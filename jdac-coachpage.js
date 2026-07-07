@@ -22,7 +22,7 @@ function wireApply(host){
   var d={name:(f.name.value||'').trim(),contact:(f.contact.value||'').trim(),level:(f.level.value||'').trim(),course:(f.course.value||'').trim(),message:(f.message.value||'').trim(),source:SRC};
   if(!d.name||!d.contact){apMsg(msg,'err','請填「名字」和「聯絡方式」再送出～');return;}
   var old=btn.innerHTML;btn.disabled=true;btn.innerHTML='送出中…';apMsg(msg,'','');msg.hidden=true;
-  fetch('/_functions/apply',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
+  fetch('https://www.jacobdrumemory.com/_functions/apply',{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(d)})
    .then(function(r){return r.json();})
    .then(function(j){if(j&&j.ok){f.reset();btn.style.display='none';apMsg(msg,'ok','\u2713 報名已送出！Jacob 會親自看過你的狀況，再與你聯繫。');}else{btn.disabled=false;btn.innerHTML=old;apMsg(msg,'err','送出失敗了，請稍後再試一次，或直接私訊 Jacob 的 LINE。');}})
    .catch(function(){btn.disabled=false;btn.innerHTML=old;apMsg(msg,'err','送出失敗，請檢查網路後再試一次。');});
