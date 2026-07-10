@@ -26,7 +26,7 @@ function wireApply(host){
   var old=btn.innerHTML;btn.disabled=true;btn.innerHTML='送出中…';apMsg(msg,'','');msg.hidden=true;
   fetch('https://www.jacobdrumemory.com/_functions/apply',{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(d)})
    .then(function(r){return r.json();})
-   .then(function(j){if(j&&j.ok){f.reset();btn.style.display='none';msg.hidden=false;msg.className='apf-msg ok';msg.innerHTML='\u2713 報名已送出！確認信也寄到你的 Email 了（若沒收到請看垃圾郵件）。<br>請先加我們的官方帳號，我會盡快與你聯繫：<br>LINE <b>@jacobbyjdac</b> ・ 微信 <b>Jaycub777</b>';}else{btn.disabled=false;btn.innerHTML=old;apMsg(msg,'err','送出失敗了，請稍後再試一次，或直接私訊 LINE @jacobbyjdac。');}})
+   .then(function(j){if(j&&j.ok){f.reset();btn.style.display='none';msg.hidden=false;msg.className='apf-msg ok';msg.innerHTML='\u2713 報名已送出！確認信也寄到你的 Email 了（若沒收到請看垃圾郵件）。<br>請先加我們的官方帳號，我會盡快與你聯繫：<br>LINE <b>@jdactw</b> ・ 微信 <b>jdac_drums</b>';}else{btn.disabled=false;btn.innerHTML=old;apMsg(msg,'err','送出失敗了，請稍後再試一次，或直接私訊 LINE @jdactw。');}})
    .catch(function(){btn.disabled=false;btn.innerHTML=old;apMsg(msg,'err','送出失敗，請檢查網路後再試一次。');});
  });
 }
