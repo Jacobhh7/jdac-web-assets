@@ -63,6 +63,42 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
   .qz-cta{flex-direction:column;align-items:stretch;gap:10px}
   .qz-cta .jh-btn{width:100%;justify-content:center;padding:15px 20px}
   .qz-retry{width:100%;text-align:center}}
+/* 加碼關卡「節奏感三圍」——結果頁 email 表單之後、CTA 之前的區塊。
+   三支頁面（首頁／教練課頁／獨立測驗頁）共用這一份，改樣式只要改這裡。
+   結果卡刻意做成黑底＝跟白色測驗卡對比，讓人想截圖分享（這區的目的就是話題性）。 */
+.qb{border-top:1px dashed #d8d5cc;padding-top:20px;margin-top:22px}
+.qb-open{background:#f7f5ec;border:1.5px dashed #0c0c0c;border-radius:14px;padding:18px 20px;text-align:center}
+.qb-openbtn{font-family:"Noto Sans TC",sans-serif;font-weight:800;font-size:15.5px;padding:13px 22px;border:1.5px solid #0c0c0c;background:#fa5a1e;color:#fff;border-radius:12px;cursor:pointer;box-shadow:3px 3px 0 #0c0c0c;transition:transform .1s,box-shadow .1s}
+.qb-openbtn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #0c0c0c}
+.qb-openbtn:active{transform:translate(3px,3px);box-shadow:0 0 0 #0c0c0c}
+.qb-hint{font-size:13px;color:#55524a;margin:10px 0 0;line-height:1.7}
+.qb-step{font-family:"Archivo",sans-serif;font-weight:700;font-size:12px;letter-spacing:.14em;color:#fa5a1e;margin-bottom:9px}
+.qb-q{font-weight:900;font-size:clamp(17px,2vw,21px);line-height:1.55;margin:0 0 16px;color:#0c0c0c}
+.qb-opt{display:block;width:100%;text-align:left;background:#f7f5ec;border:1.5px solid #0c0c0c;border-radius:12px;padding:13px 15px;font-family:"Noto Sans TC",sans-serif;font-size:14.5px;font-weight:600;color:#0c0c0c;cursor:pointer;margin-bottom:10px;box-shadow:2px 2px 0 #0c0c0c;transition:transform .1s,background .12s,box-shadow .1s}
+.qb-opt:hover{background:#ffe9df}
+.qb-opt:active{transform:translate(2px,2px);box-shadow:0 0 0 #0c0c0c}
+/* ── 結果卡（可截圖分享的那張）── */
+.qb-card{background:#0c0c0c;border-radius:16px;padding:clamp(20px,3vw,28px);color:#f4f3ee}
+.qb-tag{display:inline-block;font-family:"Archivo",sans-serif;font-weight:800;font-size:11px;letter-spacing:.16em;color:#fa5a1e;border:1px solid #fa5a1e;padding:3px 11px;border-radius:99px;margin-bottom:12px}
+.qb-title{font-family:"Archivo","Noto Sans TC",sans-serif;font-style:italic;font-weight:900;font-size:clamp(22px,3vw,32px);line-height:1;margin:0 0 20px;color:#fff}
+.qb-rows{margin:0 0 18px;padding:0;list-style:none}
+.qb-row{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(244,243,238,.14)}
+.qb-row:last-child{border-bottom:none}
+.qb-ax{font-size:13px;font-weight:700;color:#a8a49a;letter-spacing:.04em}
+.qb-dots{display:flex;gap:6px}
+.qb-dot{width:11px;height:11px;border-radius:50%;background:rgba(244,243,238,.2)}
+.qb-dot.on{background:#2563ff}
+.qb-dot.top{background:#fa5a1e}
+.qb-lv{font-family:"Archivo",sans-serif;font-weight:800;font-size:clamp(15px,1.8vw,19px);letter-spacing:.06em;color:#fff;white-space:nowrap}
+.qb-verdict{font-size:14px;line-height:1.9;color:#e4e2da;background:rgba(37,99,255,.16);border-left:3px solid #2563ff;padding:13px 16px;border-radius:0 8px 8px 0;margin:0}
+.qb-note{font-size:12.5px;line-height:1.85;color:#55524a;background:#f7f5ec;border-radius:10px;padding:12px 15px;margin:14px 0 0}
+.qb-again{background:none;border:none;color:#8a8579;font-size:13px;font-weight:600;cursor:pointer;font-family:"Noto Sans TC",sans-serif;text-decoration:underline;padding:6px 0;margin-top:10px}
+@media(max-width:620px){
+  .qb-openbtn{width:100%}
+  .qb-row{grid-template-columns:56px 1fr;gap:8px 10px}
+  .qb-lv{grid-column:2;justify-self:start;font-size:16px}
+  .qb-dots{grid-column:2;grid-row:1}
+}
 </style>
 </head>
 <body>
@@ -99,16 +135,18 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
       ["以前會的現在都生疏了，不知道從哪接回去",{"D":2}],
       ["沒有一條有效率的路徑，時間有限",{"E":1,"B":1}]
     ]},
-    {"q":"一週實際能練的時間？","opts":[
-      ["不到 1 小時（很忙，但想開始）",{"A":1}],
-      ["1～3 小時",{"B":1,"C":1}],
-      ["3 小時以上",{"E":1}]
+    {"q":"節拍器只響第 2、4 拍，你跟得住嗎？","opts":[
+      ["沒試過，光想就頭暈",{"A":1,"B":1}],
+      ["試過，撐不到四小節就跑掉",{"C":2}],
+      ["可以，但要很專心，不能同時打複雜的東西",{"B":1,"C":1}],
+      ["穩，這是我熱身的一部分",{"E":2}]
     ]},
-    {"q":"練習的傢俬（設備）？","opts":[
-      ["還沒有任何東西",{"A":1}],
-      ["打點板／練習墊",{"B":1}],
-      ["電子鼓或真鼓",{"C":1,"E":1}],
-      ["以前的鼓還在，積灰塵中",{"D":1}]
+    {"q":"給你一段沒看過的鼓譜，你直接打得出來嗎？","opts":[
+      ["我看不懂鼓譜",{"A":1}],
+      ["四分八分可以，十六分或切分就卡住",{"B":1}],
+      ["以前看得懂，現在都忘光了",{"D":1}],
+      ["大部分可以，三連音要想一下",{"C":1}],
+      ["可以，看到就打得出來",{"E":1}]
     ]}
   ],
   "types": {
@@ -117,6 +155,41 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
     "C":{"tag":"TYPE C","name":"時間感浮動鼓手","diag":"一個人打都好好的，一跟 click 或跟歌就趕拍——尤其反拍會越打越快，對吧？這不是手的問題，是時間感還沒內化。好消息：時間感是可以練的，而且有明確的方法。","dir":["節拍器不是敵人：gap click 訓練——響兩小節、靜兩小節，靜音時你撐住","反拍專項：節拍器只響 2、4 拍還能穩住，backbeat 才算真的進到身體","錄下自己：把「感覺怪」變成聽得出來的東西——自己的耳朵是最誠實的節拍器"],"bridge":"我們的練功房有一整區 time 訓練遊戲（gap click、反拍挑戰）；教練課每週交作業，我親自看你的影片、盯你的 time。"},
     "D":{"tag":"TYPE D","name":"回鍋鼓手","diag":"以前學過、打過團，停了幾年，手感掉了、譜也忘了。先講好消息：肌肉記憶還在，回來比從零開始快很多。但別直接從「當年的進度」接——那是挫折感的來源。","dir":["兩週恢復菜單：運棒手感重建，讓手記起來","程度健檢：從你「現在」的實際程度接回去，不是記憶中的程度","挑一首當年就想打的歌當第一個目標——這次把它拿下"],"bridge":"教練課入學會先健檢定位。回鍋的同學通常一到兩個月就追回當年水準，然後突破它。"},
     "E":{"tag":"TYPE E","name":"目標衝刺鼓手","diag":"你有明確的目標——上台、成發、甚至往職業走。你缺的不是熱情，是一條從目標回推的路徑，和一個盯你進度的人。這種學生我帶法不一樣：嚴格，但你每週都會知道為什麼練這個。","dir":["從目標日期回推的訓練計畫——幾月要上台，現在就知道每週該做什麼","每週作業＋批改，進度不靠自律靠系統","舞台層級的細節：速度穩定度、動態控制、fill 的取捨"],"bridge":"拚目標的學生，教練課是最短路徑——你負責練，路徑和進度我來顧。"}
+  },
+  "bonus": {
+    "cta":"🎮 加碼：3 題測你的「節奏感三圍」",
+    "hint":"三題各對應一款節奏遊戲的難度分級，30 秒測完。",
+    "tag":"BONUS ROUND",
+    "title":"你的節奏感三圍",
+    "qs": [
+      {"axis":"READING","label":"視奏","q":"看譜打點——哪一種音型會先讓你卡住？","opts":[
+        ["我還看不懂鼓譜","BASIC"],
+        ["十六分音符一多就亂","SIXTEEN"],
+        ["切分一進來就抓不到拍","SYNCO"],
+        ["三連音會讓我開始亂","TRIPLET"],
+        ["都還好，混在一起我也讀得出來","FUSION"]
+      ]},
+      {"axis":"TIME","label":"穩定度","q":"節拍器響兩小節、然後靜音兩小節——靜音那段，你回得到原本的拍點嗎？","opts":[
+        ["從來沒這樣練過，聽起來就可怕","CLASSIC"],
+        ["回得來，但明顯飄掉，而且幾乎都是越打越快","HALF"],
+        ["差一點點，而且我自己聽得出來差在哪","EIGHTH"],
+        ["穩，靜四小節我也回得來","GHOST"]
+      ]},
+      {"axis":"OFFBEAT","label":"反拍","q":"反拍練習——節拍器不響正拍，你自己數 1234。你的極限在哪？","opts":[
+        ["沒真的試過","BACKBEAT"],
+        ["只響第 2、4 拍，我還撐得住","UPBEAT"],
+        ["只響第 2 拍或第 4 拍，也還可以","SPARSE"],
+        ["一小節只響一下，我也穩得住","LONE"],
+        ["只響「4 的後半拍」，我還是回得去","AND-4"]
+      ]}
+    ],
+    "advice": {
+      "READING":"三圍裡，看譜是你最先卡住的一塊。好消息：鼓譜是所有樂器裡最好讀的——不用管音高，只要管「什麼時候打、打哪裡」。先把十六分的四種組合讀到不用想，剩下的全是它的變形。",
+      "TIME":"三圍裡，穩定度是你最該補的一塊。這不是手的問題，是時間感還沒內化。練法很具體：節拍器調成只響第 1 拍，你撐得住幾小節不飄掉，那才是你真正的 time。",
+      "OFFBEAT":"三圍裡，反拍是你最弱的一環——這也是最多人卡的地方。反拍站得穩，backbeat 才算真的進到身體。從只響 2、4 拍開始，能撐八小節再往下一級。"
+    },
+    "top":"三項都在高段——你缺的大概不是節奏感，是一個把它用進音樂裡的方向。這種階段最怕的是自己亂練：你需要的是有人告訴你「下一個該練的是什麼」。",
+    "note":"這三組代號不是我編的——是 JDAC 學員練功房裡三款節奏遊戲的實際難度分級。真的打起來會發現：自己感覺的等級，跟機器量出來的常常差一級。"
   }
 }
     </script>
@@ -163,8 +236,100 @@ function result(){
   var old=btn.textContent;btn.disabled=true;btn.textContent='寄送中…';msg.hidden=true;
   fetch('https://www.jacobdrumemory.com/_functions/quizLead',{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({email:em2,type:win,answers:'picks:'+picks.join(','),source:SRC})}).then(function(r){return r.json();}).then(function(j){if(j&&j.ok){f.reset();btn.style.display='none';msg.hidden=false;msg.className='qz-emmsg ok';msg.innerHTML=j.sent?'✓ 菜單第一天已經寄出！請收信（沒看到就找一下垃圾郵件夾）。接下來 3 天，每天會收到一步。':'✓ 已經幫你登記好了！菜單會盡快寄到你信箱（記得看一下垃圾郵件夾），接下來幾天每天一步。';}else{btn.disabled=false;btn.textContent=old;msg.hidden=false;msg.className='qz-emmsg err';msg.textContent='寄送失敗，請稍後再試一次～';}}).catch(function(){btn.disabled=false;btn.textContent=old;msg.hidden=false;msg.className='qz-emmsg err';msg.textContent='寄送失敗，請檢查網路後再試一次。';});
  });
+ jdacQuizBonus(panel,DATA);
 }
 reset();
+}
+/* 加碼關卡「節奏感三圍」——測驗結果頁的第二段。
+   三題各對應練功房一款遊戲，選項一對一映射該遊戲的實際難度代號（不加總、不用平手判定）。
+   刻意放在 email 表單「之後」：主漏斗（型別→留 email）完全不受影響，這區純粹是話題性／分享素材。
+   三支頁面共用這一份：獨立測驗頁靠 shared include 展開，兩支銷售頁由 build-jdac-salespage.py 讀檔併進去。
+   自帶跳脫函式（不依賴 qzEsc——它在獨立測驗頁是包在 jdacQuizInit 裡的區域函式，這裡看不到）。 */
+function jdacQuizBonus(panel, DATA) {
+  var B = DATA && DATA.bonus;
+  if (!B || !B.qs || !B.qs.length) return;            // 舊版題庫被快取住時安靜略過
+  var anchor = panel.querySelector('.qz-cta');
+  if (!anchor) return;
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  var wrap = document.createElement('div');
+  wrap.className = 'qb';
+  anchor.parentNode.insertBefore(wrap, anchor);
+
+  var i, picks;
+
+  function teaser() {
+    wrap.innerHTML =
+      '<div class="qb-open">' +
+      '<button type="button" class="qb-openbtn">' + esc(B.cta) + '</button>' +
+      '<p class="qb-hint">' + esc(B.hint) + '</p>' +
+      '</div>';
+    wrap.querySelector('.qb-openbtn').addEventListener('click', function () {
+      i = 0; picks = []; step();
+      try { wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (e) {}
+    });
+  }
+
+  function step() {
+    if (i >= B.qs.length) { return card(); }
+    var Q = B.qs[i];
+    var h = '<div class="qb-step">' + esc(B.tag) + ' · 第 ' + (i + 1) + ' / ' + B.qs.length + ' 題</div>' +
+            '<p class="qb-q">' + esc(Q.q) + '</p>';
+    for (var o = 0; o < Q.opts.length; o++) {
+      h += '<button type="button" class="qb-opt" data-oi="' + o + '">' + esc(Q.opts[o][0]) + '</button>';
+    }
+    wrap.innerHTML = h;
+    wrap.querySelectorAll('.qb-opt').forEach(function (b) {
+      b.addEventListener('click', function () {
+        picks.push(Number(b.getAttribute('data-oi')));
+        i++; step();
+      });
+    });
+  }
+
+  function card() {
+    // 每軸換算成 0~1 的相對位置，才能比較長度不同的量表（視奏/反拍 5 級、穩定度 4 級）
+    var rows = B.qs.map(function (Q, n) {
+      var oi = picks[n], last = Q.opts.length - 1;
+      return { axis: Q.axis, label: Q.label, oi: oi, last: last,
+               lv: Q.opts[oi][1], norm: last > 0 ? oi / last : 1 };
+    });
+
+    // 短評挑「最弱的一軸」；同分時 time 優先——時間感是地基，先講它最有用
+    var PRIO = { TIME: 0, OFFBEAT: 1, READING: 2 };
+    var weak = rows.slice().sort(function (a, b) {
+      return a.norm - b.norm || (PRIO[a.axis] || 9) - (PRIO[b.axis] || 9);
+    })[0];
+    var allTop = rows.every(function (r) { return r.norm === 1; });
+    var verdict = allTop ? B.top : ((B.advice || {})[weak.axis] || '');
+
+    var lis = rows.map(function (r) {
+      var dots = '';
+      for (var d = 0; d <= r.last; d++) {
+        dots += '<span class="qb-dot' + (d <= r.oi ? (r.oi === r.last ? ' on top' : ' on') : '') + '"></span>';
+      }
+      return '<li class="qb-row"><span class="qb-ax">' + esc(r.label) + '</span>' +
+             '<span class="qb-dots">' + dots + '</span>' +
+             '<span class="qb-lv">' + esc(r.lv) + '</span></li>';
+    }).join('');
+
+    wrap.innerHTML =
+      '<div class="qb-card">' +
+      '<span class="qb-tag">' + esc(B.tag) + '</span>' +
+      '<p class="qb-title">' + esc(B.title) + '</p>' +
+      '<ul class="qb-rows">' + lis + '</ul>' +
+      (verdict ? '<p class="qb-verdict">' + esc(verdict) + '</p>' : '') +
+      '</div>' +
+      (B.note ? '<p class="qb-note">' + esc(B.note) + '</p>' : '') +
+      '<button type="button" class="qb-again">↺ 重測加碼題</button>';
+    wrap.querySelector('.qb-again').addEventListener('click', teaser);
+  }
+
+  teaser();
 }
 jdacQuizInit(document);
 </script>
