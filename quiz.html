@@ -63,41 +63,64 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
   .qz-cta{flex-direction:column;align-items:stretch;gap:10px}
   .qz-cta .jh-btn{width:100%;justify-content:center;padding:15px 20px}
   .qz-retry{width:100%;text-align:center}}
-/* 加碼關卡「節奏感三圍」——結果頁 email 表單之後、CTA 之前的區塊。
+/* 加碼關卡「節拍器捉迷藏 · 公開試玩版」樣式。
+   視覺沿用學員練功房的 gd-box／rl-tapbtn（白卡硬陰影＋橘色打點鈕），色票換成行銷頁的電光藍/橘/米白。
    三支頁面（首頁／教練課頁／獨立測驗頁）共用這一份，改樣式只要改這裡。
-   結果卡刻意做成黑底＝跟白色測驗卡對比，讓人想截圖分享（這區的目的就是話題性）。 */
+   結果卡刻意做成黑底＝跟白色測驗卡對比，讓人想截圖分享。 */
 .qb{border-top:1px dashed #d8d5cc;padding-top:20px;margin-top:22px}
+
+/* ── 入口 ── */
 .qb-open{background:#f7f5ec;border:1.5px dashed #0c0c0c;border-radius:14px;padding:18px 20px;text-align:center}
 .qb-openbtn{font-family:"Noto Sans TC",sans-serif;font-weight:800;font-size:15.5px;padding:13px 22px;border:1.5px solid #0c0c0c;background:#fa5a1e;color:#fff;border-radius:12px;cursor:pointer;box-shadow:3px 3px 0 #0c0c0c;transition:transform .1s,box-shadow .1s}
 .qb-openbtn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #0c0c0c}
 .qb-openbtn:active{transform:translate(3px,3px);box-shadow:0 0 0 #0c0c0c}
 .qb-hint{font-size:13px;color:#55524a;margin:10px 0 0;line-height:1.7}
-.qb-step{font-family:"Archivo",sans-serif;font-weight:700;font-size:12px;letter-spacing:.14em;color:#fa5a1e;margin-bottom:9px}
-.qb-q{font-weight:900;font-size:clamp(17px,2vw,21px);line-height:1.55;margin:0 0 16px;color:#0c0c0c}
-.qb-opt{display:block;width:100%;text-align:left;background:#f7f5ec;border:1.5px solid #0c0c0c;border-radius:12px;padding:13px 15px;font-family:"Noto Sans TC",sans-serif;font-size:14.5px;font-weight:600;color:#0c0c0c;cursor:pointer;margin-bottom:10px;box-shadow:2px 2px 0 #0c0c0c;transition:transform .1s,background .12s,box-shadow .1s}
-.qb-opt:hover{background:#ffe9df}
-.qb-opt:active{transform:translate(2px,2px);box-shadow:0 0 0 #0c0c0c}
+
+/* ── 遊戲畫面 ── */
+.qb-gtitle{font-weight:900;font-size:18px;color:#0c0c0c;margin:0 0 6px;line-height:1.4}
+.qb-gtitle span{font-family:"Archivo",sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.1em;color:#2563ff;margin-left:8px;white-space:nowrap}
+.qb-ghow{font-size:13.5px;color:#55524a;line-height:1.8;margin:0 0 16px}
+.qb-stage{background:#fff;border:1.5px solid #0c0c0c;border-radius:14px;box-shadow:4px 5px 0 #0c0c0c;padding:22px 18px;text-align:center}
+.qb-state{font-size:34px;line-height:1}
+.qb-bar{font-family:"Archivo",sans-serif;font-size:14px;font-weight:800;margin-top:8px;color:#0c0c0c}
+.qb-dots4{display:flex;justify-content:center;gap:14px;margin-top:12px}
+.qb-dot4{width:18px;height:18px;border-radius:50%;background:rgba(12,12,12,.1);transition:background .06s,transform .06s}
+.qb-dot4.on{background:#2563ff;transform:scale(1.25)}
+.qb-dot4.acc{background:#fa5a1e;transform:scale(1.25)}
+.qb-acts{display:flex;justify-content:center;margin:14px 0 4px}
+.qb-start{font-family:"Noto Sans TC",sans-serif;font-weight:800;font-size:15px;padding:12px 26px;border:1.5px solid #2563ff;background:#2563ff;color:#fff;border-radius:12px;cursor:pointer;box-shadow:2px 2px 0 #0c0c0c}
+.qb-start:active{transform:translate(2px,2px);box-shadow:0 0 0 #0c0c0c}
+.qb-start:disabled{opacity:.55;cursor:default;transform:none;box-shadow:2px 2px 0 #0c0c0c}
+.qb-status{font-size:13px;color:#55524a;text-align:center;margin:6px 0 10px;min-height:20px;line-height:1.7}
+.qb-taprow{display:flex;align-items:center;justify-content:center;gap:16px;margin:14px 0 0;flex-wrap:wrap}
+/* touch-action:manipulation＝拿掉手機連點縮放的 300ms 延遲（節奏遊戲不能有那個） */
+.qb-tapbtn{width:180px;height:58px;font-size:16px;font-weight:800;font-family:"Noto Sans TC",sans-serif;background:#fa5a1e;color:#fff;border:0;border-radius:12px;cursor:pointer;box-shadow:3px 3px 0 #0c0c0c;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.qb-tapbtn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #0c0c0c}
+.qb-tiphint{font-size:12px;color:#8a8579;display:flex;align-items:center;gap:8px}
+.qb-pulse{width:12px;height:12px;border-radius:50%;background:rgba(12,12,12,.13);display:inline-block;transition:background .05s,transform .05s}
+.qb-pulse.lit{background:#2563ff;transform:scale(1.35)}
+
 /* ── 結果卡（可截圖分享的那張）── */
-.qb-card{background:#0c0c0c;border-radius:16px;padding:clamp(20px,3vw,28px);color:#f4f3ee}
-.qb-tag{display:inline-block;font-family:"Archivo",sans-serif;font-weight:800;font-size:11px;letter-spacing:.16em;color:#fa5a1e;border:1px solid #fa5a1e;padding:3px 11px;border-radius:99px;margin-bottom:12px}
-.qb-title{font-family:"Archivo","Noto Sans TC",sans-serif;font-style:italic;font-weight:900;font-size:clamp(22px,3vw,32px);line-height:1;margin:0 0 20px;color:#fff}
-.qb-rows{margin:0 0 18px;padding:0;list-style:none}
-.qb-row{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(244,243,238,.14)}
-.qb-row:last-child{border-bottom:none}
-.qb-ax{font-size:13px;font-weight:700;color:#a8a49a;letter-spacing:.04em}
-.qb-dots{display:flex;gap:6px}
-.qb-dot{width:11px;height:11px;border-radius:50%;background:rgba(244,243,238,.2)}
-.qb-dot.on{background:#2563ff}
-.qb-dot.top{background:#fa5a1e}
-.qb-lv{font-family:"Archivo",sans-serif;font-weight:800;font-size:clamp(15px,1.8vw,19px);letter-spacing:.06em;color:#fff;white-space:nowrap}
-.qb-verdict{font-size:14px;line-height:1.9;color:#e4e2da;background:rgba(37,99,255,.16);border-left:3px solid #2563ff;padding:13px 16px;border-radius:0 8px 8px 0;margin:0}
-.qb-note{font-size:12.5px;line-height:1.85;color:#55524a;background:#f7f5ec;border-radius:10px;padding:12px 15px;margin:14px 0 0}
+.qb-card{background:#0c0c0c;border-radius:16px;padding:clamp(20px,3vw,28px);color:#f4f3ee;text-align:center}
+.qb-tag{display:inline-block;font-family:"Archivo",sans-serif;font-weight:800;font-size:11px;letter-spacing:.16em;color:#fa5a1e;border:1px solid #fa5a1e;padding:3px 11px;border-radius:99px;margin-bottom:14px}
+.qb-kicker{font-size:12.5px;color:#a8a49a;margin:0 0 2px;letter-spacing:.04em}
+.qb-ms{font-family:"Archivo",sans-serif;font-style:italic;font-weight:900;font-size:clamp(52px,9vw,78px);line-height:1;margin:0;color:#fff}
+.qb-ms em{font-style:normal;font-size:.3em;font-weight:800;letter-spacing:.08em;color:#2563ff;margin-left:6px;vertical-align:.9em}
+.qb-metrics{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:14px 0 0}
+.qb-metrics span{font-size:12.5px;color:#c9c6bd;background:rgba(244,243,238,.09);border-radius:99px;padding:6px 14px}
+.qb-metrics b{font-family:"Archivo",sans-serif;color:#fff;font-size:13.5px}
+.qb-tier{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;font-size:16.5px;font-weight:900;color:#fff;margin:18px 0 0}
+/* 標籤是「可挑戰 GHOST」這種中英混排，字距要收一點、字型要帶中文 fallback */
+.qb-tierlv{font-family:"Archivo","Noto Sans TC",sans-serif;font-weight:800;font-size:12px;letter-spacing:.07em;background:#2563ff;color:#fff;padding:4px 12px;border-radius:99px;white-space:nowrap}
+.qb-verdict{font-size:14px;line-height:1.9;color:#e4e2da;background:rgba(37,99,255,.16);border-left:3px solid #2563ff;padding:13px 16px;border-radius:0 8px 8px 0;margin:16px 0 0;text-align:left}
+.qb-cal{font-size:12px;line-height:1.8;color:#55524a;background:#eef3ff;border-radius:10px;padding:11px 14px;margin:12px 0 0}
+.qb-note{font-size:12.5px;line-height:1.85;color:#55524a;background:#f7f5ec;border-radius:10px;padding:12px 15px;margin:10px 0 0}
 .qb-again{background:none;border:none;color:#8a8579;font-size:13px;font-weight:600;cursor:pointer;font-family:"Noto Sans TC",sans-serif;text-decoration:underline;padding:6px 0;margin-top:10px}
+
 @media(max-width:620px){
-  .qb-openbtn{width:100%}
-  .qb-row{grid-template-columns:56px 1fr;gap:8px 10px}
-  .qb-lv{grid-column:2;justify-self:start;font-size:16px}
-  .qb-dots{grid-column:2;grid-row:1}
+  .qb-openbtn,.qb-tapbtn{width:100%}
+  .qb-gtitle span{display:block;margin:4px 0 0}
+  .qb-taprow{gap:12px}
 }
 </style>
 </head>
@@ -157,39 +180,12 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
     "E":{"tag":"TYPE E","name":"目標衝刺鼓手","diag":"你有明確的目標——上台、成發、甚至往職業走。你缺的不是熱情，是一條從目標回推的路徑，和一個盯你進度的人。這種學生我帶法不一樣：嚴格，但你每週都會知道為什麼練這個。","dir":["從目標日期回推的訓練計畫——幾月要上台，現在就知道每週該做什麼","每週作業＋批改，進度不靠自律靠系統","舞台層級的細節：速度穩定度、動態控制、fill 的取捨"],"bridge":"拚目標的學生，教練課是最短路徑——你負責練，路徑和進度我來顧。"}
   },
   "bonus": {
-    "cta":"🎮 加碼：3 題測你的「節奏感三圍」",
-    "hint":"三題各對應一款節奏遊戲的難度分級，30 秒測完。",
     "tag":"BONUS ROUND",
-    "title":"你的節奏感三圍",
-    "qs": [
-      {"axis":"READING","label":"視奏","q":"看譜打點——哪一種音型會先讓你卡住？","opts":[
-        ["我還看不懂鼓譜","BASIC"],
-        ["十六分音符一多就亂","SIXTEEN"],
-        ["切分一進來就抓不到拍","SYNCO"],
-        ["三連音會讓我開始亂","TRIPLET"],
-        ["都還好，混在一起我也讀得出來","FUSION"]
-      ]},
-      {"axis":"TIME","label":"穩定度","q":"節拍器響兩小節、然後靜音兩小節——靜音那段，你回得到原本的拍點嗎？","opts":[
-        ["從來沒這樣練過，聽起來就可怕","CLASSIC"],
-        ["回得來，但明顯飄掉，而且幾乎都是越打越快","HALF"],
-        ["差一點點，而且我自己聽得出來差在哪","EIGHTH"],
-        ["穩，靜四小節我也回得來","GHOST"]
-      ]},
-      {"axis":"OFFBEAT","label":"反拍","q":"反拍練習——節拍器不響正拍，你自己數 1234。你的極限在哪？","opts":[
-        ["沒真的試過","BACKBEAT"],
-        ["只響第 2、4 拍，我還撐得住","UPBEAT"],
-        ["只響第 2 拍或第 4 拍，也還可以","SPARSE"],
-        ["一小節只響一下，我也穩得住","LONE"],
-        ["只響「4 的後半拍」，我還是回得去","AND-4"]
-      ]}
-    ],
-    "advice": {
-      "READING":"三圍裡，看譜是你最先卡住的一塊。好消息：鼓譜是所有樂器裡最好讀的——不用管音高，只要管「什麼時候打、打哪裡」。先把十六分的四種組合讀到不用想，剩下的全是它的變形。",
-      "TIME":"三圍裡，穩定度是你最該補的一塊。這不是手的問題，是時間感還沒內化。練法很具體：節拍器調成只響第 1 拍，你撐得住幾小節不飄掉，那才是你真正的 time。",
-      "OFFBEAT":"三圍裡，反拍是你最弱的一環——這也是最多人卡的地方。反拍站得穩，backbeat 才算真的進到身體。從只響 2、4 拍開始，能撐八小節再往下一級。"
-    },
-    "top":"三項都在高段——你缺的大概不是節奏感，是一個把它用進音樂裡的方向。這種階段最怕的是自己亂練：你需要的是有人告訴你「下一個該練的是什麼」。",
-    "note":"這三組代號不是我編的——是 JDAC 學員練功房裡三款節奏遊戲的實際難度分級。真的打起來會發現：自己感覺的等級，跟機器量出來的常常差一級。"
+    "cta":"🎮 加碼：玩一次「節拍器捉迷藏」",
+    "teaser":"節拍器響兩小節 → 突然靜音 → 你憑感覺繼續打。30 秒，量出你的 time 到底飄幾 ms。這是學員練功房裡真的那款遊戲。",
+    "how":"節拍器會響 2 小節（你跟著打四分拍）→ 突然靜音 2 小節（你憑感覺繼續打）→ 再響起來對答案。共 4 輪。唯一的重點：靜音的時候不要停。",
+    "hint":"記得開聲音或戴耳機。跟著打四分拍——靜音也不要停",
+    "note":"這就是 JDAC 學員練功房裡「節拍器捉迷藏」的入門難度 CLASSIC。裡面還有 HALF（只響 1 小節）／EIGHTH（改打八分）／GHOST（兩個都要），以及無盡挑戰——靜音一次比一次長，看你能撐到第幾關。"
   }
 }
     </script>
@@ -240,14 +236,27 @@ function result(){
 }
 reset();
 }
-/* 加碼關卡「節奏感三圍」——測驗結果頁的第二段。
-   三題各對應練功房一款遊戲，選項一對一映射該遊戲的實際難度代號（不加總、不用平手判定）。
-   刻意放在 email 表單「之後」：主漏斗（型別→留 email）完全不受影響，這區純粹是話題性／分享素材。
-   三支頁面共用這一份：獨立測驗頁靠 shared include 展開，兩支銷售頁由 build-jdac-salespage.py 讀檔併進去。
-   自帶跳脫函式（不依賴 qzEsc——它在獨立測驗頁是包在 jdacQuizInit 裡的區域函式，這裡看不到）。 */
+/* 加碼關卡「節拍器捉迷藏 · 公開試玩版」——測驗結果頁的第二段，真的可以玩。
+ *
+ * 引擎搬自學員練功房的 _wireGapClick（jacobdrumemory-wix 的 dashboard element），
+ * 判定窗、防彈跳、節拍器音色、判定門檻全部沿用，手感要跟學員版一致。改這裡前先去看那份原始碼。
+ * 公開版拿掉：難度分頁（固定 CLASSIC）、無盡挑戰、XP／討論區解鎖、後端最佳紀錄、BPM 滑桿（固定 90）。
+ *
+ * 🎯 校準是藏起來的（跟學員版不同，這是公開行銷頁、不能叫人先做暖身步驟）：
+ *    前 2 小節「響」的時候使用者本來就要跟著打，那些打點拿來取中位數＝這台裝置的音訊延遲，
+ *    再從靜音段的成績裡扣掉。所以數字是使用者自己的，不是他藍牙耳機的。
+ *    學員版是明確的「🎯 打 8 下校準」＋滑桿（_wireCalibBox），值存 localStorage 全遊戲共用。
+ *
+ * 放在 email 表單「之後」：主漏斗（型別→留 email）完全不受影響。
+ * 三頁共用這一份：獨立測驗頁靠 shared include 展開，兩支銷售頁由 build-jdac-salespage.py 讀檔併進去。
+ * 自帶跳脫函式（不依賴 qzEsc——它在獨立測驗頁是包在 jdacQuizInit 裡的區域函式，這裡看不到）。
+ */
+var jdacGapAudio = null;      // AudioContext 全頁共用一顆
+var jdacGapSilent = null;     // iOS 靜音鍵仍要出聲用的近無聲循環
+
 function jdacQuizBonus(panel, DATA) {
   var B = DATA && DATA.bonus;
-  if (!B || !B.qs || !B.qs.length) return;            // 舊版題庫被快取住時安靜略過
+  if (!B) return;
   var anchor = panel.querySelector('.qz-cta');
   if (!anchor) return;
 
@@ -256,77 +265,229 @@ function jdacQuizBonus(panel, DATA) {
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
+  // ── 遊戲參數（照搬學員版 CLASSIC：響 2 小節打四分，共 4 輪，每輪響 2＋靜 2）──
+  var BPM = 90, BEAT = 60000 / BPM, SUB = 1, ON_BARS = 2, OFF_BARS = 2, ROUNDS = 4;
+  var WIN = BEAT * SUB * 0.5;   // 判定窗＝細分間隔的一半（四分＝±半拍）
+  var DEBOUNCE = 60;            // 防彈跳，同學員版
+
   var wrap = document.createElement('div');
   wrap.className = 'qb';
   anchor.parentNode.insertBefore(wrap, anchor);
 
-  var i, picks;
+  var timers = [], running = false, beats = null, startT = 0, lastTap = 0, keyHandler = null;
 
-  function teaser() {
-    wrap.innerHTML =
-      '<div class="qb-open">' +
-      '<button type="button" class="qb-openbtn">' + esc(B.cta) + '</button>' +
-      '<p class="qb-hint">' + esc(B.hint) + '</p>' +
-      '</div>';
-    wrap.querySelector('.qb-openbtn').addEventListener('click', function () {
-      i = 0; picks = []; step();
-      try { wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (e) {}
-    });
+  function stopAll() {
+    timers.forEach(function (t) { clearTimeout(t); });
+    timers = []; running = false;
+    if (keyHandler) { document.removeEventListener('keydown', keyHandler); keyHandler = null; }
+  }
+  // 測驗「重測一次」會把整個 panel 重畫掉 → wrap 被移除，但排好的 setTimeout 還會繼續響。
+  // 每個排程回呼進來先確認自己還在頁面上，不在就整組收掉。
+  function alive() {
+    if (wrap.isConnected) return true;
+    stopAll(); return false;
   }
 
-  function step() {
-    if (i >= B.qs.length) { return card(); }
-    var Q = B.qs[i];
-    var h = '<div class="qb-step">' + esc(B.tag) + ' · 第 ' + (i + 1) + ' / ' + B.qs.length + ' 題</div>' +
-            '<p class="qb-q">' + esc(Q.q) + '</p>';
-    for (var o = 0; o < Q.opts.length; o++) {
-      h += '<button type="button" class="qb-opt" data-oi="' + o + '">' + esc(Q.opts[o][0]) + '</button>';
-    }
-    wrap.innerHTML = h;
-    wrap.querySelectorAll('.qb-opt').forEach(function (b) {
-      b.addEventListener('click', function () {
-        picks.push(Number(b.getAttribute('data-oi')));
-        i++; step();
-      });
-    });
-  }
-
-  function card() {
-    // 每軸換算成 0~1 的相對位置，才能比較長度不同的量表（視奏/反拍 5 級、穩定度 4 級）
-    var rows = B.qs.map(function (Q, n) {
-      var oi = picks[n], last = Q.opts.length - 1;
-      return { axis: Q.axis, label: Q.label, oi: oi, last: last,
-               lv: Q.opts[oi][1], norm: last > 0 ? oi / last : 1 };
-    });
-
-    // 短評挑「最弱的一軸」；同分時 time 優先——時間感是地基，先講它最有用
-    var PRIO = { TIME: 0, OFFBEAT: 1, READING: 2 };
-    var weak = rows.slice().sort(function (a, b) {
-      return a.norm - b.norm || (PRIO[a.axis] || 9) - (PRIO[b.axis] || 9);
-    })[0];
-    var allTop = rows.every(function (r) { return r.norm === 1; });
-    var verdict = allTop ? B.top : ((B.advice || {})[weak.axis] || '');
-
-    var lis = rows.map(function (r) {
-      var dots = '';
-      for (var d = 0; d <= r.last; d++) {
-        dots += '<span class="qb-dot' + (d <= r.oi ? (r.oi === r.last ? ' on top' : ' on') : '') + '"></span>';
+  // 手機靜音鍵仍要出聲：手勢內喚醒 AudioContext ＋ 播一段近無聲循環（同學員版 _rlUnlock）
+  function unlock() {
+    try {
+      if (!jdacGapAudio) jdacGapAudio = new (window.AudioContext || window.webkitAudioContext)();
+      if (jdacGapAudio.state === 'suspended' && jdacGapAudio.resume) jdacGapAudio.resume();
+    } catch (e) { /* ignore */ }
+    try {
+      if (!jdacGapSilent) {
+        var sr = 8000, n = 800, buf = new ArrayBuffer(44 + n * 2), dv = new DataView(buf);
+        var wr = function (o, s) { for (var i = 0; i < s.length; i++) dv.setUint8(o + i, s.charCodeAt(i)); };
+        wr(0, 'RIFF'); dv.setUint32(4, 36 + n * 2, true); wr(8, 'WAVE');
+        wr(12, 'fmt '); dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 1, true);
+        dv.setUint32(24, sr, true); dv.setUint32(28, sr * 2, true); dv.setUint16(32, 2, true); dv.setUint16(34, 16, true);
+        wr(36, 'data'); dv.setUint32(40, n * 2, true);
+        for (var i2 = 0; i2 < n; i2++) dv.setInt16(44 + i2 * 2, Math.round(Math.sin(i2 / sr * 2 * Math.PI * 40) * 2), true);
+        var el = document.createElement('audio');
+        el.setAttribute('playsinline', ''); el.setAttribute('webkit-playsinline', '');
+        el.loop = true; el.preload = 'auto'; el.volume = 0.02;
+        el.src = URL.createObjectURL(new Blob([buf], { type: 'audio/wav' }));
+        jdacGapSilent = el;
       }
-      return '<li class="qb-row"><span class="qb-ax">' + esc(r.label) + '</span>' +
-             '<span class="qb-dots">' + dots + '</span>' +
-             '<span class="qb-lv">' + esc(r.lv) + '</span></li>';
-    }).join('');
+      var p = jdacGapSilent.play(); if (p && p.catch) p.catch(function () {});
+    } catch (e) { /* ignore */ }
+  }
+
+  // 節拍器音色：頻率／音量／包絡全部照搬學員版，換了聲音手感就不一樣了
+  function playClick(accent) {
+    try {
+      if (!jdacGapAudio) jdacGapAudio = new (window.AudioContext || window.webkitAudioContext)();
+      var ctx = jdacGapAudio;
+      if (ctx.state === 'suspended' && ctx.resume) ctx.resume();
+      var o = ctx.createOscillator(), g = ctx.createGain();
+      o.frequency.value = accent ? 1300 : 900;
+      g.gain.setValueAtTime(0.0001, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(accent ? 0.9 : 0.7, ctx.currentTime + 0.004);
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.07);
+      o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + 0.09);
+    } catch (e) { /* ignore */ }
+  }
+
+  var $ = function (id) { return wrap.querySelector('#' + id); };
+  function setBar(t) { var e = $('qbBar'); if (e) e.textContent = t; }
+  function setState(t) { var e = $('qbState'); if (e) e.textContent = t; }
+  function setStatus(t) { var e = $('qbStatus'); if (e) e.textContent = t; }
+  function lightDots(b) {
+    var ds = wrap.querySelectorAll('.qb-dot4');
+    for (var i = 0; i < ds.length; i++) ds[i].className = 'qb-dot4' + (i === b ? (b === 0 ? ' acc' : ' on') : '');
+  }
+  function clearDots() {
+    var ds = wrap.querySelectorAll('.qb-dot4');
+    for (var i = 0; i < ds.length; i++) ds[i].className = 'qb-dot4';
+  }
+
+  // 打點：找最近的未命中期望拍，超出判定窗就不算（同學員版）
+  function tap() {
+    if (!running || !beats) return;
+    var now = performance.now();
+    if (now - lastTap < DEBOUNCE) return;
+    lastTap = now;
+    var bestO = null, bestD = Infinity;
+    for (var i = 0; i < beats.length; i++) {
+      var o = beats[i];
+      if (o.hit) continue;
+      var d = now - (startT + o.beat * BEAT);
+      if (d > BEAT) continue;
+      if (d < -BEAT) break;
+      if (Math.abs(d) < Math.abs(bestD)) { bestD = d; bestO = o; }
+    }
+    if (!bestO || Math.abs(bestD) > WIN) return;
+    bestO.hit = true; bestO.delta = bestD;
+    var p = $('qbPulse'); if (p) { p.classList.add('lit'); setTimeout(function () { p.classList.remove('lit'); }, 90); }
+  }
+
+  function median(a) {
+    if (!a.length) return 0;
+    var s = a.slice().sort(function (x, y) { return x - y; });
+    return s[Math.floor(s.length / 2)];
+  }
+
+  function start() {
+    stopAll();
+    unlock();
+    running = true; beats = []; lastTap = 0;
+    startT = performance.now();
+    var perBar = Math.round(4 / SUB), bt = 0, bar = 0;
+    for (var r = 0; r < ROUNDS; r++) {
+      for (var br = 0; br < ON_BARS + OFF_BARS; br++) {
+        var silent = br >= ON_BARS; bar++;
+        (function (barNo, silFlag, base) {
+          for (var s = 0; s < perBar; s++) {
+            var beat = base + s * SUB;
+            beats.push({ beat: beat, silent: silFlag, hit: false, delta: 0 });
+            var b = Math.round(beat - base);
+            timers.push(setTimeout(function () {
+              if (!alive() || !running) return;
+              if (!silFlag) { playClick(b === 0); setState('🔊'); setBar('第 ' + barNo + ' 小節・跟著打'); lightDots(b); }
+              else if (b === 0) { setState('🤫'); setBar('靜音中（第 ' + barNo + ' 小節）…憑感覺繼續打'); clearDots(); }
+            }, beat * BEAT));
+          }
+        })(bar, silent, bt);
+        bt += 4;
+      }
+    }
+    setStatus('跟著節拍器打四分拍——靜音也不要停！');
+    setBar('準備…');
+    var btn = $('qbStart'); if (btn) { btn.disabled = true; btn.textContent = '進行中…'; }
+    timers.push(setTimeout(function () {
+      if (!alive() || !running) return;
+      running = false;
+      result();
+    }, (bt + 0.7) * BEAT));
+  }
+
+  function result() {
+    // 隱形校準：響的那幾拍打點取中位數＝這台裝置的音訊延遲，從靜音段成績扣掉
+    var onHits = [], silHits = [], silTotal = 0;
+    for (var i = 0; i < beats.length; i++) {
+      var o = beats[i];
+      if (o.silent) { silTotal++; if (o.hit) silHits.push(o.delta); }
+      else if (o.hit) onHits.push(o.delta);
+    }
+    var latency = onHits.length >= 3 ? median(onHits) : 0;
+    var adj = silHits.map(function (d) { return d - latency; });
+    var hits = adj.length;
+    var avg = hits ? Math.round(adj.reduce(function (a, d) { return a + Math.abs(d); }, 0) / hits) : 0;
+    var signed = hits ? Math.round(adj.reduce(function (a, d) { return a + d; }, 0) / hits) : 0;
+
+    // 判定門檻沿用學員版（≤40／≤80／≤130），別自己另訂一套。
+    // ⚠️ 代號寫成「可挑戰 XXX」不能只寫 XXX——那幾個字在練功房是「難度名稱」不是成績，
+    //    單掛在旁邊鼓手會誤讀（EIGHTH 會被當成「你打八分」）。寫成目標才通，也順便種詞彙。
+    var tier = !hits ? { tag: '', name: '靜音段沒打到', note: '靜音的時候不要停，繼續打——再玩一次試試。' }
+      : avg <= 40 ? { tag: '可挑戰 GHOST', name: '人肉節拍器 🏆', note: '這個數字在職業級。你缺的大概不是 time，是把它用進音樂裡的方向。' }
+      : avg <= 80 ? { tag: '可挑戰 EIGHTH', name: 'time 很穩 👍', note: '底子好。下一步是把同樣的穩定度撐過更長的靜音，還有把它帶進真的歌裡。' }
+      : avg <= 130 ? { tag: '可挑戰 HALF', name: '還行，但會飄', note: '參考消失之後就抓不住了——這正是 gap click 要練的東西，練得起來。' }
+      : { tag: '先練穩 CLASSIC', name: '飄很大', note: '很正常，多數人第一次都這樣。從慢速開始練，靜音先只撐一小節。' };
+    var lean = !hits ? '' : signed > 15 ? '整體偏慢，你在拖' : signed < -15 ? '整體偏快，你在衝' : '快慢很平均';
 
     wrap.innerHTML =
       '<div class="qb-card">' +
       '<span class="qb-tag">' + esc(B.tag) + '</span>' +
-      '<p class="qb-title">' + esc(B.title) + '</p>' +
-      '<ul class="qb-rows">' + lis + '</ul>' +
-      (verdict ? '<p class="qb-verdict">' + esc(verdict) + '</p>' : '') +
+      '<p class="qb-kicker">你在靜音段的平均偏移</p>' +
+      '<p class="qb-ms">' + (hits ? avg : '–') + '<em>ms</em></p>' +
+      '<div class="qb-metrics">' +
+      '<span><b>' + hits + '/' + silTotal + '</b> 靜音段命中</span>' +
+      (lean ? '<span><b>' + (signed > 0 ? '+' : '') + signed + 'ms</b> ' + esc(lean) + '</span>' : '') +
       '</div>' +
+      '<p class="qb-tier">' + (tier.tag ? '<span class="qb-tierlv">' + esc(tier.tag) + '</span>' : '') + esc(tier.name) + '</p>' +
+      '<p class="qb-verdict">' + esc(tier.note) + '</p>' +
+      '</div>' +
+      // ⚠️ 中位數是負的＝這個人習慣搶拍，不是「裝置延遲 -Xms」（那不存在）。
+      //    兩種情況都照扣（目的是把基準歸零、量靜音段的飄移），但話要分開講。
+      (onHits.length >= 3
+        ? (latency >= 20
+            ? '<p class="qb-cal">🎯 已用你前面「響」的那幾拍自動抵銷裝置延遲（測到約 +' + Math.round(latency) +
+              'ms，藍牙耳機通常更大）——所以上面這個數字是你自己的，不是你耳機的。</p>'
+            : '<p class="qb-cal">🎯 已用你前面「響」的那幾拍當基準歸零（你的打點基準 ' +
+              (latency >= 0 ? '+' : '') + Math.round(latency) + 'ms）——上面量的是你在靜音時「飄掉多少」，跟裝置延遲無關。</p>')
+        : '') +
       (B.note ? '<p class="qb-note">' + esc(B.note) + '</p>' : '') +
-      '<button type="button" class="qb-again">↺ 重測加碼題</button>';
-    wrap.querySelector('.qb-again').addEventListener('click', teaser);
+      '<button type="button" class="qb-again">↺ 再玩一次</button>';
+    wrap.querySelector('.qb-again').addEventListener('click', function () { stopAll(); board(); });
+  }
+
+  // 遊戲畫面
+  function board() {
+    stopAll();
+    wrap.innerHTML =
+      '<div class="qb-game">' +
+      '<p class="qb-gtitle">🙈 節拍器捉迷藏 <span>CLASSIC・' + BPM + ' bpm</span></p>' +
+      '<p class="qb-ghow">' + esc(B.how) + '</p>' +
+      '<div class="qb-stage">' +
+      '<div class="qb-state" id="qbState">🔊</div>' +
+      '<div class="qb-bar" id="qbBar">按「開始」</div>' +
+      '<div class="qb-dots4"><span class="qb-dot4"></span><span class="qb-dot4"></span><span class="qb-dot4"></span><span class="qb-dot4"></span></div>' +
+      '</div>' +
+      '<div class="qb-acts"><button type="button" class="qb-start" id="qbStart">▶ 開始</button></div>' +
+      '<p class="qb-status" id="qbStatus">' + esc(B.hint) + '</p>' +
+      '<div class="qb-taprow">' +
+      '<button type="button" class="qb-tapbtn" id="qbTap">按這裡打點</button>' +
+      '<span class="qb-tiphint">或按 <b>空白鍵</b><span class="qb-pulse" id="qbPulse"></span></span>' +
+      '</div>' +
+      '</div>';
+    $('qbStart').addEventListener('click', function () { unlock(); start(); });
+    $('qbTap').addEventListener('click', function () { unlock(); tap(); });
+    keyHandler = function (e) {
+      if (!wrap.isConnected) { stopAll(); return; }
+      if (e.code === 'Space') { e.preventDefault(); unlock(); tap(); }
+    };
+    document.addEventListener('keydown', keyHandler);
+    try { wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (e) {}
+  }
+
+  function teaser() {
+    stopAll();
+    wrap.innerHTML =
+      '<div class="qb-open">' +
+      '<button type="button" class="qb-openbtn">' + esc(B.cta) + '</button>' +
+      '<p class="qb-hint">' + esc(B.teaser) + '</p>' +
+      '</div>';
+    wrap.querySelector('.qb-openbtn').addEventListener('click', board);
   }
 
   teaser();
