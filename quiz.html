@@ -78,7 +78,8 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
 
 /* ── 遊戲畫面 ── */
 .qb-gtitle{font-weight:900;font-size:18px;color:#0c0c0c;margin:0 0 6px;line-height:1.4}
-.qb-gtitle span{font-family:"Archivo",sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.08em;color:#2563ff;margin-left:8px}
+.qb-gtitle span{font-family:"Archivo","Noto Sans TC",sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.06em;color:#2563ff;margin-left:8px}
+.qb-gtitle .qb-lv{font-weight:900;color:#fa5a1e;letter-spacing:.1em}
 .qb-ghow{font-size:13.5px;color:#55524a;line-height:1.8;margin:0 0 16px}
 /* 譜面容器：VexFlow 會把 SVG 塞進來，載不到 CDN 時是手繪 SVG */
 .qb-staff{background:#fff;border:1.5px solid #0c0c0c;border-radius:14px;box-shadow:4px 5px 0 #0c0c0c;padding:10px 8px;min-height:120px;overflow-x:auto}
@@ -100,8 +101,20 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
 .qb-card{background:#0c0c0c;border-radius:16px;padding:clamp(20px,3vw,28px);color:#f4f3ee;text-align:center}
 .qb-tag{display:inline-block;font-family:"Archivo",sans-serif;font-weight:800;font-size:11px;letter-spacing:.16em;color:#fa5a1e;border:1px solid #fa5a1e;padding:3px 11px;border-radius:99px;margin-bottom:14px}
 .qb-kicker{font-size:12.5px;color:#a8a49a;margin:0 0 2px;letter-spacing:.04em}
-.qb-ms{font-family:"Archivo",sans-serif;font-style:italic;font-weight:900;font-size:clamp(52px,9vw,78px);line-height:1;margin:0;color:#fff}
-.qb-ms em{font-style:normal;font-size:.34em;font-weight:800;letter-spacing:.04em;color:#2563ff;margin-left:8px;vertical-align:.55em}
+/* 現在放的是關卡代號（SIXTEEN／TRIPLET…）不是數字，字要小一點才不會爆版 */
+.qb-ms{font-family:"Archivo",sans-serif;font-style:italic;font-weight:900;font-size:clamp(34px,7.5vw,58px);line-height:1.05;margin:0;color:#fff;letter-spacing:.01em;word-break:break-word}
+.qb-ms em{font-style:normal;font-size:.34em;font-weight:800;letter-spacing:.04em;color:#a8a49a;margin-left:8px;vertical-align:.55em}
+/* 天花板階梯：一關一列，過的亮起來 */
+.qb-ladder{list-style:none;margin:18px 0 0;padding:0;text-align:left}
+.qb-lrow{display:grid;grid-template-columns:20px 82px 1fr auto;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(244,243,238,.12);color:#8a8579}
+.qb-lrow:last-child{border-bottom:none}
+.qb-lrow.ok{color:#e4e2da}
+.qb-lmark{font-size:14px;font-weight:800;color:#5a5a54}
+.qb-lrow.ok .qb-lmark{color:#3fd39b}
+.qb-lname{font-family:"Archivo",sans-serif;font-weight:800;font-size:13px;letter-spacing:.06em}
+.qb-lrow.ok .qb-lname{color:#fff}
+.qb-lhint{font-size:12px;opacity:.75}
+.qb-lacc{font-family:"Archivo",sans-serif;font-size:12.5px;font-weight:700}
 .qb-metrics{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:14px 0 0}
 .qb-metrics span{font-size:12.5px;color:#c9c6bd;background:rgba(244,243,238,.09);border-radius:99px;padding:6px 14px}
 .qb-metrics b{font-family:"Archivo",sans-serif;color:#fff;font-size:13.5px}
@@ -179,16 +192,16 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
   "bonus": {
     "tag":"BONUS ROUND",
     "cta":"🎼 加碼：玩一次「節奏視奏」",
-    "teaser":"看譜、跟著節拍器打出來。5 題，每題打完立刻告訴你哪一下準、哪一下歪。這是學員練功房裡真的那款遊戲，入門難度 BASIC。",
-    "how":"聽到「預備」的 4 拍先跟著打（順便量你裝置的延遲）→ 第 5 拍開始照譜打。打完譜上會出現綠／黃／紅點，就是你每一下的準度。",
+    "teaser":"看譜、跟著節拍器打出來。五關各一題，從全四分一路跳到三連音＋切分綜合——看你的天花板停在哪一關。這是學員練功房裡真的那款遊戲。",
+    "how":"聽到「預備」的 4 拍先跟著打（順便量你裝置的延遲）→ 第 5 拍開始照譜打。打完譜上會出現綠／黃／紅點，就是你每一下的準度。過關要準度 95%＋最多 1 個黃點＋不能有紅點。",
     "hint":"記得開聲音或戴耳機。預備 4 拍也要跟著打",
-    "note":"這是 JDAC 學員練功房「節奏視奏」的入門難度 BASIC，每關 50 題、共 5 關（BASIC 四分八分／SIXTEEN 十六分／SYNCO 切分／TRIPLET 三連音／FUSION 綜合），另有無盡挑戰把 50 小節連成一條不間斷。",
+    "note":"這五關就是 JDAC 學員練功房「節奏視奏」的實際分級，每一關各有 50 題（這裡一關只抽一題），另有無盡挑戰把 50 小節連成一條不間斷。",
     "qs": [
-      ["q","q","q","q"],
-      ["q","q","q","e2"],
-      ["q","q","qr","e2"],
-      ["q","er_e","q","q"],
-      ["e2","qr","e2","q"]
+      {"lv":"BASIC","hint":"四分・八分","tk":["q","q","q","q"]},
+      {"lv":"SIXTEEN","hint":"加十六分","tk":["q","q","q","s4"]},
+      {"lv":"SYNCO","hint":"切分","tk":["er_e","s_e_s","e2","q"]},
+      {"lv":"TRIPLET","hint":"三連音","tk":["q","q","q","t3"]},
+      {"lv":"FUSION","hint":"綜合","tk":["e2","q","s_e_s","t3"]}
     ]
   }
 }
@@ -281,13 +294,19 @@ function jdacQuizBonus(panel, DATA) {
   anchor.parentNode.insertBefore(wrap, anchor);
 
   // ── 音符 token → 音符／拍點（照搬 _rlCells／_rlDur／_rlExpand）──
+  // 音型格子照搬 _rlCells（五關全部音型都要，因為公開版是一關取一題）
   var CELLS = {
     q: [['q', false]],
     qr: [['qr', true]],
     e2: [['8', false], ['8', false]],
-    er_e: [['8r', true], ['8', false]]
+    er_e: [['8r', true], ['8', false]],
+    s4: [['16', false], ['16', false], ['16', false], ['16', false]],
+    e_s2: [['8', false], ['16', false], ['16', false]],
+    s2_e: [['16', false], ['16', false], ['8', false]],
+    s_e_s: [['16', false], ['8', false], ['16', false]],
+    t3: [['8t', false], ['8t', false], ['8t', false]]
   };
-  var DUR = { q: 1, qr: 1, '8': 0.5, '8r': 0.5 };
+  var DUR = { q: 1, qr: 1, '8': 0.5, '8r': 0.5, '16': 0.25, '16r': 0.25, '8t': 1 / 3 };
   function expand(tokens) {
     var notes = [], onsets = [], beat = 0;
     (tokens || ['q', 'q', 'q', 'q']).forEach(function (tk) {
@@ -399,16 +418,21 @@ function jdacQuizBonus(panel, DATA) {
     var stave = new V.Stave(4, 12, W - 12);
     stave.addClef('percussion').addTimeSignature('4/4');
     stave.setContext(ctx).draw();
+    // 8t（三連音）在 VexFlow 畫成 8 分再包 Tuplet；音符畫小鼓位置 c/5、符桿一律朝上
     var notes = src.map(function (n) {
-      return new V.StaveNote({ clef: 'percussion', keys: ['c/5'], duration: n.dur, stem_direction: 1 });
+      return new V.StaveNote({ clef: 'percussion', keys: ['c/5'], duration: n.dur === '8t' ? '8' : n.dur, stem_direction: 1 });
     });
     var voice = new V.Voice({ num_beats: 4, beat_value: 4 }).setStrict(false).addTickables(notes);
-    var beams = [], bt = 0, gStart = 0;
+    // 符梁「手動逐拍」——generateBeams 按 1/4 分組，遇三連音的假 8 分 tick 會分錯組，別改回去
+    var beams = [], tuplets = [], bt = 0, gStart = 0;
     var flushBeat = function (from, to) {
       var idxs = [];
       for (var i = from; i < to; i++) { var n = src[i]; if (!n.rest && n.dur !== 'q') idxs.push(i); }
       if (idxs.length >= 2) {
         try { beams.push(new V.Beam(idxs.map(function (i) { return notes[i]; }))); } catch (e) { /* ignore */ }
+      }
+      if (to - from === 3 && src[from].dur === '8t') {
+        try { tuplets.push(new V.Tuplet(notes.slice(from, to), { num_notes: 3, notes_occupied: 2 })); } catch (e) { /* ignore */ }
       }
     };
     src.forEach(function (n, i) {
@@ -419,6 +443,7 @@ function jdacQuizBonus(panel, DATA) {
     new V.Formatter().joinVoices([voice]).format([voice], W - 70);
     voice.draw(ctx, stave);
     beams.forEach(function (b) { b.setContext(ctx).draw(); });
+    tuplets.forEach(function (t) { try { t.setContext(ctx).draw(); } catch (e) { /* ignore */ } });
     var svg = host.querySelector('svg');
     if (svg && marks && marks.length) {
       var oi = -1;
@@ -459,11 +484,19 @@ function jdacQuizBonus(panel, DATA) {
     var flushGroup = function () {
       if (!group.length) return;
       if (group.length === 1) {
+        // 單一音符畫符尾：十六分兩條、八分／三連音一條
         var g = group[0];
-        if (g.dur === '8') mk('path', { d: 'M' + (g.x + 6.5) + ',' + (Y - 38) + ' q7,3 6,12', fill: 'none', stroke: INK, 'stroke-width': 2.4, 'stroke-linecap': 'round' });
+        mk('path', { d: 'M' + (g.x + 6.5) + ',' + (Y - 38) + ' q7,3 6,12', fill: 'none', stroke: INK, 'stroke-width': 2.4, 'stroke-linecap': 'round' });
+        if (g.dur === '16') mk('path', { d: 'M' + (g.x + 6.5) + ',' + (Y - 31) + ' q7,3 6,12', fill: 'none', stroke: INK, 'stroke-width': 2.4, 'stroke-linecap': 'round' });
       } else {
+        // 多音符畫符梁：全十六分加第二條；整拍都是三連音再標「3」
         var x1 = group[0].x + 6.5, x2 = group[group.length - 1].x + 6.5;
         mk('rect', { x: x1, y: Y - 41, width: x2 - x1, height: 4.5, fill: INK });
+        if (group.every(function (g2) { return g2.dur === '16'; })) mk('rect', { x: x1, y: Y - 33, width: x2 - x1, height: 4.5, fill: INK });
+        if (group.every(function (g2) { return g2.dur === '8t'; })) {
+          var tt = mk('text', { x: (x1 + x2) / 2, y: Y - 47, 'text-anchor': 'middle', 'font-size': 13, 'font-style': 'italic', 'font-weight': 700, fill: INK });
+          tt.textContent = '3';
+        }
       }
       group = [];
     };
@@ -481,7 +514,7 @@ function jdacQuizBonus(panel, DATA) {
       } else {
         mk('ellipse', { cx: x, cy: Y, rx: 6.8, ry: 5.3, fill: INK });
         mk('line', { x1: x + 6.5, x2: x + 6.5, y1: Y, y2: Y - 40, stroke: INK, 'stroke-width': 1.8 });
-        if (n.dur === '8') group.push({ x: x, dur: n.dur }); else flushGroup();
+        if (n.dur === '8' || n.dur === '16' || n.dur === '8t') group.push({ x: x, dur: n.dur }); else flushGroup();
       }
       beat += DUR[n.dur];
     });
@@ -616,11 +649,12 @@ function jdacQuizBonus(panel, DATA) {
   // ── 畫面 ──
   function board() {
     stopAll();
-    cur = expand(B.qs[qi]);
+    var Q = B.qs[qi];
+    cur = expand(Q.tk);
     hits = []; wild = 0;
     wrap.innerHTML =
       '<div class="qb-game">' +
-      '<p class="qb-gtitle">🎼 節奏視奏 <span>BASIC・第 ' + (qi + 1) + ' / ' + B.qs.length + ' 題・' + BPM + ' bpm</span></p>' +
+      '<p class="qb-gtitle">🎼 節奏視奏 <span>第 ' + (qi + 1) + ' / ' + B.qs.length + ' 關・<b class="qb-lv">' + esc(Q.lv) + '</b>（' + esc(Q.hint) + '）・' + BPM + ' bpm</span></p>' +
       '<p class="qb-ghow">' + esc(B.how) + '</p>' +
       '<div class="qb-staff" id="qbStaff"></div>' +
       '<div class="qb-acts"><button type="button" class="qb-start" id="qbStart">▶ 開始</button></div>' +
@@ -652,25 +686,43 @@ function jdacQuizBonus(panel, DATA) {
 
   function summary() {
     stopAll();
-    var n = scores.length;
     var passN = scores.filter(function (s) { return s.passed; }).length;
-    var avg = n ? Math.round(scores.reduce(function (a, s) { return a + s.acc; }, 0) / n) : 0;
     var g = scores.reduce(function (a, s) { return a + s.good; }, 0);
     var y = scores.reduce(function (a, s) { return a + s.ok; }, 0);
     var rd = scores.reduce(function (a, s) { return a + s.bad; }, 0);
+    // 五題各一關，所以最有意義的讀數是「天花板」＝過關的最高一級，不是過幾題
+    var topI = -1;
+    scores.forEach(function (s, i) { if (s.passed) topI = i; });
+    var ceiling = topI >= 0 ? B.qs[topI].lv : null;
+    var nextI = topI + 1;
+    var next = nextI < B.qs.length ? B.qs[nextI].lv : null;
     // 代號要寫成「可挑戰 XXX」——那幾個字在練功房是難度名稱不是成績，單掛會被誤讀
-    var tier = passN >= 5 ? { tag: '可挑戰 SYNCO', name: '讀譜很穩 🏆', note: 'BASIC 對你太簡單了。真正會卡的是切分跟三連音——那才是視奏開始有趣的地方。' }
-      : passN >= 3 ? { tag: '可挑戰 SIXTEEN', name: '底子在 👍', note: '四分八分讀得動，下一關是十六分一多就亂的那種。' }
-      : passN >= 1 ? { tag: '先練穩 BASIC', name: '看得懂，但手還沒跟上', note: '譜你讀得出來，卡的是「讀到」跟「打出來」之間那段。這是練得起來的，而且很快。' }
-      : { tag: '先練穩 BASIC', name: '先從讀譜開始', note: '很正常。鼓譜是所有樂器裡最好讀的——不用管音高，只要管什麼時候打。從全四分音符開始就好。' };
+    var tier = !ceiling
+      ? { tag: '先練穩 BASIC', name: '先從讀譜開始', note: '很正常。鼓譜是所有樂器裡最好讀的——不用管音高，只要管什麼時候打。從全四分音符開始，一週就有感覺。' }
+      : !next
+      ? { tag: '五關全過 🏆', name: '視奏是你的武器', note: '連 FUSION 都拿下了。你缺的不是讀譜，是有人給你更難的東西練——練功房每一關有 50 題，還有把 50 小節連成一條的無盡挑戰。' }
+      : { tag: '可挑戰 ' + next, name: '天花板在 ' + ceiling, note: ceiling === 'BASIC' ? '四分八分沒問題，十六分一多就開始亂——這是最多人卡的第一道牆，而且是純熟練度問題，練得起來。'
+          : ceiling === 'SIXTEEN' ? '十六分讀得動了，卡在切分。切分不是手的問題，是你數拍的方式還沒換過來——這個講一次就會通。'
+          : ceiling === 'SYNCO' ? '切分過了，三連音把你擋下來。三連音難在「一拍塞三下」跟你原本的二分法打架，要另外建一套感覺。'
+          : '前面都過了，倒在綜合關——單一種音型你都會，混在一起就亂。這正是視奏最後一哩路。' };
+
+    var ladder = B.qs.map(function (q, i) {
+      var s = scores[i] || {};
+      return '<li class="qb-lrow' + (s.passed ? ' ok' : '') + '">' +
+        '<span class="qb-lmark">' + (s.passed ? '✓' : '✗') + '</span>' +
+        '<span class="qb-lname">' + esc(q.lv) + '</span>' +
+        '<span class="qb-lhint">' + esc(q.hint) + '</span>' +
+        '<span class="qb-lacc">' + (s.acc == null ? '–' : s.acc + '%') + '</span></li>';
+    }).join('');
 
     wrap.innerHTML =
       '<div class="qb-card">' +
       '<span class="qb-tag">' + esc(B.tag) + '</span>' +
-      '<p class="qb-kicker">你在 BASIC 通過的題數</p>' +
-      '<p class="qb-ms">' + passN + '<em>/ ' + n + '</em></p>' +
+      '<p class="qb-kicker">你的視奏天花板</p>' +
+      '<p class="qb-ms">' + esc(ceiling || 'BASIC') + (ceiling ? '' : '<em>未過</em>') + '</p>' +
+      '<ul class="qb-ladder">' + ladder + '</ul>' +
       '<div class="qb-metrics">' +
-      '<span><b>' + avg + '%</b> 平均準度</span>' +
+      '<span><b>' + passN + '/' + B.qs.length + '</b> 關過關</span>' +
       '<span><b class="qb-g">' + g + '</b>綠 <b class="qb-y">' + y + '</b>黃 <b class="qb-r">' + rd + '</b>紅</span>' +
       '</div>' +
       '<p class="qb-tier"><span class="qb-tierlv">' + esc(tier.tag) + '</span>' + esc(tier.name) + '</p>' +
