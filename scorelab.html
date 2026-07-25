@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1200">
+<meta name="robots" content="noindex,nofollow">
+<title>JDAC 寫譜工作室（老師測試版）</title>
+<style>
+:root{
+  --bg:#14161a;--panel:#1c1f25;--panel-2:#23272f;--line:#2e333c;
+  --text:#e8eaed;--dim:#949aa5;--blue:#2f6bff;--orange:#ff7a29;
+  --green:#29c07a;--red:#ff4d5e;
+  --kick:#ff7a29;--snare:#2f6bff;--hihat:#56c8d8;--hho:#2aa5b8;
+  --tom1:#b06bff;--tom2:#8a4fd8;--ft:#6a35b0;--crash:#ffd23f;--ride:#7fdb6a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);
+  font:13px/1.45 -apple-system,"PingFang TC","Noto Sans TC",sans-serif;overflow:hidden}
+body{display:flex;flex-direction:column}
+.spacer{flex:1 1 auto}
+header,#transport,footer{display:flex;align-items:center;gap:10px;padding:0 14px;
+  background:var(--panel);border-bottom:1px solid var(--line);flex:none;
+  flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+header::-webkit-scrollbar,#transport::-webkit-scrollbar,footer::-webkit-scrollbar{display:none}
+header>*,#transport>*,footer>*{flex:none}
+header{height:52px}#transport{height:46px}
+footer{height:30px;border-bottom:0;border-top:1px solid var(--line);font-size:12px;color:var(--dim)}
+.brand{font-weight:800;letter-spacing:.04em;font-size:15px;font-style:italic;color:var(--orange)}
+.brand span{color:var(--text);font-style:normal;font-weight:600}
+.meta{color:var(--dim);font-variant-numeric:tabular-nums}
+.dirty{color:var(--orange);font-weight:600}
+.hint,.legend{color:var(--dim);font-size:12px;white-space:nowrap}
+.legend b{color:var(--text);font-weight:600}
+select,input[type=number],input[type=text],button{background:var(--panel-2);color:var(--text);
+  border:1px solid var(--line);border-radius:6px;padding:6px 9px;font:inherit}
+select{max-width:280px}
+input[type=number]{width:64px;text-align:center}
+button{cursor:pointer}
+button:hover:not(:disabled){border-color:var(--blue)}
+button:disabled{opacity:.4;cursor:default}
+button.primary{background:var(--blue);border-color:var(--blue);font-weight:600}
+button.play{width:42px;height:32px;font-size:15px;background:var(--green);
+  border-color:var(--green);color:#06210f;font-weight:700}
+button.play.on{background:var(--orange);border-color:var(--orange)}
+button.ghost{background:transparent;border-color:var(--line);color:var(--dim)}
+button.ghost:hover{border-color:var(--blue);color:var(--text)}
+.ctl{display:flex;align-items:center;gap:6px;color:var(--dim);white-space:nowrap}
+.ctl.loop input[type=number]{width:54px}
+input[type=range]{width:90px;accent-color:var(--blue)}
+input[type=checkbox]{accent-color:var(--blue)}
+output{font-variant-numeric:tabular-nums;min-width:34px}
+.time{font-variant-numeric:tabular-nums;color:var(--dim);min-width:88px}
+.time span:first-child{color:var(--text);font-weight:600}
+#syncbar{display:flex;align-items:center;gap:12px;height:44px;padding:0 14px;flex:none;
+  background:#191d24;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+#syncbar .grp{display:flex;align-items:center;gap:6px;padding-right:12px;
+  border-right:1px solid var(--line);white-space:nowrap}
+#syncbar .grp:last-of-type{border-right:0}
+#syncbar b{color:var(--dim);font-weight:600;font-size:11px}
+#syncbar output{color:var(--orange);font-weight:600}
+#main{flex:1;display:flex;min-height:0}
+#ytwrap{flex:none;width:380px;border-right:1px solid var(--line);background:#000;
+  display:flex;flex-direction:column}
+#ytplayer{width:100%;aspect-ratio:16/9;background:#000}
+#ytnote{padding:10px 12px;color:var(--dim);font-size:12px;line-height:1.7}
+main#grid{flex:1;overflow:auto;padding:14px}
+.empty{color:var(--dim);padding:40px;text-align:center;line-height:2}
+.rowblock{margin-bottom:12px}
+.rowscore svg{display:block}
+.barrow{display:flex;gap:10px}
+.labels{flex:none;width:84px;display:grid;grid-template-rows:21px repeat(9,20px);
+  row-gap:1px;align-items:center;font-size:11px;color:var(--dim);text-align:right}
+.labels .sp{height:21px}
+.labels>div:not(.sp){display:flex;align-items:center;justify-content:flex-end;gap:4px;
+  cursor:pointer;border-radius:3px;padding-right:2px}
+.labels>div:not(.sp):hover{color:var(--text);background:var(--panel-2)}
+.labels kbd{font:600 9px/1 ui-monospace,monospace;background:var(--panel-2);
+  border:1px solid var(--line);border-radius:3px;padding:2px 3px;color:var(--dim)}
+.bar{flex:none;background:var(--panel);border:1px solid var(--line);border-radius:6px;
+  padding:3px 4px 4px;position:relative}
+.bar.playing{border-color:var(--blue)}
+.bar.inloop{background:#1a2130}
+.barhead{height:18px;display:flex;align-items:center;justify-content:space-between;
+  font-size:10px;color:var(--dim);cursor:pointer;padding:0 2px;font-variant-numeric:tabular-nums}
+.barhead:hover{color:var(--text)}
+.barhead .sec{color:var(--orange);font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+.cells{display:grid;grid-template-rows:repeat(9,20px);gap:1px}
+.row{display:flex;gap:1px;height:20px}
+.row .cell{flex:none}
+.cell{background:var(--panel-2);border-radius:2px;cursor:pointer;position:relative}
+.cell.beat{background:#2b313b}
+.cell:hover{outline:1px solid var(--blue)}
+.cell.on{background:var(--c)}
+.cell.on::after{content:"";position:absolute;inset:2px;border-radius:1px;background:rgba(255,255,255,.25)}
+.cell.target{box-shadow:inset 0 0 0 1px var(--orange)}
+.cell.editpos{box-shadow:inset 0 0 0 2px var(--orange)}
+.cell.t3::before,.cell.t6::before,.cell.tq::before{content:"";position:absolute;left:0;right:0;
+  bottom:0;height:2px;border-radius:0 0 2px 2px;pointer-events:none}
+.cell.t3::before{background:rgba(255,122,41,.55)}
+.cell.t6::before{background:rgba(176,107,255,.55)}
+.cell.tq::before{background:rgba(255,210,63,.6)}
+.cursor{position:absolute;top:18px;bottom:4px;width:2px;background:var(--blue);
+  pointer-events:none;box-shadow:0 0 6px var(--blue)}
+#status.ok{color:var(--green)}#status.err{color:var(--red)}#status.busy{color:var(--orange)}
+#gate{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;
+  justify-content:center;color:var(--dim);font-size:15px;z-index:99;text-align:center;line-height:2}
+</style>
+</head>
+<body>
+
+<div id="gate">寫譜工作室尚未開放<br><span style="font-size:12px">敬請期待</span></div>
+
+<header>
+  <div class="brand">JDAC <span>寫譜工作室</span><span style="color:var(--orange);font-size:11px;margin-left:6px">老師測試版</span></div>
+  <select id="projPicker"><option>（沒有專案）</option></select>
+  <button id="newBtn">新增專案</button>
+  <button id="importBtn" class="ghost">匯入</button>
+  <button id="exportBtn" class="ghost">匯出 JSON</button>
+  <button id="delProjBtn" class="ghost" title="刪除目前專案">刪除專案</button>
+  <div class="meta" id="songMeta"></div>
+  <div class="spacer"></div>
+  <div class="dirty" id="dirty" hidden>● 未存（自動儲存中）</div>
+</header>
+
+<div id="transport">
+  <button id="playBtn" class="play">▶</button>
+  <div class="time"><span id="curTime">0:00</span> / <span id="totTime">0:00</span></div>
+  <label class="ctl">速度
+    <input type="range" id="rate" min="0.25" max="1" step="0.25" value="1">
+    <output id="rateOut">1×</output>
+  </label>
+  <label class="ctl loop"><input type="checkbox" id="loopOn"> 循環
+    <input type="number" id="loopA" min="1" value="1">–<input type="number" id="loopB" min="1" value="4">
+  </label>
+  <label class="ctl"><input type="checkbox" id="clickOn"> 節拍器</label>
+  <label class="ctl"><input type="checkbox" id="followOn" checked> 跟隨捲動</label>
+  <label class="ctl"><input type="checkbox" id="scoreOn" checked> 譜面對照</label>
+  <button id="addBarsBtn" class="ghost" title="在結尾加 4 小節">＋4 小節</button>
+  <div class="spacer"></div>
+  <div class="hint">滑鼠停在格上按字母鍵下音符 · 點左側樂器名整列清除 · 雙擊小節號改段落</div>
+</div>
+
+<div id="syncbar">
+  <div class="grp"><b>對齊影片</b>
+    <button id="setOneBtn" class="primary">影片目前位置＝第 1 拍</button>
+    <output id="t0Out">未設定</output>
+  </div>
+  <div class="grp"><b>微調</b>
+    <button data-nudge="-0.05">−50ms</button><button data-nudge="-0.01">−10ms</button>
+    <button data-nudge="0.01">+10ms</button><button data-nudge="0.05">+50ms</button>
+  </div>
+  <div class="grp"><b>BPM</b>
+    <input type="number" id="bpmIn" min="30" max="260" step="0.1" value="100">
+    <button id="tapBtn" class="ghost" title="跟著音樂點,自動算 BPM">TAP</button>
+    <output id="tapOut"></output>
+  </div>
+  <div class="spacer"></div>
+  <span class="hint">先設第 1 拍和 BPM,格子和游標才會跟影片對齊</span>
+</div>
+
+<div id="main">
+  <div id="ytwrap">
+    <div id="ytplayer"></div>
+    <div id="ytnote">音源用 YouTube 內嵌播放（不下載、不存檔）。<br>
+      變速由 YouTube 提供（0.25×–1×，音高不變）。</div>
+  </div>
+  <main id="grid"><div class="empty">建立或選擇一個專案開始</div></main>
+</div>
+
+<footer>
+  <span id="status">就緒</span>
+  <span class="spacer"></span>
+  <span class="legend"><b>鍵盤</b> 空白鍵 播放 · ←/→ 移游標(⇧跳小節) ·
+    <b>S</b>D <b>H</b>H <b>O</b>pen <b>B</b>D <b>T</b>1 <b>Y</b>=T2 <b>U</b>=Ft <b>C</b>rash <b>R</b>ide ·
+    <b>3/6/⇧3</b> 三連音 <b>4</b> 還原 · <b>⌘C/⌘V</b> 複製貼上 <b>⌘⇧V</b> 只貼音符 <b>⌘⌫</b> 刪小節 · Z 復原</span>
+</footer>
+
+<input type="file" id="fileIn" accept=".json" hidden>
+<script src="vendor/vexflow-min.js"></script>
+<script src="scorelab.js"></script>
+</body>
+</html>
