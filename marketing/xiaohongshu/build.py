@@ -84,11 +84,22 @@ TEXT = {
 
 # ── 版型 ──────────────────────────────────────────────────────────
 BASE = """
+/* 字重明確綁死，不靠系統去猜。粗細不一致有兩個來源，兩個都堵掉：
+   1) 只用 400 / 700 / 900 三級 —— 之前混到 500（沒這個字檔）跟 900
+      （Noto 的 Black 在系統裡是獨立字族），瀏覽器就自己合成假粗體。
+   2) 簡體版一定要用 Noto Sans SC —— 用 TC 去排簡體，缺的字會掉到系統
+      備援字型（文泉驛）去墊，同一行就會忽粗忽細。 */
+@font-face { font-family:"CJK"; font-weight:400; src:url("../fonts/{cjk}-400.ttf") format("truetype") }
+@font-face { font-family:"CJK"; font-weight:700; src:url("../fonts/{cjk}-700.ttf") format("truetype") }
+@font-face { font-family:"CJK"; font-weight:900; src:url("../fonts/{cjk}-900.ttf") format("truetype") }
+@font-face { font-family:"Arch"; font-weight:700; src:url("../fonts/Archivo-700.ttf") format("truetype") }
+@font-face { font-family:"Arch"; font-weight:900; src:url("../fonts/Archivo-900.ttf") format("truetype") }
+
 * { box-sizing:border-box; margin:0; padding:0 }
 body { width:1242px; height:1656px; overflow:hidden; background:#f4f3ee; color:#0c0c0c;
-       font-family:"Noto Sans TC",sans-serif; -webkit-font-smoothing:antialiased }
+       font-family:"CJK",sans-serif; -webkit-font-smoothing:antialiased }
 .pg { width:100%; height:100%; display:flex; flex-direction:column }
-.lat { font-family:"Archivo",sans-serif; font-weight:700 }
+.lat { font-family:"Arch",sans-serif; font-weight:700 }
 /* 小標籤 */
 .chip { display:inline-block; background:#fa5a1e; color:#fff; font-weight:900; font-size:30px;
         letter-spacing:.06em; padding:12px 26px; border-radius:999px }
@@ -132,10 +143,10 @@ S2 = """
 .band img { width:100%; height:100%; object-fit:cover; display:block }
 .list { display:flex; flex-direction:column; gap:26px }
 .row { display:flex; align-items:flex-start; gap:24px }
-.row .n { font-family:"Archivo",sans-serif; font-weight:700; font-size:44px; color:#fa5a1e;
+.row .n { font-family:"Arch",sans-serif; font-weight:700; font-size:44px; color:#fa5a1e;
           line-height:1.15; flex:none; width:74px }
 .row .t { font-size:44px; font-weight:700; line-height:1.35 }
-.note { font-size:34px; line-height:1.6; color:#5b574f; font-weight:500;
+.note { font-size:34px; line-height:1.6; color:#5b574f; font-weight:400;
         border-left:8px solid #2563ff; padding-left:24px }
 .cta { background:#0c0c0c; color:#fff; border-radius:24px; padding:44px 46px;
        font-size:62px; font-weight:900; line-height:1.32; letter-spacing:-.01em }
@@ -199,12 +210,16 @@ PAGE = """<!doctype html>
 """
 
 
+CJK = {"sc": "NotoSansSC", "tc": "NotoSansTC"}
+
+
 def render_html(lang):
     t = TEXT[lang]
+    base = BASE.replace("{cjk}", CJK[lang])
     pages = {}
 
     pages["1-cover"] = PAGE.format(
-        title=f"1 封面 ({lang})", base=BASE, css=S1, body=S1_BODY.format(**t)
+        title=f"1 封面 ({lang})", base=base, css=S1, body=S1_BODY.format(**t)
     )
 
     rows = "".join(
@@ -212,13 +227,13 @@ def render_html(lang):
         for i, x in enumerate(t["s2_items"], 1)
     )
     pages["2-answer"] = PAGE.format(
-        title=f"2 解答 ({lang})", base=BASE, css=S2,
+        title=f"2 解答 ({lang})", base=base, css=S2,
         body=S2_BODY.format(s2_rows=rows, **{k: v for k, v in t.items() if k != "s2_items"}),
     )
 
     pts = "".join(f'<div class="pt"><i></i><span>{x}</span></div>' for x in t["s3_items"])
     pages["3-about"] = PAGE.format(
-        title=f"3 自介 ({lang})", base=BASE, css=S3,
+        title=f"3 自介 ({lang})", base=base, css=S3,
         body=S3_BODY.format(s3_pts=pts, **{k: v for k, v in t.items() if k != "s3_items"}),
     )
     return pages

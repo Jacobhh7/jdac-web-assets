@@ -2,11 +2,22 @@
 <meta charset="utf-8">
 <title>3 自介 (tc)</title>
 <style>
+/* 字重明確綁死，不靠系統去猜。粗細不一致有兩個來源，兩個都堵掉：
+   1) 只用 400 / 700 / 900 三級 —— 之前混到 500（沒這個字檔）跟 900
+      （Noto 的 Black 在系統裡是獨立字族），瀏覽器就自己合成假粗體。
+   2) 簡體版一定要用 Noto Sans SC —— 用 TC 去排簡體，缺的字會掉到系統
+      備援字型（文泉驛）去墊，同一行就會忽粗忽細。 */
+@font-face { font-family:"CJK"; font-weight:400; src:url("../fonts/NotoSansTC-400.ttf") format("truetype") }
+@font-face { font-family:"CJK"; font-weight:700; src:url("../fonts/NotoSansTC-700.ttf") format("truetype") }
+@font-face { font-family:"CJK"; font-weight:900; src:url("../fonts/NotoSansTC-900.ttf") format("truetype") }
+@font-face { font-family:"Arch"; font-weight:700; src:url("../fonts/Archivo-700.ttf") format("truetype") }
+@font-face { font-family:"Arch"; font-weight:900; src:url("../fonts/Archivo-900.ttf") format("truetype") }
+
 * { box-sizing:border-box; margin:0; padding:0 }
 body { width:1242px; height:1656px; overflow:hidden; background:#f4f3ee; color:#0c0c0c;
-       font-family:"Noto Sans TC",sans-serif; -webkit-font-smoothing:antialiased }
+       font-family:"CJK",sans-serif; -webkit-font-smoothing:antialiased }
 .pg { width:100%; height:100%; display:flex; flex-direction:column }
-.lat { font-family:"Archivo",sans-serif; font-weight:700 }
+.lat { font-family:"Arch",sans-serif; font-weight:700 }
 /* 小標籤 */
 .chip { display:inline-block; background:#fa5a1e; color:#fff; font-weight:900; font-size:30px;
         letter-spacing:.06em; padding:12px 26px; border-radius:999px }
