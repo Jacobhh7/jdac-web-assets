@@ -26,27 +26,29 @@ body { width:1242px; height:1656px; overflow:hidden; background:#f4f3ee; color:#
       padding:.06em .12em .10em; border-radius:8px }
 .o  { color:#fa5a1e }
 
-.shot { position:relative; height:860px; overflow:hidden }
-.shot img { width:100%; height:100%; object-fit:cover; display:block }
-.shot::after { content:""; position:absolute; inset:0;
-  background:linear-gradient(180deg,rgba(12,12,12,.30) 0%,rgba(12,12,12,0) 40%,rgba(12,12,12,.55) 100%) }
-.shot .chip { position:absolute; left:64px; top:56px; z-index:2 }
-.say { flex:1; background:#0c0c0c; color:#fff; padding:66px 64px 60px;
-       display:flex; flex-direction:column; justify-content:space-between }
-.kick { font-size:38px; font-weight:700; color:#b9b4a8; letter-spacing:.01em }
-.say h1 { font-size:132px; font-weight:900; line-height:1.30; letter-spacing:-.02em }
-.foot { display:flex; justify-content:space-between; align-items:flex-end;
-        font-size:36px; font-weight:700 }
-.foot span { color:#b9b4a8 }
-.foot b { color:#fa5a1e; font-size:42px }
+/* 純大字報，不放照片。靠字級落差跟橘色塊撐畫面，
+   節拍格子當視覺元素，比塞一張看不清楚的照片有力。 */
+.pg { padding:84px 76px 72px; justify-content:space-between }
+.pg h1 { font-size:200px; font-weight:900; line-height:1.24; letter-spacing:-.035em; margin-top:44px }
+.beats { display:flex; gap:13px }
+.beats i { width:44px; height:44px; border-radius:10px; background:#ddd9ce; display:block }
+.beats i.on { background:#fa5a1e }
+.kick { font-size:42px; font-weight:700; color:#5b574f; margin-top:34px }
+.foot { display:flex; justify-content:space-between; align-items:flex-end; font-size:38px;
+        font-weight:700; border-top:5px solid #0c0c0c; padding-top:32px }
+.foot span { color:#5b574f }
+.foot b { color:#fa5a1e; font-size:46px }
 </style>
 
 <div class="pg">
-  <div class="shot"><img src="../p1-class.jpg" alt=""><div class="chip">打鼓 · 卡關自救</div></div>
-  <div class="say">
-    <div class="kick">90% 的人以為是天分問題</div>
+  <div>
+    <div class="chip">打鼓 · 卡關自救</div>
     <h1>練了3年<br>還是只會<br><span class="hl">那幾個節奏</span></h1>
-    <div class="foot"><span>其實大家都卡在同一件事</span><b>往右滑 →</b></div>
   </div>
+  <div>
+    <div class="beats"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></div>
+    <div class="kick">90% 的人以為是天分問題</div>
+  </div>
+  <div class="foot"><span>其實大家都卡在同一件事</span><b>往右滑 →</b></div>
 </div>
 

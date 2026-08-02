@@ -33,10 +33,10 @@ TEXT = {
         "s2_h1": "不是你不够努力<br>是没人在旁边看着改",
         "s2_items": [
             "握棒的支点，到底在哪根手指",
-            "棒子落下去，是弹回来，还是被你硬拉回来",
-            "打快的时候，是手在动，还是整条手臂在硬撑",
+            "棒子落下去，是弹回来还是被你硬拉回来",
+            "打快的时候，是手在动还是手臂在硬撑",
         ],
-        "s2_note": "这三件事，隔着萤幕看不到。我坐你旁边十分钟，能省你半年。",
+        "s2_note": "这三件事，隔着屏幕看不到。我坐你旁边十分钟，能省你半年。",
         "s2_cta": '我人已经在<span class="o">上海</span><br>一对一，面对面上课中',
         # 第 3 張：自我介紹
         "s3_hi": "我是",
@@ -62,8 +62,8 @@ TEXT = {
         "s2_h1": "不是你不夠努力<br>是沒人在旁邊看著改",
         "s2_items": [
             "握棒的支點，到底在哪根手指",
-            "棒子落下去，是彈回來，還是被你硬拉回來",
-            "打快的時候，是手在動，還是整條手臂在硬撐",
+            "棒子落下去，是彈回來還是被你硬拉回來",
+            "打快的時候，是手在動還是手臂在硬撐",
         ],
         "s2_note": "這三件事，隔著螢幕看不到。我坐你旁邊十分鐘，能省你半年。",
         "s2_cta": '我人已經在<span class="o">上海</span><br>一對一，面對面上課中',
@@ -110,46 +110,46 @@ body { width:1242px; height:1656px; overflow:hidden; background:#f4f3ee; color:#
 """
 
 S1 = """
-.shot { position:relative; height:860px; overflow:hidden }
-.shot img { width:100%; height:100%; object-fit:cover; display:block }
-.shot::after { content:""; position:absolute; inset:0;
-  background:linear-gradient(180deg,rgba(12,12,12,.30) 0%,rgba(12,12,12,0) 40%,rgba(12,12,12,.55) 100%) }
-.shot .chip { position:absolute; left:64px; top:56px; z-index:2 }
-.say { flex:1; background:#0c0c0c; color:#fff; padding:66px 64px 60px;
-       display:flex; flex-direction:column; justify-content:space-between }
-.kick { font-size:38px; font-weight:700; color:#b9b4a8; letter-spacing:.01em }
-.say h1 { font-size:132px; font-weight:900; line-height:1.30; letter-spacing:-.02em }
-.foot { display:flex; justify-content:space-between; align-items:flex-end;
-        font-size:36px; font-weight:700 }
-.foot span { color:#b9b4a8 }
-.foot b { color:#fa5a1e; font-size:42px }
+/* 純大字報，不放照片。靠字級落差跟橘色塊撐畫面，
+   節拍格子當視覺元素，比塞一張看不清楚的照片有力。 */
+.pg { padding:84px 76px 72px; justify-content:space-between }
+.pg h1 { font-size:200px; font-weight:900; line-height:1.24; letter-spacing:-.035em; margin-top:44px }
+.beats { display:flex; gap:13px }
+.beats i { width:44px; height:44px; border-radius:10px; background:#ddd9ce; display:block }
+.beats i.on { background:#fa5a1e }
+.kick { font-size:42px; font-weight:700; color:#5b574f; margin-top:34px }
+.foot { display:flex; justify-content:space-between; align-items:flex-end; font-size:38px;
+        font-weight:700; border-top:5px solid #0c0c0c; padding-top:32px }
+.foot span { color:#5b574f }
+.foot b { color:#fa5a1e; font-size:46px }
 """
 
 S1_BODY = """
 <div class="pg">
-  <div class="shot"><img src="../p1-class.jpg" alt=""><div class="chip">{s1_chip}</div></div>
-  <div class="say">
-    <div class="kick">{s1_kicker}</div>
+  <div>
+    <div class="chip">{s1_chip}</div>
     <h1>{s1_h1}</h1>
-    <div class="foot"><span>{s1_foot_l}</span><b>{s1_foot_r}</b></div>
   </div>
+  <div>
+    <div class="beats">{beats}</div>
+    <div class="kick">{s1_kicker}</div>
+  </div>
+  <div class="foot"><span>{s1_foot_l}</span><b>{s1_foot_r}</b></div>
 </div>
 """
 
 S2 = """
-.pg { padding:72px 76px 68px; justify-content:space-between }
-.pg h1 { font-size:82px; font-weight:900; line-height:1.28; letter-spacing:-.02em; margin-top:34px }
-.band { height:352px; border-radius:22px; overflow:hidden; margin-top:6px }
-.band img { width:100%; height:100%; object-fit:cover; display:block }
-.list { display:flex; flex-direction:column; gap:26px }
-.row { display:flex; align-items:flex-start; gap:24px }
-.row .n { font-family:"Arch",sans-serif; font-weight:700; font-size:44px; color:#fa5a1e;
-          line-height:1.15; flex:none; width:74px }
-.row .t { font-size:44px; font-weight:700; line-height:1.35 }
-.note { font-size:34px; line-height:1.6; color:#5b574f; font-weight:400;
-        border-left:8px solid #2563ff; padding-left:24px }
-.cta { background:#0c0c0c; color:#fff; border-radius:24px; padding:44px 46px;
-       font-size:62px; font-weight:900; line-height:1.32; letter-spacing:-.01em }
+.pg { padding:80px 76px 70px; justify-content:space-between }
+.pg h1 { font-size:92px; font-weight:900; line-height:1.28; letter-spacing:-.025em; margin-top:36px }
+.list { display:flex; flex-direction:column; gap:40px }
+.row { display:flex; align-items:flex-start; gap:26px }
+.row .n { font-family:"Arch",sans-serif; font-weight:900; font-size:52px; color:#fa5a1e;
+          line-height:1.12; flex:none; width:86px }
+.row .t { font-size:46px; font-weight:700; line-height:1.34 }
+.note { font-size:34px; line-height:1.62; color:#3f3c36; font-weight:700;
+        border-left:9px solid #2563ff; padding-left:28px }
+.cta { background:#0c0c0c; color:#fff; border-radius:24px; padding:48px 48px;
+       font-size:66px; font-weight:900; line-height:1.32; letter-spacing:-.015em }
 """
 
 S2_BODY = """
@@ -158,7 +158,6 @@ S2_BODY = """
     <div class="chip">{s2_chip}</div>
     <h1>{s2_h1}</h1>
   </div>
-  <div class="band"><img src="../p2-band.jpg" alt=""></div>
   <div class="list">{s2_rows}</div>
   <div class="note">{s2_note}</div>
   <div class="cta">{s2_cta}</div>
@@ -218,8 +217,10 @@ def render_html(lang):
     base = BASE.replace("{cjk}", CJK[lang])
     pages = {}
 
+    # 16 格節拍，每拍第一格亮橘色
+    beats = "".join(f'<i class="{"on" if i % 4 == 0 else ""}"></i>' for i in range(16))
     pages["1-cover"] = PAGE.format(
-        title=f"1 封面 ({lang})", base=base, css=S1, body=S1_BODY.format(**t)
+        title=f"1 封面 ({lang})", base=base, css=S1, body=S1_BODY.format(beats=beats, **t)
     )
 
     rows = "".join(
