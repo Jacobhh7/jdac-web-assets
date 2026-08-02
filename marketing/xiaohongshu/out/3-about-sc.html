@@ -1,0 +1,51 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>3 自介 (sc)</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0 }
+body { width:1242px; height:1656px; overflow:hidden; background:#f4f3ee; color:#0c0c0c;
+       font-family:"Noto Sans TC",sans-serif; -webkit-font-smoothing:antialiased }
+.pg { width:100%; height:100%; display:flex; flex-direction:column }
+.lat { font-family:"Archivo",sans-serif; font-weight:700 }
+/* 小標籤 */
+.chip { display:inline-block; background:#fa5a1e; color:#fff; font-weight:900; font-size:30px;
+        letter-spacing:.06em; padding:12px 26px; border-radius:999px }
+/* 高亮：用 inline-block 壓低行高，色塊才不會撞到上一行 */
+.hl { display:inline-block; background:#fa5a1e; color:#fff; line-height:1.06;
+      padding:.06em .12em .10em; border-radius:8px }
+.o  { color:#fa5a1e }
+
+.pg { padding:76px 76px 68px; justify-content:space-between }
+.top { display:flex; gap:44px; align-items:flex-start }
+.who { flex:1; padding-top:8px }
+.who .hi { font-size:56px; font-weight:700; color:#5b574f }
+.who .nm { font-size:150px; font-weight:900; line-height:.98; letter-spacing:-.03em; margin-top:6px }
+.who .rl { font-size:40px; font-weight:700; margin-top:26px; line-height:1.4 }
+.who .rl::before { content:""; display:block; width:110px; height:9px; background:#fa5a1e; margin-bottom:24px }
+.who .qt { font-size:46px; font-weight:900; line-height:1.5; margin-top:52px; letter-spacing:-.01em }
+.who .qt::before { content:"「"; color:#fa5a1e }
+.who .qt::after  { content:"」"; color:#fa5a1e }
+.port { width:452px; height:700px; border-radius:24px; overflow:hidden; flex:none }
+.port img { width:100%; height:100%; object-fit:cover; display:block }
+.pts { display:flex; flex-direction:column; gap:30px }
+.pt { display:flex; align-items:flex-start; gap:22px; font-size:50px; font-weight:700; line-height:1.34 }
+.pt i { width:20px; height:20px; border-radius:50%; background:#2563ff; flex:none; margin-top:20px }
+.bar { background:#0c0c0c; color:#fff; border-radius:22px; padding:38px 42px; text-align:center }
+.bar .b1 { font-size:56px; font-weight:900; letter-spacing:-.01em }
+.bar .b2 { font-size:32px; font-weight:700; color:#b9b4a8; margin-top:16px }
+</style>
+
+<div class="pg">
+  <div class="top">
+    <div class="who">
+      <div class="hi">我是</div>
+      <div class="nm lat">Jacob</div>
+      <div class="rl">职业鼓手 · 教打鼓的人</div>
+      <div class="qt">先把地基打稳，<br>炫技才有意义。</div>
+    </div>
+    <div class="port"><img src="../p3-portrait.jpg" alt=""></div>
+  </div>
+  <div class="pts"><div class="pt"><i></i><span>从教会的鼓开始打，一路打成职业</span></div><div class="pt"><i></i><span>去过纽约、伦敦进修</span></div><div class="pt"><i></i><span>台湾最早做线上鼓课的那批人</span></div><div class="pt"><i></i><span>教最多的不是乐手，是零基础的上班族</span></div></div>
+  <div class="bar"><div class="b1">现在人在上海 · 一对一面对面</div><div class="b2">想上课的私信我「实体课」，我把档期发你</div></div>
+</div>
+

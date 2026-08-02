@@ -1,0 +1,41 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>1 封面 (sc)</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0 }
+body { width:1242px; height:1656px; overflow:hidden; background:#f4f3ee; color:#0c0c0c;
+       font-family:"Noto Sans TC",sans-serif; -webkit-font-smoothing:antialiased }
+.pg { width:100%; height:100%; display:flex; flex-direction:column }
+.lat { font-family:"Archivo",sans-serif; font-weight:700 }
+/* 小標籤 */
+.chip { display:inline-block; background:#fa5a1e; color:#fff; font-weight:900; font-size:30px;
+        letter-spacing:.06em; padding:12px 26px; border-radius:999px }
+/* 高亮：用 inline-block 壓低行高，色塊才不會撞到上一行 */
+.hl { display:inline-block; background:#fa5a1e; color:#fff; line-height:1.06;
+      padding:.06em .12em .10em; border-radius:8px }
+.o  { color:#fa5a1e }
+
+.shot { position:relative; height:860px; overflow:hidden }
+.shot img { width:100%; height:100%; object-fit:cover; display:block }
+.shot::after { content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg,rgba(12,12,12,.30) 0%,rgba(12,12,12,0) 40%,rgba(12,12,12,.55) 100%) }
+.shot .chip { position:absolute; left:64px; top:56px; z-index:2 }
+.say { flex:1; background:#0c0c0c; color:#fff; padding:66px 64px 60px;
+       display:flex; flex-direction:column; justify-content:space-between }
+.kick { font-size:38px; font-weight:700; color:#b9b4a8; letter-spacing:.01em }
+.say h1 { font-size:132px; font-weight:900; line-height:1.30; letter-spacing:-.02em }
+.foot { display:flex; justify-content:space-between; align-items:flex-end;
+        font-size:36px; font-weight:700 }
+.foot span { color:#b9b4a8 }
+.foot b { color:#fa5a1e; font-size:42px }
+</style>
+
+<div class="pg">
+  <div class="shot"><img src="../p1-class.jpg" alt=""><div class="chip">打鼓 · 卡关自救</div></div>
+  <div class="say">
+    <div class="kick">90% 的人以为是天分问题</div>
+    <h1>练了3年<br>还是只会<br><span class="hl">那几个节奏</span></h1>
+    <div class="foot"><span>其实大家都卡在同一件事</span><b>往右滑 →</b></div>
+  </div>
+</div>
+
