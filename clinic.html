@@ -44,6 +44,7 @@ input[type=file]{padding:11px 12px}
 .msg.ok{background:#e9f6ee;color:#12633a;border:1.5px solid #a9ddbf}
 .big{font-family:"Archivo","Noto Sans TC",sans-serif;font-style:italic;font-weight:900;font-size:clamp(24px,4.2vw,34px);line-height:1.15;margin:0 0 12px}
 .ctr{text-align:center;padding:14px 0}
+.card.mid{min-height:46vh;display:flex;flex-direction:column;justify-content:center}
 .ctr .em{font-size:44px;line-height:1;margin-bottom:14px}
 footer{max-width:720px;margin:0 auto;padding:18px clamp(18px,5vw,40px) 40px;border-top:1.5px solid rgba(12,12,12,.15);font-size:12.5px;color:#8a8579;line-height:1.8}
 footer a{color:#2563ff;text-decoration:none;font-weight:700}
@@ -83,15 +84,15 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
   // 開頭幾秒多送幾次，任何一則接到就會調好高度；都沒接到就維持編輯器設的固定高度。
   [0, 300, 800, 1500, 2500, 4000].forEach(function (ms) { setTimeout(reportHeight, ms); });
 
-  function panel(html) {
-    stage.innerHTML = '<div class="card">' + html + '</div>';
+  function panel(html, mid) {
+    stage.innerHTML = '<div class="card' + (mid ? ' mid' : '') + '">' + html + '</div>';
     setTimeout(reportHeight, 30);   // 內容換了，高度也要跟著回報
   }
 
   function bad(title, body) {
     lead.textContent = '';
     panel('<div class="ctr"><div class="em">🤔</div><div class="big">' + esc(title) + '</div>'
-        + '<p class="sub" style="margin:0">' + body + '</p></div>');
+        + '<p class="sub" style="margin:0">' + body + '</p></div>', true);
   }
 
   if (!TOKEN) {
@@ -212,7 +213,7 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
           ? '這支影片我已經收到，正在排隊等我看。回覆會直接寄到你的信箱。'
           : '我會親自看完你這一段，然後<b>寄一封回覆到你的信箱</b>——講我看到什麼、你現在最該修的是哪一件事。')
       + '</p>'
-      + '<p class="hint" style="margin:14px 0 0">通常 2～3 天內會回。如果超過一週還沒收到，直接回信催我。</p></div>');
+      + '<p class="hint" style="margin:14px 0 0">通常 2～3 天內會回。如果超過一週還沒收到，直接回信催我。</p></div>', true);
   }
 })();
 </script>
