@@ -55,6 +55,9 @@ input[type=file]{padding:11px 12px}
 .big{font-family:"Archivo","Noto Sans TC",sans-serif;font-style:italic;font-weight:900;font-size:clamp(24px,4.2vw,34px);line-height:1.15;margin:0 0 12px}
 .ctr{text-align:center;padding:14px 0}
 .card.mid{min-height:46vh;display:flex;flex-direction:column;justify-content:center}
+.rp-vid{width:100%;max-height:70vh;margin:0 0 18px;border-radius:14px;background:#000;display:block}
+.rp-text{font-size:15.5px;line-height:2;color:#1a1a18;white-space:pre-wrap;margin:0}
+.rp-when{font-size:12.5px;color:#8a8579;margin:16px 0 0;padding-top:12px;border-top:1px dashed rgba(12,12,12,.15);line-height:1.8}
 .ctr .em{font-size:44px;line-height:1;margin-bottom:14px}
 footer{max-width:720px;margin:0 auto;padding:18px clamp(18px,5vw,40px) 40px;border-top:1.5px solid rgba(12,12,12,.15);font-size:12.5px;color:#8a8579;line-height:1.8}
 footer a{color:#2563ff;text-decoration:none;font-weight:700}
@@ -117,6 +120,7 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
         bad('這條連結我認不得', '可能是網址少貼了一小段，或這次的名額不包含這個信箱。直接回信給我，我幫你看一下。');
         return;
       }
+      if (d.replied) { showReply(d); return; }
       if (d.submitted) { done(true); return; }
       if (d.over) {
         bad('這次的收件已經截止了', '截止日是 ' + esc(d.deadline) + '。如果你還是想讓我看一下，回信跟我說，我看看能不能排進去。');
@@ -220,6 +224,21 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
         xhr.send(fd);
       }).catch(function () { fail('連線出了問題，請稍後再試一次。'); });
     });
+  }
+
+  // 已經回覆了：同一條連結直接變成「看 Jacob 的回覆」——對方不用收新網址、不用登入。
+  function showReply(d) {
+    lead.innerHTML = '我看完你的影片了。下面是給 <b>' + esc(d.emailMask) + '</b> 的回覆。';
+    var when = '';
+    if (d.repliedAt) { var t = new Date(d.repliedAt); when = t.getFullYear() + '/' + (t.getMonth() + 1) + '/' + t.getDate(); }
+    panel(
+      (d.replyVideo
+        ? '<video class="rp-vid" src="' + esc(d.replyVideo) + '" controls preload="metadata" playsinline></video>'
+        : '')
+      + (d.replyText ? '<p class="rp-text">' + esc(d.replyText) + '</p>' : '')
+      + '<p class="rp-when">' + (when ? esc(when) + ' 回覆・' : '')
+      + '這段影片只有你看得到。有問題直接回信給我，我還在。</p>'
+    );
   }
 
   function done(already) {
