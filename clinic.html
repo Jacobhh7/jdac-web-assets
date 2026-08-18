@@ -58,6 +58,10 @@ input[type=file]{padding:11px 12px}
 .rp-vid{width:100%;max-height:70vh;margin:0 0 18px;border-radius:14px;background:#000;display:block}
 .rp-text{font-size:15.5px;line-height:2;color:#1a1a18;white-space:pre-wrap;margin:0}
 .rp-when{font-size:12.5px;color:#8a8579;margin:16px 0 0;padding-top:12px;border-top:1px dashed rgba(12,12,12,.15);line-height:1.8}
+.nx{margin:26px 0 0;padding:20px 20px 18px;background:#f7f5ec;border:1.5px solid #0c0c0c;border-radius:14px}
+.nx-h{font-family:"Archivo","Noto Sans TC",sans-serif;font-style:italic;font-weight:900;font-size:clamp(19px,2.6vw,23px);line-height:1.35;margin:0 0 10px}
+.nx-p{font-size:14.5px;line-height:1.9;color:#3a3a36;margin:0 0 16px}
+.nx-p b{border-bottom:2px solid #fa5a1e;font-weight:700;color:#0c0c0c}
 .ctr .em{font-size:44px;line-height:1;margin-bottom:14px}
 footer{max-width:720px;margin:0 auto;padding:18px clamp(18px,5vw,40px) 40px;border-top:1.5px solid rgba(12,12,12,.15);font-size:12.5px;color:#8a8579;line-height:1.8}
 footer a{color:#2563ff;text-decoration:none;font-weight:700}
@@ -77,6 +81,7 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
 (function () {
   var API = 'https://www.jacobdrumemory.com/_functions';
   var MAX_MB = 500;
+  var CTA_URL = 'https://www.jacobdrumemory.com/onlinecoaching?src=clinic';   // 帶 src 供日後歸因；頁面現在還沒讀它（見備註）
   var TOKEN = (new URLSearchParams(location.search).get('t') || '').toLowerCase().replace(/[^a-f0-9]/g, '').slice(0, 20);
   var stage = document.getElementById('stage');
   var lead = document.getElementById('lead');
@@ -238,6 +243,14 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
       + (d.replyText ? '<p class="rp-text">' + esc(d.replyText) + '</p>' : '')
       + '<p class="rp-when">' + (when ? esc(when) + ' 回覆・' : '')
       + '這段影片只有你看得到。有問題直接回信給我，我還在。</p>'
+      // 下一步：放在看完回覆「之後」，不是信裡也不是上傳前——
+      // 他剛被親自看過一次，這是唯一講這件事不會像推銷的時機。
+      + '<div class="nx">'
+      + '<p class="nx-h">想要每週都有人這樣看你打？</p>'
+      + '<p class="nx-p">剛剛那一段，是我的線上教練課每週都在做的事——你交一支影片，'
+      + '<b>我逐拍看完、告訴你下一步練什麼</b>。差別只在於：那不是一次，是連續三個月。</p>'
+      + '<a class="jh-btn p" style="width:auto" href="' + CTA_URL + '" target="_blank" rel="noopener">看看線上教練課 →</a>'
+      + '</div>'
       // TEST 帳號＝Jacob 自己在預覽，給他一個回到上傳表單的出口，不然健康檢查就做不了了
       + (d.isTest ? '<p style="margin:14px 0 0"><button class="jh-btn" id="again" style="width:auto;padding:9px 16px;font-size:13px">🔁 回上傳表單（測試帳號限定）</button></p>' : '')
     );
