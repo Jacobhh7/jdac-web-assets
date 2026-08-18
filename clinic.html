@@ -24,6 +24,15 @@ h1 em{font-style:italic;color:#2563ff}
 .steps li::before{content:attr(data-n);position:absolute;left:0;top:11px;width:26px;height:26px;background:#2563ff;color:#fff;border-radius:50%;font-family:"Archivo",sans-serif;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
 .steps b{border-bottom:2px solid #fa5a1e}
 .note{font-size:14px;line-height:1.9;color:#2c2c28;background:#f7f5ec;border-left:4px solid #fa5a1e;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0 0}
+.opt2{display:grid;gap:14px;margin:0 0 4px}
+.opt2c{border:1.5px solid #0c0c0c;border-radius:14px;padding:16px 18px 14px;background:#fff;box-shadow:3px 3px 0 #0c0c0c}
+.opt2t{display:inline-block;font-family:"Archivo",sans-serif;font-weight:800;font-size:11px;letter-spacing:.14em;background:#2563ff;color:#fff;padding:4px 11px;border-radius:99px}
+.opt2c.b .opt2t{background:#fa5a1e}
+.opt2h{font-weight:900;font-size:17.5px;margin:10px 0 8px;line-height:1.4}
+.opt2p{font-size:14.5px;line-height:1.85;color:#2c2c28;margin:0}
+.opt2f{font-size:13px;color:#8a8579;margin:10px 0 0;line-height:1.7;border-top:1px dashed rgba(12,12,12,.14);padding-top:9px}
+.opt2c .steps li{padding:8px 0 8px 36px;font-size:14.5px}
+.opt2c .steps li::before{top:8px;width:23px;height:23px;font-size:12px}
 .dl{display:inline-block;font-family:"Archivo",sans-serif;font-weight:800;font-size:12px;letter-spacing:.12em;background:#0c0c0c;color:#f4f3ee;padding:5px 14px;border-radius:99px;margin-bottom:14px}
 .dl.warn{background:#fa5a1e}
 label.fl{display:block;font-weight:700;font-size:14.5px;margin:0 0 8px}
@@ -127,13 +136,21 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
     if (days <= 3) warn = ' warn';
     panel(
       '<span class="dl' + warn + '">收件截止 ' + esc(d.deadline) + (days > 0 ? '（剩 ' + days + ' 天）' : '') + '</span>'
-      + '<div class="dh">拍什麼</div>'
+      + '<div class="dh">拍什麼 — 兩種都可以，選一個就好</div>'
+      + '<div class="opt2">'
+      + '<div class="opt2c"><span class="opt2t">選項 A</span>'
+      + '<div class="opt2h">照我指定的打</div>'
       + '<ul class="steps">'
       + '<li data-n="1">節拍器設 <b>80</b>，只響第 <b>2、4 拍</b>（很多手機 app 都可以設）。</li>'
       + '<li data-n="2">跟著打一段<b>最基本的 8 beat</b>，大概 30 秒就夠。</li>'
-      + '<li data-n="3">手機隨便放，<b>拍得到手和腳</b>就好。不用打得好，打你平常的樣子。</li>'
       + '</ul>'
-      + '<div class="note">如果你有更想讓我看的東西（某首歌卡住的地方、某個過門），那就拍那個，不用勉強照上面來。<b>我要看的是你真實的樣子，不是你最好的一次。</b></div>'
+      + '<p class="opt2f">不知道要給我看什麼的話選這個。這一段最看得出一個人的時間感。</p></div>'
+      + '<div class="opt2c b"><span class="opt2t">選項 B</span>'
+      + '<div class="opt2h">拍你自己想問的那一段</div>'
+      + '<p class="opt2p">某首歌卡住的地方、某個過門、某個你怎麼練都不對勁的東西——直接拍那個就好，然後在下面告訴我你想問什麼。</p>'
+      + '<p class="opt2f">心裡已經有想問的，選這個。</p></div>'
+      + '</div>'
+      + '<div class="note">兩種都一樣，<b>不用打得好</b>——手機隨便放，拍得到手和腳就行。我要看的是你真實的樣子，不是你最好的一次。</div>'
       + '<div style="height:26px"></div>'
       + '<div class="dh">傳上來</div>'
       + '<div class="fld"><label class="fl" for="f">你的影片</label>'
