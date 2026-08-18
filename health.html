@@ -101,6 +101,13 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
   .hc-next{width:100%;margin-left:0}
   .hc-nav{flex-direction:column-reverse;align-items:stretch}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.hc-nick{width:100%;min-width:min(240px,100%);box-sizing:border-box;font-family:"Noto Sans TC",sans-serif;
+  font-size:16px;padding:14px 16px;border:1.5px solid #0c0c0c;border-radius:10px;background:#fff;margin:0 0 14px}
+.hc-nick:focus{outline:none;box-shadow:3px 3px 0 #2563ff}
+.hc-cheer{text-align:center;padding:18px 4px 6px}
+.hc-cheer .em{font-family:Archivo,sans-serif;font-style:italic;font-weight:800;font-size:26px;line-height:1.3;
+  letter-spacing:-.01em;margin:0 0 12px;color:#0c0c0c}
+.hc-cheer .bd{font-size:15px;line-height:1.9;color:#3a3a36;margin:0 auto 20px;max-width:34em}
 .hc-gintro{font-size:14px;line-height:1.85;color:#55524a;background:#f7f5ec;border-radius:10px;padding:12px 15px;margin:0 0 14px}
 .hc-skip{background:none;border:none;color:#8a8579;font-size:13px;font-weight:600;cursor:pointer;font-family:"Noto Sans TC",sans-serif;text-decoration:underline;padding:6px 0}
 .hc-gmnote{font-size:13.5px;line-height:1.85;color:#3a3a36;background:#eef3ff;border-left:3px solid #2563ff;border-radius:0;padding:11px 14px;margin:14px 0 0}
@@ -197,126 +204,778 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
 <script type="application/json" id="jdacHealthData">
 {
   "dims": [
-    {"k":"TIME","zh":"時間感","sub":"內在脈動與穩定度",
-     "strong":"你的 time 是你的本錢。多數自學者卡在這一軸，你已經過了。",
-     "weak":"你最大的槓桿在這裡。time 不是天分，是可以量、可以練的東西——而且它一好，所有其他軸的表現都會跟著往上。",
-     "drills":["gap click：節拍器響兩小節、靜兩小節，靜音那段你自己撐住","節拍器只響第 2、4 拍，用 backbeat 當參考點打 8-beat","每次練完錄 30 秒，只聽 fill 進出的那兩下準不準"]},
-    {"k":"COORD","zh":"協調獨立","sub":"四肢的分離與控制",
-     "strong":"四肢分得開，代表你之後學任何風格都不會被手腳綁住。",
-     "weak":"你的手腳還在互相牽制。這一軸是慢工，但路徑非常明確，不需要天分。",
-     "drills":["非慣用手單獨練：60bpm 單擊 10 分鐘，只要求高度一致","大鼓十六分四個位置逐一定位（1 / e / & / a），一次只練一個","穩定 groove 上加 ghost notes，先把音量壓到剛好聽得見"]},
-    {"k":"READ","zh":"讀譜視奏","sub":"看得懂，而且當場打得出來",
-     "strong":"看得懂譜讓你能自己讀教材、能接團、能跟人溝通。這是很多自學者永遠沒補的一塊。",
-     "weak":"這是你最容易被低估的一軸。不看譜不會讓你打不了鼓，但會讓你永遠只能靠模仿，學一首算一首。",
-     "drills":["先攻休止符：十六分裡的休止是絕大多數人卡住的地方","每天視奏一小節沒看過的譜，慢速打對就好","把自己打的 groove 寫成譜——寫得出來才代表真的懂"]},
-    {"k":"EAR","zh":"耳朵與扒歌","sub":"聽得出來、打得回來、說得出名字",
-     "strong":"你的耳朵能自己扒歌，等於有一座無限的教材庫。",
-     "weak":"耳朵沒開，你就得一直等別人幫你出譜、出教學。這一軸練開之後，整個網路都是你的教材。",
-     "drills":["聽一首新歌只抓 groove，先不管 fill","抓完之後說出它是什麼風格、特徵在哪","跟著原曲打，錄下來跟原版對齊聽差在哪"]},
-    {"k":"STYLE","zh":"風格廣度","sub":"你的語彙庫有多寬",
-     "strong":"你的風格庫夠寬，代表你上台不會只有一種聲音。",
-     "weak":"你可能打得很穩，但只有一種聲音。廣度不是為了炫技，是為了讓你在不同歌裡都做得出對的選擇。",
-     "drills":["挑一個你完全沒碰過的風格，只學它最基本的那一個 pattern","同一首歌用兩種風格打打看，感受選擇的差別","從 shuffle 或 6/8 開始——三連音系是最大的一塊拼圖"]},
-    {"k":"SYSTEM","zh":"練習系統","sub":"你怎麼練，以及有沒有人看",
-     "strong":"你有系統，這比多練幾小時值錢得多。",
-     "weak":"這一軸是所有軸的乘數。沒有計畫、沒有標準、沒有人給你回饋，練再久都會停在同一個地方——這也是最快可以改善的一軸。",
-     "drills":["坐下前先寫今天要練什麼、從幾 BPM 開始","給每個項目一個「算練起來了」的明確標準","每週錄一次、找一個真的會給你具體回饋的人看"]}
+    {
+      "k": "TIME",
+      "zh": "時間感",
+      "sub": "內在脈動與穩定度",
+      "strong": "你的 time 是你的本錢。多數自學者卡在這一軸，你已經過了。",
+      "weak": "你最大的槓桿在這裡。time 不是天分，是可以量、可以練的東西——而且它一好，所有其他軸的表現都會跟著往上。",
+      "drills": [
+        "gap click：節拍器響兩小節、靜兩小節，靜音那段你自己撐住",
+        "節拍器只響第 2、4 拍，用 backbeat 當參考點打 8-beat",
+        "每次練完錄 30 秒，只聽 fill 進出的那兩下準不準"
+      ]
+    },
+    {
+      "k": "COORD",
+      "zh": "協調獨立",
+      "sub": "四肢的分離與控制",
+      "strong": "四肢分得開，代表你之後學任何風格都不會被手腳綁住。",
+      "weak": "你的手腳還在互相牽制。這一軸是慢工，但路徑非常明確，不需要天分。",
+      "drills": [
+        "非慣用手單獨練：60bpm 單擊 10 分鐘，只要求高度一致",
+        "大鼓十六分四個位置逐一定位（1 / e / & / a），一次只練一個",
+        "穩定 groove 上加 ghost notes，先把音量壓到剛好聽得見"
+      ]
+    },
+    {
+      "k": "READ",
+      "zh": "讀譜視奏",
+      "sub": "看得懂，而且當場打得出來",
+      "strong": "看得懂譜讓你能自己讀教材、能接團、能跟人溝通。這是很多自學者永遠沒補的一塊。",
+      "weak": "這是你最容易被低估的一軸。不看譜不會讓你打不了鼓，但會讓你永遠只能靠模仿，學一首算一首。",
+      "drills": [
+        "先攻休止符：十六分裡的休止是絕大多數人卡住的地方",
+        "每天視奏一小節沒看過的譜，慢速打對就好",
+        "把自己打的 groove 寫成譜——寫得出來才代表真的懂"
+      ]
+    },
+    {
+      "k": "EAR",
+      "zh": "耳朵與扒歌",
+      "sub": "聽得出來、打得回來、說得出名字",
+      "strong": "你的耳朵能自己扒歌，等於有一座無限的教材庫。",
+      "weak": "耳朵沒開，你就得一直等別人幫你出譜、出教學。這一軸練開之後，整個網路都是你的教材。",
+      "drills": [
+        "聽一首新歌只抓 groove，先不管 fill",
+        "抓完之後說出它是什麼風格、特徵在哪",
+        "跟著原曲打，錄下來跟原版對齊聽差在哪"
+      ]
+    },
+    {
+      "k": "STYLE",
+      "zh": "風格廣度",
+      "sub": "你的語彙庫有多寬",
+      "strong": "你的風格庫夠寬，代表你上台不會只有一種聲音。",
+      "weak": "你可能打得很穩，但只有一種聲音。廣度不是為了炫技，是為了讓你在不同歌裡都做得出對的選擇。",
+      "drills": [
+        "挑一個你完全沒碰過的風格，只學它最基本的那一個 pattern",
+        "同一首歌用兩種風格打打看，感受選擇的差別",
+        "從 shuffle 或 6/8 開始——三連音系是最大的一塊拼圖"
+      ]
+    },
+    {
+      "k": "SYSTEM",
+      "zh": "練習系統",
+      "sub": "你怎麼練，以及有沒有人看",
+      "strong": "你有系統，這比多練幾小時值錢得多。",
+      "weak": "這一軸是所有軸的乘數。沒有計畫、沒有標準、沒有人給你回饋，練再久都會停在同一個地方——這也是最快可以改善的一軸。",
+      "drills": [
+        "坐下前先寫今天要練什麼、從幾 BPM 開始",
+        "給每個項目一個「算練起來了」的明確標準",
+        "每週錄一次、找一個真的會給你具體回饋的人看"
+      ]
+    }
   ],
   "qs": [
-    {"d":"TIME","q":"跟節拍器一起打的時候，我能穩穩對住的比例是：","opts":[
-      ["幾乎每次都對得住",5],["大多數時候可以，快的時候會飄",3],["慢歌比較難，快歌反而穩",2],["老實說我很少開節拍器",0]]},
-    {"d":"TIME","q":"如果把節拍器改成「只響第 2、4 拍」：","opts":[
-      ["沒問題，我平常就這樣練",5],["試過，會撐一下下然後跑掉",3],["光想就覺得很難",1],["沒試過，不太確定那是什麼意思",0]]},
-    {"d":"TIME","q":"打完一段 fill、回到 groove 的那一下：","opts":[
-      ["回得準，位置很清楚",5],["大部分準，複雜的 fill 會晚一點",3],["常常回來就發現快了或慢了",1],["我沒特別注意過這件事",0]]},
-    {"d":"TIME","q":"最近一次「錄下自己打鼓、然後從頭聽完一遍」是：","opts":[
-      ["這週",5],["這個月",3],["半年前左右",1],["幾乎沒有錄過",0]]},
-    {"d":"TIME","q":"一首歌從頭打到尾，速度的變化：","opts":[
-      ["我實際量過，前後差不到 2 BPM",5],["應該還好，但沒有實際量過",3],["我知道我會愈打愈快",2],["沒想過可以量這個",0]]},
-
-    {"d":"COORD","q":"左手（非慣用手）單獨打的時候：","opts":[
-      ["跟右手差不多",5],["音量夠但沒那麼穩",3],["明顯比較弱、比較不受控",1],["我幾乎都用右手主導，沒特別練過左手",0]]},
-    {"d":"COORD","q":"大鼓踩在十六分的四個位置（1 e &amp; a）：","opts":[
-      ["四個位置都踩得出來",5],["正拍和後半拍可以，其他要想一下",3],["只有正拍穩",1],["我不太確定這在說什麼",0]]},
-    {"d":"COORD","q":"一邊打穩定 groove、一邊左手加 ghost notes：","opts":[
-      ["可以，而且音量控制得住",5],["打得出來但 ghost 會太大聲",3],["一加就亂掉",1],["我沒練過 ghost notes",0]]},
-    {"d":"COORD","q":"三連音系列（shuffle、6/8、jazz ride）：","opts":[
-      ["三種都打得順",5],["打得出來但不太「搖」",3],["只會其中一種",2],["三連音對我來說一直很卡",0]]},
-
-    {"d":"READ","q":"拿到一張沒看過的鼓譜：","opts":[
-      ["看一遍就能打個八成",5],["慢速可以，原速要練幾次",3],["要一小節一小節拆才行",1],["我基本上不看譜，靠聽的",0]]},
-    {"d":"READ","q":"譜上的十六分休止（例如「十六分・休止・八分・休止・十六分」這種）：","opts":[
-      ["一看就知道怎麼打",5],["要數一下但沒問題",3],["看到休止就容易亂",1],["我看不太懂休止符",0]]},
-    {"d":"READ","q":"拍號 6/8、3/4、5/4：","opts":[
-      ["三種都打過也打得出來",5],["6/8 和 3/4 可以，5/4 沒有",3],["只有 4/4 是舒服的",1],["我不太確定拍號怎麼影響打法",0]]},
-    {"d":"READ","q":"你能把自己打的一段 groove 寫成譜嗎？","opts":[
-      ["可以，符桿與休止都寫得對",5],["大概畫得出來，細節不確定",3],["寫不出來但看得懂別人的",2],["沒試過",0]]},
-
-    {"d":"EAR","q":"聽一首新歌，你能抓出鼓的 pattern：","opts":[
-      ["聽一兩遍就抓得到，包含 fill",5],["groove 抓得到，fill 要放慢",3],["大概方向抓得到，細節抓不出來",1],["我通常直接找譜或找教學影片",0]]},
-    {"d":"EAR","q":"聽到一段 groove，你說得出它是什麼風格：","opts":[
-      ["說得出名稱，也知道特徵在哪",5],["聽得出不一樣但講不出名字",3],["只分得出快慢",1],["沒特別想過",0]]},
-    {"d":"EAR","q":"在樂團裡，當別人跑掉的時候：","opts":[
-      ["我知道是誰跑掉、也知道要不要跟",5],["感覺怪怪的但不確定是誰",3],["我會被帶著跑",1],["我沒有跟樂團一起打過",0]]},
-
-    {"d":"STYLE","q":"下面這些你「打得出來」——可以複選，沒有的就不要勾：","multi":true,"per":2,"opts":[
-      ["八分 rock groove"],["十六分 funk（含 ghost notes）"],["shuffle"],["jazz ride pattern（含 comping）"],
-      ["bossa／samba"],["半開 hi-hat"],["linear funk"],["6/8 抒情"],["雙踏基礎"]]},
-    {"d":"STYLE","q":"除了你最常打的風格，第二熟的是：","opts":[
-      ["有，而且能打完整首",5],["有，但只會皮毛",3],["沒有，我幾乎只打一種",1],["我還在建立第一種",0]]},
-
-    {"d":"SYSTEM","q":"你坐上鼓之前，知道今天要練什麼嗎：","opts":[
-      ["每次都有明確項目與 BPM",5],["大概有方向",3],["想到什麼打什麼",1],["通常就是把喜歡的歌打一遍",0]]},
-    {"d":"SYSTEM","q":"你怎麼知道一個東西「練起來了」：","opts":[
-      ["有明確標準（BPM、連續幾遍不失誤）",5],["感覺順了就算",2],["沒想過這個問題",1],["老實說我很少有練起來的感覺",0]]},
-    {"d":"SYSTEM","q":"最近三個月，有人聽過你打鼓並給你「具體」的回饋：","opts":[
-      ["每週都有",5],["一兩次",3],["只有家人朋友說「不錯」",1],["沒有",0]]},
-    {"d":"SYSTEM","q":"上一次跟其他樂手一起演奏：","opts":[
-      ["這個月",5],["半年內",3],["一年以上",1],["從來沒有",0]]},
-    {"d":"SYSTEM","q":"每週實際坐上鼓的時間：","opts":[
-      ["5 小時以上",5],["2–4 小時",4],["1 小時左右",2],["不一定，有空才打",1]]}
+    {
+      "d": "TIME",
+      "q": "跟節拍器一起打的時候，我能穩穩對住的比例是：",
+      "opts": [
+        [
+          "幾乎每次都對得住",
+          5
+        ],
+        [
+          "大多數時候可以，快的時候會飄",
+          3
+        ],
+        [
+          "慢歌比較難，快歌反而穩",
+          2
+        ],
+        [
+          "老實說我很少開節拍器",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "TIME",
+      "q": "如果把節拍器改成「只響第 2、4 拍」：",
+      "opts": [
+        [
+          "沒問題，我平常就這樣練",
+          5
+        ],
+        [
+          "試過，會撐一下下然後跑掉",
+          3
+        ],
+        [
+          "光想就覺得很難",
+          1
+        ],
+        [
+          "沒試過，不太確定那是什麼意思",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "TIME",
+      "q": "打完一段 fill、回到 groove 的那一下：",
+      "opts": [
+        [
+          "回得準，位置很清楚",
+          5
+        ],
+        [
+          "大部分準，複雜的 fill 會晚一點",
+          3
+        ],
+        [
+          "常常回來就發現快了或慢了",
+          1
+        ],
+        [
+          "我沒特別注意過這件事",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "TIME",
+      "q": "最近一次「錄下自己打鼓、然後從頭聽完一遍」是：",
+      "opts": [
+        [
+          "這週",
+          5
+        ],
+        [
+          "這個月",
+          3
+        ],
+        [
+          "半年前左右",
+          1
+        ],
+        [
+          "幾乎沒有錄過",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "TIME",
+      "q": "一首歌從頭打到尾，速度的變化：",
+      "opts": [
+        [
+          "我實際量過，前後差不到 2 BPM",
+          5
+        ],
+        [
+          "應該還好，但沒有實際量過",
+          3
+        ],
+        [
+          "我知道我會愈打愈快",
+          2
+        ],
+        [
+          "沒想過可以量這個",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "COORD",
+      "q": "左手（非慣用手）單獨打的時候：",
+      "opts": [
+        [
+          "跟右手差不多",
+          5
+        ],
+        [
+          "音量夠但沒那麼穩",
+          3
+        ],
+        [
+          "明顯比較弱、比較不受控",
+          1
+        ],
+        [
+          "我幾乎都用右手主導，沒特別練過左手",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "COORD",
+      "q": "大鼓踩在十六分的四個位置（1 e &amp; a）：",
+      "opts": [
+        [
+          "四個位置都踩得出來",
+          5
+        ],
+        [
+          "正拍和後半拍可以，其他要想一下",
+          3
+        ],
+        [
+          "只有正拍穩",
+          1
+        ],
+        [
+          "我不太確定這在說什麼",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "COORD",
+      "q": "一邊打穩定 groove、一邊左手加 ghost notes：",
+      "opts": [
+        [
+          "可以，而且音量控制得住",
+          5
+        ],
+        [
+          "打得出來但 ghost 會太大聲",
+          3
+        ],
+        [
+          "一加就亂掉",
+          1
+        ],
+        [
+          "我沒練過 ghost notes",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "COORD",
+      "q": "三連音系列（shuffle、6/8、jazz ride）：",
+      "opts": [
+        [
+          "三種都打得順",
+          5
+        ],
+        [
+          "打得出來但不太「搖」",
+          3
+        ],
+        [
+          "只會其中一種",
+          2
+        ],
+        [
+          "三連音對我來說一直很卡",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "READ",
+      "q": "拿到一張沒看過的鼓譜：",
+      "opts": [
+        [
+          "看一遍就能打個八成",
+          5
+        ],
+        [
+          "慢速可以，原速要練幾次",
+          3
+        ],
+        [
+          "要一小節一小節拆才行",
+          1
+        ],
+        [
+          "我基本上不看譜，靠聽的",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "READ",
+      "q": "譜上的十六分休止（例如「十六分・休止・八分・休止・十六分」這種）：",
+      "opts": [
+        [
+          "一看就知道怎麼打",
+          5
+        ],
+        [
+          "要數一下但沒問題",
+          3
+        ],
+        [
+          "看到休止就容易亂",
+          1
+        ],
+        [
+          "我看不太懂休止符",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "READ",
+      "q": "拍號 6/8、3/4、5/4：",
+      "opts": [
+        [
+          "三種都打過也打得出來",
+          5
+        ],
+        [
+          "6/8 和 3/4 可以，5/4 沒有",
+          3
+        ],
+        [
+          "只有 4/4 是舒服的",
+          1
+        ],
+        [
+          "我不太確定拍號怎麼影響打法",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "READ",
+      "q": "你能把自己打的一段 groove 寫成譜嗎？",
+      "opts": [
+        [
+          "可以，符桿與休止都寫得對",
+          5
+        ],
+        [
+          "大概畫得出來，細節不確定",
+          3
+        ],
+        [
+          "寫不出來但看得懂別人的",
+          2
+        ],
+        [
+          "沒試過",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "EAR",
+      "q": "聽一首新歌，你能抓出鼓的 pattern：",
+      "opts": [
+        [
+          "聽一兩遍就抓得到，包含 fill",
+          5
+        ],
+        [
+          "groove 抓得到，fill 要放慢",
+          3
+        ],
+        [
+          "大概方向抓得到，細節抓不出來",
+          1
+        ],
+        [
+          "我通常直接找譜或找教學影片",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "EAR",
+      "q": "聽到一段 groove，你說得出它是什麼風格：",
+      "opts": [
+        [
+          "說得出名稱，也知道特徵在哪",
+          5
+        ],
+        [
+          "聽得出不一樣但講不出名字",
+          3
+        ],
+        [
+          "只分得出快慢",
+          1
+        ],
+        [
+          "沒特別想過",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "EAR",
+      "q": "在樂團裡，當別人跑掉的時候：",
+      "opts": [
+        [
+          "我知道是誰跑掉、也知道要不要跟",
+          5
+        ],
+        [
+          "感覺怪怪的但不確定是誰",
+          3
+        ],
+        [
+          "我會被帶著跑",
+          1
+        ],
+        [
+          "我沒有跟樂團一起打過",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "STYLE",
+      "q": "下面這些你「打得出來」——可以複選，沒有的就不要勾：",
+      "multi": true,
+      "per": 2,
+      "opts": [
+        [
+          "八分 rock groove"
+        ],
+        [
+          "十六分 funk（含 ghost notes）"
+        ],
+        [
+          "shuffle"
+        ],
+        [
+          "jazz ride pattern（含 comping）"
+        ],
+        [
+          "bossa／samba"
+        ],
+        [
+          "半開 hi-hat"
+        ],
+        [
+          "linear funk"
+        ],
+        [
+          "6/8 抒情"
+        ],
+        [
+          "雙踏基礎"
+        ]
+      ]
+    },
+    {
+      "d": "STYLE",
+      "q": "除了你最常打的風格，第二熟的是：",
+      "opts": [
+        [
+          "有，而且能打完整首",
+          5
+        ],
+        [
+          "有，但只會皮毛",
+          3
+        ],
+        [
+          "沒有，我幾乎只打一種",
+          1
+        ],
+        [
+          "我還在建立第一種",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "SYSTEM",
+      "q": "你坐上鼓之前，知道今天要練什麼嗎：",
+      "opts": [
+        [
+          "每次都有明確項目與 BPM",
+          5
+        ],
+        [
+          "大概有方向",
+          3
+        ],
+        [
+          "想到什麼打什麼",
+          1
+        ],
+        [
+          "通常就是把喜歡的歌打一遍",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "SYSTEM",
+      "q": "你怎麼知道一個東西「練起來了」：",
+      "opts": [
+        [
+          "有明確標準（BPM、連續幾遍不失誤）",
+          5
+        ],
+        [
+          "感覺順了就算",
+          2
+        ],
+        [
+          "沒想過這個問題",
+          1
+        ],
+        [
+          "老實說我很少有練起來的感覺",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "SYSTEM",
+      "q": "最近三個月，有人聽過你打鼓並給你「具體」的回饋：",
+      "opts": [
+        [
+          "每週都有",
+          5
+        ],
+        [
+          "一兩次",
+          3
+        ],
+        [
+          "只有家人朋友說「不錯」",
+          1
+        ],
+        [
+          "沒有",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "SYSTEM",
+      "q": "上一次跟其他樂手一起演奏：",
+      "opts": [
+        [
+          "這個月",
+          5
+        ],
+        [
+          "半年內",
+          3
+        ],
+        [
+          "一年以上",
+          1
+        ],
+        [
+          "從來沒有",
+          0
+        ]
+      ]
+    },
+    {
+      "d": "SYSTEM",
+      "q": "每週實際坐上鼓的時間：",
+      "opts": [
+        [
+          "5 小時以上",
+          5
+        ],
+        [
+          "2–4 小時",
+          4
+        ],
+        [
+          "1 小時左右",
+          2
+        ],
+        [
+          "不一定，有空才打",
+          1
+        ]
+      ]
+    }
   ],
   "quals": [
-    {"k":"years","q":"你學鼓多久了？","opts":["還沒開始／不到半年","半年–2 年","2–5 年","5 年以上"]},
-    {"k":"how","q":"你目前的學習方式？","opts":["完全自學","上實體課","買過線上課自己看","以前學過，現在自己練"]},
-    {"k":"goal","q":"接下來三個月，你最想達成的一件事？","open":true,"ph":"一句話就好，例如：把某首歌完整打下來"},
-    {"k":"want","q":"如果有人每週看你的練習影片、逐拍告訴你哪裡要修，你會想試試看嗎？","opts":["想，愈快愈好","有興趣，想先知道怎麼運作","現在還沒準備好","我比較想自己摸索"]}
+    {
+      "k": "years",
+      "q": "你學鼓多久了？",
+      "opts": [
+        "還沒開始／不到半年",
+        "半年–2 年",
+        "2–5 年",
+        "5 年以上"
+      ]
+    },
+    {
+      "k": "how",
+      "q": "你目前的學習方式？",
+      "opts": [
+        "完全自學",
+        "上實體課",
+        "買過線上課自己看",
+        "以前學過，現在自己練"
+      ]
+    },
+    {
+      "k": "goal",
+      "q": "接下來三個月，你最想達成的一件事？",
+      "open": true,
+      "ph": "一句話就好，例如：把某首歌完整打下來"
+    },
+    {
+      "k": "want",
+      "q": "如果有人每週看你的練習影片、逐拍告訴你哪裡要修，你會想試試看嗎？",
+      "opts": [
+        "想，愈快愈好",
+        "有興趣，想先知道怎麼運作",
+        "現在還沒準備好",
+        "我比較想自己摸索"
+      ]
+    }
   ],
   "grades": [
-    {"max":25,"g":"入門前","note":"你還在起跑線上，這很正常——而且零底子最大的優勢是沒有壞習慣要拆。"},
-    {"max":40,"g":"Rockschool Debut–Grade 1","note":"對照 RSL 官方大綱，這一級通常是「學了 6 個月到 1 年」的程度。"},
-    {"max":55,"g":"Rockschool Grade 2","note":"對照 RSL 官方大綱，這一級通常是「學了 1 年到 1 年半」的程度。"},
-    {"max":70,"g":"Rockschool Grade 3","note":"對照 RSL 官方大綱，這一級通常是「學了 1 年半到 2 年」的程度，開始有風格意識。"},
-    {"max":82,"g":"Rockschool Grade 4","note":"對照 RSL 官方大綱，這一級通常是「學了 2 年到 2 年半」的程度，基本技巧已經精熟。"},
-    {"max":92,"g":"Rockschool Grade 5","note":"你已經具備中階技巧與技術，風格說服力也出來了。"},
-    {"max":101,"g":"Rockschool Grade 6 以上","note":"你在往進階技術控制走了。這個階段最缺的通常不是練什麼，是有人幫你挑毛病。"}
+    {
+      "max": 25,
+      "g": "入門前",
+      "note": "你還在起跑線上，這很正常——而且零底子最大的優勢是沒有壞習慣要拆。"
+    },
+    {
+      "max": 40,
+      "g": "Rockschool Debut–Grade 1",
+      "note": "對照 RSL 官方大綱，這一級通常是「學了 6 個月到 1 年」的程度。"
+    },
+    {
+      "max": 55,
+      "g": "Rockschool Grade 2",
+      "note": "對照 RSL 官方大綱，這一級通常是「學了 1 年到 1 年半」的程度。"
+    },
+    {
+      "max": 70,
+      "g": "Rockschool Grade 3",
+      "note": "對照 RSL 官方大綱，這一級通常是「學了 1 年半到 2 年」的程度，開始有風格意識。"
+    },
+    {
+      "max": 82,
+      "g": "Rockschool Grade 4",
+      "note": "對照 RSL 官方大綱，這一級通常是「學了 2 年到 2 年半」的程度，基本技巧已經精熟。"
+    },
+    {
+      "max": 92,
+      "g": "Rockschool Grade 5",
+      "note": "你已經具備中階技巧與技術，風格說服力也出來了。"
+    },
+    {
+      "max": 101,
+      "g": "Rockschool Grade 6 以上",
+      "note": "你在往進階技術控制走了。這個階段最缺的通常不是練什麼，是有人幫你挑毛病。"
+    }
   ],
   "tiers": [
-    {"max":40,"tag":"BUILDING","zh":"地基期",
-     "lead":"你現在的分數落在地基期。這不是壞消息——地基期最大的好處是，你每補一塊都會馬上聽得出差別。",
-     "cta":"watch"},
-    {"max":89,"tag":"DEVELOPING","zh":"成長期",
-     "lead":"你的底子是紮實的，但還有很大的改善空間——而且落差集中在特定幾軸，不是全面性的。這是最值得投資的階段，因為你已經聽得懂別人在說什麼了。",
-     "cta":"class"},
-    {"max":101,"tag":"ADVANCED","zh":"進階期",
-     "lead":"你的六軸都相當均衡，這在自學者裡很少見。到這個階段，進步通常不是靠「再練久一點」，而是靠有人幫你挑出那些你自己聽不到的東西。",
-     "cta":"talk"}
+    {
+      "max": 40,
+      "tag": "BUILDING",
+      "zh": "地基期",
+      "lead": "你現在的分數落在地基期。這不是壞消息——地基期最大的好處是，你每補一塊都會馬上聽得出差別。",
+      "cta": "watch"
+    },
+    {
+      "max": 89,
+      "tag": "DEVELOPING",
+      "zh": "成長期",
+      "lead": "你的底子是紮實的，但還有很大的改善空間——而且落差集中在特定幾軸，不是全面性的。這是最值得投資的階段，因為你已經聽得懂別人在說什麼了。",
+      "cta": "class"
+    },
+    {
+      "max": 101,
+      "tag": "ADVANCED",
+      "zh": "進階期",
+      "lead": "你的六軸都相當均衡，這在自學者裡很少見。到這個階段，進步通常不是靠「再練久一點」，而是靠有人幫你挑出那些你自己聽不到的東西。",
+      "cta": "talk"
+    }
   ],
   "bonus": {
-    "tag":"實測關 · 不計時",
-    "cta":"開始實測",
-    "teaser":"看譜、跟著節拍器打出來。",
-    "how":"聽到「預備」的 4 拍先跟著打（順便量你裝置的延遲）→ 第 5 拍開始照譜打。打完譜上會出現綠／黃／紅點，就是你每一下的準度。過關要準度 95%＋最多 1 個黃點＋不能有紅點。",
-    "hint":"記得開聲音或戴耳機。預備 4 拍也要跟著打",
-    "note":"這五關就是 JDAC 學員練功房「節奏視奏」的實際分級，每一關各有 50 題（這裡一關只抽一題），另有無盡挑戰把 50 小節連成一條不間斷。",
-    "qs":[
-      {"lv":"BASIC","hint":"四分・八分","tk":["q","q","q","q"]},
-      {"lv":"SIXTEEN","hint":"加十六分","tk":["q","q","q","s4"]},
-      {"lv":"SYNCO","hint":"切分","tk":["er_e","s_e_s","e2","q"]},
-      {"lv":"TRIPLET","hint":"三連音","tk":["q","q","q","t3"]},
-      {"lv":"FUSION","hint":"綜合","tk":["e2","q","s_e_s","t3"]}
+    "tag": "實測關 · 不計時",
+    "cta": "開始實測",
+    "teaser": "看譜、跟著節拍器打出來。",
+    "how": "聽到「預備」的 4 拍先跟著打（順便量你裝置的延遲）→ 第 5 拍開始照譜打。打完譜上會出現綠／黃／紅點，就是你每一下的準度。過關要準度 95%＋最多 1 個黃點＋不能有紅點。",
+    "hint": "記得開聲音或戴耳機。預備 4 拍也要跟著打",
+    "note": "這五關就是 JDAC 學員練功房「節奏視奏」的實際分級，每一關各有 50 題（這裡一關只抽一題），另有無盡挑戰把 50 小節連成一條不間斷。",
+    "qs": [
+      {
+        "lv": "BASIC",
+        "hint": "四分・八分",
+        "tk": [
+          "q",
+          "q",
+          "q",
+          "q"
+        ]
+      },
+      {
+        "lv": "SIXTEEN",
+        "hint": "加十六分",
+        "tk": [
+          "q",
+          "q",
+          "q",
+          "s4"
+        ]
+      },
+      {
+        "lv": "SYNCO",
+        "hint": "切分",
+        "tk": [
+          "er_e",
+          "s_e_s",
+          "e2",
+          "q"
+        ]
+      },
+      {
+        "lv": "TRIPLET",
+        "hint": "三連音",
+        "tk": [
+          "q",
+          "q",
+          "q",
+          "t3"
+        ]
+      },
+      {
+        "lv": "FUSION",
+        "hint": "綜合",
+        "tk": [
+          "e2",
+          "q",
+          "s_e_s",
+          "t3"
+        ]
+      }
     ]
-  }
+  },
+  "intro": {
+    "lab": "開始之前",
+    "q": "我怎麼稱呼你？",
+    "note": "不用真名，一個稱呼就好。接下來 27 題有點長，中間我會叫你幾聲——比較不像在填表。",
+    "ph": "例如：阿明",
+    "btn": "開始健檢 →",
+    "skip": "不填，直接開始"
+  },
+  "cheers": [
+    {
+      "lab": "撐過最難的一段了",
+      "t": "{name}最重的一關過去了。",
+      "b": "剩下的都是選一選就好，沒有要你再動手。前面那些答案已經夠我判斷你的讀譜位置了。"
+    },
+    {
+      "lab": "剩最後一段",
+      "t": "{name}剩 9 題，其中 4 題不計分。",
+      "b": "最後這段問的是「你怎麼練」——這一軸是所有技術的乘數，同樣練一小時，有系統的人拿到的東西是好幾倍。老實答，這裡答漂亮沒有意義。"
+    }
+  ]
 }
 </script>
 <script>
@@ -349,10 +1008,17 @@ var GAME_MAX=HASGAME?DATA.bonus.qs.length:0;
 var GAME_AT=0;QS.forEach(function(Q,qi){if(Q.d==='READ')GAME_AT=qi+1;});
 var STEPS=TOTAL+(HASGAME?1:0);
 
-var i,ans,qual,unlocked,gameShown,gameResult,gameReturnTo,gameApi;
+/* 鼓勵頁：插在「最重的那一關之後」與「最後一段之前」。
+   位置寫死在這裡、文案放題庫的 cheers[]——Jacob 要改字不用碰程式。 */
+var CHEERS=[{at:GAME_AT,afterGame:true},{at:18}];
+var INTRO=DATA.intro||null, CHEERTXT=DATA.cheers||[];
+var i,ans,qual,unlocked,gameShown,gameResult,gameReturnTo,gameApi,nick,started,cheersDone;
+// {name} → 「阿明，」；沒填稱呼就整個消失，句子照樣通順
+function nm(t){return esc(String(t||'')).replace(/\{name\}/g, nick?esc(nick)+'，':'');}
 function killGame(){if(gameApi&&gameApi.stop){try{gameApi.stop();}catch(e){}}gameApi=null;}
 function reset(){i=0;ans=new Array(QS.length).fill(null);qual={};unlocked=false;
-  gameShown=false;gameResult=null;gameReturnTo=null;killGame();render();
+  gameShown=false;gameResult=null;gameReturnTo=null;killGame();
+  nick='';started=!INTRO;cheersDone=CHEERS.map(function(){return false;});render();
   try{panel.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}}
 
 function pct(n,d){return d>0?Math.round(n/d*100):0;}
@@ -373,9 +1039,21 @@ function calc(){
 }
 function pick(list,key){var r=null;for(var n=0;n<list.length;n++){if(key<=list[n].max){r=list[n];break;}}return r||list[list.length-1];}
 
+function cheerAt(){
+  for(var c=0;c<CHEERS.length;c++){
+    if(cheersDone[c])continue;
+    if(CHEERS[c].at!==i)continue;
+    if(CHEERS[c].afterGame&&HASGAME&&!gameShown)continue;   // 實測關那頁要先跑完才鼓勵
+    if(!CHEERTXT[c])continue;
+    return c;
+  }
+  return -1;
+}
 function render(){
   killGame();
+  if(!started)return renderIntro();
   if(HASGAME&&i===GAME_AT&&!gameShown)return renderGame();
+  var ci=cheerAt();if(ci>=0)return renderCheer(ci);
   if(i<QS.length)return renderQ();
   if(i<TOTAL)return renderQual();
   return result();
@@ -392,6 +1070,36 @@ function navRow(nextDisabled,nextLabel){
     (nextLabel?'<button type="button" class="hc-next"'+(nextDisabled?' disabled':'')+'>'+esc(nextLabel)+'</button>':'')+'</div>';
 }
 function wireBack(){var b=panel.querySelector('.hc-back');if(b)b.addEventListener('click',function(){i--;render();});}
+
+/* 第 0 頁：只要一個稱呼，不要 email。
+   稱呼幾乎沒有心理成本（不是個資、不會被寄廣告），但填完人就進入「我已經開始了」的狀態，
+   而且中間的鼓勵可以叫他的名字。email 仍然留在最後解鎖報告那一關。 */
+function renderIntro(){
+  var I=INTRO||{};
+  panel.innerHTML='<div class="hc-step"><span>'+esc(I.lab||'開始之前')+'</span></div>'+
+    '<div class="hc-bar"><i style="width:0%"></i></div>'+
+    '<p class="hc-q">'+esc(I.q||'我怎麼稱呼你？')+'</p>'+
+    '<p class="hc-gintro">'+esc(I.note||'')+'</p>'+
+    '<input class="hc-nick" type="text" maxlength="20" autocomplete="nickname" placeholder="'+esc(I.ph||'')+'">'+
+    '<div class="hc-nav"><button type="button" class="hc-back hc-skipnick">'+esc(I.skip||'不填，直接開始')+'</button>'+
+    '<button type="button" class="hc-next">'+esc(I.btn||'開始健檢 →')+'</button></div>';
+  var inp=panel.querySelector('.hc-nick');
+  var go=function(){nick=(inp.value||'').trim().slice(0,20);started=true;render();};
+  panel.querySelector('.hc-next').addEventListener('click',go);
+  panel.querySelector('.hc-skipnick').addEventListener('click',function(){nick='';started=true;render();});
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();go();}});
+  try{inp.focus();}catch(e){}
+}
+
+/* 鼓勵頁：不問問題、只有一顆繼續。看過就不再出現（cheersDone），
+   所以回上一題再往前不會重複打斷。 */
+function renderCheer(ci){
+  var C=CHEERTXT[ci]||{};
+  panel.innerHTML=head(C.lab||'繼續','')+
+    '<div class="hc-cheer"><p class="em">'+nm(C.t)+'</p><p class="bd">'+nm(C.b)+'</p>'+
+    '<button type="button" class="jh-btn p hc-cheergo">繼續 →</button></div>';
+  panel.querySelector('.hc-cheergo').addEventListener('click',function(){cheersDone[ci]=true;render();});
+}
 
 function renderQ(){
   var Q=QS[i],dim=null;
@@ -584,6 +1292,7 @@ function result(){
       dims:rows.map(function(r){return r.k+':'+r.p;}).join(','),
       weak:w1.k+','+w2.k,top:top.k,
       answers:ans.map(function(a){return Array.isArray(a)?a.join('|'):(a==null?'-':a);}).join(','),
+      nick:nick||'',
       game:(gameResult?((gameResult.ceiling||'未過')+' · '+gameResult.passN+'/'+GAME_MAX+' 關'):(HASGAME?'跳過':'')),
       years:qual.years||'',how:qual.how||'',goal:qual.goal||'',want:qual.want||'',source:SRC};
     var unlock=function(sent){
