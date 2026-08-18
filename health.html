@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>鼓手能力健檢｜JDAC 爵士鼓學校</title>
+<meta name="description" content="23 題測出你在時間感、協調獨立、讀譜視奏、耳朵、風格廣度、練習系統六個面向各在哪——並對照 Rockschool 分級，告訴你最該補的兩塊。">
+<meta property="og:title" content="鼓手能力健檢｜JDAC 爵士鼓學校">
+<meta property="og:description" content="六個面向、23 題，看出你的雷達圖長什麼形狀——以及你最該補的是哪兩塊。">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,800;1,800;1,900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+html,body{margin:0;background:#f4f3ee}
+.pg{background:#f4f3ee;color:#0c0c0c;font-family:"Noto Sans TC",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.pg *{box-sizing:border-box}
+.wrap{max-width:760px;margin:0 auto;padding:0 clamp(18px,5vw,40px) 56px}
+.mglab{font-family:"Archivo",sans-serif;font-weight:500;letter-spacing:.3em;text-transform:uppercase;font-size:11px;color:#3a3a36}
+.lab{color:#2563ff;margin:26px 0 10px}
+h1{font-family:"Archivo","Noto Sans TC",sans-serif;font-style:italic;font-weight:900;font-size:clamp(30px,7.2vw,44px);line-height:1.12;letter-spacing:-.015em;margin:0 0 12px}
+h1 em{font-style:italic;color:#2563ff}
+.sub{font-size:clamp(14.5px,1.5vw,16px);color:#3a3a36;line-height:1.85;margin:0 0 26px}
+.sub b{color:#0c0c0c;border-bottom:2px solid #fa5a1e;font-weight:700}
+.trust{font-size:12.5px;color:#8a8579;margin:18px 0 0;line-height:1.7}
+footer{max-width:760px;margin:0 auto;padding:18px clamp(18px,5vw,40px) 40px;border-top:1.5px solid rgba(12,12,12,.15);font-size:12.5px;color:#8a8579;line-height:1.8}
+footer a{color:#2563ff;text-decoration:none;font-weight:700}
+.jh-btn{font-family:"Noto Sans TC",sans-serif;font-weight:700;font-size:15px;padding:14px 24px;border:1.5px solid #0c0c0c;border-radius:12px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .14s,background .14s;background:#fff;color:#0c0c0c}
+.jh-btn:hover{transform:translate(-2px,-2px)}
+.jh-btn.p{background:#2563ff;color:#fff;border-color:#2563ff}
+.jh-btn.p:hover{background:#1f56e0}
+.jh-btn.line{background:#06c755;color:#fff;border-color:#06c755}
+.jh-btn.line:hover{background:#05b34c}
+
+.hc-panel{background:#fff;border:1.5px solid #0c0c0c;border-radius:18px;box-shadow:8px 9px 0 #0c0c0c;padding:clamp(22px,3vw,40px)}
+.hc-step{font-family:"Archivo",sans-serif;font-weight:700;font-size:12px;letter-spacing:.14em;color:#2563ff;margin-bottom:9px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.hc-step .dim{color:#0c0c0c;background:#f0ece0;padding:2px 10px;border-radius:99px;font-size:11px;letter-spacing:.1em}
+.hc-bar{height:8px;background:rgba(12,12,12,.1);border-radius:99px;overflow:hidden;margin-bottom:22px}
+.hc-bar i{display:block;height:100%;background:#2563ff;transition:width .3s ease}
+.hc-q{font-weight:900;font-size:clamp(18px,2.1vw,23px);line-height:1.55;margin:0 0 18px;color:#0c0c0c}
+.hc-opt{display:block;width:100%;text-align:left;background:#f7f5ec;border:1.5px solid #0c0c0c;border-radius:12px;padding:14px 16px;font-family:"Noto Sans TC",sans-serif;font-size:15px;font-weight:600;color:#0c0c0c;cursor:pointer;margin-bottom:11px;box-shadow:2px 2px 0 #0c0c0c;transition:transform .1s,background .12s,box-shadow .1s}
+.hc-opt:hover{background:#e8efff}
+.hc-opt:active{transform:translate(2px,2px);box-shadow:0 0 0 #0c0c0c}
+.hc-opt:focus-visible{outline:3px solid #fa5a1e;outline-offset:2px}
+.hc-opt.on{background:#2563ff;color:#fff;border-color:#2563ff}
+.hc-opt.on::after{content:" ✓";font-weight:900}
+.hc-multi-hint{font-size:13px;color:#8a8579;margin:-6px 0 14px}
+.hc-nav{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.hc-back{background:none;border:none;color:#8a8579;font-size:13.5px;font-weight:600;cursor:pointer;font-family:"Noto Sans TC",sans-serif;text-decoration:underline;padding:8px 0}
+.hc-next{font-family:"Noto Sans TC",sans-serif;font-weight:700;font-size:15px;padding:13px 26px;border:1.5px solid #2563ff;background:#2563ff;color:#fff;border-radius:12px;cursor:pointer;margin-left:auto}
+.hc-next:disabled{opacity:.45;cursor:default}
+.hc-open{width:100%;min-width:min(200px,100%);font-family:"Noto Sans TC",sans-serif;font-size:15px;padding:14px 16px;border:1.5px solid #d8d5cc;border-radius:12px;background:#fff;color:#0c0c0c;box-sizing:border-box}
+.hc-open:focus{outline:none;border-color:#2563ff;box-shadow:0 0 0 3px rgba(37,99,255,.15)}
+
+.hc-rtag{display:inline-block;font-family:"Archivo",sans-serif;font-weight:800;font-size:12px;letter-spacing:.14em;background:#0c0c0c;color:#f4f3ee;padding:4px 14px;border-radius:99px;margin-bottom:12px}
+.hc-score{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:0 0 6px}
+.hc-score .n{font-family:"Archivo","Noto Sans TC",sans-serif;font-style:italic;font-weight:900;font-size:clamp(52px,11vw,76px);line-height:.9;color:#2563ff;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.hc-score .of{font-size:15px;color:#8a8579;font-weight:700}
+.hc-grade{font-size:15px;font-weight:900;color:#0c0c0c;margin:0 0 4px}
+.hc-gnote{font-size:13.5px;color:#55524a;line-height:1.8;margin:0 0 20px}
+.hc-lead{font-size:15px;line-height:1.95;color:#2c2c28;background:#f7f5ec;border-left:4px solid #fa5a1e;padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 22px}
+.hc-dh{font-family:"Archivo",sans-serif;font-weight:700;font-size:12px;letter-spacing:.14em;color:#2563ff;margin:26px 0 12px;text-transform:uppercase}
+
+.hc-radarwrap{display:flex;gap:22px;flex-wrap:wrap;align-items:center;justify-content:center;margin:0 0 8px}
+.hc-radar{flex:0 0 auto;max-width:100%;height:auto}
+.hc-bars{flex:1;min-width:min(260px,100%)}
+.hc-brow{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-size:13.5px}
+.hc-brow .bk{font-family:"Archivo",sans-serif;font-weight:800;font-size:11px;letter-spacing:.1em;width:66px;flex:0 0 66px;color:#3a3a36}
+.hc-brow .bt{flex:1;height:14px;background:rgba(12,12,12,.08);border-radius:99px;overflow:hidden;min-width:60px}
+.hc-brow .bt i{display:block;height:100%;background:#2563ff;border-radius:99px}
+.hc-brow.low .bt i{background:#fa5a1e}
+.hc-brow .bv{width:44px;flex:0 0 44px;text-align:right;font-family:"Archivo",sans-serif;font-weight:800;font-variant-numeric:tabular-nums;font-size:13px}
+
+.hc-see{margin:0 0 6px;padding:14px 18px;border-radius:10px;font-size:14.5px;line-height:1.9}
+.hc-see.up{background:#e8f6ee;color:#12553a;border-left:4px solid #12855c}
+.hc-see.dn{background:#fff1ea;color:#7a2f10;border-left:4px solid #fa5a1e;margin-bottom:20px}
+.hc-see b{font-weight:900}
+.hc-dir{margin:0 0 22px;padding:0;list-style:none}
+.hc-dir li{font-size:14.5px;line-height:1.85;padding:10px 0 10px 40px;position:relative;border-bottom:1px dashed rgba(12,12,12,.12);color:#3a3a36}
+.hc-dir li::before{content:attr(data-n);position:absolute;left:0;top:9px;width:26px;height:26px;background:#2563ff;color:#fff;border-radius:50%;font-family:"Archivo",sans-serif;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.hc-bridge{font-size:14px;line-height:1.9;color:#1c3a7a;background:#e8efff;border-radius:10px;padding:13px 16px;margin:0 0 22px}
+
+.hc-gate{border:1.5px dashed #2563ff;border-radius:14px;padding:18px 20px;background:#f7faff;margin:0 0 22px}
+.hc-gate .lb{font-weight:900;font-size:16.5px;color:#0c0c0c;margin:0 0 5px;line-height:1.5}
+.hc-gate .sb{font-size:13.5px;color:#55524a;margin:0 0 14px;line-height:1.75}
+.hc-emrow{display:flex;gap:12px;flex-wrap:wrap}
+.hc-emin{flex:1;width:100%;min-width:min(200px,100%);font-family:"Noto Sans TC",sans-serif;font-size:15px;padding:14px 16px;border:1.5px solid #d8d5cc;border-radius:12px;background:#fff;color:#0c0c0c;box-sizing:border-box;transition:border-color .14s,box-shadow .14s}
+.hc-emin:focus{outline:none;border-color:#2563ff;box-shadow:0 0 0 3px rgba(37,99,255,.15)}
+.hc-emin::placeholder{color:#a8a49a}
+.hc-embtn{font-family:"Noto Sans TC",sans-serif;font-weight:700;font-size:15px;padding:14px 24px;border:1.5px solid #2563ff;background:#2563ff;color:#fff;border-radius:12px;cursor:pointer;white-space:nowrap;transition:transform .14s,background .14s}
+.hc-embtn:hover{transform:translate(-2px,-2px);background:#1f56e0}
+.hc-embtn:disabled{opacity:.6;cursor:default;transform:none}
+.hc-emmsg{font-size:14px;font-weight:700;margin:12px 0 0;line-height:1.6}
+.hc-emmsg.ok{color:#1f7a3d}.hc-emmsg.err{color:#c0392b}
+.hc-locked{position:relative}
+.hc-locked .hc-blur{filter:blur(6px);opacity:.5;pointer-events:none;user-select:none}
+.hc-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:22px}
+.hc-retry{background:none;border:none;color:#8a8579;font-size:13px;font-weight:600;cursor:pointer;font-family:"Noto Sans TC",sans-serif;text-decoration:underline;padding:6px 0}
+.hc-wxhint{font-size:13px;color:#3a3a36;margin:10px 0 0;line-height:1.7}
+@media(max-width:620px){.hc-emrow{flex-direction:column}.hc-embtn{width:100%}
+  .hc-cta{flex-direction:column;align-items:stretch;gap:10px}
+  .hc-cta .jh-btn{width:100%;justify-content:center;padding:15px 20px}
+  .hc-retry{width:100%;text-align:center}
+  .hc-next{width:100%;margin-left:0}
+  .hc-nav{flex-direction:column-reverse;align-items:stretch}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.hc-gintro{font-size:14px;line-height:1.85;color:#55524a;background:#f7f5ec;border-radius:10px;padding:12px 15px;margin:0 0 14px}
+.hc-skip{background:none;border:none;color:#8a8579;font-size:13px;font-weight:600;cursor:pointer;font-family:"Noto Sans TC",sans-serif;text-decoration:underline;padding:6px 0}
+.hc-gmnote{font-size:13.5px;line-height:1.85;color:#3a3a36;background:#eef3ff;border-left:3px solid #2563ff;border-radius:0;padding:11px 14px;margin:14px 0 0}
+.hc-gmretry{background:none;border:none;color:#2563ff;font-size:13.5px;font-weight:700;cursor:pointer;font-family:"Noto Sans TC",sans-serif;text-decoration:underline;padding:0}
+/* 加碼關卡「節奏視奏 · 公開試玩版」樣式。
+   視覺沿用學員練功房的白卡硬陰影＋橘色打點鈕，色票換成行銷頁的電光藍/橘/米白。
+   三支頁面（首頁／教練課頁／獨立測驗頁）共用這一份，改樣式只要改這裡。
+   結果卡刻意做成黑底＝跟白色測驗卡對比，讓人想截圖分享。 */
+.qb{border-top:1px dashed #d8d5cc;padding-top:20px;margin-top:22px}
+
+/* ── 入口 ── */
+.qb-open{background:#f7f5ec;border:1.5px dashed #0c0c0c;border-radius:14px;padding:18px 20px;text-align:center}
+.qb-openbtn{font-family:"Noto Sans TC",sans-serif;font-weight:800;font-size:15.5px;padding:13px 22px;border:1.5px solid #0c0c0c;background:#fa5a1e;color:#fff;border-radius:12px;cursor:pointer;box-shadow:3px 3px 0 #0c0c0c;transition:transform .1s,box-shadow .1s}
+.qb-openbtn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #0c0c0c}
+.qb-openbtn:active{transform:translate(3px,3px);box-shadow:0 0 0 #0c0c0c}
+.qb-hint{font-size:13px;color:#55524a;margin:10px 0 0;line-height:1.7}
+
+/* ── 遊戲畫面 ── */
+.qb-gtitle{font-weight:900;font-size:18px;color:#0c0c0c;margin:0 0 6px;line-height:1.4}
+.qb-gtitle span{font-family:"Archivo","Noto Sans TC",sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.06em;color:#2563ff;margin-left:8px}
+.qb-gtitle .qb-lv{font-weight:900;color:#fa5a1e;letter-spacing:.1em}
+.qb-ghow{font-size:13.5px;color:#55524a;line-height:1.8;margin:0 0 16px}
+/* 譜面容器：VexFlow 會把 SVG 塞進來，載不到 CDN 時是手繪 SVG */
+.qb-staff{background:#fff;border:1.5px solid #0c0c0c;border-radius:14px;box-shadow:4px 5px 0 #0c0c0c;padding:10px 8px;min-height:120px;overflow-x:auto}
+.qb-staff svg{display:block;max-width:100%}
+.qb-acts{display:flex;justify-content:center;margin:16px 0 4px}
+.qb-start{font-family:"Noto Sans TC",sans-serif;font-weight:800;font-size:15px;padding:12px 26px;border:1.5px solid #2563ff;background:#2563ff;color:#fff;border-radius:12px;cursor:pointer;box-shadow:2px 2px 0 #0c0c0c}
+.qb-start:active{transform:translate(2px,2px);box-shadow:0 0 0 #0c0c0c}
+.qb-start:disabled{opacity:.55;cursor:default;transform:none;box-shadow:2px 2px 0 #0c0c0c}
+.qb-status{font-size:13px;color:#55524a;text-align:center;margin:6px 0 10px;min-height:20px;line-height:1.7}
+.qb-taprow{display:flex;align-items:center;justify-content:center;gap:16px;margin:14px 0 0;flex-wrap:wrap}
+/* touch-action:manipulation＝拿掉手機連點縮放的 300ms 延遲（節奏遊戲不能有那個） */
+.qb-tapbtn{width:180px;height:58px;font-size:16px;font-weight:800;font-family:"Noto Sans TC",sans-serif;background:#fa5a1e;color:#fff;border:0;border-radius:12px;cursor:pointer;box-shadow:3px 3px 0 #0c0c0c;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.qb-tapbtn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #0c0c0c}
+.qb-tiphint{font-size:12px;color:#8a8579;display:flex;align-items:center;gap:8px}
+.qb-pulse{width:12px;height:12px;border-radius:50%;background:rgba(12,12,12,.13);display:inline-block;transition:background .05s,transform .05s}
+.qb-pulse.lit{background:#2563ff;transform:scale(1.35)}
+
+/* ── 結果卡（可截圖分享的那張）── */
+.qb-card{background:#0c0c0c;border-radius:16px;padding:clamp(20px,3vw,28px);color:#f4f3ee;text-align:center}
+.qb-tag{display:inline-block;font-family:"Archivo",sans-serif;font-weight:800;font-size:11px;letter-spacing:.16em;color:#fa5a1e;border:1px solid #fa5a1e;padding:3px 11px;border-radius:99px;margin-bottom:14px}
+.qb-kicker{font-size:12.5px;color:#a8a49a;margin:0 0 2px;letter-spacing:.04em}
+/* 現在放的是關卡代號（SIXTEEN／TRIPLET…）不是數字，字要小一點才不會爆版 */
+.qb-ms{font-family:"Archivo",sans-serif;font-style:italic;font-weight:900;font-size:clamp(34px,7.5vw,58px);line-height:1.05;margin:0;color:#fff;letter-spacing:.01em;word-break:break-word}
+.qb-ms em{font-style:normal;font-size:.34em;font-weight:800;letter-spacing:.04em;color:#a8a49a;margin-left:8px;vertical-align:.55em}
+/* 天花板階梯：一關一列，過的亮起來 */
+.qb-ladder{list-style:none;margin:18px 0 0;padding:0;text-align:left}
+.qb-lrow{display:grid;grid-template-columns:20px 82px 1fr auto;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(244,243,238,.12);color:#8a8579}
+.qb-lrow:last-child{border-bottom:none}
+.qb-lrow.ok{color:#e4e2da}
+.qb-lmark{font-size:14px;font-weight:800;color:#5a5a54}
+.qb-lrow.ok .qb-lmark{color:#3fd39b}
+.qb-lname{font-family:"Archivo",sans-serif;font-weight:800;font-size:13px;letter-spacing:.06em}
+.qb-lrow.ok .qb-lname{color:#fff}
+.qb-lhint{font-size:12px;opacity:.75}
+.qb-lacc{font-family:"Archivo",sans-serif;font-size:12.5px;font-weight:700}
+.qb-metrics{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:14px 0 0}
+.qb-metrics span{font-size:12.5px;color:#c9c6bd;background:rgba(244,243,238,.09);border-radius:99px;padding:6px 14px}
+.qb-metrics b{font-family:"Archivo",sans-serif;color:#fff;font-size:13.5px}
+.qb-metrics b.qb-g{color:#3fd39b}.qb-metrics b.qb-y{color:#f0a020}.qb-metrics b.qb-r{color:#ff6b58}
+.qb-tier{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;font-size:16.5px;font-weight:900;color:#fff;margin:18px 0 0}
+/* 標籤是「可挑戰 SYNCO」這種中英混排，字距要收一點、字型要帶中文 fallback */
+.qb-tierlv{font-family:"Archivo","Noto Sans TC",sans-serif;font-weight:800;font-size:12px;letter-spacing:.07em;background:#2563ff;color:#fff;padding:4px 12px;border-radius:99px;white-space:nowrap}
+.qb-verdict{font-size:14px;line-height:1.9;color:#e4e2da;background:rgba(37,99,255,.16);border-left:3px solid #2563ff;padding:13px 16px;border-radius:0 8px 8px 0;margin:16px 0 0;text-align:left}
+.qb-cal{font-size:12px;line-height:1.8;color:#55524a;background:#eef3ff;border-radius:10px;padding:11px 14px;margin:12px 0 0}
+.qb-note{font-size:12.5px;line-height:1.85;color:#55524a;background:#f7f5ec;border-radius:10px;padding:12px 15px;margin:10px 0 0}
+.qb-again{background:none;border:none;color:#8a8579;font-size:13px;font-weight:600;cursor:pointer;font-family:"Noto Sans TC",sans-serif;text-decoration:underline;padding:6px 0;margin-top:10px}
+.qb-endrow{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:10px}
+.qb-endrow .qb-again{margin-top:0}
+.qb-cont{font-family:"Noto Sans TC",sans-serif;font-weight:800;font-size:15px;padding:12px 24px;border:1.5px solid #0c0c0c;background:#2563ff;color:#fff;border-radius:12px;cursor:pointer;box-shadow:3px 3px 0 #0c0c0c;transition:transform .1s,box-shadow .1s;margin-left:auto}
+.qb-cont:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #0c0c0c}
+.qb-cont:active{transform:translate(3px,3px);box-shadow:0 0 0 #0c0c0c}
+
+@media(max-width:620px){
+  .qb-openbtn,.qb-tapbtn{width:100%}
+  .qb-gtitle span{display:block;margin:4px 0 0}
+  .qb-taprow{gap:12px}
+  .qb-endrow{flex-direction:column-reverse;align-items:stretch}
+  .qb-cont{width:100%;margin-left:0}
+}
+</style>
+</head>
+<body>
+<div class="pg">
+  <main class="wrap">
+    <p class="mglab lab">Drummer Health Check · 六個面向</p>
+    <h1>你的鼓，<em>哪一塊最弱</em>？</h1>
+    <p class="sub">27 題<b>＋ 1 關實測</b>，測出你在<b>時間感、協調獨立、讀譜視奏、耳朵、風格廣度、練習系統</b>六個面向各在哪——並對照 Rockschool 官方分級，告訴你最該補的是哪兩塊。約 5 分鐘，中途有一關要動手打（不方便可以跳過）。</p>
+    <div class="hc-panel"><div id="jdacHealthBody"></div></div>
+    <p class="trust">出題的是 Jacob——JDAC 爵士鼓學校創辦人。維度架構對照 RSL Rockschool 與 Trinity Rock &amp; Pop 的官方評分軸，題目來自批改超過 3,000 份學員作業後歸納出的實際卡關點。</p>
+  </main>
+  <footer>JDAC 爵士鼓學校 · <a href="https://www.jacobdrumemory.com" target="_blank" rel="noopener">jacobdrumemory.com</a><br>LINE 官方帳號 @jdactw · 微信 jdac_drums</footer>
+</div>
+<script type="application/json" id="jdacHealthData">
+{
+  "dims": [
+    {"k":"TIME","zh":"時間感","sub":"內在脈動與穩定度",
+     "strong":"你的 time 是你的本錢。多數自學者卡在這一軸，你已經過了。",
+     "weak":"你最大的槓桿在這裡。time 不是天分，是可以量、可以練的東西——而且它一好，所有其他軸的表現都會跟著往上。",
+     "drills":["gap click：節拍器響兩小節、靜兩小節，靜音那段你自己撐住","節拍器只響第 2、4 拍，用 backbeat 當參考點打 8-beat","每次練完錄 30 秒，只聽 fill 進出的那兩下準不準"]},
+    {"k":"COORD","zh":"協調獨立","sub":"四肢的分離與控制",
+     "strong":"四肢分得開，代表你之後學任何風格都不會被手腳綁住。",
+     "weak":"你的手腳還在互相牽制。這一軸是慢工，但路徑非常明確，不需要天分。",
+     "drills":["非慣用手單獨練：60bpm 單擊 10 分鐘，只要求高度一致","大鼓十六分四個位置逐一定位（1 / e / & / a），一次只練一個","穩定 groove 上加 ghost notes，先把音量壓到剛好聽得見"]},
+    {"k":"READ","zh":"讀譜視奏","sub":"看得懂，而且當場打得出來",
+     "strong":"看得懂譜讓你能自己讀教材、能接團、能跟人溝通。這是很多自學者永遠沒補的一塊。",
+     "weak":"這是你最容易被低估的一軸。不看譜不會讓你打不了鼓，但會讓你永遠只能靠模仿，學一首算一首。",
+     "drills":["先攻休止符：十六分裡的休止是絕大多數人卡住的地方","每天視奏一小節沒看過的譜，慢速打對就好","把自己打的 groove 寫成譜——寫得出來才代表真的懂"]},
+    {"k":"EAR","zh":"耳朵與扒歌","sub":"聽得出來、打得回來、說得出名字",
+     "strong":"你的耳朵能自己扒歌，等於有一座無限的教材庫。",
+     "weak":"耳朵沒開，你就得一直等別人幫你出譜、出教學。這一軸練開之後，整個網路都是你的教材。",
+     "drills":["聽一首新歌只抓 groove，先不管 fill","抓完之後說出它是什麼風格、特徵在哪","跟著原曲打，錄下來跟原版對齊聽差在哪"]},
+    {"k":"STYLE","zh":"風格廣度","sub":"你的語彙庫有多寬",
+     "strong":"你的風格庫夠寬，代表你上台不會只有一種聲音。",
+     "weak":"你可能打得很穩，但只有一種聲音。廣度不是為了炫技，是為了讓你在不同歌裡都做得出對的選擇。",
+     "drills":["挑一個你完全沒碰過的風格，只學它最基本的那一個 pattern","同一首歌用兩種風格打打看，感受選擇的差別","從 shuffle 或 6/8 開始——三連音系是最大的一塊拼圖"]},
+    {"k":"SYSTEM","zh":"練習系統","sub":"你怎麼練，以及有沒有人看",
+     "strong":"你有系統，這比多練幾小時值錢得多。",
+     "weak":"這一軸是所有軸的乘數。沒有計畫、沒有標準、沒有人給你回饋，練再久都會停在同一個地方——這也是最快可以改善的一軸。",
+     "drills":["坐下前先寫今天要練什麼、從幾 BPM 開始","給每個項目一個「算練起來了」的明確標準","每週錄一次、找一個真的會給你具體回饋的人看"]}
+  ],
+  "qs": [
+    {"d":"TIME","q":"跟節拍器一起打的時候，我能穩穩對住的比例是：","opts":[
+      ["幾乎每次都對得住",5],["大多數時候可以，快的時候會飄",3],["慢歌比較難，快歌反而穩",2],["老實說我很少開節拍器",0]]},
+    {"d":"TIME","q":"如果把節拍器改成「只響第 2、4 拍」：","opts":[
+      ["沒問題，我平常就這樣練",5],["試過，會撐一下下然後跑掉",3],["光想就覺得很難",1],["沒試過，不太確定那是什麼意思",0]]},
+    {"d":"TIME","q":"打完一段 fill、回到 groove 的那一下：","opts":[
+      ["回得準，位置很清楚",5],["大部分準，複雜的 fill 會晚一點",3],["常常回來就發現快了或慢了",1],["我沒特別注意過這件事",0]]},
+    {"d":"TIME","q":"最近一次「錄下自己打鼓、然後從頭聽完一遍」是：","opts":[
+      ["這週",5],["這個月",3],["半年前左右",1],["幾乎沒有錄過",0]]},
+    {"d":"TIME","q":"一首歌從頭打到尾，速度的變化：","opts":[
+      ["我實際量過，前後差不到 2 BPM",5],["應該還好，但沒有實際量過",3],["我知道我會愈打愈快",2],["沒想過可以量這個",0]]},
+
+    {"d":"COORD","q":"左手（非慣用手）單獨打的時候：","opts":[
+      ["跟右手差不多",5],["音量夠但沒那麼穩",3],["明顯比較弱、比較不受控",1],["我幾乎都用右手主導，沒特別練過左手",0]]},
+    {"d":"COORD","q":"大鼓踩在十六分的四個位置（1 e &amp; a）：","opts":[
+      ["四個位置都踩得出來",5],["正拍和後半拍可以，其他要想一下",3],["只有正拍穩",1],["我不太確定這在說什麼",0]]},
+    {"d":"COORD","q":"一邊打穩定 groove、一邊左手加 ghost notes：","opts":[
+      ["可以，而且音量控制得住",5],["打得出來但 ghost 會太大聲",3],["一加就亂掉",1],["我沒練過 ghost notes",0]]},
+    {"d":"COORD","q":"三連音系列（shuffle、6/8、jazz ride）：","opts":[
+      ["三種都打得順",5],["打得出來但不太「搖」",3],["只會其中一種",2],["三連音對我來說一直很卡",0]]},
+
+    {"d":"READ","q":"拿到一張沒看過的鼓譜：","opts":[
+      ["看一遍就能打個八成",5],["慢速可以，原速要練幾次",3],["要一小節一小節拆才行",1],["我基本上不看譜，靠聽的",0]]},
+    {"d":"READ","q":"譜上的十六分休止（例如「十六分・休止・八分・休止・十六分」這種）：","opts":[
+      ["一看就知道怎麼打",5],["要數一下但沒問題",3],["看到休止就容易亂",1],["我看不太懂休止符",0]]},
+    {"d":"READ","q":"拍號 6/8、3/4、5/4：","opts":[
+      ["三種都打過也打得出來",5],["6/8 和 3/4 可以，5/4 沒有",3],["只有 4/4 是舒服的",1],["我不太確定拍號怎麼影響打法",0]]},
+    {"d":"READ","q":"你能把自己打的一段 groove 寫成譜嗎？","opts":[
+      ["可以，符桿與休止都寫得對",5],["大概畫得出來，細節不確定",3],["寫不出來但看得懂別人的",2],["沒試過",0]]},
+
+    {"d":"EAR","q":"聽一首新歌，你能抓出鼓的 pattern：","opts":[
+      ["聽一兩遍就抓得到，包含 fill",5],["groove 抓得到，fill 要放慢",3],["大概方向抓得到，細節抓不出來",1],["我通常直接找譜或找教學影片",0]]},
+    {"d":"EAR","q":"聽到一段 groove，你說得出它是什麼風格：","opts":[
+      ["說得出名稱，也知道特徵在哪",5],["聽得出不一樣但講不出名字",3],["只分得出快慢",1],["沒特別想過",0]]},
+    {"d":"EAR","q":"在樂團裡，當別人跑掉的時候：","opts":[
+      ["我知道是誰跑掉、也知道要不要跟",5],["感覺怪怪的但不確定是誰",3],["我會被帶著跑",1],["我沒有跟樂團一起打過",0]]},
+
+    {"d":"STYLE","q":"下面這些你「打得出來」——可以複選，沒有的就不要勾：","multi":true,"per":2,"opts":[
+      ["八分 rock groove"],["十六分 funk（含 ghost notes）"],["shuffle"],["jazz ride pattern（含 comping）"],
+      ["bossa／samba"],["半開 hi-hat"],["linear funk"],["6/8 抒情"],["雙踏基礎"]]},
+    {"d":"STYLE","q":"除了你最常打的風格，第二熟的是：","opts":[
+      ["有，而且能打完整首",5],["有，但只會皮毛",3],["沒有，我幾乎只打一種",1],["我還在建立第一種",0]]},
+
+    {"d":"SYSTEM","q":"你坐上鼓之前，知道今天要練什麼嗎：","opts":[
+      ["每次都有明確項目與 BPM",5],["大概有方向",3],["想到什麼打什麼",1],["通常就是把喜歡的歌打一遍",0]]},
+    {"d":"SYSTEM","q":"你怎麼知道一個東西「練起來了」：","opts":[
+      ["有明確標準（BPM、連續幾遍不失誤）",5],["感覺順了就算",2],["沒想過這個問題",1],["老實說我很少有練起來的感覺",0]]},
+    {"d":"SYSTEM","q":"最近三個月，有人聽過你打鼓並給你「具體」的回饋：","opts":[
+      ["每週都有",5],["一兩次",3],["只有家人朋友說「不錯」",1],["沒有",0]]},
+    {"d":"SYSTEM","q":"上一次跟其他樂手一起演奏：","opts":[
+      ["這個月",5],["半年內",3],["一年以上",1],["從來沒有",0]]},
+    {"d":"SYSTEM","q":"每週實際坐上鼓的時間：","opts":[
+      ["5 小時以上",5],["2–4 小時",4],["1 小時左右",2],["不一定，有空才打",1]]}
+  ],
+  "quals": [
+    {"k":"years","q":"你學鼓多久了？","opts":["還沒開始／不到半年","半年–2 年","2–5 年","5 年以上"]},
+    {"k":"how","q":"你目前的學習方式？","opts":["完全自學","上實體課","買過線上課自己看","以前學過，現在自己練"]},
+    {"k":"goal","q":"接下來三個月，你最想達成的一件事？","open":true,"ph":"一句話就好，例如：把某首歌完整打下來"},
+    {"k":"want","q":"如果有人每週看你的練習影片、逐拍告訴你哪裡要修，你會想試試看嗎？","opts":["想，愈快愈好","有興趣，想先知道怎麼運作","現在還沒準備好","我比較想自己摸索"]}
+  ],
+  "grades": [
+    {"max":25,"g":"入門前","note":"你還在起跑線上，這很正常——而且零底子最大的優勢是沒有壞習慣要拆。"},
+    {"max":40,"g":"Rockschool Debut–Grade 1","note":"對照 RSL 官方大綱，這一級通常是「學了 6 個月到 1 年」的程度。"},
+    {"max":55,"g":"Rockschool Grade 2","note":"對照 RSL 官方大綱，這一級通常是「學了 1 年到 1 年半」的程度。"},
+    {"max":70,"g":"Rockschool Grade 3","note":"對照 RSL 官方大綱，這一級通常是「學了 1 年半到 2 年」的程度，開始有風格意識。"},
+    {"max":82,"g":"Rockschool Grade 4","note":"對照 RSL 官方大綱，這一級通常是「學了 2 年到 2 年半」的程度，基本技巧已經精熟。"},
+    {"max":92,"g":"Rockschool Grade 5","note":"你已經具備中階技巧與技術，風格說服力也出來了。"},
+    {"max":101,"g":"Rockschool Grade 6 以上","note":"你在往進階技術控制走了。這個階段最缺的通常不是練什麼，是有人幫你挑毛病。"}
+  ],
+  "tiers": [
+    {"max":40,"tag":"BUILDING","zh":"地基期",
+     "lead":"你現在的分數落在地基期。這不是壞消息——地基期最大的好處是，你每補一塊都會馬上聽得出差別。",
+     "cta":"watch"},
+    {"max":89,"tag":"DEVELOPING","zh":"成長期",
+     "lead":"你的底子是紮實的，但還有很大的改善空間——而且落差集中在特定幾軸，不是全面性的。這是最值得投資的階段，因為你已經聽得懂別人在說什麼了。",
+     "cta":"class"},
+    {"max":101,"tag":"ADVANCED","zh":"進階期",
+     "lead":"你的六軸都相當均衡，這在自學者裡很少見。到這個階段，進步通常不是靠「再練久一點」，而是靠有人幫你挑出那些你自己聽不到的東西。",
+     "cta":"talk"}
+  ],
+  "bonus": {
+    "tag":"實測關 · 不計時",
+    "cta":"開始實測",
+    "teaser":"看譜、跟著節拍器打出來。",
+    "how":"聽到「預備」的 4 拍先跟著打（順便量你裝置的延遲）→ 第 5 拍開始照譜打。打完譜上會出現綠／黃／紅點，就是你每一下的準度。過關要準度 95%＋最多 1 個黃點＋不能有紅點。",
+    "hint":"記得開聲音或戴耳機。預備 4 拍也要跟著打",
+    "note":"這五關就是 JDAC 學員練功房「節奏視奏」的實際分級，每一關各有 50 題（這裡一關只抽一題），另有無盡挑戰把 50 小節連成一條不間斷。",
+    "qs":[
+      {"lv":"BASIC","hint":"四分・八分","tk":["q","q","q","q"]},
+      {"lv":"SIXTEEN","hint":"加十六分","tk":["q","q","q","s4"]},
+      {"lv":"SYNCO","hint":"切分","tk":["er_e","s_e_s","e2","q"]},
+      {"lv":"TRIPLET","hint":"三連音","tk":["q","q","q","t3"]},
+      {"lv":"FUSION","hint":"綜合","tk":["e2","q","s_e_s","t3"]}
+    ]
+  }
+}
+</script>
+<script>
+/* jdacHealthInit(root)：獨立頁傳 document、Wix custom element 傳 host——同一份邏輯兩處用。
+   custom element 跑在頁面本體（非 iframe），所以 location.search 讀得到 ?src=xxx 的歸因參數。
+   留資採「teaser 分數先給、完整報告要 email 解鎖」——ScoreApp 官方文件的後置 gate 形態。 */
+function jdacHealthInit(root){
+var sp=new URLSearchParams(location.search);
+var sfx=(sp.get('src')||'').toLowerCase().replace(/[^a-z0-9_-]/g,'').slice(0,20);
+var SRC='能力健檢'+(sfx?'-'+sfx:'');
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+var panel=root.querySelector('#jdacHealthBody');
+var dataEl=root.querySelector('#jdacHealthData');
+var DATA;try{DATA=JSON.parse(dataEl.textContent);}catch(e){return;}
+var DIMS=DATA.dims,QS=DATA.qs,QUALS=DATA.quals,GRADES=DATA.grades,TIERS=DATA.tiers;
+var TOTAL=QS.length+QUALS.length;
+
+// ── 每軸滿分（單選題取選項最高分；複選題 per×選項數）──
+var MAXD={};DIMS.forEach(function(d){MAXD[d.k]=0;});
+QS.forEach(function(Q){
+  if(Q.multi){MAXD[Q.d]+=(Q.per||1)*Q.opts.length;}
+  else{var m=0;Q.opts.forEach(function(o){if(o[1]>m)m=o[1];});MAXD[Q.d]+=m;}
+});
+
+// ── 視奏實測關 ──
+// 位置＝READ 那組的最後一題後面（動態算，題目重排也不會跑掉）。
+// 它是「題目」不是加碼關，所以 autoStart 跳過 teaser，直接把譜攤開。
+var HASGAME=!!(DATA.bonus&&DATA.bonus.qs&&DATA.bonus.qs.length&&typeof jdacQuizBonus==='function');
+var GAME_MAX=HASGAME?DATA.bonus.qs.length:0;
+var GAME_AT=0;QS.forEach(function(Q,qi){if(Q.d==='READ')GAME_AT=qi+1;});
+var STEPS=TOTAL+(HASGAME?1:0);
+
+var i,ans,qual,unlocked,gameShown,gameResult,gameReturnTo,gameApi;
+function killGame(){if(gameApi&&gameApi.stop){try{gameApi.stop();}catch(e){}}gameApi=null;}
+function reset(){i=0;ans=new Array(QS.length).fill(null);qual={};unlocked=false;
+  gameShown=false;gameResult=null;gameReturnTo=null;killGame();render();
+  try{panel.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}}
+
+function pct(n,d){return d>0?Math.round(n/d*100):0;}
+function calc(){
+  var per={},tot=0,max=0,maxd={};
+  DIMS.forEach(function(d){per[d.k]=0;maxd[d.k]=MAXD[d.k];});
+  QS.forEach(function(Q,qi){
+    var a=ans[qi];if(a==null)return;
+    if(Q.multi){per[Q.d]+=(a.length||0)*(Q.per||1);}
+    else{per[Q.d]+=(Q.opts[a]&&Q.opts[a][1])||0;}
+  });
+  // 實測關當 READ 的第 5 題：分數＝過關的最高一級（天花板），滿分＝關卡數。
+  // 跳過的人 maxd 不加，READ 就純自評——不因為沒打而被扣分。
+  if(gameResult){per.READ+=(gameResult.topI+1);maxd.READ+=GAME_MAX;}
+  DIMS.forEach(function(d){tot+=per[d.k];max+=maxd[d.k];});
+  var rows=DIMS.map(function(d){return {k:d.k,zh:d.zh,sub:d.sub,p:pct(per[d.k],maxd[d.k]),d:d};});
+  return {rows:rows,overall:pct(tot,max)};
+}
+function pick(list,key){var r=null;for(var n=0;n<list.length;n++){if(key<=list[n].max){r=list[n];break;}}return r||list[list.length-1];}
+
+function render(){
+  killGame();
+  if(HASGAME&&i===GAME_AT&&!gameShown)return renderGame();
+  if(i<QS.length)return renderQ();
+  if(i<TOTAL)return renderQual();
+  return result();
+}
+
+// 進度條要含實測關，不然打完那關進度不動，看起來像卡住
+function stepNo(){return i+((HASGAME&&gameShown)?1:0);}
+function head(label,dimLabel){
+  return '<div class="hc-step"><span>'+esc(label)+'</span>'+(dimLabel?'<span class="dim">'+esc(dimLabel)+'</span>':'')+'</div>'+
+    '<div class="hc-bar"><i style="width:'+Math.round(stepNo()/STEPS*100)+'%"></i></div>';
+}
+function navRow(nextDisabled,nextLabel){
+  return '<div class="hc-nav">'+(i>0?'<button type="button" class="hc-back">← 上一題</button>':'')+
+    (nextLabel?'<button type="button" class="hc-next"'+(nextDisabled?' disabled':'')+'>'+esc(nextLabel)+'</button>':'')+'</div>';
+}
+function wireBack(){var b=panel.querySelector('.hc-back');if(b)b.addEventListener('click',function(){i--;render();});}
+
+function renderQ(){
+  var Q=QS[i],dim=null;
+  DIMS.forEach(function(d){if(d.k===Q.d)dim=d;});
+  var h=head('健檢 · 第 '+(i+1)+' / '+TOTAL+' 題',dim?dim.k+' · '+dim.zh:'')+'<p class="hc-q">'+esc(Q.q)+'</p>';
+  if(Q.multi)h+='<p class="hc-multi-hint">可以複選；一個都沒有也可以直接下一題。</p>';
+  var cur=ans[i];
+  for(var o=0;o<Q.opts.length;o++){
+    var on=Q.multi?(cur&&cur.indexOf(o)>=0):(cur===o);
+    h+='<button type="button" class="hc-opt'+(on?' on':'')+'" data-oi="'+o+'">'+esc(Q.opts[o][0])+'</button>';
+  }
+  h+=navRow(false,Q.multi?'下一題 →':'');
+  panel.innerHTML=h;
+  panel.querySelectorAll('.hc-opt').forEach(function(b){
+    b.addEventListener('click',function(){
+      var oi=Number(b.getAttribute('data-oi'));
+      if(Q.multi){
+        var arr=Array.isArray(ans[i])?ans[i].slice():[];
+        var at=arr.indexOf(oi);if(at>=0)arr.splice(at,1);else arr.push(oi);
+        ans[i]=arr;b.classList.toggle('on');
+      }else{ans[i]=oi;i++;render();}
+    });
+  });
+  var nx=panel.querySelector('.hc-next');
+  if(nx)nx.addEventListener('click',function(){if(!Array.isArray(ans[i]))ans[i]=[];i++;render();});
+  wireBack();
+}
+
+/* 實測關。跟題目不同的地方：可以跳過、可以重打、打完才往下一題。
+   刻意給明顯的逃生口——沒鼓、在辦公室、在捷運的人不該被這關卡死，
+   跳過的人 READ 就純自評（calc 不加 maxd），不會因為沒打而被扣分。 */
+function renderGame(){
+  /* ⚠️ 打完／跳過都停在「同一個 i」，不是 i+1。
+     實測關是插在 GAME_AT 這個索引「前面」的一站，不佔題目格；
+     推成 i+1 會把 QS[GAME_AT]（EAR 第一題）整題吃掉——2026-07-29 實測抓到的。 */
+  var leave=function(){
+    gameShown=true;killGame();
+    if(gameReturnTo!=null){i=gameReturnTo;gameReturnTo=null;}
+    render();
+  };
+  panel.innerHTML=head('實測關 · 動手打一次','READ · 讀譜視奏')+
+    '<p class="hc-q">看譜，跟著節拍器打出來。</p>'+
+    '<p class="hc-gintro">五關由簡到難，打到哪關算哪關——這是學員練功房裡真的那款遊戲。<b>這關會出聲音</b>，建議戴耳機。'+
+    '用鍵盤空白鍵、或直接點畫面上的按鈕都可以，<b>不用真的坐在鼓前面</b>。<br>'+
+    '成績會算進「讀譜視奏」那一軸；跳過的話那一軸就純自評，<b>不會扣你分</b>。</p>'+
+    '<div id="hcGameAnchor"></div>'+
+    '<div class="hc-nav"><button type="button" class="hc-back">← 上一題</button>'+
+    '<button type="button" class="hc-skip">現在不方便，跳過這關</button></div>';
+  panel.querySelector('.hc-skip').addEventListener('click',function(){gameResult=null;leave();});
+  var bb=panel.querySelector('.hc-back');
+  if(bb)bb.addEventListener('click',function(){gameReturnTo=null;killGame();i--;render();});
+  gameApi=jdacQuizBonus(panel,DATA,{anchor:'#hcGameAnchor',autoStart:true,
+    onDone:function(r){gameResult=r;leave();}});
+  // 引擎沒起來（題庫缺、VexFlow 全部 CDN 掛掉）就當作沒這關往下走，不能把人卡死在這頁
+  if(!gameApi){gameShown=true;render();}
+}
+
+function renderQual(){
+  var qi=i-QS.length,Q=QUALS[qi];
+  var h=head('健檢 · 第 '+(i+1)+' / '+TOTAL+' 題','最後幾題 · 不計分');
+  h+='<p class="hc-q">'+esc(Q.q)+'</p>';
+  if(Q.open){
+    h+='<input class="hc-open" type="text" maxlength="120" placeholder="'+esc(Q.ph||'')+'" value="'+esc(qual[Q.k]||'')+'">';
+    h+=navRow(false,'下一題 →');
+  }else{
+    for(var o=0;o<Q.opts.length;o++){
+      var on=qual[Q.k]===Q.opts[o];
+      h+='<button type="button" class="hc-opt'+(on?' on':'')+'" data-oi="'+o+'">'+esc(Q.opts[o])+'</button>';
+    }
+    h+=navRow(false,'');
+  }
+  panel.innerHTML=h;
+  panel.querySelectorAll('.hc-opt').forEach(function(b){
+    b.addEventListener('click',function(){qual[Q.k]=Q.opts[Number(b.getAttribute('data-oi'))];i++;render();});
+  });
+  var inp=panel.querySelector('.hc-open');
+  var nx=panel.querySelector('.hc-next');
+  if(nx)nx.addEventListener('click',function(){if(inp)qual[Q.k]=(inp.value||'').trim().slice(0,120);i++;render();});
+  wireBack();
+}
+
+function radarSVG(rows){
+  var S=250,C=125,R=96,n=rows.length,i2,pts=[],lbl='',rings='';
+  function xy(idx,r){var a=-Math.PI/2+idx*2*Math.PI/n;return [C+r*Math.cos(a),C+r*Math.sin(a)];}
+  [1,.66,.33].forEach(function(f){
+    var p=[];for(i2=0;i2<n;i2++){var q=xy(i2,R*f);p.push(q[0].toFixed(1)+','+q[1].toFixed(1));}
+    rings+='<polygon points="'+p.join(' ')+'" fill="none" stroke="#d8d5cc" stroke-width="1"/>';
+  });
+  var spokes='';
+  for(i2=0;i2<n;i2++){var e=xy(i2,R);spokes+='<line x1="'+C+'" y1="'+C+'" x2="'+e[0].toFixed(1)+'" y2="'+e[1].toFixed(1)+'" stroke="#d8d5cc" stroke-width="1"/>';}
+  var minP=Math.min.apply(null,rows.map(function(r){return r.p;}));
+  var dots='';
+  for(i2=0;i2<n;i2++){
+    var v=Math.max(rows[i2].p,4)/100,q2=xy(i2,R*v);
+    pts.push(q2[0].toFixed(1)+','+q2[1].toFixed(1));
+    if(rows[i2].p===minP)dots+='<circle cx="'+q2[0].toFixed(1)+'" cy="'+q2[1].toFixed(1)+'" r="5" fill="#fa5a1e"/>';
+    var l=xy(i2,R+20);
+    var anchor=Math.abs(l[0]-C)<6?'middle':(l[0]>C?'start':'end');
+    lbl+='<text x="'+l[0].toFixed(1)+'" y="'+(l[1]+4).toFixed(1)+'" text-anchor="'+anchor+'" font-size="11" font-family="Archivo,sans-serif" font-weight="800" fill="#3a3a36">'+esc(rows[i2].k)+'</text>';
+  }
+  // viewBox 左右各留 48 的空間給軸標籤——標籤是 anchor:start/end 畫在半徑外側，
+  // 用 0 0 250 250 會把 SYSTEM/STYLE/COORD/READ 這幾個長標籤裁掉（2026-07-29 截圖才發現）。
+  return '<svg class="hc-radar" viewBox="-48 0 '+(S+96)+' '+S+'" width="300" height="217" role="img" aria-label="六個面向的能力雷達圖">'+
+    rings+spokes+'<polygon points="'+pts.join(' ')+'" fill="rgba(37,99,255,.25)" stroke="#2563ff" stroke-width="2.4"/>'+dots+lbl+'</svg>';
+}
+
+function result(){
+  var R=calc(),rows=R.rows,overall=R.overall;
+  var sorted=rows.slice().sort(function(a,b){return b.p-a.p;});
+  var top=sorted[0],w1=sorted[sorted.length-1],w2=sorted[sorted.length-2];
+  var G=pick(GRADES,overall),T=pick(TIERS,overall);
+  // ⚠️ 只有「真的偏低」的軸才能被講成該補的。不設門檻的話，六軸都 100 時會冒出
+  //    「最該補的是 X（100%）、其次是 Y（100%）」這種鬼話，一句就毀掉整份報告的可信度。
+  var WEAK=70;                                  // 低於這個百分比才算落差
+  var allStrong=w1.p>=WEAK;                     // 連最低的一軸都及格＝沒有明顯短板
+  var showW2=(w2.p<WEAK && w2.p<top.p-10);      // 第二弱要夠低、且跟最強拉得開才提
+  var bars='';
+  rows.forEach(function(r){
+    var low=(!allStrong && r.k===w1.k)||(showW2 && r.k===w2.k);
+    bars+='<div class="hc-brow'+(low?' low':'')+'"><span class="bk">'+esc(r.k)+'</span>'+
+      '<span class="bt"><i style="width:'+Math.max(r.p,2)+'%"></i></span><span class="bv">'+r.p+'%</span></div>';
+  });
+  // seesaw：先講最強、再講最弱（Scorecard Marketing 的 seesaw technique）
+  var dnTxt=allStrong
+    ? '<b>你最低的一軸是「'+esc(w1.zh)+'」（'+w1.p+'%）——但它也已經在水準之上。</b>'+
+      '到這個階段，進步通常不是靠再練久一點，而是靠有人幫你挑出那些你自己聽不到的東西。'
+    : '<b>最該補的是「'+esc(w1.zh)+'」（'+w1.p+'%）'+(showW2?'，其次是「'+esc(w2.zh)+'」（'+w2.p+'%）':'')+'。</b>'+esc(w1.d.weak);
+  var see='<div class="hc-see up"><b>你最強的是「'+esc(top.zh)+'」（'+top.p+'%）。</b>'+esc(top.d.strong)+'</div>'+
+          '<div class="hc-see dn">'+dnTxt+'</div>';
+  var dirs='';w1.d.drills.forEach(function(t,n){dirs+='<li data-n="'+(n+1)+'">'+esc(t)+'</li>';});
+
+  var CTA={watch:{t:'先從免費教學看起 →',u:'https://www.youtube.com/@jacobdrumemory'},
+           class:{t:'看線上教練課 →',u:'https://www.jacobdrumemory.com/onlinecoaching'},
+           talk:{t:'看線上教練課 →',u:'https://www.jacobdrumemory.com/onlinecoaching'}}[T.cta]||
+          {t:'看線上教練課 →',u:'https://www.jacobdrumemory.com/onlinecoaching'};
+
+  // 讓他知道 READ 那一軸的分數是實測還是自評——這是花了一關的代價換來的差異，不講等於白做
+  var gmNote='';
+  if(gameResult){
+    gmNote='<div class="hc-gmnote">「讀譜視奏」這一軸有<b>實測</b>成分：你在視奏實測關的天花板是 <b>'+
+      esc(gameResult.ceiling||'未過 BASIC')+'</b>（'+gameResult.passN+' / '+GAME_MAX+' 關過關），已經算進上面的分數了。</div>';
+  }else if(HASGAME){
+    gmNote='<div class="hc-gmnote">你跳過了視奏實測關，所以「讀譜視奏」這一軸<b>完全是自評</b>——'+
+      '想要更準的話，<button type="button" class="hc-gmretry">現在補打一次</button>（不用重做其他題）。</div>';
+  }
+
+  var full='<div class="hc-dh">六個面向，你各在哪</div>'+
+    '<div class="hc-radarwrap">'+radarSVG(rows)+'<div class="hc-bars">'+bars+'</div></div>'+
+    gmNote+see+
+    '<div class="hc-dh">'+(allStrong?'要再往上，先從「'+esc(w1.zh)+'」下手':'你現在該練的三件事（衝著「'+esc(w1.zh)+'」）')+'</div>'+
+    '<ul class="hc-dir">'+dirs+'</ul>'+
+    '<div class="hc-bridge">🥁 這份健檢只能告訴你「哪裡弱」。真正難的是——弱在哪一個細節，那要有人看你打。教練課每週交作業，我親自看你的影片、逐拍給你回饋，累積批改超過 3,000 份。</div>';
+
+  var gate='<div class="hc-gate"><p class="lb">把完整報告寄給你</p>'+
+    '<p class="sb">留個 email，我把你的六軸完整報告寄過去——包含每一軸的詳細解讀，以及衝著你最弱那兩軸排好的練習方向，附我 YouTube 上對應的教學影片。</p>'+
+    '<form class="hc-emform" novalidate><div class="hc-emrow">'+
+    '<input class="hc-emin" type="email" name="email" required maxlength="120" placeholder="你的 Email" autocomplete="email" inputmode="email">'+
+    '<button type="submit" class="hc-embtn">解鎖完整報告</button></div><p class="hc-emmsg" hidden></p></form></div>';
+
+  panel.innerHTML='<span class="hc-rtag">'+esc(T.tag)+' · '+esc(T.zh)+'</span>'+
+    '<div class="hc-score"><span class="n">'+overall+'</span><span class="of">／ 100 分</span></div>'+
+    '<p class="hc-grade">≈ '+esc(G.g)+'</p><p class="hc-gnote">'+esc(G.note)+'</p>'+
+    '<div class="hc-lead">'+esc(T.lead)+'</div>'+
+    (unlocked?'':gate)+
+    '<div class="hc-locked"><div id="hcFull"'+(unlocked?'':' class="hc-blur" aria-hidden="true"')+'>'+full+'</div></div>'+
+    '<div class="hc-cta"><a class="jh-btn p" href="'+CTA.u+'" target="_blank" rel="noopener">'+esc(CTA.t)+'</a>'+
+    '<a class="jh-btn line" href="https://line.me/R/ti/p/@jdactw" target="_blank" rel="noopener">加 LINE 諮詢</a>'+
+    '<button type="button" class="jh-btn" id="hcWechat">複製微信號</button>'+
+    '<button type="button" class="hc-retry">↺ 重測一次</button></div><p class="hc-wxhint" id="hcWxHint" hidden></p>';
+
+  panel.querySelector('.hc-retry').addEventListener('click',reset);
+  // 補打實測關：回到那一站，打完直接跳回結果頁（gameReturnTo），其他題不用重做
+  var gmr=panel.querySelector('.hc-gmretry');
+  if(gmr)gmr.addEventListener('click',function(){gameShown=false;gameReturnTo=TOTAL;i=GAME_AT;render();});
+  var wb=panel.querySelector('#hcWechat');
+  wb.addEventListener('click',function(){
+    var id='jdac_drums';var hint=panel.querySelector('#hcWxHint');
+    var done=function(ok){if(!hint)return;hint.hidden=false;hint.innerHTML=(ok?'✓ 微信號 <b>'+id+'</b> 已複製！':'微信號：<b>'+id+'</b>（請長按複製）')+'　打開微信 → 搜尋加好友';};
+    var fb=function(){try{var ta=document.createElement('textarea');ta.value=id;ta.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(ta);ta.focus();ta.select();var ok=document.execCommand('copy');ta.remove();done(ok);}catch(e){done(false);}};
+    try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(id).then(function(){done(true);},function(){fb();});}else{fb();}}catch(e){fb();}
+  });
+
+  var f=panel.querySelector('.hc-emform');
+  if(f)f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var msg=f.querySelector('.hc-emmsg'),em2=(f.elements['email'].value||'').trim(),btn=f.querySelector('.hc-embtn');
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em2)){msg.hidden=false;msg.className='hc-emmsg err';msg.textContent='Email 格式好像怪怪的，再確認一下～';return;}
+    var old=btn.textContent;btn.disabled=true;btn.textContent='處理中…';msg.hidden=true;
+    var payload={email:em2,overall:overall,tier:T.tag,grade:G.g,
+      dims:rows.map(function(r){return r.k+':'+r.p;}).join(','),
+      weak:w1.k+','+w2.k,top:top.k,
+      answers:ans.map(function(a){return Array.isArray(a)?a.join('|'):(a==null?'-':a);}).join(','),
+      game:(gameResult?((gameResult.ceiling||'未過')+' · '+gameResult.passN+'/'+GAME_MAX+' 關'):(HASGAME?'跳過':'')),
+      years:qual.years||'',how:qual.how||'',goal:qual.goal||'',want:qual.want||'',source:SRC};
+    var unlock=function(sent){
+      unlocked=true;
+      var box=panel.querySelector('#hcFull');
+      if(box){box.classList.remove('hc-blur');box.removeAttribute('aria-hidden');}
+      var g=panel.querySelector('.hc-gate');
+      if(g){g.innerHTML='<p class="lb">✓ 完整報告已解鎖</p><p class="sb" style="margin:0">'+
+        (sent?'同一份也寄到你信箱了（沒看到就找一下垃圾郵件夾）。':'我們也會把它寄到你信箱，記得看一下垃圾郵件夾。')+'</p>';}
+      try{box.scrollIntoView({behavior:'smooth',block:'start'});}catch(e2){}
+    };
+    fetch('https://www.jacobdrumemory.com/_functions/healthLead',{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)})
+      .then(function(r){return r.json();})
+      .then(function(j){ if(j&&j.ok){unlock(!!j.sent);} else {unlock(false);} })
+      .catch(function(){ unlock(false); });   // 送不出去也要解鎖：報告是他做完 23 題換來的，不能因為後端掛掉就扣住
+  });
+}
+reset();
+}
+/* 加碼關卡「節奏視奏 · 公開試玩版」——測驗結果頁的第二段，真的可以玩。
+ *
+ * 引擎搬自學員練功房的 _wireRhythmLab／_rlRenderVex／_rlRenderHand／_rlExpand
+ * （jacobdrumemory-wix 的 dashboard element）。判定窗、防彈跳 60ms、節拍器音色、
+ * 過關四條件（準度≥95%＋黃點≤1＋紅點 0＋亂打 0）、綠黃紅門檻（150／300ms）全部照搬，
+ * 手感要跟學員版一致。改這裡前先去看那份原始碼。
+ * 公開版拿掉：Level 分頁（固定 BASIC）、50 題題庫（只取 5 題）、無盡挑戰、XP／討論區解鎖、
+ * 後端紀錄、過關打勾、BPM 滑桿（固定 90）。
+ *
+ * 🥁 記譜鐵則（Jacob 拍板，別改）：正拍單擊一律四分音符，不可「八分＋八分休止」；
+ *    反拍切分用 er_e；音符畫小鼓位置 c/5；符桿一律朝上。
+ * 🥁 VexFlow 符梁要「手動逐拍」——generateBeams 按 1/4 分組會分錯，別改回去。
+ *
+ * 🎯 校準藏在「預備拍」裡（學員版是明確的「打 8 下校準」＋滑桿，公開行銷頁不能叫人先暖身）：
+ *    綠點門檻只有 150ms，藍牙延遲 100~150ms 會讓每個人都變黃紅、遊戲等於壞的。
+ *    所以預備 4 拍也請他跟著打，那 4 下取中位數＝裝置延遲，正式那小節才計分。
+ *    音樂上也自然（就是數 1234 進來）。校準值跨題沿用、每題有好資料就更新。
+ *
+ * 放在 email 表單「之後」：主漏斗（型別→留 email）完全不受影響。
+ * 三頁共用這一份：獨立測驗頁靠 shared include 展開，兩支銷售頁由 build-jdac-salespage.py 讀檔併進去。
+ */
+var jdacRlAudio = null, jdacRlSilent = null, jdacRlVexPromise = null;
+
+/* opts（第三個參數，可省略——測驗頁與兩支銷售頁都不傳，行為完全不變）：
+ *   anchor   插入點選擇器，預設 '.qz-cta'
+ *   autoStart 跳過 teaser 直接進第一關（健檢把它當「題目」用，不是加碼關）
+ *   onDone   五關跑完、使用者按「繼續」時呼叫，帶 {passN, topI, ceiling, scores}
+ * 回傳 {stop}——呼叫端換頁前要 stop()，否則空白鍵監聽會殘留一次。 */
+function jdacQuizBonus(panel, DATA, opts) {
+  opts = opts || {};
+  var B = DATA && DATA.bonus;
+  if (!B || !B.qs || !B.qs.length) return null;
+  var anchor = panel.querySelector(opts.anchor || '.qz-cta');
+  if (!anchor) return null;
+
+  var BPM = 90, BEAT = 60000 / BPM, LEAD = 4, PASS = 95, DEBOUNCE = 60;
+  var INK = '#0c0c0c';
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  var wrap = document.createElement('div');
+  wrap.className = 'qb';
+  anchor.parentNode.insertBefore(wrap, anchor);
+
+  // ── 音符 token → 音符／拍點（照搬 _rlCells／_rlDur／_rlExpand）──
+  // 音型格子照搬 _rlCells（五關全部音型都要，因為公開版是一關取一題）
+  var CELLS = {
+    q: [['q', false]],
+    qr: [['qr', true]],
+    e2: [['8', false], ['8', false]],
+    er_e: [['8r', true], ['8', false]],
+    s4: [['16', false], ['16', false], ['16', false], ['16', false]],
+    e_s2: [['8', false], ['16', false], ['16', false]],
+    s2_e: [['16', false], ['16', false], ['8', false]],
+    s_e_s: [['16', false], ['8', false], ['16', false]],
+    t3: [['8t', false], ['8t', false], ['8t', false]]
+  };
+  var DUR = { q: 1, qr: 1, '8': 0.5, '8r': 0.5, '16': 0.25, '16r': 0.25, '8t': 1 / 3 };
+  function expand(tokens) {
+    var notes = [], onsets = [], beat = 0;
+    (tokens || ['q', 'q', 'q', 'q']).forEach(function (tk) {
+      (CELLS[tk] || CELLS.q).forEach(function (pair) {
+        notes.push({ dur: pair[0], rest: pair[1] });
+        if (!pair[1]) onsets.push(beat);
+        beat += DUR[pair[0]];
+      });
+    });
+    return { notes: notes, onsets: onsets };
+  }
+
+  // ── 狀態 ──
+  var qi = 0, cur = null, hits = [], wild = 0, running = false, calibrating = false;
+  var timers = [], startT = 0, lastTap = 0, offset = 0, calibTaps = [], keyHandler = null;
+  var scores = [];
+
+  function stopAll() {
+    timers.forEach(function (t) { clearTimeout(t); });
+    timers = []; running = false; calibrating = false;
+    if (keyHandler) { document.removeEventListener('keydown', keyHandler); keyHandler = null; }
+  }
+  // 測驗「重測一次」會重畫整個 panel → wrap 被移除，但排好的 setTimeout 還會繼續響
+  function alive() { if (wrap.isConnected) return true; stopAll(); return false; }
+
+  function unlock() {
+    try {
+      if (!jdacRlAudio) jdacRlAudio = new (window.AudioContext || window.webkitAudioContext)();
+      if (jdacRlAudio.state === 'suspended' && jdacRlAudio.resume) jdacRlAudio.resume();
+    } catch (e) { /* ignore */ }
+    try {
+      if (!jdacRlSilent) {
+        var sr = 8000, n = 800, buf = new ArrayBuffer(44 + n * 2), dv = new DataView(buf);
+        var wr = function (o, s) { for (var i = 0; i < s.length; i++) dv.setUint8(o + i, s.charCodeAt(i)); };
+        wr(0, 'RIFF'); dv.setUint32(4, 36 + n * 2, true); wr(8, 'WAVE');
+        wr(12, 'fmt '); dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 1, true);
+        dv.setUint32(24, sr, true); dv.setUint32(28, sr * 2, true); dv.setUint16(32, 2, true); dv.setUint16(34, 16, true);
+        wr(36, 'data'); dv.setUint32(40, n * 2, true);
+        for (var i2 = 0; i2 < n; i2++) dv.setInt16(44 + i2 * 2, Math.round(Math.sin(i2 / sr * 2 * Math.PI * 40) * 2), true);
+        var el = document.createElement('audio');
+        el.setAttribute('playsinline', ''); el.setAttribute('webkit-playsinline', '');
+        el.loop = true; el.preload = 'auto'; el.volume = 0.02;
+        el.src = URL.createObjectURL(new Blob([buf], { type: 'audio/wav' }));
+        jdacRlSilent = el;
+      }
+      var p = jdacRlSilent.play(); if (p && p.catch) p.catch(function () {});
+    } catch (e) { /* ignore */ }
+  }
+
+  // 節拍器音色照搬學員版，換了手感就不一樣
+  function playClick(accent) {
+    try {
+      if (!jdacRlAudio) jdacRlAudio = new (window.AudioContext || window.webkitAudioContext)();
+      var ctx = jdacRlAudio;
+      if (ctx.state === 'suspended' && ctx.resume) ctx.resume();
+      var o = ctx.createOscillator(), g = ctx.createGain();
+      o.frequency.value = accent ? 1300 : 900;
+      g.gain.setValueAtTime(0.0001, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(accent ? 0.9 : 0.7, ctx.currentTime + 0.004);
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.07);
+      o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + 0.09);
+    } catch (e) { /* ignore */ }
+  }
+
+  // ── VexFlow：動態載入三個 CDN，載不到就退手繪（照搬 _rlEnsureVexflow）──
+  function VF() { return window.Vex && window.Vex.Flow ? window.Vex.Flow : null; }
+  function ensureVexflow() {
+    if (VF()) return Promise.resolve(true);
+    if (jdacRlVexPromise) return jdacRlVexPromise;
+    var urls = [
+      'https://cdnjs.cloudflare.com/ajax/libs/vexflow/3.0.9/vexflow-min.js',
+      'https://cdn.jsdelivr.net/npm/vexflow@3.0.9/releases/vexflow-min.js',
+      'https://unpkg.com/vexflow@3.0.9/releases/vexflow-min.js'
+    ];
+    jdacRlVexPromise = new Promise(function (resolve) {
+      var idx = 0;
+      var tryNext = function () {
+        if (VF()) return resolve(true);
+        if (idx >= urls.length) return resolve(false);
+        var s = document.createElement('script');
+        s.src = urls[idx++]; s.async = true;
+        var to = setTimeout(function () { s.onload = s.onerror = null; s.remove(); tryNext(); }, 6000);
+        s.onload = function () { clearTimeout(to); if (VF()) resolve(true); else tryNext(); };
+        s.onerror = function () { clearTimeout(to); s.remove(); tryNext(); };
+        document.head.appendChild(s);
+      };
+      tryNext();
+    });
+    return jdacRlVexPromise;
+  }
+
+  function marksOf() {
+    var out = [];
+    hits.forEach(function (v, i) {
+      if (v === undefined) return;
+      var a = Math.abs(v);
+      out.push({ idx: i, q: a < 150 ? 'good' : a < 300 ? 'ok' : 'bad' });
+    });
+    return out;
+  }
+
+  // 正規譜（照搬 _rlRenderVex；符梁手動逐拍）
+  function renderVex(host, V, src, marks) {
+    host.innerHTML = '';
+    var W = Math.max(320, Math.min(660, host.clientWidth || 600));
+    var renderer = new V.Renderer(host, V.Renderer.Backends.SVG);
+    renderer.resize(W, 120);
+    var ctx = renderer.getContext();
+    var stave = new V.Stave(4, 12, W - 12);
+    stave.addClef('percussion').addTimeSignature('4/4');
+    stave.setContext(ctx).draw();
+    // 8t（三連音）在 VexFlow 畫成 8 分再包 Tuplet；音符畫小鼓位置 c/5、符桿一律朝上
+    var notes = src.map(function (n) {
+      return new V.StaveNote({ clef: 'percussion', keys: ['c/5'], duration: n.dur === '8t' ? '8' : n.dur, stem_direction: 1 });
+    });
+    var voice = new V.Voice({ num_beats: 4, beat_value: 4 }).setStrict(false).addTickables(notes);
+    // 符梁「手動逐拍」——generateBeams 按 1/4 分組，遇三連音的假 8 分 tick 會分錯組，別改回去
+    var beams = [], tuplets = [], bt = 0, gStart = 0;
+    var flushBeat = function (from, to) {
+      var idxs = [];
+      for (var i = from; i < to; i++) { var n = src[i]; if (!n.rest && n.dur !== 'q') idxs.push(i); }
+      if (idxs.length >= 2) {
+        try { beams.push(new V.Beam(idxs.map(function (i) { return notes[i]; }))); } catch (e) { /* ignore */ }
+      }
+      if (to - from === 3 && src[from].dur === '8t') {
+        try { tuplets.push(new V.Tuplet(notes.slice(from, to), { num_notes: 3, notes_occupied: 2 })); } catch (e) { /* ignore */ }
+      }
+    };
+    src.forEach(function (n, i) {
+      if (i > gStart && Math.abs(bt - Math.round(bt)) < 1e-6) { flushBeat(gStart, i); gStart = i; }
+      bt += DUR[n.dur];
+    });
+    flushBeat(gStart, src.length);
+    new V.Formatter().joinVoices([voice]).format([voice], W - 70);
+    voice.draw(ctx, stave);
+    beams.forEach(function (b) { b.setContext(ctx).draw(); });
+    tuplets.forEach(function (t) { try { t.setContext(ctx).draw(); } catch (e) { /* ignore */ } });
+    var svg = host.querySelector('svg');
+    if (svg && marks && marks.length) {
+      var oi = -1;
+      notes.forEach(function (sn, i) {
+        if (src[i].rest) return;
+        oi++;
+        var m = null;
+        for (var k = 0; k < marks.length; k++) if (marks[k].idx === oi) { m = marks[k]; break; }
+        if (!m) return;
+        var x = 0; try { x = sn.getAbsoluteX(); } catch (e) { x = 0; }
+        if (!(x > 0)) return;
+        var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        c.setAttribute('cx', x); c.setAttribute('cy', 8); c.setAttribute('r', 4.5);
+        c.setAttribute('fill', m.q === 'good' ? '#1d9e75' : m.q === 'ok' ? '#f0a020' : '#c0392b');
+        svg.appendChild(c);
+      });
+    }
+  }
+
+  // 手繪保底（照搬 _rlRenderHand）：CDN 被擋或 VexFlow 出錯時還是要看得到譜
+  function renderHand(host, src, marks) {
+    var NS = 'http://www.w3.org/2000/svg';
+    host.innerHTML = '';
+    var svg = document.createElementNS(NS, 'svg');
+    var VW = 640, Y = 62, X0 = 60, X1 = 612, span = X1 - X0;
+    svg.setAttribute('viewBox', '0 0 ' + VW + ' 120');
+    svg.setAttribute('width', '100%'); svg.setAttribute('height', '120');
+    var bx = function (beat) { return X0 + (beat / 4) * span; };
+    var mk = function (tag, attrs) {
+      var e = document.createElementNS(NS, tag);
+      Object.keys(attrs).forEach(function (k) { e.setAttribute(k, attrs[k]); });
+      svg.appendChild(e); return e;
+    };
+    mk('line', { x1: X0 - 12, x2: X1 + 8, y1: Y, y2: Y, stroke: INK, 'stroke-width': 1.5 });
+    var ts = mk('text', { x: X0 - 44, y: Y + 5, 'font-family': 'serif', 'font-size': 26, 'font-weight': 700, fill: INK }); ts.textContent = '4';
+    var ts2 = mk('text', { x: X0 - 44, y: Y + 24, 'font-family': 'serif', 'font-size': 26, 'font-weight': 700, fill: INK }); ts2.textContent = '4';
+    var beat = 0, group = [];
+    var flushGroup = function () {
+      if (!group.length) return;
+      if (group.length === 1) {
+        // 單一音符畫符尾：十六分兩條、八分／三連音一條
+        var g = group[0];
+        mk('path', { d: 'M' + (g.x + 6.5) + ',' + (Y - 38) + ' q7,3 6,12', fill: 'none', stroke: INK, 'stroke-width': 2.4, 'stroke-linecap': 'round' });
+        if (g.dur === '16') mk('path', { d: 'M' + (g.x + 6.5) + ',' + (Y - 31) + ' q7,3 6,12', fill: 'none', stroke: INK, 'stroke-width': 2.4, 'stroke-linecap': 'round' });
+      } else {
+        // 多音符畫符梁：全十六分加第二條；整拍都是三連音再標「3」
+        var x1 = group[0].x + 6.5, x2 = group[group.length - 1].x + 6.5;
+        mk('rect', { x: x1, y: Y - 41, width: x2 - x1, height: 4.5, fill: INK });
+        if (group.every(function (g2) { return g2.dur === '16'; })) mk('rect', { x: x1, y: Y - 33, width: x2 - x1, height: 4.5, fill: INK });
+        if (group.every(function (g2) { return g2.dur === '8t'; })) {
+          var tt = mk('text', { x: (x1 + x2) / 2, y: Y - 47, 'text-anchor': 'middle', 'font-size': 13, 'font-style': 'italic', 'font-weight': 700, fill: INK });
+          tt.textContent = '3';
+        }
+      }
+      group = [];
+    };
+    src.forEach(function (n) {
+      var x = bx(beat);
+      if (Math.abs(beat - Math.round(beat)) < 0.001) flushGroup();
+      if (n.rest) {
+        flushGroup();
+        if (n.dur === 'qr') {
+          mk('path', { d: 'M' + (x - 5) + ',' + (Y - 13) + ' L' + (x + 4) + ',' + (Y - 5) + ' L' + (x - 4) + ',' + (Y + 3) + ' L' + (x + 4) + ',' + (Y + 11) + ' L' + (x - 5) + ',' + (Y + 16), fill: 'none', stroke: INK, 'stroke-width': 3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
+        } else {
+          mk('circle', { cx: x, cy: Y - 4, r: 3.2, fill: INK });
+          mk('path', { d: 'M' + (x + 2) + ',' + (Y - 6) + ' q6,8 -3,18', fill: 'none', stroke: INK, 'stroke-width': 2.4, 'stroke-linecap': 'round' });
+        }
+      } else {
+        mk('ellipse', { cx: x, cy: Y, rx: 6.8, ry: 5.3, fill: INK });
+        mk('line', { x1: x + 6.5, x2: x + 6.5, y1: Y, y2: Y - 40, stroke: INK, 'stroke-width': 1.8 });
+        if (n.dur === '8' || n.dur === '16' || n.dur === '8t') group.push({ x: x, dur: n.dur }); else flushGroup();
+      }
+      beat += DUR[n.dur];
+    });
+    flushGroup();
+    mk('line', { x1: X1 + 8, x2: X1 + 8, y1: Y - 22, y2: Y + 22, stroke: INK, 'stroke-width': 2 });
+    if (marks && marks.length) {
+      var bt2 = 0, oi = -1;
+      src.forEach(function (n) {
+        if (!n.rest) {
+          oi++;
+          for (var k = 0; k < marks.length; k++) {
+            if (marks[k].idx === oi) {
+              mk('circle', { cx: bx(bt2), cy: 10, r: 4.5, fill: marks[k].q === 'good' ? '#1d9e75' : marks[k].q === 'ok' ? '#f0a020' : '#c0392b' });
+              break;
+            }
+          }
+        }
+        bt2 += DUR[n.dur];
+      });
+    }
+    host.appendChild(svg);
+  }
+
+  function renderStaff(marks) {
+    var host = wrap.querySelector('#qbStaff');
+    if (!host || !cur) return;
+    var V = VF();
+    try {
+      if (V) renderVex(host, V, cur.notes, marks); else renderHand(host, cur.notes, marks);
+    } catch (e) {
+      try { renderHand(host, cur.notes, marks); } catch (e2) { /* ignore */ }
+    }
+  }
+
+  // ── 打點（照搬 registerTap 的一般模式）──
+  function tap() {
+    var now = performance.now();
+    if (calibrating) {
+      if (now - lastTap < DEBOUNCE) return;
+      lastTap = now; calibTaps.push(now);
+      flashPulse(); return;
+    }
+    if (!running) return;
+    if (now - lastTap < DEBOUNCE) return;
+    lastTap = now;
+    flashPulse();
+    var onsets = cur.onsets, bestIdx = -1, bestDelta = Infinity;
+    for (var i = 0; i < onsets.length; i++) {
+      if (hits[i] !== undefined) continue;
+      var exp = startT + (LEAD + onsets[i]) * BEAT + offset;
+      var d = now - exp;
+      if (Math.abs(d) < Math.abs(bestDelta)) { bestDelta = d; bestIdx = i; }
+    }
+    // 容忍窗＝半拍；搆不到任何拍點的多餘打點記「亂打」（前導拍不罰）
+    if (bestIdx === -1 || Math.abs(bestDelta) > BEAT * 0.5) {
+      if (now - startT > LEAD * BEAT) wild++;
+      return;
+    }
+    hits[bestIdx] = bestDelta;
+    renderStaff(marksOf());
+  }
+
+  function flashPulse() {
+    var p = wrap.querySelector('#qbPulse');
+    if (p) { p.classList.add('lit'); setTimeout(function () { p.classList.remove('lit'); }, 90); }
+  }
+  function setStatus(t) { var e = wrap.querySelector('#qbStatus'); if (e) e.textContent = t; }
+
+  function run() {
+    stopAll(); unlock();
+    hits = []; wild = 0; calibTaps = []; calibrating = true; running = false;
+    renderStaff([]);
+    startT = performance.now();
+    var btn = wrap.querySelector('#qbStart');
+    if (btn) { btn.disabled = true; btn.textContent = '進行中…'; }
+    var clicks = LEAD + 4;
+    for (var c = 0; c < clicks; c++) {
+      (function (c2) {
+        timers.push(setTimeout(function () {
+          if (!alive()) return;
+          playClick(c2 % 4 === 0);
+          if (c2 < LEAD) setStatus('預備 ' + (c2 + 1) + '——跟著打（這 4 下用來校準你的裝置延遲）');
+          else if (c2 === LEAD) setStatus('🥁 照譜打！');
+        }, c2 * BEAT));
+      })(c);
+    }
+    // 前導拍結束：用那 4 下算出裝置延遲，正式小節才開始計分
+    timers.push(setTimeout(function () {
+      if (!alive()) return;
+      calibrating = false; running = true;
+      var deltas = calibTaps.map(function (tp) {
+        var k = Math.round((tp - startT) / BEAT);
+        return tp - (startT + k * BEAT);
+      }).filter(function (d) { return Math.abs(d) < BEAT * 0.5; });
+      if (deltas.length >= 3) {
+        deltas.sort(function (a, b) { return a - b; });
+        offset = Math.max(-50, Math.min(300, Math.round(deltas[Math.floor(deltas.length / 2)])));
+      }
+    }, LEAD * BEAT - 60));
+    timers.push(setTimeout(function () {
+      if (!alive()) return;
+      running = false;
+      score();
+    }, clicks * BEAT + 250));
+  }
+
+  function score() {
+    var recorded = hits.filter(function (h) { return h !== undefined; });
+    var total = cur.onsets.length;
+    var acc = total ? Math.round(recorded.length / total * 100) : 0;
+    var mk = marksOf();
+    var okN = mk.filter(function (m) { return m.q === 'ok'; }).length;
+    var badN = mk.filter(function (m) { return m.q === 'bad'; }).length;
+    // 過關四條件照搬學員版：準度≥95%＋黃點≤1＋紅點 0＋亂打 0
+    var passed = !!(total && acc >= PASS && okN <= 1 && badN === 0 && wild === 0);
+    scores.push({ acc: acc, passed: passed, good: mk.filter(function (m) { return m.q === 'good'; }).length, ok: okN, bad: badN, wild: wild });
+    renderStaff(mk);
+    var why = !recorded.length ? '這題沒打到'
+      : wild > 0 ? '多打了 ' + wild + ' 下沒有的拍點'
+      : badN > 0 ? badN + ' 個紅點（偏差太大）'
+      : okN > 1 ? okN + ' 個黃點（最多能有 1 個）'
+      : '準度 ' + acc + '%（要 ' + PASS + '%）';
+    setStatus(passed ? '✓ 過了（' + acc + '%・' + (okN ? '1 個黃點' : '全綠') + '）' : '沒過：' + why);
+    var btn = wrap.querySelector('#qbStart');
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = (qi + 1 >= B.qs.length) ? '看結果 →' : '下一題 →';
+      btn.setAttribute('data-next', '1');
+    }
+  }
+
+  // ── 畫面 ──
+  function board() {
+    stopAll();
+    var Q = B.qs[qi];
+    cur = expand(Q.tk);
+    hits = []; wild = 0;
+    wrap.innerHTML =
+      '<div class="qb-game">' +
+      '<p class="qb-gtitle">🎼 節奏視奏 <span>第 ' + (qi + 1) + ' / ' + B.qs.length + ' 關・<b class="qb-lv">' + esc(Q.lv) + '</b>（' + esc(Q.hint) + '）・' + BPM + ' bpm</span></p>' +
+      '<p class="qb-ghow">' + esc(B.how) + '</p>' +
+      '<div class="qb-staff" id="qbStaff"></div>' +
+      '<div class="qb-acts"><button type="button" class="qb-start" id="qbStart">▶ 開始</button></div>' +
+      '<p class="qb-status" id="qbStatus">' + esc(B.hint) + '</p>' +
+      '<div class="qb-taprow">' +
+      '<button type="button" class="qb-tapbtn" id="qbTap">按這裡打點</button>' +
+      '<span class="qb-tiphint">或按 <b>空白鍵</b><span class="qb-pulse" id="qbPulse"></span></span>' +
+      '</div>' +
+      '</div>';
+    renderStaff([]);
+    ensureVexflow().then(function (ok) { if (alive() && ok && cur) renderStaff(marksOf()); });
+    wrap.querySelector('#qbStart').addEventListener('click', function (e) {
+      unlock();
+      if (e.currentTarget.getAttribute('data-next')) {
+        qi++;
+        if (qi >= B.qs.length) return summary();
+        return board();
+      }
+      run();
+    });
+    // 打點吃 pointerdown 不吃 click：click 在觸控要等 touchend，而且抖動大。
+    // 綠點門檻只有 150ms，預備 4 拍的中位數只吸收得掉「固定」延遲，吸收不掉抖動。
+    // pointerdown 在滑鼠上也比較對——鼓手是「打下去」的那一刻算數，不是放開。
+    var padEl = wrap.querySelector('#qbTap');
+    if (window.PointerEvent) {
+      padEl.style.touchAction = 'manipulation';
+      padEl.addEventListener('pointerdown', function (e) { e.preventDefault(); unlock(); tap(); });
+    } else {
+      padEl.addEventListener('click', function () { unlock(); tap(); });
+    }
+    keyHandler = function (ev) {
+      if (!wrap.isConnected) { stopAll(); return; }
+      if (ev.code === 'Space') { ev.preventDefault(); unlock(); tap(); }
+    };
+    document.addEventListener('keydown', keyHandler);
+    try { wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (e) {}
+  }
+
+  function summary() {
+    stopAll();
+    var passN = scores.filter(function (s) { return s.passed; }).length;
+    var g = scores.reduce(function (a, s) { return a + s.good; }, 0);
+    var y = scores.reduce(function (a, s) { return a + s.ok; }, 0);
+    var rd = scores.reduce(function (a, s) { return a + s.bad; }, 0);
+    // 五題各一關，所以最有意義的讀數是「天花板」＝過關的最高一級，不是過幾題
+    var topI = -1;
+    scores.forEach(function (s, i) { if (s.passed) topI = i; });
+    var ceiling = topI >= 0 ? B.qs[topI].lv : null;
+    var nextI = topI + 1;
+    var next = nextI < B.qs.length ? B.qs[nextI].lv : null;
+    // 代號要寫成「可挑戰 XXX」——那幾個字在練功房是難度名稱不是成績，單掛會被誤讀
+    var tier = !ceiling
+      ? { tag: '先練穩 BASIC', name: '先從讀譜開始', note: '很正常。鼓譜是所有樂器裡最好讀的——不用管音高，只要管什麼時候打。從全四分音符開始，一週就有感覺。' }
+      : !next
+      ? { tag: '五關全過 🏆', name: '視奏是你的武器', note: '連 FUSION 都拿下了。你缺的不是讀譜，是有人給你更難的東西練——練功房每一關有 50 題，還有把 50 小節連成一條的無盡挑戰。' }
+      : { tag: '可挑戰 ' + next, name: '天花板在 ' + ceiling, note: ceiling === 'BASIC' ? '四分八分沒問題，十六分一多就開始亂——這是最多人卡的第一道牆，而且是純熟練度問題，練得起來。'
+          : ceiling === 'SIXTEEN' ? '十六分讀得動了，卡在切分。切分不是手的問題，是你數拍的方式還沒換過來——這個講一次就會通。'
+          : ceiling === 'SYNCO' ? '切分過了，三連音把你擋下來。三連音難在「一拍塞三下」跟你原本的二分法打架，要另外建一套感覺。'
+          : '前面都過了，倒在綜合關——單一種音型你都會，混在一起就亂。這正是視奏最後一哩路。' };
+
+    var ladder = B.qs.map(function (q, i) {
+      var s = scores[i] || {};
+      return '<li class="qb-lrow' + (s.passed ? ' ok' : '') + '">' +
+        '<span class="qb-lmark">' + (s.passed ? '✓' : '✗') + '</span>' +
+        '<span class="qb-lname">' + esc(q.lv) + '</span>' +
+        '<span class="qb-lhint">' + esc(q.hint) + '</span>' +
+        '<span class="qb-lacc">' + (s.acc == null ? '–' : s.acc + '%') + '</span></li>';
+    }).join('');
+
+    wrap.innerHTML =
+      '<div class="qb-card">' +
+      '<span class="qb-tag">' + esc(B.tag) + '</span>' +
+      '<p class="qb-kicker">你的視奏天花板</p>' +
+      '<p class="qb-ms">' + esc(ceiling || 'BASIC') + (ceiling ? '' : '<em>未過</em>') + '</p>' +
+      '<ul class="qb-ladder">' + ladder + '</ul>' +
+      '<div class="qb-metrics">' +
+      '<span><b>' + passN + '/' + B.qs.length + '</b> 關過關</span>' +
+      '<span><b class="qb-g">' + g + '</b>綠 <b class="qb-y">' + y + '</b>黃 <b class="qb-r">' + rd + '</b>紅</span>' +
+      '</div>' +
+      '<p class="qb-tier"><span class="qb-tierlv">' + esc(tier.tag) + '</span>' + esc(tier.name) + '</p>' +
+      '<p class="qb-verdict">' + esc(tier.note) + '</p>' +
+      '</div>' +
+      '<p class="qb-cal">🎯 每題的「預備 4 拍」都拿去量了你的裝置延遲並自動補償（藍牙耳機通常 100ms 以上）——所以綠黃紅是你自己的，不是你耳機的。</p>' +
+      (B.note ? '<p class="qb-note">' + esc(B.note) + '</p>' : '') +
+      '<div class="qb-endrow">' +
+      '<button type="button" class="qb-again">' + (opts.onDone ? '↺ 重打一次' : '↺ 再玩一次') + '</button>' +
+      (opts.onDone ? '<button type="button" class="qb-cont">繼續健檢 →</button>' : '') +
+      '</div>';
+    wrap.querySelector('.qb-again').addEventListener('click', function () {
+      qi = 0; scores = []; board();
+    });
+    var contBtn = wrap.querySelector('.qb-cont');
+    if (contBtn) contBtn.addEventListener('click', function () {
+      stopAll();
+      opts.onDone({ passN: passN, topI: topI, ceiling: ceiling, scores: scores.slice() });
+    });
+  }
+
+  function teaser() {
+    stopAll();
+    wrap.innerHTML =
+      '<div class="qb-open">' +
+      '<button type="button" class="qb-openbtn">' + esc(B.cta) + '</button>' +
+      '<p class="qb-hint">' + esc(B.teaser) + '</p>' +
+      '</div>';
+    wrap.querySelector('.qb-openbtn').addEventListener('click', function () { qi = 0; scores = []; board(); });
+  }
+
+  if (opts.autoStart) { qi = 0; scores = []; board(); } else { teaser(); }
+  return { stop: stopAll };
+}
+jdacHealthInit(document);
+</script>
+</body>
+</html>
