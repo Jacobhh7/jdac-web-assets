@@ -238,7 +238,13 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
       + (d.replyText ? '<p class="rp-text">' + esc(d.replyText) + '</p>' : '')
       + '<p class="rp-when">' + (when ? esc(when) + ' 回覆・' : '')
       + '這段影片只有你看得到。有問題直接回信給我，我還在。</p>'
+      // TEST 帳號＝Jacob 自己在預覽，給他一個回到上傳表單的出口，不然健康檢查就做不了了
+      + (d.isTest ? '<p style="margin:14px 0 0"><button class="jh-btn" id="again" style="width:auto;padding:9px 16px;font-size:13px">🔁 回上傳表單（測試帳號限定）</button></p>' : '')
     );
+    if (d.isTest) {
+      var again = stage.querySelector('#again');
+      if (again) again.addEventListener('click', function () { render(d); });
+    }
   }
 
   function done(already) {
