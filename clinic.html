@@ -25,6 +25,7 @@ h1 em{font-style:italic;color:#2563ff}
 .steps b{border-bottom:2px solid #fa5a1e}
 .note{font-size:14px;line-height:1.9;color:#2c2c28;background:#f7f5ec;border-left:4px solid #fa5a1e;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0 0}
 .opt2{display:grid;gap:14px;margin:0 0 4px}
+@media(min-width:620px){.opt2{grid-template-columns:1fr 1fr;gap:16px}}
 .opt2c{border:1.5px solid #0c0c0c;border-radius:14px;padding:16px 18px 14px;background:#fff;box-shadow:3px 3px 0 #0c0c0c}
 .opt2t{display:inline-block;font-family:"Archivo",sans-serif;font-weight:800;font-size:11px;letter-spacing:.14em;background:#2563ff;color:#fff;padding:4px 11px;border-radius:99px}
 .opt2c.b .opt2t{background:#fa5a1e}
@@ -154,7 +155,7 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
       + '<div style="height:26px"></div>'
       + '<div class="dh">傳上來</div>'
       + '<div class="fld"><label class="fl" for="f">你的影片</label>'
-      + '<p class="hint">手機直接選相簿裡的檔就好。上限 ' + MAX_MB + 'MB（30 秒的影片遠遠不會超過）。</p>'
+      + '<p class="hint">手機直接選相簿裡的檔。上限 ' + MAX_MB + 'MB。</p>'
       + '<input type="file" id="f" accept="video/*,audio/*"></div>'
       + '<div class="fld"><label class="fl" for="n">你最想問我什麼？</label>'
       + '<p class="hint">寫一兩句就好——你自己覺得哪裡怪、或想知道什麼。這會決定我回覆時先講哪一件事。</p>'
