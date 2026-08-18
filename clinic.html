@@ -79,6 +79,9 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
   }
   window.addEventListener('load', reportHeight);
   window.addEventListener('resize', reportHeight);
+  // 母頁（Wix masterPage）可能比 iframe 晚掛上 onMessage，早送的那則會掉。
+  // 開頭幾秒多送幾次，任何一則接到就會調好高度；都沒接到就維持編輯器設的固定高度。
+  [0, 300, 800, 1500, 2500, 4000].forEach(function (ms) { setTimeout(reportHeight, ms); });
 
   function panel(html) {
     stage.innerHTML = '<div class="card">' + html + '</div>';
