@@ -4,9 +4,9 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>鼓手能力健檢｜JDAC 爵士鼓學校</title>
-<meta name="description" content="23 題測出你在時間感、協調獨立、讀譜視奏、耳朵、風格廣度、練習系統六個面向各在哪——並對照 Rockschool 分級，告訴你最該補的兩塊。">
+<meta name="description" content="27 題測出你在時間感、協調獨立、讀譜視奏、耳朵、風格廣度、練習系統六個面向各在哪——並對照 Rockschool 分級，告訴你最該補的兩塊。">
 <meta property="og:title" content="鼓手能力健檢｜JDAC 爵士鼓學校">
-<meta property="og:description" content="六個面向、23 題，看出你的雷達圖長什麼形狀——以及你最該補的是哪兩塊。">
+<meta property="og:description" content="六個面向、27 題，看出你的雷達圖長什麼形狀——以及你最該補的是哪兩塊。">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,800;1,800;1,900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
 <style>
 html,body{margin:0;background:#f4f3ee}
@@ -91,12 +91,17 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
 .hc-emmsg.ok{color:#1f7a3d}.hc-emmsg.err{color:#c0392b}
 .hc-locked{position:relative}
 .hc-locked .hc-blur{filter:blur(6px);opacity:.5;pointer-events:none;user-select:none}
+.hc-vc{border-top:1px dashed #d8d5cc;padding-top:20px;margin-top:22px}
+.hc-vc .lb{font-weight:900;font-size:16.5px;color:#0c0c0c;margin:0 0 5px;line-height:1.5}
+.hc-vc .sb{font-size:13.5px;color:#55524a;margin:0 0 14px;line-height:1.75}
+.jh-btn.vc{background:#fa5a1e;color:#fff;border-color:#fa5a1e}
+.jh-btn.vc:hover{background:#e04d14}
 .hc-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:22px}
 .hc-retry{background:none;border:none;color:#8a8579;font-size:13px;font-weight:600;cursor:pointer;font-family:"Noto Sans TC",sans-serif;text-decoration:underline;padding:6px 0}
 .hc-wxhint{font-size:13px;color:#3a3a36;margin:10px 0 0;line-height:1.7}
 @media(max-width:620px){.hc-emrow{flex-direction:column}.hc-embtn{width:100%}
   .hc-cta{flex-direction:column;align-items:stretch;gap:10px}
-  .hc-cta .jh-btn{width:100%;justify-content:center;padding:15px 20px}
+  .hc-cta .jh-btn,.hc-vc .jh-btn{width:100%;justify-content:center;padding:15px 20px}
   .hc-retry{width:100%;text-align:center}
   .hc-next{width:100%;margin-left:0}
   .hc-nav{flex-direction:column-reverse;align-items:stretch}}
@@ -1259,12 +1264,14 @@ function result(){
     '<input class="hc-emin" type="email" name="email" required maxlength="120" placeholder="你的 Email" autocomplete="email" inputmode="email">'+
     '<button type="submit" class="hc-embtn">解鎖完整報告</button></div><p class="hc-emmsg" hidden></p></form></div>';
 
+  var vc='<div class="hc-vc"'+(unlocked?'':' hidden')+'>'+'<p class="lb">最弱的那一塊，用講的看不出來</p>'+'<p class="sb">你「'+esc(w1.zh)+'」的分數最低——但分數只告訴你哪一軸有問題，看不出你到底是哪個動作做錯了。拍一段 30 秒傳給我，我逐拍看完，把問題在哪、怎麼改，錄一段回給你。</p>'+'<a class="jh-btn vc" href="https://www.jacobdrumemory.com/videoclinic?src=health" target="_blank" rel="noopener">傳一段影片給 Jacob →</a>'+'</div>';
+
   panel.innerHTML='<span class="hc-rtag">'+esc(T.tag)+' · '+esc(T.zh)+'</span>'+
     '<div class="hc-score"><span class="n">'+overall+'</span><span class="of">／ 100 分</span></div>'+
     '<p class="hc-grade">≈ '+esc(G.g)+'</p><p class="hc-gnote">'+esc(G.note)+'</p>'+
     '<div class="hc-lead">'+esc(T.lead)+'</div>'+
     (unlocked?'':gate)+
-    '<div class="hc-locked"><div id="hcFull"'+(unlocked?'':' class="hc-blur" aria-hidden="true"')+'>'+full+'</div></div>'+
+    '<div class="hc-locked"><div id="hcFull"'+(unlocked?'':' class="hc-blur" aria-hidden="true"')+'>'+full+'</div></div>'+vc+
     '<div class="hc-cta"><a class="jh-btn p" href="'+CTA.u+'" target="_blank" rel="noopener">'+esc(CTA.t)+'</a>'+
     '<a class="jh-btn line" href="https://line.me/R/ti/p/@jdactw" target="_blank" rel="noopener">加 LINE 諮詢</a>'+
     '<button type="button" class="jh-btn" id="hcWechat">複製微信號</button>'+
@@ -1297,6 +1304,7 @@ function result(){
       years:qual.years||'',how:qual.how||'',goal:qual.goal||'',want:qual.want||'',source:SRC};
     var unlock=function(sent){
       unlocked=true;
+      var _vc=panel.querySelector('.hc-vc'); if(_vc) _vc.removeAttribute('hidden');
       var box=panel.querySelector('#hcFull');
       if(box){box.classList.remove('hc-blur');box.removeAttribute('aria-hidden');}
       var g=panel.querySelector('.hc-gate');

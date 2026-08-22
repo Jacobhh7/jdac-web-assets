@@ -44,6 +44,11 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
 .qz-dir li{font-size:14.5px;line-height:1.85;padding:10px 0 10px 40px;position:relative;border-bottom:1px dashed rgba(12,12,12,.12);color:#3a3a36}
 .qz-dir li::before{content:attr(data-n);position:absolute;left:0;top:9px;width:26px;height:26px;background:#2563ff;color:#fff;border-radius:50%;font-family:"Archivo",sans-serif;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
 .qz-bridge{font-size:14px;line-height:1.9;color:#1c3a7a;background:#e8efff;border-radius:10px;padding:13px 16px;margin:0 0 22px}
+.qz-hc{border-top:1px dashed #d8d5cc;padding-top:20px;margin-top:20px}
+.qz-hc .lb{font-weight:900;font-size:16.5px;color:#0c0c0c;margin:0 0 5px;line-height:1.5}
+.qz-hc .sb{font-size:13.5px;color:#55524a;margin:0 0 14px;line-height:1.75}
+.jh-btn.hc{background:#fa5a1e;color:#fff;border-color:#fa5a1e}
+.jh-btn.hc:hover{background:#e04d14}
 .qz-em{border-top:1px dashed #d8d5cc;padding-top:20px}
 .qz-em .lb{font-weight:900;font-size:16.5px;color:#0c0c0c;margin:0 0 5px;line-height:1.5}
 .qz-em .sb{font-size:13.5px;color:#55524a;margin:0 0 14px;line-height:1.75}
@@ -61,7 +66,7 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
 .qz-wxhint{font-size:13px;color:#3a3a36;margin:10px 0 0;line-height:1.7}
 @media(max-width:620px){.qz-emrow{flex-direction:column}.qz-embtn{width:100%}
   .qz-cta{flex-direction:column;align-items:stretch;gap:10px}
-  .qz-cta .jh-btn{width:100%;justify-content:center;padding:15px 20px}
+  .qz-cta .jh-btn,.qz-hc .jh-btn{width:100%;justify-content:center;padding:15px 20px}
   .qz-retry{width:100%;text-align:center}}
 /* 加碼關卡「節奏視奏 · 公開試玩版」樣式。
    視覺沿用學員練功房的白卡硬陰影＋橘色打點鈕，色票換成行銷頁的電光藍/橘/米白。
@@ -233,7 +238,8 @@ function result(){
  var PRIO=['E','D','C','B','A'],win=PRIO[0],best=-1;PRIO.forEach(function(k){if((score[k]||0)>best){best=score[k]||0;win=k;}});
  var T=TYPES[win];var dirs='';for(var d=0;d<T.dir.length;d++){dirs+='<li data-n="'+(d+1)+'">'+qzEsc(T.dir[d])+'</li>';}
  var em='<div class="qz-em"><p class="lb">把「'+qzEsc(T.name)+'」的 3 天客製練習菜單寄給你</p><p class="sb">留個 email，我把照你型別排好的 3 天菜單寄過去——每天一步，附我 YouTube 上對應的教學影片。看完覺得對味，再談加入。</p><form class="qz-emform" novalidate><div class="qz-emrow"><input class="qz-emin" type="email" name="email" required maxlength="120" placeholder="你的 Email" autocomplete="email" inputmode="email"><button type="submit" class="qz-embtn">寄給我 3 天菜單</button></div><p class="qz-emmsg" hidden></p></form></div>';
- panel.innerHTML='<span class="qz-rtag">'+qzEsc(T.tag)+' · 你的鼓手型別</span>'+'<p class="qz-rname">'+qzEsc(T.name)+'</p>'+'<div class="qz-diag">'+qzEsc(T.diag)+'</div>'+'<p class="qz-dh">你現在該練的三件事</p>'+'<ul class="qz-dir">'+dirs+'</ul>'+'<div class="qz-bridge">🥁 '+qzEsc(T.bridge)+'</div>'+em+
+ var hc='<div class="qz-hc">'+'<p class="lb">知道型別，還不知道差在哪一塊</p>'+'<p class="sb">27 題、5 分鐘，測出你在時間感、協調獨立、讀譜視奏、耳朵與扒歌、風格廣度、練習系統六個面向各在哪一級——對照 Rockschool 官方分級，告訴你最該補的是哪兩塊。</p>'+'<a class="jh-btn hc" href="https://www.jacobdrumemory.com/drummerquiz?src=type" target="_blank" rel="noopener">開始能力健檢 →</a>'+'</div>';
+  panel.innerHTML='<span class="qz-rtag">'+qzEsc(T.tag)+' · 你的鼓手型別</span>'+'<p class="qz-rname">'+qzEsc(T.name)+'</p>'+'<div class="qz-diag">'+qzEsc(T.diag)+'</div>'+'<p class="qz-dh">你現在該練的三件事</p>'+'<ul class="qz-dir">'+dirs+'</ul>'+'<div class="qz-bridge">🥁 '+qzEsc(T.bridge)+'</div>'+em+hc+
   '<div class="qz-cta"><a class="jh-btn p" href="https://www.jacobdrumemory.com/onlinecoaching" target="_blank" rel="noopener">看線上教練課 →</a><a class="jh-btn line" href="https://line.me/R/ti/p/@jdactw" target="_blank" rel="noopener">加 LINE 諮詢</a><button type="button" class="jh-btn" id="qzWechat">複製微信號</button><button type="button" class="qz-retry">↺ 重測一次</button></div><p class="qz-wxhint" id="qzWxHint" hidden></p>';
  panel.querySelector('.qz-retry').addEventListener('click',reset);
  var wb=panel.querySelector('#qzWechat');
