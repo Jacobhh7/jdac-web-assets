@@ -1,0 +1,104 @@
+html,body{margin:0;background:#f4f3ee}
+body{color:#0c0c0c;font-family:"Noto Sans TC",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+.wrap{max-width:720px;margin:0 auto;padding:0 clamp(18px,5vw,40px) 56px}
+.mglab{font-family:"Archivo",sans-serif;font-weight:500;letter-spacing:.3em;text-transform:uppercase;font-size:11px;color:#2563ff;margin:30px 0 10px}
+h1{font-family:"Archivo","Noto Sans TC",sans-serif;font-style:italic;font-weight:900;font-size:clamp(28px,6.6vw,42px);line-height:1.14;letter-spacing:-.015em;margin:0 0 14px}
+h1 em{font-style:italic;color:#2563ff}
+.sub{font-size:clamp(14.5px,1.5vw,16px);color:#3a3a36;line-height:1.85;margin:0 0 24px}
+.sub b{color:#0c0c0c;border-bottom:2px solid #fa5a1e;font-weight:700}
+.card{background:#fff;border:1.5px solid #0c0c0c;border-radius:18px;box-shadow:8px 9px 0 #0c0c0c;padding:clamp(22px,3vw,36px);margin-bottom:22px}
+.dh{font-family:"Archivo",sans-serif;font-weight:700;font-size:12px;letter-spacing:.14em;color:#2563ff;margin:0 0 14px;text-transform:uppercase}
+.mono{font-family:"JetBrains Mono",monospace}
+.fine{font-size:13px;color:#8a8579;line-height:1.75;margin:10px 0 0}
+.note{font-size:14px;line-height:1.9;color:#2c2c28;background:#f7f5ec;border-left:4px solid #fa5a1e;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0 0}
+/* 下載區 */
+.getrow{display:grid;gap:20px}
+@media(min-width:620px){.getrow{grid-template-columns:200px 1fr;align-items:start}}
+.thumb{border:1.5px solid #0c0c0c;border-radius:6px;box-shadow:6px 7px 0 #2563ff;width:100%;display:block;background:#fff}
+.spec{margin:0;padding:0;list-style:none}
+.spec li{font-size:14.5px;line-height:1.8;padding:7px 0;border-bottom:1px dashed rgba(12,12,12,.12);color:#2c2c28}
+.spec li:last-child{border-bottom:0}
+.jh-btn{display:inline-block;text-decoration:none;font-weight:900;font-size:16px;padding:15px 30px;border-radius:99px;border:1.5px solid #0c0c0c;transition:transform .12s}
+.jh-btn:active{transform:translateY(2px)}
+.jh-btn.p{background:#2563ff;color:#fff;border-color:#2563ff;box-shadow:4px 5px 0 #0c0c0c}
+.jh-btn.s{background:#fff;color:#0c0c0c;box-shadow:4px 5px 0 #0c0c0c}
+.btnrow{margin:22px 0 0}
+/* 訂閱 */
+.qz-em{margin:18px 0 0;padding:18px 20px;background:#f7f5ec;border-radius:12px}
+.qz-emrow{display:flex;gap:10px;margin:12px 0 0}
+@media(max-width:619px){.qz-emrow{flex-direction:column}}
+.qz-emin{width:100%;min-width:min(240px,100%);flex:1;font:inherit;font-size:15px;padding:12px 14px;border:1.5px solid #0c0c0c;border-radius:10px;background:#fff}
+.qz-embtn{font-family:"Noto Sans TC",sans-serif;font-weight:900;font-size:15px;padding:12px 22px;border:1.5px solid #0c0c0c;border-radius:10px;background:#fff;cursor:pointer;white-space:nowrap}
+.qz-emmsg{font-size:13.5px;margin:10px 0 0;min-height:1em}
+.qz-emmsg.ok{color:#1c7a3e}.qz-emmsg.err{color:#c0392b}
+/* 12 條 */
+.part{margin:0 0 26px}
+.part:last-child{margin-bottom:0}
+.ptag{display:inline-block;font-family:"Archivo",sans-serif;font-weight:800;font-size:11px;letter-spacing:.14em;background:#fa5a1e;color:#fff;padding:4px 12px;border-radius:99px}
+.psub{font-size:14px;color:#6b6a63;line-height:1.8;margin:10px 0 12px}
+.ex{display:grid;grid-template-columns:38px 1fr;gap:0 12px;padding:10px 0;border-bottom:1px dashed rgba(12,12,12,.14)}
+.part .ex:last-child{border-bottom:0}
+.ex .n{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:14px;color:#2563ff;padding-top:2px}
+.ex .t{font-weight:700;font-size:15.5px;line-height:1.5}
+.ex .s{font-family:"JetBrains Mono",monospace;font-size:14px;color:#0c0c0c;letter-spacing:.06em;margin-top:3px}
+.ex .nt{font-size:13.5px;color:#6b6a63;line-height:1.75;margin-top:5px}
+.ex .tg{display:inline-block;font-size:11px;font-weight:900;background:#2563ff;color:#fff;padding:2px 9px;border-radius:99px;margin-left:8px;vertical-align:2px}
+/* 練的順序 */
+.steps{margin:0;padding:0;list-style:none}
+.steps li{font-size:15px;line-height:1.85;padding:11px 0 11px 40px;position:relative;border-bottom:1px dashed rgba(12,12,12,.12);color:#2c2c28}
+.steps li:last-child{border-bottom:0}
+.steps li::before{content:attr(data-n);position:absolute;left:0;top:11px;width:26px;height:26px;background:#2563ff;color:#fff;border-radius:50%;font-family:"Archivo",sans-serif;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+/* 章節 */
+.ch{display:grid;grid-template-columns:64px 1fr;gap:0 12px;padding:7px 0;border-bottom:1px dashed rgba(12,12,12,.1);font-size:14.5px}
+.ch:last-child{border-bottom:0}
+.ch .tm{font-family:"JetBrains Mono",monospace;font-weight:700;color:#2563ff}
+.ch.skip{opacity:.55}
+.ch.skip .tm{color:#8a8579}
+/* 黑色監聽段 */
+.band-dark{background:#0a0a0a;color:#e8eaf0;margin:34px -100vw 22px;padding:clamp(30px,5vw,46px) 100vw}
+.band-in{max-width:720px;margin:0 auto}
+.tick{display:flex;gap:3px;margin:0 0 20px;align-items:flex-end;height:16px}
+.tick i{width:2px;height:6px;background:#2a2a33;display:block}
+.tick i:nth-child(5n+1){height:14px;background:#2563ff}
+.lab{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.14em;color:#fa5a1e}
+.lab2{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.14em;color:#5a5a68;float:right}
+.band-dark h2{font-family:"Archivo","Noto Sans TC",sans-serif;font-style:italic;font-weight:800;font-size:clamp(26px,5.4vw,38px);margin:14px 0 16px;color:#fff;letter-spacing:-.015em}
+.band-dark p{font-size:15px;line-height:1.9;color:#b9bcc7;margin:0 0 14px}
+.pb-card{border:1px solid #23232c;border-radius:12px;padding:16px 18px;margin:0 0 12px;background:#101018}
+.pb-card .err{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;color:#fa5a1e}
+.pb-card .rt{font-size:14.5px;line-height:1.85;color:#d5d8e2;margin:8px 0 0}
+/* 見證 */
+.vo-card{background:#fff;border:1.5px solid #0c0c0c;border-radius:14px;box-shadow:5px 6px 0 #0c0c0c;padding:1.6rem}
+.vo-card .av{width:56px;height:56px;border-radius:50%;border:1.5px solid #0c0c0c;background-size:cover;background-position:center;margin-bottom:16px}
+.vo-card .qt{font-size:14.5px;line-height:1.8;color:#2a2824;margin:0 0 14px}
+.vo-card .who{font-weight:900;font-size:14.5px}
+.vo-card .who span{font-weight:400;color:#8a8579}
+/* 雙路徑 */
+.dp{display:grid;gap:16px;margin:0 0 4px}
+@media(min-width:620px){.dp{grid-template-columns:1.15fr 1fr}}
+.dp-c{border:1.5px solid #0c0c0c;border-radius:14px;padding:20px 22px;background:#fff;box-shadow:4px 5px 0 #0c0c0c}
+.dp-c h3{font-size:18px;margin:10px 0 8px;font-weight:900}
+.dp-c p{font-size:14.5px;line-height:1.85;color:#2c2c28;margin:0 0 14px}
+.dp-tag{display:inline-block;font-family:"Archivo",sans-serif;font-weight:800;font-size:11px;letter-spacing:.14em;background:#2563ff;color:#fff;padding:4px 11px;border-radius:99px}
+.dp-c.cool .dp-tag{background:#0c0c0c}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}
+.reveal.in-view{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+/* ── 索引頁 ── */
+.ixgrid{display:grid;gap:16px}
+@media(min-width:620px){.ixgrid{grid-template-columns:1fr 1fr}}
+.ix{display:block;text-decoration:none;color:inherit;background:#fff;border:1.5px solid #0c0c0c;border-radius:16px;box-shadow:6px 7px 0 #0c0c0c;overflow:hidden;transition:transform .12s,box-shadow .12s}
+.ix:hover{transform:translate(-2px,-2px);box-shadow:8px 9px 0 #2563ff}
+.ix img{width:100%;display:block;border-bottom:1.5px solid #0c0c0c;background:#f4f3ee;aspect-ratio:1/.62;object-fit:cover;object-position:top center}
+.ixb{padding:16px 18px 18px}
+.ixno{display:inline-block;font-family:"Archivo",sans-serif;font-weight:800;font-size:11px;letter-spacing:.14em;background:#2563ff;color:#fff;padding:3px 10px;border-radius:99px}
+.ixt{font-weight:900;font-size:18px;margin:10px 0 6px;line-height:1.4}
+.ixp{font-size:14px;line-height:1.8;color:#2c2c28;margin:0 0 10px}
+.ixm{font-size:12.5px;color:#8a8579;margin:0;border-top:1px dashed rgba(12,12,12,.14);padding-top:9px}
+
+/* ── 觀看按鈕（刻意不是實心藍：全頁的藍鈕只留給「下載」跟「健檢」）── */
+.watch{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
+.jh-btn.s.wbtn{font-size:14.5px;padding:11px 20px;display:inline-flex;align-items:center;gap:9px}
+.wbtn .wm{font-family:"Archivo",sans-serif;font-weight:900;font-size:12px;background:#0c0c0c;color:#fff;width:22px;height:22px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center}
+#herowatch a{color:#2563ff;font-weight:700}
