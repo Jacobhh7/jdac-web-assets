@@ -1,36 +1,13 @@
 {
- "_怎麼用": "複製這份改名成 <slug>.json，填完跑 python3 build-sheets.py。parts/order 不要手打，從 sheet_<片名>.py --json 貼過來。",
+ "_怎麼用": "複製這份改名成 <slug>.json，填完跑 python3 build-sheets.py。PDF 放 sheets/<slug>.pdf、第一頁縮圖放 sheets/<slug>-p1.png。",
  "slug": "your-slug",
  "no": "02",
  "title": "中文標題（索引卡跟瀏覽器標題用）",
- "h1": "反轉句大標，<em>藍色的那半放這裡</em>",
- "sub": "《標題》A4 練習譜．N 頁 M 條．<b>直接下載，不用留 email。</b>",
  "card_line": "索引卡上那一句：這份在教什麼。",
  "pdf": "sheets/your-slug.pdf",
  "thumb": "sheets/your-slug-p1.png",
  "pages": 2,
- "video_title": "配套長片的標題（時長）",
  "video_len": "10:31",
- "video_quote": "「影片裡最能代表這一集的一句話，直接抄字幕。」",
- "chapter_map": "章節對應 PDF 上的編號：…",
- "hero_bullets": [
-  "N 頁 A4／M 條練習／300dpi",
-  "PART 1 … → PART 2 …",
-  "附「練的順序」"
- ],
- "faq_first": [
-  "我打了幾年了，這份譜會不會太基礎？",
-  "回答要指出這份真正難的是哪幾條。"
- ],
- "faq_gear": "哪幾條打點板就能練、哪幾條要有鼓。",
- "chapters": [
-  {
-   "t": "0:00",
-   "s": "章節標題"
-  }
- ],
- "parts": [],
- "order": [],
  "youtube_url": "https://youtu.be/XXXXXXXXXXX   ← 貼 YouTube 網址，章節就會自動變成可點的 ?t= 深連結",
  "bilibili_url": "https://www.bilibili.com/video/BVxxxxxxxxxx/   ← 貼 B站網址；兩個都可以留空"
 }
