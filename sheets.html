@@ -33,15 +33,31 @@ h1 em{font-style:italic;color:#2563ff}
 .b.p{background:#2563ff;color:#fff;border-color:#2563ff}
 .b .m{font-family:"Archivo",sans-serif;font-weight:900;font-size:11px;background:#0c0c0c;color:#fff;width:19px;height:19px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center}
 .ixm{font-size:12.5px;color:#8a8579;margin:14px 0 0;border-top:1px dashed rgba(12,12,12,.14);padding-top:9px}
-/* 留 email */
-.qz-em{margin:26px 0 0;padding:20px 22px;background:#fff;border:1.5px solid #0c0c0c;border-radius:16px;box-shadow:6px 7px 0 #2563ff}
-.qzt{font-weight:900;font-size:16.5px}
-.qz-emrow{display:flex;gap:10px;margin:12px 0 0}
-@media(max-width:619px){.qz-emrow{flex-direction:column}}
-.qz-emin{width:100%;min-width:min(240px,100%);flex:1;font:inherit;font-size:15px;padding:12px 14px;border:1.5px solid #0c0c0c;border-radius:10px;background:#fff}
-.qz-embtn{font-family:"Noto Sans TC",sans-serif;font-weight:900;font-size:15px;padding:12px 22px;border:1.5px solid #0c0c0c;border-radius:10px;background:#fff;cursor:pointer;white-space:nowrap}
-.qz-emmsg{font-size:13.5px;margin:10px 0 0;min-height:1em}
-.qz-emmsg.ok{color:#1c7a3e}.qz-emmsg.err{color:#c0392b}
+/* 宣傳段 */
+.band-dark{background:#0a0a0a;color:#e8eaf0;margin:34px -100vw 26px;padding:clamp(30px,5vw,46px) 100vw}
+.band-in{max-width:900px;margin:0 auto;padding:0 clamp(18px,5vw,40px)}
+.tick{display:flex;gap:3px;margin:0 0 20px;align-items:flex-end;height:16px}
+.tick i{width:2px;height:6px;background:#2a2a33;display:block}
+.tick i:nth-child(5n+1){height:14px;background:#2563ff}
+.lab{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.14em;color:#fa5a1e}
+.lab2{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.14em;color:#5a5a68;float:right}
+.band-dark h2{font-family:"Archivo","Noto Sans TC",sans-serif;font-style:italic;font-weight:800;font-size:clamp(26px,5vw,36px);margin:14px 0 16px;color:#fff;letter-spacing:-.015em}
+.band-dark p{font-size:15px;line-height:1.9;color:#b9bcc7;margin:0 0 14px}
+.pb-card{border:1px solid #23232c;border-radius:12px;padding:16px 18px;margin:0 0 12px;background:#101018}
+.pb-card .err{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;color:#fa5a1e}
+.pb-card .rt{font-size:14.5px;line-height:1.85;color:#d5d8e2;margin:8px 0 0}
+.vo-card{background:#fff;border:1.5px solid #0c0c0c;border-radius:14px;box-shadow:5px 6px 0 #0c0c0c;padding:22px;margin:0 0 18px}
+.vo-card .av{width:56px;height:56px;border-radius:50%;border:1.5px solid #0c0c0c;background-size:cover;background-position:center;margin-bottom:14px}
+.vo-card .qt{font-size:14.5px;line-height:1.8;color:#2a2824;margin:0 0 12px}
+.vo-card .who{font-weight:900;font-size:14.5px}
+.vo-card .who span{font-weight:400;color:#8a8579}
+.dp{display:grid;gap:16px;margin:0 0 4px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.dp-c{border:1.5px solid #0c0c0c;border-radius:14px;padding:20px 22px;background:#fff;box-shadow:4px 5px 0 #0c0c0c;display:flex;flex-direction:column}
+.dp-c h3{font-size:18px;margin:10px 0 8px;font-weight:900}
+.dp-c p{font-size:14.5px;line-height:1.85;color:#2c2c28;margin:0 0 14px}
+.dp-c .b{align-self:flex-start;margin-top:auto}
+.dp-tag{align-self:flex-start;font-family:"Archivo",sans-serif;font-weight:800;font-size:11px;letter-spacing:.14em;background:#2563ff;color:#fff;padding:4px 11px;border-radius:99px}
+.dp-c.cool .dp-tag{background:#0c0c0c}
 .reveal{opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s}
 .reveal.in-view{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
@@ -66,33 +82,47 @@ h1 em{font-style:italic;color:#2563ff}
     </div>
   </div></div>
 
-<div class="qz-em">
-  <div class="qzt">出新的講義要不要寄給你？</div>
-  <p class="fine" style="margin-top:6px">留個信箱，之後每出一份我一起寄。只寄講義，不寄別的，隨時可以退訂。</p>
-  <form id="subf"><div class="qz-emrow">
-    <input class="qz-emin" id="em" type="email" required placeholder="你的 email">
-    <button class="qz-embtn" type="submit">寄給我</button>
-  </div></form>
-  <p class="qz-emmsg" id="msg"></p>
+</div><!-- /wrap -->
+
+<div class="band-dark">
+  <div class="band-in">
+    <div class="tick"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div><span class="lab">// FEEDBACK LOOP — 這些譜給不了你的</span><span class="lab2">CH.01 — SINGLE DIRECTION</span></div>
+    <h2>譜是單向的。</h2>
+    <p>你可以把它全部印出來、貼在打點板旁邊、每天打三十分鐘。<br>但它不會在你左手慢半格的時候停下來告訴你。</p>
+    <div class="pb-card"><span class="err">ERR 01</span><p class="rt">錄起來聽，才發現重音根本沒出來。重音不清楚，整句就糊掉。</p></div>
+    <div class="pb-card"><span class="err">ERR 02</span><p class="rt">卡在同一個速度兩個禮拜。多半不是缺新練習，是缺一個會回頭看你上一次練了什麼的人。</p></div>
+    <p style="margin-top:16px">他自己聽不出來，因為他一直是用同一雙耳朵，在聽同一雙手。</p>
+  </div>
+</div>
+
+<div class="wrap">
+<div class="vo-card reveal">
+  <div class="av" style="background-image:url('https://static.wixstatic.com/media/1a91b2_303fb4954b224514b343e0c9b7aa8dcc~mv2.jpg/v1/fill/w_240,h_240,al_c,q_80,enc_auto/xinyu.jpg')"></div>
+  <p class="qt">學爵士鼓很多年，平時也在網路上自修，但總覺得進步很慢、不太系統，走了不少彎路。偶然在 YouTube 看到 Jacob 老師的教學，內容細緻用心，就下決心報名，明顯感覺到突破性的提升。絕對系統的良心教學！</p>
+  <div class="who">昕宇 <span>／ 爵士鼓老師</span></div>
+</div>
+
+<div class="dp">
+  <div class="dp-c reveal">
+    <span class="dp-tag">先量一下</span>
+    <h3>不確定該先補哪一塊？</h3>
+    <p>27 題、六個面向，做完會拿到一份屬於你自己的能力報告。約 5 分鐘，中途有一關要動手打，不方便的話可以跳過。</p>
+    <a class="b p" href="https://www.jacobdrumemory.com/drummerquiz?src=sheets" target="_blank" rel="noopener">開始鼓手能力健檢</a>
+  </div>
+  <div class="dp-c cool reveal">
+    <span class="dp-tag">要有人看你打</span>
+    <h3>線上教練課</h3>
+    <p>每週交一支影片，我逐拍看完再回你。作業全部我一個人批改，所以我會控制人數。</p>
+    <a class="b" href="https://www.jacobdrumemory.com/onlinecoaching?src=sheets" target="_blank" rel="noopener">看課程怎麼上</a>
+  </div>
 </div>
 
 <p class="fine" style="margin-top:22px">自己練、印出來、帶去教室都可以。請不要拿去賣，也不要改成自己的名字。</p>
 </div>
 <script>
 (function () {
-  var API = 'https://www.jacobdrumemory.com/_functions';
   var $ = function (i) { return document.getElementById(i); };
-  $('subf').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var m = $('msg'); m.className = 'qz-emmsg'; m.textContent = '寄送中…';
-    var src = (new URLSearchParams(location.search).get('src') || 'sheets')
-      .toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 20);
-    fetch(API + '/handoutLead', { method: 'POST', headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ email: $('em').value.trim(), handout: 'all', source: src }) })
-      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-      .then(function () { m.className = 'qz-emmsg ok'; m.textContent = '好了，之後出新的我就寄給你。'; })
-      .catch(function () { m.className = 'qz-emmsg err'; m.textContent = '寄不出去。上面的譜還是可以直接下載。'; });
-  });
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (es) { es.forEach(function (x) {
       if (x.isIntersecting) { x.target.classList.add('in-view'); io.unobserve(x.target); } }); }, { threshold: .12 });
