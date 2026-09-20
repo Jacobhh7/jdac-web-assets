@@ -105,8 +105,10 @@
 
 .jdlive .who{background:var(--card);border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);padding:clamp(36px,5vw,64px) 0}
 .jdlive .whogrid{display:grid;grid-template-columns:200px 1fr;gap:clamp(20px,4vw,40px);align-items:center}
-.jdlive .photo{aspect-ratio:1;background:linear-gradient(135deg,#dcdcd4,#c8c8bf);border:1.5px solid var(--ink);
-  border-radius:14px;box-shadow:6px 6px 0 var(--blue);background-size:cover;background-position:center}
+.jdlive .photo{background:#fff;border:1.5px solid var(--ink);box-shadow:9px 10px 0 var(--blue);
+  padding:10px 10px 14px;transform:rotate(-1.5deg)}
+.jdlive .photo .im{display:block;width:100%;height:clamp(300px,30vw,400px);
+  background-size:cover;background-position:center top;background-color:#dcdcd4}
 .jdlive .who h3{margin:10px 0 0;font-size:clamp(24px,3.4vw,34px)}
 .jdlive .who p{color:var(--muted);font-size:15px;line-height:1.9;margin:14px 0 0;max-width:56ch}
 .jdlive .cta{background:var(--blue);color:#fff;padding:clamp(40px,6vw,68px) 0;text-align:center}
@@ -121,7 +123,7 @@
   .jdlive .chat{height:420px}
   .jdlive .nextgrid{grid-template-columns:minmax(0,1fr)}
   .jdlive .whogrid{grid-template-columns:minmax(0,1fr)}
-  .jdlive .photo{max-width:180px}
+  .jdlive .photo{max-width:220px;transform:none}
 }
 @media(max-width:560px){
   .jdlive .row2{grid-template-columns:1fr;gap:6px}
@@ -358,7 +360,7 @@ function jdacLiveInit(root){
       +'<small>往期的直播不會放在這裡，開播過的場次會收進<b>學員專區的講座課程</b>。</small>'
       +'</div></div></div></div>'
       +'<div class="who"><div class="jd-in"><div class="whogrid">'
-      +'<div class="photo"></div><div>'
+      +'<div class="photo"><span class="im" style="background-image:url(\'https://static.wixstatic.com/media/1a91b2_1e92d8180af344d9964f182bc39876ef~mv2.jpg/v1/fill/w_680,h_820,al_c,q_85,enc_auto/jacob.jpg\')"></span></div><div>'
       +'<span class="eyebrow">MEET JACOB / 關於你的教練</span>'
       +'<h3 class="arch">教鼓十幾年，<br>最常看到的還是同一批問題</h3>'
       +'<p>所以我開這個直播。每一場挑一個大家真的卡住的點，講清楚、當場示範、當場回答。不賣關子，也不留一半到課程裡。</p>'
