@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- GitHub Pages 給 max-age=600，改版後容易看到舊版。這幾行讓瀏覽器少快取一點；
+     真正的保險是 page code 給 iframe src 加時間戳（見 live-pagecode.js）。 -->
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
 <title>JDAC 直播</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,600;0,800;1,800;1,900&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
 <style>
