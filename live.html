@@ -42,6 +42,8 @@
   padding:5px 11px;font:inherit;font-size:12px;cursor:pointer}
 .jdlive .qbar button.on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:800}
 .jdlive .qbar button:hover:not(.on){border-color:#3a3f4a}
+.jdlive .player .qwait{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;
+  background:rgba(0,0,0,.72);color:#fff;font-size:13px;padding:10px 16px;border-radius:10px;text-align:center;line-height:1.6}
 
 .jdlive .stagewrap{background:var(--dark);padding:26px 0 30px}
 .jdlive .stage2{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:start}
@@ -185,6 +187,11 @@ function jdacLiveInit(root){
   // 目前選的畫質（'src'＝原畫）。續約網址、切換畫質都要記得沿用它，
   // 不然每 25 分鐘換一次網址時會被打回原畫——大陸學員剛降下去又被拉回去。
   var quality='src';
+  // 按需轉碼（阿里雲 IsLazy）：第一次有人要某個畫質時它才**開始**轉，要幾秒到幾十秒
+  // 才有第一個分片，在那之前請求是 404。播放器預設一次失敗就放棄，所以這裡自己重試，
+  // 並且明確告訴使用者在等什麼——不然看起來就只是「這個畫質壞掉」。
+  var qRetry=0, qTimer=null;
+  var Q_MAX_RETRY=8, Q_WAIT_MS=3000;
   // 有沒有被嵌在 Wix 頁面裡。直接開 GitHub Pages 那個網址時 parent===window，
   // 代表沒有 page code 接 postMessage → 登入／留言都不會有反應，
   // 這時按鈕要老實導回官網，而不是擺一顆按了沒事發生的假按鈕。
@@ -264,6 +271,14 @@ function jdacLiveInit(root){
     });
   }
   function killHls(){ try{ if(hls){hls.destroy(); hls=null;} }catch(e){ hls=null; } }
+  function qWait(text){
+    var box=$('.player'); if(!box) return;
+    var el=box.querySelector('.qwait');
+    if(!text){ if(el) el.remove(); return; }
+    if(!el){ el=document.createElement('div'); el.className='qwait'; box.appendChild(el); }
+    el.textContent=text;
+  }
+  function qClearRetry(){ qRetry=0; if(qTimer){ clearTimeout(qTimer); qTimer=null; } qWait(''); }
   function attach(video,url){
     killHls();
     if(video.canPlayType&&video.canPlayType('application/vnd.apple.mpegurl')){ video.src=url; return; }
@@ -273,7 +288,27 @@ function jdacLiveInit(root){
         var h=new window.Hls({lowLatencyMode:true,liveSyncDurationCount:3});
         hls=h;
         // 鑑權過期（403）表現成致命載入錯誤 → 重抓一組新網址接上去
-        h.on(window.Hls.Events.ERROR,function(_e,d){ if(d&&d.fatal) renew(true); });
+        h.on(window.Hls.Events.ERROR,function(_e,d){
+          if(!d||!d.fatal) return;
+          // 轉碼流剛被點開時 404 是正常的——阿里雲還在起轉碼，等它
+          if(quality!=='src' && qRetry<Q_MAX_RETRY){
+            qRetry++;
+            var lab=((S&&S.qualities||[]).filter(function(x){return x.key===quality;})[0]||{}).label||'這個畫質';
+            qWait('正在準備 '+lab+'…（'+qRetry+'/'+Q_MAX_RETRY+'）');
+            if(qTimer) clearTimeout(qTimer);
+            qTimer=setTimeout(function(){ try{ h.loadSource(urlFor(S)); }catch(e){} }, Q_WAIT_MS);
+            return;
+          }
+          if(quality!=='src'){
+            // 等太久還是不行 → 退回原畫，不要讓人盯著黑畫面
+            qClearRetry(); quality='src';
+            root.querySelectorAll('[data-q]').forEach(function(x){ x.classList.toggle('on',x.dataset.q==='src'); });
+            var v2=$('#jdPlayer'); if(v2) attach(v2,urlFor(S));
+            return;
+          }
+          renew(true);
+        });
+        h.on(window.Hls.Events.FRAG_LOADED,function(){ qClearRetry(); });
         h.loadSource(url); h.attachMedia(video);
       } else { video.src=url; }
     });
@@ -451,6 +486,8 @@ function jdacLiveInit(root){
       b.addEventListener('click',function(){
         if(b.dataset.q===quality) return;
         quality=b.dataset.q;
+        qClearRetry();
+        if(quality!=='src') qWait('正在準備 '+b.textContent.trim()+'…');
         root.querySelectorAll('[data-q]').forEach(function(x){ x.classList.toggle('on',x.dataset.q===quality); });
         var vv=$('#jdPlayer');
         if(vv) attach(vv,urlFor(S));   // 換源會小卡一下，這是切畫質的正常行為
