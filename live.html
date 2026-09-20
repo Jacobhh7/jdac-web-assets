@@ -301,12 +301,18 @@ function jdacLiveInit(root){
   function chatBar(){
     if(!S.canChat) return '<div class="chatbar"><p class="hint" style="color:#8a93a8">這一場沒有開放留言。</p></div>';
     if(!loggedIn){
-      if(!EMBEDDED||!hasPageCode){
-        // 沒被嵌入（直接開這個網址），或嵌了但沒人接（page code 沒貼）
-        // → 給真的連結，不要擺假按鈕
+      if(!EMBEDDED){
+        // 直接開這個網址（它只是 iframe 的內容來源，不是給人看的）→ 帶去官網那一頁
         return '<div class="chatbar loginwall">'
           +'<p><b>想留言或提問？</b><br>請到官網的直播頁，登入後就能發言。</p>'
           +'<a class="btn" href="'+SITE+'/live" target="_top">到官網直播頁</a></div>';
+      }
+      if(!hasPageCode){
+        // 嵌在頁面裡但沒人接（page code 沒貼／沒發佈）。這裡**刻意不給按鈕**：
+        // 站上沒有獨立的登入網址（Wix 的登入是彈窗，只有 page code 開得起來），
+        // 導去哪都是原地打轉，那比沒有按鈕更糟。
+        return '<div class="chatbar loginwall">'
+          +'<p><b>留言功能設定中</b><br>很快就開放，先看直播吧。</p></div>';
       }
       return '<div class="chatbar loginwall">'
         +'<p><b>想留言或提問？</b><br>免費註冊會員就能發言，Jacob 會挑題現場回答。</p>'
@@ -371,10 +377,13 @@ function jdacLiveInit(root){
       +'<h3>'+(loggedIn?'開播時會通知你':'註冊就通知你開播')+'</h3>'
       +'<p>'+(loggedIn
           ?'你已經登入了，開播時會通知你。直播時可以直接留言提問。'
-          :'免費註冊會員，開播前寄提醒給你。直播時也才能留言、提問——Jacob 會挑題現場回答。')+'</p>'
+          :(EMBEDDED&&!hasPageCode
+            ?'註冊功能設定中，很快開放。'
+            :'免費註冊會員，開播前寄提醒給你。直播時也才能留言、提問——Jacob 會挑題現場回答。'))+'</p>'
       +(loggedIn?''
          :((EMBEDDED&&hasPageCode)?'<button class="btn" id="jdLogin">免費註冊 / 登入</button>'
-                   :'<a class="btn" href="'+SITE+'/live" target="_top">到官網直播頁</a>'))
+           :(EMBEDDED?''   /* 嵌了但沒人接＝按鈕開不了彈窗，不如不放 */
+                     :'<a class="btn" href="'+SITE+'/live" target="_top">到官網直播頁</a>')))
       +'<small>往期的直播不會放在這裡，開播過的場次會收進<b>學員專區的講座課程</b>。</small>'
       +'</div></div></div></div>'
       +'<div class="who"><div class="jd-in"><div class="whogrid">'
