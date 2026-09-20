@@ -174,6 +174,16 @@ function jdacLiveInit(root){
   //    問得到（authentication.loggedIn()），它會寫進 jdac-auth attribute 告訴我們。
   //    沒有 page code 的環境（直接開這個 html）＝永遠當未登入，顯示登入牆，這是對的 fallback。
   var loggedIn=false;
+  // 有沒有被嵌在 Wix 頁面裡。直接開 GitHub Pages 那個網址時 parent===window，
+  // 代表沒有 page code 接 postMessage → 登入／留言都不會有反應，
+  // 這時按鈕要老實導回官網，而不是擺一顆按了沒事發生的假按鈕。
+  var EMBEDDED=(window.parent!==window);
+  var SITE='https://www.jacobdrumemory.com';
+  // EMBEDDED 只說明「被嵌在某個頁面裡」，不代表**有人接**。
+  // iframe 放好了但 page code 沒貼（或貼錯 nickname）時，登入／留言送出去都沒人回，
+  // 按鈕就會變成按了沒反應的死鈕。page code 一活著就會回訊息（ready→auth），
+  // 所以「收過它任何一則訊息」就是它在的證據。
+  var hasPageCode=false;
 
   /* ── 跟 Wix page code 溝通（postMessage）─────────────────────────────────
      這頁是 **iframe**（Wix HTML Component），不是 Custom Element——Wix 的
@@ -193,6 +203,7 @@ function jdacLiveInit(root){
     // 只收自家 page code 的訊息：Wix 的 iframe 裡什麼廣告腳本都可能發訊息進來
     if(!ev||!ev.data||typeof ev.data!=='object'||ev.data.__jdac!=='live') return;
     var d=ev.data;
+    hasPageCode=true;
     if(d.kind==='result'){
       var fn=pending[d.id]; if(fn){ delete pending[d.id]; fn(d.result); }
     } else if(d.kind==='auth'){
@@ -290,6 +301,13 @@ function jdacLiveInit(root){
   function chatBar(){
     if(!S.canChat) return '<div class="chatbar"><p class="hint" style="color:#8a93a8">這一場沒有開放留言。</p></div>';
     if(!loggedIn){
+      if(!EMBEDDED||!hasPageCode){
+        // 沒被嵌入（直接開這個網址），或嵌了但沒人接（page code 沒貼）
+        // → 給真的連結，不要擺假按鈕
+        return '<div class="chatbar loginwall">'
+          +'<p><b>想留言或提問？</b><br>請到官網的直播頁，登入後就能發言。</p>'
+          +'<a class="btn" href="'+SITE+'/live" target="_top">到官網直播頁</a></div>';
+      }
       return '<div class="chatbar loginwall">'
         +'<p><b>想留言或提問？</b><br>免費註冊會員就能發言，Jacob 會挑題現場回答。</p>'
         +'<button class="btn" id="jdLogin">登入 / 免費註冊</button>'
@@ -305,7 +323,7 @@ function jdacLiveInit(root){
     return '<div class="cta"><div class="jd-in">'
       +'<h2 class="arch">想把今天講的真的練起來？</h2>'
       +'<p>直播講的是「為什麼」，線上教練課帶你走完「怎麼做」——有課表、有作業，我一個一個批改。</p>'
-      +'<a class="btn" href="/線上教練課">看線上教練課</a>'
+      +'<a class="btn" href="'+SITE+'/onlinecoaching" target="_top">看線上教練課</a>'
       +'</div></div>';
   }
 
@@ -354,7 +372,9 @@ function jdacLiveInit(root){
       +'<p>'+(loggedIn
           ?'你已經登入了，開播時會通知你。直播時可以直接留言提問。'
           :'免費註冊會員，開播前寄提醒給你。直播時也才能留言、提問——Jacob 會挑題現場回答。')+'</p>'
-      +(loggedIn?'':'<button class="btn" id="jdLogin">免費註冊 / 登入</button>')
+      +(loggedIn?''
+         :((EMBEDDED&&hasPageCode)?'<button class="btn" id="jdLogin">免費註冊 / 登入</button>'
+                   :'<a class="btn" href="'+SITE+'/live" target="_top">到官網直播頁</a>'))
       +'<small>往期的直播不會放在這裡，開播過的場次會收進<b>學員專區的講座課程</b>。</small>'
       +'</div></div></div></div>'
       +'<div class="who"><div class="jd-in"><div class="whogrid">'
@@ -476,6 +496,8 @@ function jdacLiveInit(root){
   // 由我們主動說一聲「我好了」，page code 收到才推登入狀態過來，
   // 比它定時盲推可靠（它那邊仍留了幾次重推當保險）。
   toParent({__jdac:'live',kind:'ready'});
+  // page code 活著的話這時候早就回過話了。還沒回＝它不在，重畫一次把按鈕換成真連結。
+  setTimeout(function(){ if(!hasPageCode) render(true); }, 3500);
   refresh(true);
 }
 jdacLiveInit(document.getElementById('jdLiveRoot'));
