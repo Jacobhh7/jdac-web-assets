@@ -103,6 +103,26 @@
 .jdlive .remind small{display:block;margin-top:10px;color:var(--muted);font-size:11.5px;line-height:1.6}
 .jdlive .remind small b{color:var(--ink)}
 
+/* 開播前提問：跟直播中的現場提問**共用同一批資料**（LiveMessages 的 isQuestion），
+   所以老師端只看一個佇列，直播時點「這題我回答」之後，收播存檔的章節目錄裡
+   自然就包含這些事先收到的問題。 */
+.jdlive .ask{background:var(--card);border-top:1.5px solid var(--ink);padding:clamp(36px,5vw,64px) 0}
+.jdlive .askgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,4vw,44px);align-items:start}
+.jdlive .askhead h3{margin:10px 0 0;font-size:clamp(23px,3.2vw,32px)}
+.jdlive .askhead p{color:var(--muted);font-size:15px;line-height:1.9;margin:14px 0 0;max-width:46ch}
+.jdlive .qlist{display:flex;flex-direction:column;gap:10px;margin:0 0 16px}
+.jdlive .qitem{background:var(--paper);border:1.5px solid var(--ink);border-radius:12px;padding:11px 13px;font-size:14px;line-height:1.6}
+.jdlive .qitem b{font-weight:800;margin-right:7px}
+.jdlive .qitem.done{background:#f2f7ef}
+.jdlive .qitem i{font-style:normal;font-size:10px;font-weight:900;background:var(--green,#4f9e3f);color:#fff;padding:1px 6px;border-radius:8px;margin-right:6px}
+.jdlive .qempty{color:var(--muted);font-size:14px;line-height:1.8}
+.jdlive .askbox{background:var(--paper);border:1.5px solid var(--ink);border-radius:14px;padding:16px;box-shadow:5px 5px 0 var(--ink)}
+.jdlive .askbox textarea{width:100%;min-width:min(140px,100%);box-sizing:border-box;border:1.5px solid var(--ink);
+  border-radius:10px;padding:10px;font:inherit;font-size:14px;resize:vertical}
+.jdlive .askbox .btn{width:100%;margin-top:9px}
+.jdlive .askbox .hint{margin:8px 0 0;font-size:12px;color:var(--orange);min-height:1em}
+.jdlive .askbox small{display:block;margin-top:9px;color:var(--muted);font-size:11.5px;line-height:1.6}
+@media(max-width:760px){.jdlive .askgrid{grid-template-columns:minmax(0,1fr)}}
 .jdlive .lab{background:var(--dark);color:var(--dark-ink);padding:clamp(40px,6vw,72px) 0}
 .jdlive .lab .secname{display:flex;align-items:baseline;gap:14px;margin-bottom:26px;flex-wrap:wrap}
 .jdlive .lab .secname .en{font-family:Archivo;font-style:italic;font-weight:900;font-size:clamp(22px,3vw,32px);color:#fff}
@@ -416,6 +436,38 @@ function jdacLiveInit(root){
       + ctaHTML();
   }
 
+  // 開播前提問。問題列出來給大家看得到——別人問什麼會帶出「我也想問」，
+  // 而且讓這一頁在還沒開播的時候就有內容、不是一個空的預告頁。
+  function askHTML(){
+    var s=S.session; if(!s) return '';
+    var qs=(S.messages||[]).filter(function(m){return m.q;});
+    var list=qs.length
+      ? '<div class="qlist">'+qs.slice(-8).map(function(m){
+          return '<div class="qitem'+(m.answered?' done':'')+'">'
+            +(m.answered?'<i>會講到</i>':'')+'<b>'+esc(m.name)+'</b>'+esc(m.text)+'</div>';
+        }).join('')+'</div>'
+      : '<p class="qempty">還沒有人提問。第一個問的人，通常會被排在最前面講。</p>';
+    var box=!loggedIn
+      ? '<div class="askbox"><p style="margin:0 0 12px;font-size:14px;line-height:1.7"><b>想問問題？</b><br>免費註冊會員就能提問。</p>'
+        +((EMBEDDED&&hasPageCode)
+           ? '<button class="btn" id="jdLogin">登入 / 免費註冊</button>'
+           : (EMBEDDED?'<p class="qempty" style="font-size:13px">提問功能設定中。</p>'
+                      :'<a class="btn" href="'+SITE+'/live" target="_top">到官網直播頁</a>'))
+        +'<small>註冊後也會在開播前收到通知。</small></div>'
+      : '<div class="askbox">'
+        +'<textarea id="jdAsk" rows="3" maxlength="300" placeholder="你卡在哪？寫得越具體，越容易被挑到"></textarea>'
+        +'<button class="btn" id="jdAskSend">送出問題</button>'
+        +'<p class="hint" id="jdAskHint"></p>'
+        +'<small>Jacob 會挑幾題在直播裡講。問題會公開顯示在這一頁。</small></div>';
+    return '<div class="ask"><div class="jd-in"><div class="askgrid">'
+      +'<div class="askhead"><span class="eyebrow">ASK AHEAD / 先問</span>'
+      +'<h3 class="arch">這一場想聽什麼？</h3>'
+      +'<p>先把問題丟過來，我會照大家問的東西安排內容，挑幾題在直播裡直接講。</p>'
+      +list+'</div>'
+      +'<div>'+box+'</div>'
+      +'</div></div></div>';
+  }
+
   function viewIdle(){
     var s=S.session;
     var when=s?fmtWhen(s.scheduledAt):'';
@@ -444,6 +496,7 @@ function jdacLiveInit(root){
                      :'<a class="btn" href="'+SITE+'/live" target="_top">到官網直播頁</a>')))
       +'<small>往期的直播不會放在這裡，開播過的場次會收進<b>學員專區的講座課程</b>。</small>'
       +'</div></div></div></div>'
+      + askHTML()
       +'<div class="who"><div class="jd-in"><div class="whogrid">'
       +'<div class="photo"><span class="im" style="background-image:url(\'https://static.wixstatic.com/media/1a91b2_1e92d8180af344d9964f182bc39876ef~mv2.jpg/v1/fill/w_680,h_820,al_c,q_85,enc_auto/jacob.jpg\')"></span></div><div>'
       +'<span class="eyebrow">MEET JACOB / 關於你的教練</span>'
@@ -500,6 +553,34 @@ function jdacLiveInit(root){
       renewT=setTimeout(function(){renew(false);}, Math.max(60,Number(S.renewInSec)||1500)*1000);
     }
     var box=$('#jdMsgs'); if(box) box.scrollTop=box.scrollHeight;
+
+    // 開播前提問：走同一支 live-msg，isQuestion 固定 true，
+    // 所以它跟直播中的現場提問會進同一個佇列，老師端不用分兩邊看。
+    var askBtn=$('#jdAskSend'), askTa=$('#jdAsk');
+    if(askBtn&&askTa){
+      var doAsk=function(){
+        var text=(askTa.value||'').trim();
+        var hint=$('#jdAskHint');
+        if(!text||!S.session) return;
+        askBtn.disabled=true; if(hint) hint.textContent='';
+        action('live-msg',{sessionId:S.session.id,text:text,isQuestion:true}).then(function(r){
+          askBtn.disabled=false;
+          if(r&&r.ok){
+            askTa.value='';
+            S.messages=(S.messages||[]).concat([r.msg]);
+            render(true);   // 未開播頁是低頻互動，重畫沒有草稿被洗掉的問題
+            return;
+          }
+          if(hint) hint.textContent = !r ? '沒送出去，再試一次。'
+            : r.reason==='too-fast' ? '慢一點，兩秒後再送。'
+            : r.reason==='login-required' ? '請先登入。' : '沒送出去，再試一次。';
+        });
+      };
+      askBtn.addEventListener('click',doAsk);
+      askTa.addEventListener('keydown',function(e){
+        if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)){e.preventDefault();doAsk();}
+      });
+    }
 
     var lg=$('#jdLogin');
     if(lg) lg.addEventListener('click',function(){
