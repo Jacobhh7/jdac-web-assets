@@ -110,6 +110,12 @@
 .jdlive .askgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,4vw,44px);align-items:start}
 .jdlive .askhead h3{margin:10px 0 0;font-size:clamp(23px,3.2vw,32px)}
 .jdlive .askhead p{color:var(--muted);font-size:15px;line-height:1.9;margin:14px 0 0;max-width:46ch}
+.jdlive .quota{display:inline-flex;align-items:center;gap:8px;margin:14px 0 0;
+  background:var(--paper);border:1.5px solid var(--ink);border-radius:20px;padding:5px 14px;font-size:13px;font-weight:700}
+.jdlive .quota b{font-family:"JetBrains Mono",monospace;font-size:16px;color:var(--blue)}
+.jdlive .quota.full b{color:var(--orange)}
+.jdlive .askdone{background:#eef4ea;border:1.5px solid #4f9e3f;border-radius:12px;padding:13px 15px;
+  font-size:14px;line-height:1.7;color:#22461a}
 .jdlive .qlist{display:flex;flex-direction:column;gap:10px;margin:0 0 16px}
 .jdlive .qitem{background:var(--paper);border:1.5px solid var(--ink);border-radius:12px;padding:11px 13px;font-size:14px;line-height:1.6}
 .jdlive .qitem b{font-weight:800;margin-right:7px}
@@ -447,22 +453,45 @@ function jdacLiveInit(root){
             +(m.answered?'<i>會講到</i>':'')+'<b>'+esc(m.name)+'</b>'+esc(m.text)+'</div>';
         }).join('')+'</div>'
       : '<p class="qempty">還沒有人提問。第一個問的人，通常會被排在最前面講。</p>';
-    var box=!loggedIn
-      ? '<div class="askbox"><p style="margin:0 0 12px;font-size:14px;line-height:1.7"><b>想問問題？</b><br>免費註冊會員就能提問。</p>'
+    var a=S.ask||{limit:15,used:qs.length,left:Math.max(0,15-qs.length),full:false};
+    var quota='<div class="quota'+(a.full?' full':'')+'">'
+      +(a.full?'提問名額已滿':'還剩 <b>'+a.left+'</b> 個提問名額')
+      +'<span style="font-weight:400;color:var(--muted);font-size:12px">／共 '+a.limit+' 份</span></div>';
+
+    var box;
+    if(!loggedIn){
+      box='<div class="askbox"><p style="margin:0 0 12px;font-size:14px;line-height:1.7"><b>'
+        +(a.full?'想收到開播通知？':'想問問題？')+'</b><br>免費註冊會員就能'+(a.full?'預約':'提問')+'。</p>'
         +((EMBEDDED&&hasPageCode)
            ? '<button class="btn" id="jdLogin">登入 / 免費註冊</button>'
            : (EMBEDDED?'<p class="qempty" style="font-size:13px">提問功能設定中。</p>'
                       :'<a class="btn" href="'+SITE+'/live" target="_top">到官網直播頁</a>'))
-        +'<small>註冊後也會在開播前收到通知。</small></div>'
-      : '<div class="askbox">'
+        +'<small>'+(a.full
+            ?'名額滿了還是可以預約，開播前會寄信提醒你。'
+            :'註冊後也會在開播前收到通知。')+'</small></div>';
+    } else if(a.signedUp && a.full){
+      // 名額滿、而且他已經在名單上了
+      box='<div class="askbox"><div class="askdone"><b>已經幫你預約了</b><br>'
+        +'開播前一天晚上和開播前一小時各會寄一封提醒。當天直播的 QA 時間也可以直接發問。</div></div>';
+    } else if(a.full){
+      // 名額滿、還沒預約 → 轉成預約
+      box='<div class="askbox"><p style="margin:0 0 12px;font-size:14px;line-height:1.7">'
+        +'<b>這場的提問名額滿了。</b><br>還是可以預約，開播前會寄信提醒你；當天 QA 時間一樣能發問。</p>'
+        +'<button class="btn" id="jdSignup">預約這場直播</button>'
+        +'<p class="hint" id="jdAskHint"></p></div>';
+    } else {
+      box='<div class="askbox">'
         +'<textarea id="jdAsk" rows="3" maxlength="300" placeholder="你卡在哪？寫得越具體，越容易被挑到"></textarea>'
         +'<button class="btn" id="jdAskSend">送出問題</button>'
         +'<p class="hint" id="jdAskHint"></p>'
-        +'<small>Jacob 會挑幾題在直播裡講。問題會公開顯示在這一頁。</small></div>';
+        +'<small>Jacob 會挑幾題在直播裡講，收到後會寄一封確認信給你。問題會公開顯示在這一頁。</small></div>';
+    }
     return '<div class="ask"><div class="jd-in"><div class="askgrid">'
       +'<div class="askhead"><span class="eyebrow">ASK AHEAD / 先問</span>'
       +'<h3 class="arch">這一場想聽什麼？</h3>'
       +'<p>先把問題丟過來，我會照大家問的東西安排內容，挑幾題在直播裡直接講。</p>'
+      +quota
+      +'<div style="height:16px"></div>'
       +list+'</div>'
       +'<div>'+box+'</div>'
       +'</div></div></div>';
@@ -571,6 +600,12 @@ function jdacLiveInit(root){
             render(true);   // 未開播頁是低頻互動，重畫沒有草稿被洗掉的問題
             return;
           }
+          if(r&&r.reason==='ask-full'){
+            // 剛好在他打字的時候被別人搶走最後一個名額 → 直接把畫面換成預約
+            S.ask=S.ask||{}; S.ask.full=true; S.ask.left=0;
+            render(true);
+            return;
+          }
           if(hint) hint.textContent = !r ? '沒送出去，再試一次。'
             : r.reason==='too-fast' ? '慢一點，兩秒後再送。'
             : r.reason==='login-required' ? '請先登入。' : '沒送出去，再試一次。';
@@ -581,6 +616,20 @@ function jdacLiveInit(root){
         if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)){e.preventDefault();doAsk();}
       });
     }
+
+    // 名額滿了 → 預約（一樣要登入，不然沒辦法寄信給他）
+    var suBtn=$('#jdSignup');
+    if(suBtn) suBtn.addEventListener('click',function(){
+      if(!S.session) return;
+      var hint=$('#jdAskHint');
+      suBtn.disabled=true; if(hint) hint.textContent='';
+      action('live-signup',{sessionId:S.session.id}).then(function(r){
+        suBtn.disabled=false;
+        if(r&&r.ok){ S.ask=S.ask||{}; S.ask.signedUp=true; render(true); return; }
+        if(hint) hint.textContent = !r ? '沒送出去，再試一次。'
+          : r.reason==='login-required' ? '請先登入。' : '沒送出去，再試一次。';
+      });
+    });
 
     var lg=$('#jdLogin');
     if(lg) lg.addEventListener('click',function(){
