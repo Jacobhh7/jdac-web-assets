@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base target="_top"><style>html,body{margin:0;background:#f4f3ee}</style></head>
 <body><jdac-coachpage></jdac-coachpage><script src="./jdac-coachpage.js"></script>
-<script>/* best-effort：把內容高度回報給外層（Wix 若不收也無害）*/
-(function(){function h(){try{var d=document.documentElement,b=document.body;var H=Math.max(d.scrollHeight,b.scrollHeight,d.offsetHeight,b.offsetHeight);parent.postMessage({jdacHeight:H},'*');}catch(e){}}
+<script>/* 把內容高度回報給外層（masterPage.js 的 wireEmbedAutoHeight 收）。
+   ⚠️ jdacFrom 一定要帶：外層那支 `if (!d.jdacFrom) return;` 會把沒署名的訊息整則丟掉。
+   2026-08-18～2026-09-22 這兩頁就是漏了它，iframe 一直卡在編輯器的預設高度、內容在框裡自己捲。 */
+(function(){function h(){try{var d=document.documentElement,b=document.body;var H=Math.max(d.scrollHeight,b.scrollHeight,d.offsetHeight,b.offsetHeight);parent.postMessage({jdacFrom:'coachpage',jdacHeight:H},'*');}catch(e){}}
 window.addEventListener('load',h);setInterval(h,1200);})();</script>
 </body></html>
