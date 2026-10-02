@@ -47,8 +47,8 @@ const CAMP = {
   },
   cap: { max: 30, min: 15 },          // 每梯上限／開營門檻
   upgradeDays: 14,                    // 結營後幾天內升級可全額折抵
-  checkoutUrl:   '',                  // 台灣／海外結帳頁（綠界）；空字串＝按鈕先捲到價格區
-  checkoutUrlCn: ''                   // 大陸微信付款頁；空字串＝按鈕先捲到價格區
+  checkoutUrl:   'https://jdac-admin.vercel.app/camp',   // 台灣／海外結帳頁（綠界，只收信用卡）
+  checkoutUrlCn: ''                   // 大陸：不開結帳頁（大陸打不開），按鈕捲到下面的客服微信說明
 };
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -705,11 +705,11 @@ html,body{margin:0;background:#f4f3ee}
           <p class="due" data-until="earlyEnd">早鳥到 <b><span data-d="earlyEnd">10/8（四）</span><span data-v="times.earlyEnd">23:59</span></b>，之後恢復原價。</p>
           <p class="due" data-after="earlyEnd" hidden>報名到 <b><span data-d="regClose">10/16（五）</span></b>，額滿提前關閉。</p>
         </div>
-        <div class="pcard cn">
+        <div class="pcard cn" id="cn-pay">
           <div class="pk">大陸學員・微信付款</div>
           <div class="amt" data-until="earlyEnd"><span class="pn"><small>¥</small><span data-v="price.cnEarly">469</span></span><s>原價 ¥<span data-v="price.cnRegular">599</span></s></div>
           <div class="amt" data-after="earlyEnd" hidden><span class="pn"><small>¥</small><span data-v="price.cnRegular">599</span></span></div>
-          <p class="pd">用微信收款。付款後傳截圖，對完帳就幫你保留名額，營隊區跟台灣學員同一天開通。</p>
+          <p class="pd">加客服微信 <b style="font-family:'JetBrains Mono',monospace;user-select:all">jdac_drums</b>，說你要報名營隊，客服會給你付款方式；確認收款後幫你登記名額，營隊區跟台灣學員同一天開通。</p>
         </div>
       </div>
 
@@ -723,7 +723,7 @@ html,body{margin:0;background:#f4f3ee}
 
       <div class="pr-cta">
         <a class="cta main" href="#checkout" data-buy="tw" data-cta="camp-earlybird" data-cta-after="camp-regular"><span data-until="earlyEnd">早鳥報名・NT$<span data-v="price.twEarly">1,990</span></span><span data-after="earlyEnd" hidden>立即報名・NT$<span data-v="price.twRegular">2,490</span></span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
-        <a class="cta alt" href="#checkout" data-buy="cn" data-cta="camp-earlybird-cn" data-cta-after="camp-regular-cn">大陸學員・微信付款</a>
+        <a class="cta alt" href="#cn-pay" data-buy="cn" data-cta="camp-earlybird-cn" data-cta-after="camp-regular-cn">大陸學員・加客服微信報名</a>
       </div>
       <p class="micro"><b><span data-d="day0">10/18（日）</span></b>做前測，<b><span data-d="start">10/19（一）</span></b>正式開始。</p>
     </div>
@@ -772,7 +772,7 @@ html,body{margin:0;background:#f4f3ee}
       <div class="ans"><p>不會。影片每天都可以傳，我固定<b>每週兩次</b>（<span data-v="feedbackDays">週一、週四</span>）看完給回饋。每天練、每天錄，是讓你自己留下紀錄，我回的時候也看得出這幾天的變化。</p></div></details>
 
     <details><summary><span class="num">05</span><span class="qq">大陸學員怎麼付款？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p>用微信付款。人民幣早鳥 ¥<span data-v="price.cnEarly">469</span>，原價 ¥<span data-v="price.cnRegular">599</span>。</p><p>按「大陸學員・微信付款」照指示付款，付完傳截圖（要看得到金額和時間），對完帳就幫你保留名額，營隊區跟台灣學員同一天開通。有問題可以加客服微信 <b>jdac_drums</b>。</p></div></details>
+      <div class="ans"><p>用微信付款。人民幣早鳥 ¥<span data-v="price.cnEarly">469</span>，原價 ¥<span data-v="price.cnRegular">599</span>。</p><p>加客服微信 <b>jdac_drums</b>，說你要報名營隊，客服會給你付款方式。確認收款後幫你登記名額，營隊區跟台灣學員同一天開通。</p><p>大陸打不開刷卡結帳頁，所以大陸學員一律走客服微信。</p></div></details>
 
     <details><summary><span class="num">06</span><span class="qq">報名人數不夠怎麼辦？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
       <div class="ans"><p>每梯滿 <span data-v="cap.min">15</span> 人才開營。到報名截止（<span data-d="regClose">10/16（五）</span>）還不到 <span data-v="cap.min">15</span> 人，這一梯就不開，已經付的<b>全額退費</b>。</p></div></details>
@@ -865,7 +865,7 @@ html,body{margin:0;background:#f4f3ee}
   pg.setAttribute('data-phase', phase);
   pg.querySelectorAll('[data-buy]').forEach(function(el){
     var cn = el.getAttribute('data-buy') === 'cn';
-    if (phase === 'soon') { el.textContent = fmtMDW(C.dates.saleOpen) + ' ' + (C.times.saleOpen || '00:00') + ' 開賣' + (cn ? '・大陸微信付款' : ''); el.setAttribute('href', '#checkout'); el.classList.add('is-soon'); }
+    if (phase === 'soon') { el.textContent = fmtMDW(C.dates.saleOpen) + ' ' + (C.times.saleOpen || '00:00') + ' 開賣' + (cn ? '・大陸加微信報名' : ''); el.setAttribute('href', '#checkout'); el.classList.add('is-soon'); }
     else if (phase === 'closed') { el.textContent = '第 ' + C.cohort + ' 梯報名已截止'; el.removeAttribute('href'); el.classList.add('is-closed'); el.setAttribute('aria-disabled', 'true'); }
     else { var u = cn ? C.checkoutUrlCn : C.checkoutUrl; if (u) { el.setAttribute('href', u); el.setAttribute('target', '_blank'); el.setAttribute('rel', 'noopener'); } }
   });
