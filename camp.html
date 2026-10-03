@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>30 天運棒穩拍營｜JDAC</title>
-<meta name="description" content="給打了一段時間、手很緊、打不快、越打越累的鼓手。30 天線上營隊，每天 20 分鐘，Jacob 每週兩次看你的影片給回饋。">
+<title>運棒協調營・30 天｜JDAC</title>
+<meta name="description" content="給打了一段時間、手很緊、打不快、手腳對不起來的鼓手。30 天線上營隊，每天 40–60 分鐘，Jacob 每週五看你的影片給回饋。">
 <script>
 /* ═══════════════════════════════════════════════════════════════════
    營隊設定（第 1 梯）—— 改日期／時間／價格／名額，只改這一塊。
@@ -16,9 +16,9 @@ const CAMP = {
     demoLive:  '2026-10-17',          // 免費示範直播講座
     earlyEnd:  '2026-10-18',          // 早鳥最後一天（當天 times.earlyEnd 截止）＝示範講座隔天
     regClose:  '2026-10-23',          // 報名截止
-    day0:      '2026-10-25',          // 第 0 天：前測
+    day0:      '2026-10-25',          // 第 0 天：健檢＋節拍檢測＋一段演奏
     start:     '2026-10-26',          // 開營＝第 1 天
-    kickoff:   '2026-10-25',          // 開營前一晚：帳號開通＋VooV 線上聊天＋前測
+    kickoff:   '2026-10-25',          // 開營前一晚：帳號開通＋VooV 線上聊天＋第 0 天三件事
     retest:    '2026-11-22',          // 重測開放（第 28 天）
     day30:     '2026-11-24',          // 第 30 天：重測最後一天
     replyBy:   '2026-11-27',          // 個人對照回覆送到
@@ -31,12 +31,13 @@ const CAMP = {
     earlyEnd:   '23:59',
     weeklyLive: '21:00',               // 每週講解影片上架時間（錄好的，不是直播）
     kickoff:    '20:00',
-    dailyUpload:'23:59'                // 每天影片幾點前傳上來算當天有交
+    dailyUpload:'23:59'                // （目前頁面沒用到：每天上傳已改成選填）
   },
   weeklyLiveDay: 1,                   // 每週直播星期幾（0=日 1=一 … 4=四）
   weeklyLiveName: '週一',
   kickoffMinutes: 60,                 // 開營 VooV 聊天（VooV 免費版上限 60 分鐘）
-  feedbackDays: '週一、週四',          // Jacob 固定回饋的兩天
+  feedbackDays: '週五',                // Jacob 固定回饋的日子（每週一次，看這一週傳上來的影片）
+  beatCheckPerWeek: 2,                // 節拍檢測每週最多幾次
   demoMinutes: 90,
   liveUrl: 'https://www.jacobdrumemory.com/live',   // 示範講座：先到這裡登入留問題
   replayMonths: 3,                    // 結營後講解影片與紀錄還能看幾個月
@@ -95,7 +96,9 @@ html,body{margin:0;background:#f4f3ee}
 .jh-name{display:inline-flex;align-items:center;gap:10px;font-weight:900;font-size:clamp(15px,1.5vw,18px);letter-spacing:.06em;color:#0c0c0c;margin:0}
 .jh-name .no{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11px;letter-spacing:.1em;color:#fff;background:#0c0c0c;padding:3px 8px;border-radius:4px}
 .jh-head{font-family:"Archivo",sans-serif;font-style:italic;font-weight:900;font-size:clamp(46px,7vw,88px);line-height:.9;letter-spacing:-.022em;margin:14px 0 0;color:#0c0c0c}
+.jh-name .sb{font-weight:500;font-size:.86em;letter-spacing:.04em;color:#55524a}
 .jh-head .l2{display:block;color:#2563ff}
+.jh-head .l2.fit{font-size:.8em}
 .jh-head .l3{display:block;font-size:.46em;margin-top:10px;letter-spacing:-.01em}
 .jh-hook{font-weight:900;font-size:clamp(24px,3vw,38px);line-height:1.34;letter-spacing:-.01em;margin:24px 0 0;max-width:620px;color:#0c0c0c}
 .jh-hook em{font-style:normal;color:#2563ff;display:inline-block}
@@ -190,7 +193,7 @@ html,body{margin:0;background:#f4f3ee}
 .dm-facts .v{font-size:15px;font-weight:700;line-height:1.55}
 .dm-facts .v small{display:block;font-weight:400;font-size:12.5px;color:#8a8579}
 
-/* ═══ DAILY 每天 20 分鐘 ═══ */
+/* ═══ DAILY 每天 40–60 分鐘 ═══ */
 .dy{padding:clamp(44px,5vw,72px) 0}
 .dy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:22px;margin-top:32px}
 .dy-step{border-top:2px solid #0c0c0c;padding-top:16px}
@@ -201,6 +204,17 @@ html,body{margin:0;background:#f4f3ee}
 .dy-step .sd{font-size:14.5px;color:#55524a;margin-top:8px;line-height:1.8}
 .dy-note{font-size:clamp(15px,1.4vw,17px);line-height:1.85;color:#3a3a36;margin:32px 0 0;padding-top:18px;border-top:1.5px solid #0c0c0c;max-width:760px}
 .dy-note b{color:#2563ff}
+/* 節拍檢測 */
+.bt{margin-top:30px;background:#fff;border:1.5px solid #0c0c0c;border-radius:16px;box-shadow:6px 7px 0 #2563ff;padding:clamp(20px,3vw,32px);display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,360px);gap:clamp(18px,3vw,44px);align-items:start}
+.bt h3{font-weight:900;font-size:clamp(19px,2vw,24px);margin:14px 0 0;line-height:1.4;color:#0c0c0c}
+.bt p{font-size:clamp(15px,1.4vw,16px);line-height:1.85;color:#3a3a36;margin:10px 0 0}
+.bt p b{color:#0c0c0c}
+.bt p.fine{font-size:13.5px;color:#8a8579}
+.bt ol{list-style:none;margin:0;padding:0;border-top:1.5px solid #0c0c0c;counter-reset:bt}
+.bt li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;padding:11px 0;border-bottom:1px dashed #d8d5cc;font-size:14.5px;line-height:1.6;color:#3a3a36;counter-increment:bt}
+.bt li:before{content:counter(bt,decimal-leading-zero);font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;color:#2563ff;padding-top:2px}
+.bt li:last-child{border-bottom:0}
+.bt li b{color:#0c0c0c}
 
 /* ═══ DRUM-LAB 黑色監聽：四週課表 ═══ */
 .band-dark{background:#0a0a0a;color:#e8eaf0;font-family:"JetBrains Mono","Noto Sans TC",monospace}
@@ -392,6 +406,7 @@ html,body{margin:0;background:#f4f3ee}
   .wy-grid{grid-template-columns:1fr}
   .wy-photo{max-width:320px;transform:none}
   .dm-panel{grid-template-columns:1fr}
+  .bt{grid-template-columns:1fr}
   .af-grid{grid-template-columns:1fr}
   .ft-cta .jd-in{grid-template-columns:1fr}
   .ft-bar .cr{margin-left:0;width:100%}
@@ -432,15 +447,15 @@ html,body{margin:0;background:#f4f3ee}
   <!-- ═══ HERO ═══ -->
   <section class="hero"><div class="jd-in">
     <div class="jh-top">
-      <span class="jh-tag"><span class="dot"></span>30-Day Stick Camp</span>
+      <span class="jh-tag"><span class="dot"></span>30-Day Stick &amp; Coordination Camp</span>
       <span class="jh-idx">COHORT <b>01</b> · <span data-d="start">10/19（一）</span>開營</span>
     </div>
     <div class="jh-grid">
       <div>
-        <p class="jh-name"><span class="no">NO.01</span>30 天運棒穩拍營</p>
-        <h1 class="jh-head"><span class="sr">30 天運棒穩拍營：</span>30 DAYS<span class="l2">STICK CAMP</span><span class="l3">STOP BRAKING.</span></h1>
+        <p class="jh-name"><span class="no">NO.01</span>運棒協調營<span class="sb">調整運棒・協調演奏</span></p>
+        <h1 class="jh-head"><span class="sr">運棒協調營・30 天：調整運棒、協調演奏。</span>STICK &amp;<span class="l2 fit">COORDINATION</span><span class="l3">30-DAY CAMP.</span></h1>
         <p class="jh-hook">你以為打不快是手不夠快，<br>其實是<em>每一下都在煞車。</em></p>
-        <p class="jh-tagline">每天 20 分鐘，跟著我把手放掉、把拍子放穩。開營前測一次、第 30 天再測一次，<b>差多少，你自己看得到</b>。</p>
+        <p class="jh-tagline">每天 40–60 分鐘，跟著我先把運棒調好，再把手跟腳接起來。開營前測一次、第 30 天再測一次，<b>差多少，你自己看得到</b>。</p>
         <div class="jh-cta">
           <a class="btn p" href="#checkout" data-buy="tw" data-cta="camp-earlybird" data-cta-after="camp-regular"><span data-until="earlyEnd">早鳥報名</span><span data-after="earlyEnd" hidden>立即報名</span> <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
           <a class="btn s" href="#demo" data-until="demoLive"><span data-d="demoLive" data-f="md">10/17</span> 免費直播講座</a>
@@ -455,10 +470,10 @@ html,body{margin:0;background:#f4f3ee}
         <div class="tk-row"><span class="d" data-d="demoLive">10/8（四）</span><span class="e">免費直播講座 <span data-v="times.demoLive">15:00</span><small>回答大家的問題，先到 /live 留問題</small></span></div>
         <div class="tk-row"><span class="d" data-d="earlyEnd">10/18（日）</span><span class="e">早鳥截止 <span data-v="times.earlyEnd">23:59</span></span></div>
         <div class="tk-row"><span class="d" data-d="regClose">10/16（五）</span><span class="e">報名截止<small>額滿會提前關閉</small></span></div>
-        <div class="tk-row"><span class="d" data-d="kickoff">10/25（日）</span><span class="e">開通＋線上開營 <span data-v="times.kickoff">20:00</span><small>VooV 跟大家聊聊，接著做前測</small></span></div>
+        <div class="tk-row"><span class="d" data-d="kickoff">10/25（日）</span><span class="e">開通＋線上開營 <span data-v="times.kickoff">20:00</span><small>VooV 跟大家聊聊，接著做第 0 天的三件事</small></span></div>
         <div class="tk-row hl"><span class="d" data-d="start">10/19（一）</span><span class="e">開營・第 1 天</span></div>
-        <div class="tk-row"><span class="d">每週一、四</span><span class="e">Jacob 看影片、給回饋<small>每<span data-v="weeklyLiveName">週一</span> <span data-v="times.weeklyLive">21:00</span> 講解影片上架</small></span></div>
-        <div class="tk-row"><span class="d" data-d="day30">11/24（二）</span><span class="e">第 30 天：重測截止<small>第 28～30 天重做前測三件事</small></span></div>
+        <div class="tk-row"><span class="d">每<span data-v="feedbackDays">週五</span></span><span class="e">Jacob 看這週的影片、給回饋<small>下週一 <span data-v="times.weeklyLive">21:00</span> 講解影片上架</small></span></div>
+        <div class="tk-row"><span class="d" data-d="day30">11/24（二）</span><span class="e">第 30 天：重測截止<small>第 28～30 天重做節拍檢測、重錄那段演奏</small></span></div>
         <div class="tk-row"><span class="d" data-d="replyBy">11/27（五）</span><span class="e">個人對照回覆送到</span></div>
         <div class="tk-row"><span class="d" data-d="closeLive">11/29（日）</span><span class="e">結營影片上架</span></div>
         <p class="tk-ft">每梯上限 <b><span data-v="cap.max">30</span> 人</b>，滿 <b><span data-v="cap.min">15</span> 人</b>開營。</p>
@@ -467,8 +482,8 @@ html,body{margin:0;background:#f4f3ee}
 
     <div class="jh-stat">
       <div class="st"><div class="v">30<small>DAYS</small></div><div class="k">全梯同一天開營</div></div>
-      <div class="st"><div class="v">20<small>MIN</small></div><div class="k">每天大約練這麼久</div></div>
-      <div class="st"><div class="v o">2×<small>/WEEK</small></div><div class="k">Jacob 親自看影片、給回饋</div></div>
+      <div class="st"><div class="v">40–60<small>MIN</small></div><div class="k">每天大約練這麼久</div></div>
+      <div class="st"><div class="v o">1×<small>/WEEK</small></div><div class="k">每<span data-v="feedbackDays">週五</span> Jacob 親自看影片、給回饋</div></div>
       <div class="st"><div class="v"><span data-v="cap.max">30</span><small>MAX</small></div><div class="k">每梯人數上限</div></div>
     </div>
   </div></section>
@@ -484,7 +499,7 @@ html,body{margin:0;background:#f4f3ee}
       <button type="button" class="pn-card" aria-pressed="false"><span class="n">03</span><span class="tx">越想打快，手就越緊。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
       <button type="button" class="pn-card" aria-pressed="false"><span class="n">04</span><span class="tx">自己打覺得還好，一開節拍器就飄。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
       <button type="button" class="pn-card" aria-pressed="false"><span class="n">05</span><span class="tx">運棒影片看了很多，一坐上鼓又回到老樣子。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
-      <button type="button" class="pn-card" aria-pressed="false"><span class="n">06</span><span class="tx">練了一陣子沒進步，也不知道還能換什麼方法。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
+      <button type="button" class="pn-card" aria-pressed="false"><span class="n">06</span><span class="tx">一加上大鼓，手就亂掉，手腳對不起來。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
     </div>
     <p class="pn-count" id="pnCount" aria-live="polite">這幾個看起來不一樣，很多時候是同一個原因。往下看。</p>
   </div></section>
@@ -502,7 +517,7 @@ html,body{margin:0;background:#f4f3ee}
           <q>丟下去，聽音量。<br><em>有聲音，就是在出力、在煞車。</em></q>
           <cite>— JACOB · 上課很常講的一句</cite>
         </blockquote>
-        <p class="last">這 30 天，第一件事就是把煞車放掉。放掉了，再來練快、練穩。</p>
+        <p class="last">這 30 天，第一週就是把運棒調好、把煞車放掉。手順了，再加大鼓、練輕重音，最後讓手跟腳一起動。</p>
       </div>
       <figure class="wy-photo" aria-hidden="true" style="margin:8px 0 0">
         <span class="im" style="background-image:url('https://static.wixstatic.com/media/1a91b2_1e92d8180af344d9964f182bc39876ef~mv2.jpg/v1/fill/w_680,h_820,al_c,q_85,enc_auto/jacob.jpg')"></span>
@@ -569,15 +584,31 @@ html,body{margin:0;background:#f4f3ee}
   <!-- ═══ DAILY ═══ -->
   <section class="dy" aria-labelledby="dy-h"><div class="jd-in">
     <span class="eb">How it runs / 30 天怎麼跑</span>
-    <h2 class="sec-h" id="dy-h">每天 20 分鐘，<em>四件事</em>。</h2>
-    <p class="sub">全部在學員專區的營隊區完成。跟練影片、上傳、每週講解，都在同一個地方。</p>
+    <h2 class="sec-h" id="dy-h">每天 40–60 分鐘，<em>四件事</em>。</h2>
+    <p class="sub">全部在學員專區的營隊區完成。暖身影片、每天的課、上傳、每週講解，都放在同一個地方，不用另外去找。</p>
     <div class="dy-grid">
-      <div class="dy-step"><div class="top"><span class="sn">01</span><span class="tm">FOLLOW-ALONG</span></div><div class="sh">跟練影片打一支</div><div class="sd">跟著我的運棒跟練影片打。A 練習是 1100 下跟打，B 練習是 Stick Control，兩支輪流。</div></div>
-      <div class="dy-step"><div class="top"><span class="sn">02</span><span class="tm">5 MIN</span></div><div class="sh">本週重點</div><div class="sd">每週一個重點，每天花 5 分鐘練它。第一週是放掉，第二週是彈，後面照課表走。</div></div>
-      <div class="dy-step"><div class="top"><span class="sn">03</span><span class="tm">2 MIN</span></div><div class="sh">節拍器捉迷藏</div><div class="sd">練功房的小遊戲。節拍器響一段、然後靜音，你自己撐住，看拍子飄多少。當作每天的穩拍檢查。</div></div>
-      <div class="dy-step"><div class="top"><span class="sn">04</span><span class="tm">20 SEC</span></div><div class="sh">拍 20 秒，傳上來</div><div class="sd">每天我會指定拍哪一段。手機放側面、拍到手肘，用手機相機拍好，再從相簿選影片上傳。當天 <span data-v="times.dailyUpload">23:59</span> 前傳上來，就算當天有交。</div></div>
+      <div class="dy-step"><div class="top"><span class="sn">01</span><span class="tm">WARM-UP</span></div><div class="sh">暖身</div><div class="sd">跟著「運棒優化」A 或 B 練習打一支，手先熱開。</div></div>
+      <div class="dy-step"><div class="top"><span class="sn">02</span><span class="tm">WATCH</span></div><div class="sh">看當天的課</div><div class="sd">營隊區每天都有當天的課。看完，就知道今天要練什麼。</div></div>
+      <div class="dy-step"><div class="top"><span class="sn">03</span><span class="tm">PRACTICE</span></div><div class="sh">照指示練</div><div class="sd">照課裡講的練。速度多少、練幾遍、要不要開節拍器，課裡都會講。</div></div>
+      <div class="dy-step"><div class="top"><span class="sn">04</span><span class="tm">OPTIONAL</span></div><div class="sh">想給我看，就拍一段傳上來</div><div class="sd">選填，不傳也可以。手機放側面、拍到手肘，用手機相機拍好，再從相簿選影片上傳。有幾天我會請大家錄一整張譜。</div></div>
     </div>
-    <p class="dy-note">影片每天都可以傳。我<b>每週看兩次、回兩次</b>（<span data-v="feedbackDays">週一、週四</span>）。大家同一天開營、同一天結營，<span data-v="weeklyLiveName">週一</span>的講解影片裡，你會看到別人卡在哪，很多時候跟你是同一個地方。</p>
+    <p class="dy-note">影片哪一天都可以傳。我<b>每<span data-v="feedbackDays">週五</span>看一次、回一次</b>，看的是你這一週傳上來的影片。大家同一天開營、同一天結營，週五我看到大家常卡的地方，會整理進<span data-v="weeklyLiveName">週一</span>的講解影片。你會發現，別人卡住的地方很多時候跟你一樣。</p>
+
+    <div class="bt" id="beatcheck">
+      <div>
+        <span class="otag b">BEAT CHECK / 節拍檢測</span>
+        <h3>拍子穩不穩，<br>錄下來看看。</h3>
+        <p>營隊期間，節拍檢測<b>每週最多用 <span data-v="beatCheckPerWeek">2</span> 次</b>，什麼時候測你自己挑。</p>
+        <p>選好要測的練習，輸入 BPM 和你怎麼打的，把錄好的檔案傳上去。結果會告訴你哪裡搶拍、哪裡拖拍，手跟大鼓在哪裡對不齊。</p>
+        <p class="fine">這是給你練習參考用的。每<span data-v="feedbackDays">週五</span>我回饋的時候，也會一起看你的檢測結果。</p>
+      </div>
+      <ol>
+        <li><span><b>選練習</b>：這次要測哪一個。</span></li>
+        <li><span><b>輸入 BPM 和打法</b>：幾速、用什麼方式打。</span></li>
+        <li><span><b>錄好，傳上去</b>：照你剛剛填的速度和打法錄。</span></li>
+        <li><span><b>看結果</b>：搶拍、拖拍，還有手腳哪裡分開了。</span></li>
+      </ol>
+    </div>
   </div></section>
 
   <!-- ═══ 四週課表（DRUM-LAB 黑色監聽） ═══ -->
@@ -585,51 +616,51 @@ html,body{margin:0;background:#f4f3ee}
     <div class="tick" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <section class="lc" aria-labelledby="lc-h"><div class="jd-in">
       <div class="scope" aria-hidden="true"><span class="l1">● CAMP MONITOR — DAY 00 → DAY 30</span><span class="l2">4 WEEKS</span><svg viewBox="0 0 1180 46" preserveAspectRatio="none"><polyline class="wave" fill="none" stroke="#2563ff" stroke-width="1.4" points="0,23 60,23 90,8 120,40 150,15 180,30 220,23 290,23 320,6 350,42 380,18 410,28 450,23 520,23 550,12 580,38 610,9 640,40 670,20 700,28 740,23 820,23 850,7 880,41 910,16 940,32 980,23 1060,23 1090,11 1120,38 1150,14 1180,23"/></svg></div>
-      <div class="sechead"><h2 id="lc-h">FOUR WEEKS / <span>四週課表</span></h2><span class="note">放掉 → 彈 → 穩 → 整合</span></div>
-      <p class="lead">一週只練一件事，一層一層疊上去。第 0 天跟第 30 天做一樣的測驗，中間四週照順序走。</p>
+      <div class="sechead"><h2 id="lc-h">FOUR WEEKS / <span>四週課表</span></h2><span class="note">運棒優化 → 大鼓 → 輕重音 → 應用</span></div>
+      <p class="lead">一週一個主題，一層一層疊上去。第 0 天跟第 30 天做一樣的檢測，中間四週照順序走。</p>
       <div class="lc-grid">
         <div class="track key"><div class="ch">DAY<b>00</b></div><div>
-          <div class="tt">前測 <span>Baseline · <i data-d="day0" data-f="md" style="font-style:normal">10/18</i></span></div>
-          <div class="td">開營前一天，做三件事：<b>27 題鼓手能力健檢</b>、錄一段 <b>60 秒基準影片</b>、截一張<b>捉迷藏分數</b>。</div>
-          <div class="chips"><span>慢速運棒</span><span>節拍器 80 八分接十六分</span><span>你能穩定打的最快速度</span></div>
+          <div class="tt">第 0 天 <span>Baseline · <i data-d="day0" data-f="md" style="font-style:normal">10/25</i></span></div>
+          <div class="td">開營前一天，做三件事：① <b>27 題鼓手能力健檢</b>。② <b>單擊八分 80</b>，節拍器外放，打 8 小節，傳到「節拍檢測」，這段也是你的起點影片。③ <b>演奏一首歌或一段節奏</b>，1 分鐘內，我看你全身打起來自不自然。</div>
+          <div class="chips"><span>能力健檢 27 題</span><span>單擊八分 80・8 小節</span><span>一首歌或一段節奏</span></div>
           <div class="meter"><span class="pk"></span><span></span><span></span><span></span><span></span><em>BASELINE</em></div>
         </div></div>
         <div class="track"><div class="ch">WEEK<b>01</b></div><div>
-          <div class="tt">放掉 <span>Let go</span></div>
-          <div class="td">先把煞車放掉。用慢速運棒把每一下的動作放鬆，三種基本握棒一起整理好。</div>
-          <div class="chips"><span>慢速運棒</span><span>三種基本握棒</span><span>不煞車</span></div>
+          <div class="tt">運棒優化 <span>Stick tune-up</span></div>
+          <div class="td">先把德式、Power Grip、Free Stroke 整理好，再接 Stick Control。每天跟練「運棒優化」A／B 練習。</div>
+          <div class="chips"><span>德式</span><span>Power Grip</span><span>Free Stroke</span><span>Stick Control</span><span>運棒優化 A／B</span></div>
           <div class="meter"><span class="on"></span><span></span><span></span><span></span><span></span><em>LV 1 / 4</em></div>
         </div></div>
         <div class="track"><div class="ch">WEEK<b>02</b></div><div>
-          <div class="tt">彈 <span>Bounce</span></div>
-          <div class="td">讓棒子彈起來，再學控制它停在哪裡。四種運棒練熟，輕重音就從這裡出來。</div>
-          <div class="chips"><span>Fall</span><span>Down</span><span>Tap</span><span>Up</span><span>輕重音</span></div>
+          <div class="tt">法式／美式＋大鼓 <span>Grips &amp; Kick</span></div>
+          <div class="td">手換成法式、美式運棒。腳開始練大鼓：Heel Up、Closed Tone。接著大鼓加進 Basic Grid 和 New Breed。</div>
+          <div class="chips"><span>法式</span><span>美式</span><span>Heel Up</span><span>Closed Tone</span><span>大鼓＋Basic Grid</span><span>大鼓＋New Breed</span></div>
           <div class="meter"><span class="on"></span><span class="on"></span><span></span><span></span><span></span><em>LV 2 / 4</em></div>
         </div></div>
         <div class="track"><div class="ch">WEEK<b>03</b></div><div>
-          <div class="tt">穩 <span>Lock in</span></div>
-          <div class="td">把手放到節拍器上。Stick Control 配階梯法：<b>4 小節全乾淨才 +4 BPM，失誤就退 8</b>。</div>
-          <div class="chips"><span>Stick Control</span><span>階梯法</span><span>節拍器</span></div>
+          <div class="tt">輕重音入門 <span>Accents</span></div>
+          <div class="td">四種運棒 Full、Down、Tap、Up，用 Basic Grid 和 New Breed 練輕重音。同一週開始 <b>14 天協調衝刺，第 1–7 天</b>。</div>
+          <div class="chips"><span>Full</span><span>Down</span><span>Tap</span><span>Up</span><span>Basic Grid</span><span>New Breed</span><span>協調衝刺 1–7</span></div>
           <div class="meter"><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span><em>LV 3 / 4</em></div>
         </div></div>
         <div class="track"><div class="ch">WEEK<b>04</b></div><div>
-          <div class="tt">整合 <span>Put it together</span></div>
-          <div class="td">雙擊、雙手協調，把前三週的東西接起來。<b>第 28–30 天，重錄第 1 天那一段。</b></div>
-          <div class="chips"><span>雙擊</span><span>雙手協調</span><span>重錄第 1 天</span></div>
+          <div class="tt">進階輕重音＋應用 <span>Put it to music</span></div>
+          <div class="td">輕重音加上前臂，再練移位，最後用到節奏和過門裡。<b>14 天協調衝刺，第 8–14 天</b>。第 28–30 天，重做第 0 天那兩段。</div>
+          <div class="chips"><span>加前臂</span><span>移位</span><span>節奏</span><span>過門</span><span>協調衝刺 8–14</span></div>
           <div class="meter"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><em>LV 4 / 4</em></div>
         </div></div>
         <div class="track key"><div class="ch">DAY<b>30</b></div><div>
-          <div class="tt">重測＋對照回覆 <span>Replay · <i data-d="day30" data-f="md" style="font-style:normal">11/17</i></span></div>
-          <div class="td">第 0 天那三樣全部重做。我把你第 1 天和第 30 天的影片並排看，<b>錄一段只給你的回覆</b>，告訴你下一步。</div>
-          <div class="chips"><span>健檢重做</span><span>60 秒重錄</span><span>捉迷藏重測</span></div>
+          <div class="tt">重測＋對照回覆 <span>Replay · <i data-d="day30" data-f="md" style="font-style:normal">11/24</i></span></div>
+          <div class="td">單擊八分 80 再傳一次節拍檢測，那首歌或那段節奏再錄一次，健檢也再做一次。我把你第 0 天和第 30 天的影片並排看，<b>錄一段只給你的回覆</b>，<span data-d="replyBy" data-f="md">11/27</span> 前送到。</div>
+          <div class="chips"><span>節拍檢測重測</span><span>演奏重錄</span><span>健檢重做</span><span>影片並排</span></div>
           <div class="meter"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="pk"></span><em>PEAK</em></div>
         </div></div>
       </div>
       <div class="live">
         <span class="lb"><i></i>WEEKLY</span>
         <span class="when">每<span data-v="weeklyLiveName">週一</span> <span data-v="times.weeklyLive">21:00</span> 講解影片上架</span>
-        <span class="dates" id="liveDates"><span>10/22</span><span>10/29</span><span>11/5</span><span>11/12</span><span class="end">結營 11/19</span></span>
-        <span class="rp">我挑大家上一週的影片，一拍一拍拆給全梯看。錄好的影片，什麼時候看都可以，留在營隊區，只有這一梯看得到。</span>
+        <span class="dates" id="liveDates"><span>11/2</span><span>11/9</span><span>11/16</span><span>11/23</span><span class="end">結營影片 11/29</span></span>
+        <span class="rp">週五我看完大家這一週的影片，把常見的問題整理起來，一拍一拍拆給全梯看。錄好的影片，什麼時候看都可以，留在營隊區，只有這一梯看得到。</span>
       </div>
     </div></section>
   </div>
@@ -639,14 +670,15 @@ html,body{margin:0;background:#f4f3ee}
     <span class="eb">What you get / 你會拿到什麼</span>
     <h2 class="sec-h" id="gt-h">你練，我看。</h2>
     <div class="svc-grid">
-      <div class="svc-card hl"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="st">每週兩次回饋，我親自看</div><div class="sd">影片每天都可以傳。我每週<b><span data-v="feedbackDays">週一、週四</span></b>固定看、固定回，告訴你哪裡還在出力、下一步調什麼。</div></div>
-      <div class="svc-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3"/></svg></div><div class="st">每<span data-v="weeklyLiveName">週一</span> <span data-v="times.weeklyLive">21:00</span> 講解影片</div><div class="sd">我挑學員上一週的影片，一拍一拍拆給大家看，也回答大家留的問題。錄好的，什麼時候看都可以。</div></div>
-      <div class="svc-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="9" height="14" rx="1.5"/><rect x="13" y="5" width="9" height="14" rx="1.5"/></svg></div><div class="st">第 30 天，一段只給你的回覆</div><div class="sd">你的第 1 天和第 30 天並排放，我看完錄一段回覆給你本人：改了什麼、還差什麼、下一步練什麼。</div></div>
+      <div class="svc-card hl"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="st">每<span data-v="feedbackDays">週五</span>回饋一次，我親自看</div><div class="sd">影片哪一天都可以傳。每<b><span data-v="feedbackDays">週五</span></b>我把你這一週傳上來的影片和節拍檢測結果看過，告訴你哪裡還在出力、下一步調什麼。</div></div>
+      <div class="svc-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3"/></svg></div><div class="st">每<span data-v="weeklyLiveName">週一</span> <span data-v="times.weeklyLive">21:00</span> 講解影片</div><div class="sd">週五看到大家常卡的地方，我整理起來，一拍一拍拆給大家看，也回答大家留的問題。錄好的，什麼時候看都可以。</div></div>
+      <div class="svc-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="9" height="14" rx="1.5"/><rect x="13" y="5" width="9" height="14" rx="1.5"/></svg></div><div class="st">第 30 天，一段只給你的回覆</div><div class="sd">你第 0 天和第 30 天的影片並排放，我看完錄一段回覆給你本人：改了什麼、還差什麼、下一步練什麼。<span data-d="replyBy">11/27（五）</span>前送到。</div></div>
       <div class="svc-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="st">30 天內開放的練習工具</div>
         <ul>
-          <li>學員專區裡的營隊區</li>
-          <li>運棒課程影片</li>
-          <li>14 天協調衝刺 <small>（精選幾天）</small></li>
+          <li>學員專區裡的營隊區 <small>：每天的課、暖身影片都在這裡</small></li>
+          <li>「運棒優化」A／B 跟練影片</li>
+          <li>節拍檢測 <small>（每週最多 <span data-v="beatCheckPerWeek">2</span> 次）</small></li>
+          <li>14 天協調衝刺 <small>（第 3、4 週跟著跑完）</small></li>
           <li>練功房節奏遊戲</li>
           <li>AI 課程助理 <small>：平台怎麼用、練習卡在哪，都可以問</small></li>
         </ul>
@@ -656,12 +688,12 @@ html,body{margin:0;background:#f4f3ee}
     <div class="ba">
       <div class="ba-hd"><span class="otag k">BEFORE / AFTER</span><h3>第 0 天和第 30 天，做一樣的三件事</h3></div>
       <div class="ba-tb" role="table" aria-label="前後測項目">
-        <div class="ba-row h" role="row"><span role="columnheader">項目</span><span role="columnheader">DAY 0 · <i data-d="day0" data-f="md" style="font-style:normal">10/18</i></span><span class="d30" role="columnheader">DAY 30 · <i data-d="day30" data-f="md" style="font-style:normal">11/17</i></span></div>
+        <div class="ba-row h" role="row"><span role="columnheader">項目</span><span role="columnheader">DAY 0 · <i data-d="day0" data-f="md" style="font-style:normal">10/25</i></span><span class="d30" role="columnheader">DAY 30 · <i data-d="day30" data-f="md" style="font-style:normal">11/24</i></span></div>
         <div class="ba-row" role="row"><span class="it" role="cell">鼓手能力健檢<small>27 題</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>你的結果</span><span class="cell d30" role="cell"><span class="m">DAY 30</span>你的結果</span></div>
-        <div class="ba-row" role="row"><span class="it" role="cell">60 秒基準錄影<small>慢速運棒／節拍器 80 八分接十六分／你能穩定打的最快速度</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>▶ 第一次錄</span><span class="cell d30" role="cell"><span class="m">DAY 30</span>▶ 同樣再錄</span></div>
-        <div class="ba-row" role="row"><span class="it" role="cell">節拍器捉迷藏<small>練功房分數截圖</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>你的分數</span><span class="cell d30" role="cell"><span class="m">DAY 30</span>你的分數</span></div>
+        <div class="ba-row" role="row"><span class="it" role="cell">節拍檢測<small>單擊八分 80，節拍器外放，8 小節</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>▶ 起點影片</span><span class="cell d30" role="cell"><span class="m">DAY 30</span>▶ 同樣再測</span></div>
+        <div class="ba-row" role="row"><span class="it" role="cell">一首歌或一段節奏<small>1 分鐘內，看全身打起來自不自然</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>▶ 第一次錄</span><span class="cell d30" role="cell"><span class="m">DAY 30</span>▶ 影片並排</span></div>
       </div>
-      <p class="ba-cap">兩次用同一套題目、同樣的錄法。<b>進步多少，看你自己的數字</b>，不用聽我說。</p>
+      <p class="ba-cap">兩次用同樣的題目、同樣的錄法。<b>差多少，你自己看得到</b>。影片我會並排看，再錄一段回覆給你。</p>
     </div>
 
     <p class="gt-not"><b>營隊裡沒有的：</b>教練課的其他課程、講座、動態鼓譜。這些要升級線上教練課才會打開。</p>
@@ -678,12 +710,13 @@ html,body{margin:0;background:#f4f3ee}
         <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span>手很緊、越打越累</span></div>
         <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span>速度上不去，一快就亂</span></div>
         <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span>跟節拍器，拍子會飄</span></div>
-        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span>每天擠得出 20 分鐘，<b>願意錄 20 秒給我看</b></span></div>
+        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span>加上大鼓，手腳就對不起來</span></div>
+        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span>每天擠得出 40–60 分鐘，<b>願意拍影片給我看</b></span></div>
       </div>
       <div class="col no">
         <p class="ct">先別報，如果——</p>
         <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b3b0a6" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg><span>完全沒打過鼓。建議先從線上教練課的 Pre-school 開始</span></div>
-        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b3b0a6" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg><span>想學歌、學過門、學新節奏。這 30 天只練手跟拍子</span></div>
+        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b3b0a6" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg><span>想學新歌、學很多新節奏。這 30 天主要練運棒和手腳協調</span></div>
         <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b3b0a6" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg><span>想三天變快，不打算每天練</span></div>
         <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b3b0a6" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg><span>手邊沒有鼓，也沒有打點板</span></div>
       </div>
@@ -693,7 +726,7 @@ html,body{margin:0;background:#f4f3ee}
   <!-- ═══ PRICE ═══ -->
   <section class="pr" id="checkout" aria-labelledby="pr-h"><div class="jd-in">
     <div class="panel">
-      <span class="otag b">COHORT 01 / 第 1 梯報名</span>
+      <span class="otag b">COHORT 01 / 運棒協調營・第 1 梯報名</span>
       <h2 id="pr-h">第 1 梯，<span data-v="cap.max">30</span> 個位置。</h2>
       <p class="lead">影片我要一支一支看，每週講解也只講得到這麼多人，所以一梯最多 <span data-v="cap.max">30</span> 人。滿 <span data-v="cap.min">15</span> 人開營。</p>
 
@@ -713,7 +746,7 @@ html,body{margin:0;background:#f4f3ee}
         </div>
       </div>
 
-      <p class="incl">含：<b>30 天營隊區</b>｜運棒跟練影片｜<b>Jacob 每週兩次回饋</b>｜每週講解影片｜線上開營｜<b>第 30 天對照回覆</b>｜前後測｜練功房｜AI 課程助理</p>
+      <p class="incl">含：<b>30 天營隊區</b>｜每天的課＋運棒優化跟練影片｜<b>Jacob 每週五回饋</b>｜每週講解影片｜節拍檢測｜線上開營｜<b>第 30 天對照回覆</b>｜前後測｜練功房｜AI 課程助理</p>
 
       <div class="facts">
         <div><div class="k">每梯上限</div><div class="v"><span data-v="cap.max">30</span> 人</div></div>
@@ -725,7 +758,7 @@ html,body{margin:0;background:#f4f3ee}
         <a class="cta main" href="#checkout" data-buy="tw" data-cta="camp-earlybird" data-cta-after="camp-regular"><span data-until="earlyEnd">早鳥報名・NT$<span data-v="price.twEarly">1,990</span></span><span data-after="earlyEnd" hidden>立即報名・NT$<span data-v="price.twRegular">2,490</span></span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
         <a class="cta alt" href="#cn-pay" data-buy="cn" data-cta="camp-earlybird-cn" data-cta-after="camp-regular-cn">大陸學員・加客服微信報名</a>
       </div>
-      <p class="micro"><b><span data-d="day0">10/18（日）</span></b>做前測，<b><span data-d="start">10/19（一）</span></b>正式開始。</p>
+      <p class="micro"><b><span data-d="day0">10/18（日）</span></b>做第 0 天的三件事，<b><span data-d="start">10/26（一）</span></b>正式開始。</p>
     </div>
   </div></section>
 
@@ -735,18 +768,18 @@ html,body{margin:0;background:#f4f3ee}
       <div class="af-body">
         <span class="eb">After day 30 / 結營之後</span>
         <h2 class="sec-h" id="af-h">手順了，<br>接下來練什麼？</h2>
-        <p>30 天練的是手跟拍子。手順了，接下來就是節奏、過門、歌。</p>
+        <p>30 天練的是運棒和手腳協調。手腳順了，接下來就是更多節奏、過門、歌。</p>
         <p>線上教練課是每週交作業，我每週親自批改、回覆。到現在我已經<b>批改超過 3,000 份作業</b>，整套課程庫也會一起打開。</p>
         <p class="credit">結營後 <b><span data-v="upgradeDays">14</span> 天內</b>升級線上教練課（三個月 NT$<span data-v="price.upTw">8,250</span>／大陸 ¥<span data-v="price.upCn">2,250</span>），<b>你付的營隊費全額折抵</b>。</p>
         <p>不升級也完全沒關係。30 天練下來的東西是你的，照著練就好。</p>
       </div>
       <div class="cmp-wrap">
         <table>
-          <thead><tr><th></th><th>30 天運棒穩拍營</th><th class="c2">線上教練課</th></tr></thead>
+          <thead><tr><th></th><th>運棒協調營</th><th class="c2">線上教練課</th></tr></thead>
           <tbody>
             <tr><th>期間</th><td>30 天，全梯同一天開始</td><td class="c2">一期 3 個月</td></tr>
-            <tr><th>練什麼</th><td>運棒、穩拍</td><td class="c2">完整課程庫：節奏、過門、歌、技巧</td></tr>
-            <tr><th>回饋</th><td>每天可傳影片，Jacob 每週回兩次</td><td class="c2">每週交作業，Jacob 親自批改回覆</td></tr>
+            <tr><th>練什麼</th><td>運棒、大鼓、輕重音、手腳協調</td><td class="c2">完整課程庫：節奏、過門、歌、技巧</td></tr>
+            <tr><th>回饋</th><td>影片哪天都能傳，Jacob 每週五回一次</td><td class="c2">每週交作業，Jacob 親自批改回覆</td></tr>
             <tr><th>價格</th><td>NT$<span data-v="price.twEarly">1,990</span> 起</td><td class="c2">NT$<span data-v="price.upTw">8,250</span>／期<br>營隊費全額折抵</td></tr>
           </tbody>
         </table>
@@ -760,16 +793,16 @@ html,body{margin:0;background:#f4f3ee}
     <h2 id="fq-h">報名前，你可能會問</h2>
 
     <details><summary><span class="num">01</span><span class="qq">每天要花多久？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p>大約 20 分鐘。跟練影片打一支、本週重點 5 分鐘、節拍器捉迷藏 2 分鐘，最後拍 20 秒上傳。</p></div></details>
+      <div class="ans"><p>大約 40–60 分鐘。先用「運棒優化」A 或 B 練習暖身，再看當天的課、照課裡的指示練。想讓我看，就拍一段傳上來，這步是選填。</p><p>影片全部在營隊區裡，不用另外去找。</p></div></details>
 
     <details><summary><span class="num">02</span><span class="qq">講解影片一定要準時看嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
       <div class="ans"><p>不用。每<span data-v="weeklyLiveName">週一</span>晚上 <span data-v="times.weeklyLive">21:00</span> 上架，之後什麼時候看都可以，留在營隊區，只有同一梯的人看得到。</p><p>整個營隊只有開營那晚（<span data-d="kickoff">10/25（日）</span><span data-v="times.kickoff">20:00</span>）是線上聊天，沒空也沒關係，會錄下來放進營隊區。</p><p>結營之後，你的帳號會變成唯讀，不能再上傳，但<b>講解影片和你自己的紀錄還可以看 <span data-v="replayMonths">3</span> 個月</b>。</p></div></details>
 
     <details><summary><span class="num">03</span><span class="qq">需要什麼設備？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p><b>一組鼓或一個打點板</b>，加一支手機。手機用來看影片、玩練功房、拍影片。</p><p>影片用手機平常的相機拍就好，拍完從相簿選起來上傳，不用在網站裡錄。</p><p>錄影時手機要放在側面、拍得到手肘，找個東西把它立起來就行，手機架或一疊書都可以。</p></div></details>
+      <div class="ans"><p><b>一組鼓或一個打點板</b>，加一支手機。手機用來看影片、玩練功房、拍影片。第 2 週開始會練大鼓，有鼓會比較好練。</p><p>影片用手機平常的相機拍就好，拍完從相簿選起來上傳，不用在網站裡錄。</p><p>錄影時手機要放在側面、拍得到手肘，找個東西把它立起來就行，手機架或一疊書都可以。</p></div></details>
 
     <details><summary><span class="num">04</span><span class="qq">影片每天都會被回嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p>不會。影片每天都可以傳，我固定<b>每週兩次</b>（<span data-v="feedbackDays">週一、週四</span>）看完給回饋。每天練、每天錄，是讓你自己留下紀錄，我回的時候也看得出這幾天的變化。</p></div></details>
+      <div class="ans"><p>不會。影片哪一天都可以傳，不傳也可以。我固定<b>每<span data-v="feedbackDays">週五</span></b>，把你這一週傳上來的影片和節拍檢測結果一起看，給你回饋。</p><p>週五看到大家常卡的地方，我會整理進下週一的講解影片。多錄幾天，你自己也留得下紀錄，我回的時候也看得出這一週的變化。</p></div></details>
 
     <details><summary><span class="num">05</span><span class="qq">大陸學員怎麼付款？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
       <div class="ans"><p>用微信付款。人民幣早鳥 ¥<span data-v="price.cnEarly">469</span>，原價 ¥<span data-v="price.cnRegular">599</span>。</p><p>加客服微信 <b>jdac_drums</b>，說你要報名營隊，客服會給你付款方式。確認收款後幫你登記名額，營隊區跟台灣學員同一天開通。</p><p>大陸打不開刷卡結帳頁，所以大陸學員一律走客服微信。</p></div></details>
@@ -778,7 +811,7 @@ html,body{margin:0;background:#f4f3ee}
       <div class="ans"><p>每梯滿 <span data-v="cap.min">15</span> 人才開營。到報名截止（<span data-d="regClose">10/16（五）</span>）還不到 <span data-v="cap.min">15</span> 人，這一梯就不開，已經付的<b>全額退費</b>。</p></div></details>
 
     <details><summary><span class="num">07</span><span class="qq">可以只看影片、不交影片嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p>可以。跟練影片、每週講解、練功房都照樣能用。</p><p>只是回饋要看影片才給得出來。沒交影片，我就沒辦法回你；第 30 天的對照回覆，也需要你第 1 天和第 30 天的影片。</p></div></details>
+      <div class="ans"><p>可以。每天的課、暖身影片、每週講解、練功房都照樣能用。</p><p>只是回饋要看影片才給得出來。這一週沒傳影片，週五我就沒東西可以回你；第 30 天的對照回覆，也需要你第 0 天和第 30 天的影片。</p></div></details>
 
     <details><summary><span class="num">08</span><span class="qq">完全沒打過鼓，可以參加嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
       <div class="ans"><p>不建議。這個營隊是給已經在打、但卡住的人，第一天就會用到基本的握棒和節拍器。完全沒碰過鼓，建議先從線上教練課的 Pre-school 開始。</p></div></details>
@@ -794,7 +827,7 @@ html,body{margin:0;background:#f4f3ee}
         <p class="lab">Last call / 最後一件事</p>
         <h2>想好了，就報名。<span data-until="demoLive"><br>還沒想好，先來看示範。</span></h2>
         <p class="say" data-until="demoLive"><span data-d="demoLive">10/8（四）</span><span data-v="times.demoLive">15:00</span> 免費直播講座，<span data-v="demoMinutes">90</span> 分鐘，先到 /live 留問題。聽完覺得適合，再決定。</p>
-        <p class="say" data-after="demoLive" hidden>第 <span data-v="cohort">1</span> 梯 <span data-d="start">10/19（一）</span>開營，一梯最多 <span data-v="cap.max">30</span> 人。</p>
+        <p class="say" data-after="demoLive" hidden>運棒協調營第 <span data-v="cohort">1</span> 梯 <span data-d="start">10/26（一）</span>開營，一梯最多 <span data-v="cap.max">30</span> 人。</p>
       </div>
       <div class="btns">
         <a class="btn w" href="#checkout" data-buy="tw" data-cta="camp-earlybird" data-cta-after="camp-regular"><span data-until="earlyEnd">早鳥報名</span><span data-after="earlyEnd" hidden>立即報名</span></a>
