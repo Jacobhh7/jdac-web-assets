@@ -26,7 +26,7 @@ const CAMP = {
     cn: 169,                          // 人民幣（微信收款）
     upTw: 8250                        // 升級線上教練課（三個月）
   },
-  paused: true,                       // 暫停開賣中（Jacob 另外點頭才改 false）
+  paused: false,                      // 2026-10-10 Jacob：推上去開賣（要再暫停改回 true）
   statusUrl:     'https://jdac-admin.vercel.app/api/camp-status',   // 即時梯次／名額
   checkoutUrl:   'https://jdac-admin.vercel.app/camp',               // 台灣／海外結帳頁（一律開新分頁）
   checkoutUrlCn: ''                   // 大陸：不開結帳頁（大陸打不開），按鈕捲到下面的客服微信說明
@@ -442,7 +442,7 @@ html,body{margin:0;background:#f4f3ee}
       <div>
         <p class="jh-name"><span class="no">NEW</span>7 天運棒特訓班<span class="sb">小班・每梯 <span data-v="cap">5</span> 人</span></p>
         <h1 class="jh-head"><span class="sr">7 天運棒特訓班</span><span aria-hidden="true">7-DAY<span class="l2">STICK CLASS.</span></span></h1>
-        <p class="jh-hook">你以為要更用力練，<br>其實要先<em>學會少出力。</em></p>
+        <p class="jh-hook">你以為要更用力練，<br>但其實要先<em>學會怎麼發力。</em></p>
         <p class="jh-tagline">7 天，每天 <span data-v="dailyMin">15–20</span> 分鐘，只練運棒。開始前一天錄一段，第 7 天再錄同一段，<b>我親自把兩段放在一起看，回覆給你</b>。</p>
         <div class="jh-cta">
           <a class="btn p" href="#checkout" data-buy="tw" data-cta="stick7-hero">我要報名・NT$<span data-v="price.tw">690</span> <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
@@ -703,7 +703,7 @@ html,body{margin:0;background:#f4f3ee}
       <div class="facts">
         <div><div class="k">每梯上限</div><div class="v"><span data-v="cap">5</span> 人<small>額滿就關</small></div></div>
         <div><div class="k">開始日</div><div class="v">每月第 1、第 3 個週一<small>前一天（週日）是第 0 天</small></div></div>
-        <div><div class="k">退費</div><div class="v">開始前全額退<small>週六 <span data-v="closeTime">23:59</span> 前；開始後不退</small></div></div>
+        <div><div class="k">退費</div><div class="v">週六前全額退<small>週六 <span data-v="closeTime">23:59</span> 前；週日開始後不退</small></div></div>
       </div>
 
       <div class="pr-cta">
@@ -722,7 +722,7 @@ html,body{margin:0;background:#f4f3ee}
         <h2 class="sec-h" id="af-h">7 天做完，<br>接下來呢？</h2>
         <p>7 天練的是運棒。做完之後，影片和我給你的回覆，<b><span data-v="replayDays">90</span> 天內都還看得到</b>，可以照著繼續練。</p>
         <p>如果你想要有人每週盯著你練，線上教練課是一期 3 個月、12 次作業批改，節奏、過門、歌都在裡面。</p>
-        <p class="credit">做完後 <b><span data-v="upgradeDays">14</span> 天內</b>升級線上教練課（3 個月 NT$<span data-v="price.upTw">8,250</span>），<b>特訓班付的 NT$<span data-v="price.tw">690</span> 全額折抵</b>。用 LINE @jdactw 跟我們說一聲就好。</p>
+        <p class="credit">做完後 <b><span data-v="upgradeDays">14</span> 天內</b>升級線上教練課（3 個月 NT$<span data-v="price.upTw">8,250</span>），<b>特訓班付的 NT$<span data-v="price.tw">690</span> 全額折抵</b>（大陸學員折抵 ¥<span data-v="price.cn">169</span>）。用 LINE @jdactw 跟我們說一聲就好，大陸請找微信 jdac_drums。</p>
         <p>不升級也完全沒關係。7 天練下來的東西是你的，照著練就好。</p>
       </div>
       <div class="cmp-wrap">
@@ -766,18 +766,20 @@ html,body{margin:0;background:#f4f3ee}
       <div class="ans"><p>我不會跟你說 7 天就變快。這 7 天練的是方向：怎麼放鬆、怎麼用最少的力氣、左右手怎麼打得一樣。</p><p>差多少，第 7 天的影片和檢測結果會告訴你，我也會在對照回覆裡講清楚，接下來先練什麼。</p></div></details>
 
     <details><summary><span class="num">08</span><span class="qq">可以退費嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p>開始之前（開始前的週六 <span data-v="closeTime">23:59</span> 以前）可以<b>全額退費</b>。開始之後就不退了。</p></div></details>
+      <div class="ans"><p>開跑前一天（週日）就要拍起點影片，所以在那之前，也就是<b>週六 <span data-v="closeTime">23:59</span> 以前</b>可以全額退費；週日開始之後就不退了。報名時會請你先勾選同意這條。</p></div></details>
 
     <details><summary><span class="num">09</span><span class="qq">做完之後呢？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p>影片和我的回覆，做完後 <span data-v="replayDays">90</span> 天內都看得到。</p><p>想繼續有人盯你練，做完 <span data-v="upgradeDays">14</span> 天內升級線上教練課（3 個月 NT$<span data-v="price.upTw">8,250</span>，12 次作業批改），<b>NT$<span data-v="price.tw">690</span> 全額折抵</b>，LINE @jdactw 跟我們說就好。</p></div></details>
+      <div class="ans"><p>影片和我的回覆，做完後 <span data-v="replayDays">90</span> 天內都看得到。</p><p>想繼續有人盯你練，做完 <span data-v="upgradeDays">14</span> 天內升級線上教練課（3 個月 NT$<span data-v="price.upTw">8,250</span>，12 次作業批改），<b>NT$<span data-v="price.tw">690</span> 全額折抵</b>（大陸學員折抵 ¥<span data-v="price.cn">169</span>），LINE @jdactw 跟我們說就好。</p></div></details>
 
     <details><summary><span class="num">10</span><span class="qq">要用哪個帳號登入？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
       <div class="ans"><p>報名用的 email，就是你登入 www.jacobdrumemory.com 學員專區的 email。<b>兩個要一樣</b>，影片和回覆才會出現在你的帳號裡。</p></div></details>
+    <details><summary><span class="num">11</span><span class="qq">報名之後臨時有事，可以換梯次嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans"><p>可以，你自己就能換。用報名的 email 登入 <a href="https://www.jacobdrumemory.com/dashboard" target="_top">學員專區</a>，打開「7 天運棒特訓班」，在<b>原本那梯開跑前的週六 <span data-v="closeTime">23:59</span> 以前</b>，選一個還有名額的梯次就換好了，不用再付錢。</p></div></details>
 
-    <details><summary><span class="num">11</span><span class="qq">大陸學員怎麼付款？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+    <details><summary><span class="num">12</span><span class="qq">大陸學員怎麼付款？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
       <div class="ans"><p>用微信付款，¥<span data-v="price.cn">169</span>。加客服微信 <b>jdac_drums</b>，說你要報名 7 天運棒特訓班、想上哪一梯，客服會給你付款方式。</p><p>大陸打不開刷卡結帳頁，所以大陸學員一律走客服微信。</p></div></details>
 
-    <details><summary><span class="num">12</span><span class="qq">為什麼一梯只收 5 個人？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+    <details><summary><span class="num">13</span><span class="qq">為什麼一梯只收 5 個人？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
       <div class="ans"><p>因為每個人的影片我都要自己看、自己回。人一多，回覆就會變短、變慢。</p></div></details>
   </div></div></section>
 
