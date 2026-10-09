@@ -48,6 +48,7 @@ const CAMP = {
   },
   cap: { max: 30, min: 15 },          // 每梯上限／開營門檻
   upgradeDays: 14,                    // 結營後幾天內升級可全額折抵
+  paused: true,                       // 改版中暫停開賣（2026-10-09 Jacob：要改成 7～15 天、更便宜、更聚焦）。新版定案再改回 false
   checkoutUrl:   'https://jdac-admin.vercel.app/camp',   // 台灣／海外結帳頁（綠界，只收信用卡）
   checkoutUrlCn: ''                   // 大陸：不開結帳頁（大陸打不開），按鈕捲到下面的客服微信說明
 };
@@ -57,6 +58,11 @@ const CAMP = {
 <style>
 html{scroll-behavior:smooth}
 [data-buy].is-soon{background:#0c0c0c!important;border-color:#0c0c0c!important;color:#fff!important}
+.paused-note{display:none;background:#0c0c0c;color:#fff;font-family:"Noto Sans TC",sans-serif;font-size:15px;line-height:1.7;padding:14px clamp(16px,4vw,36px);text-align:center}
+.paused-note b{color:#fa5a1e}
+.paused-note a{color:#fff;text-decoration:underline}
+.pg[data-phase="paused"] .paused-note{display:block}
+.pg[data-phase="paused"] [data-cta="camp-demo-live"]{display:none!important}
 [data-buy].is-closed{background:#d9d6cc!important;border-color:#d9d6cc!important;color:#6f6d64!important;pointer-events:none;cursor:default}
 html,body{margin:0;background:#f4f3ee}
 .pg{background:#f4f3ee;color:#0c0c0c;font-family:"Noto Sans TC",sans-serif;width:100%;overflow-x:clip;line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -443,6 +449,7 @@ html,body{margin:0;background:#f4f3ee}
 }
 </style></head><body>
 <div class="pg">
+<div class="paused-note"><b>改版中</b>　這一梯營隊正在調整天數和內容，新的梯次、日期和價格很快公布。想第一個知道：<a href="https://line.me/R/ti/p/@jdactw" target="_blank" rel="noopener">LINE @jdactw</a> 留言，大陸請加微信 jdac_drums。</div>
 
   <!-- ═══ HERO ═══ -->
   <section class="hero"><div class="jd-in">
@@ -890,15 +897,17 @@ html,body{margin:0;background:#f4f3ee}
   // 4b) 開賣前／報名截止後：買的按鈕換字。結帳網址有填才真的連過去，沒填就捲到價格區
   var openAt = twMs(C.dates.saleOpen, C.times.saleOpen || '00:00') - 59e3;
   var closeAt = twMs(C.dates.regClose, C.times.regClose || '23:59');
-  var phase = now < openAt ? 'soon' : (now > closeAt ? 'closed' : 'open');
+  var phase = C.paused ? 'paused' : (now < openAt ? 'soon' : (now > closeAt ? 'closed' : 'open'));
   pg.setAttribute('data-phase', phase);
   pg.querySelectorAll('[data-buy]').forEach(function(el){
     var cn = el.getAttribute('data-buy') === 'cn';
-    if (phase === 'soon') { el.textContent = fmtMDW(C.dates.saleOpen) + ' ' + (C.times.saleOpen || '00:00') + ' 開賣' + (cn ? '・大陸加微信報名' : ''); el.setAttribute('href', '#checkout'); el.classList.add('is-soon'); }
+    if (phase === 'paused') { el.textContent = cn ? '改版中・加微信 jdac_drums 等通知' : '改版中・LINE 留言等通知'; if (cn) el.setAttribute('href', '#cn-pay'); else { el.setAttribute('href', 'https://line.me/R/ti/p/@jdactw'); el.setAttribute('target', '_blank'); el.setAttribute('rel', 'noopener'); } el.classList.add('is-soon'); }
+    else if (phase === 'soon') { el.textContent = fmtMDW(C.dates.saleOpen) + ' ' + (C.times.saleOpen || '00:00') + ' 開賣' + (cn ? '・大陸加微信報名' : ''); el.setAttribute('href', '#checkout'); el.classList.add('is-soon'); }
     else if (phase === 'closed') { el.textContent = '第 ' + C.cohort + ' 梯報名已截止'; el.removeAttribute('href'); el.classList.add('is-closed'); el.setAttribute('aria-disabled', 'true'); }
     else { var u = cn ? C.checkoutUrlCn : C.checkoutUrl; if (u) { el.setAttribute('href', u); el.setAttribute('target', '_blank'); el.setAttribute('rel', 'noopener'); } }
   });
   var pill = pg.querySelector('.tk-hd .pill');
+  if (pill && phase === 'paused') pill.textContent = '改版中';
   if (pill && phase === 'soon') pill.textContent = fmtMD(C.dates.saleOpen) + ' 開賣';
   if (pill && phase === 'closed') pill.textContent = '已截止';
 
