@@ -1,55 +1,34 @@
 <!DOCTYPE html>
 <html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>運棒協調營・30 天｜JDAC</title>
-<meta name="description" content="給打了一段時間、手很緊、打不快、手腳對不起來的鼓手。30 天線上營隊，每天 40–60 分鐘，Jacob 每週五看你的影片給回饋。">
+<title>7 天運棒特訓班｜JDAC</title>
+<meta name="description" content="只練運棒的 7 天小班。每天 15–20 分鐘，開始前一天和第 7 天各錄一段，Jacob 親自看前後對照、回覆你。每梯 5 人，NT$690。">
 <script>
 /* ═══════════════════════════════════════════════════════════════════
-   營隊設定（第 1 梯）—— 改日期／時間／價格／名額，只改這一塊。
-   日期一律寫 'YYYY-MM-DD'，星期幾會自動算（台灣時間），不用手寫。
-   頁面上所有日期、價格、名額都從這裡帶；早鳥過期後頁面會自動切成原價。
-   預覽某一天的樣子：網址加 ?now=2026-10-09（例：看早鳥結束後）。
+   7 天運棒特訓班設定 —— 改價格／名額／開關，只改這一塊。
+   梯次＝每個月第 1、第 3 個週一開始；第 0 天＝前一天（週日）；
+   報名截止＝開始前的週六 closeTime（台灣時間）。
+   頁面會先抓 statusUrl 的即時梯次與剩餘名額；抓不到或格式不對，
+   就用這裡的規則自己算日期，只寫「每梯 N 人」不寫剩幾位。
+   firstStart 之前的週一一律不顯示（第一梯是 2026-11-02）。
+   預覽某一天的樣子：網址加 ?now=2026-10-30（例：看 11/2 梯截止前一天）。
    ═══════════════════════════════════════════════════════════════════ */
 const CAMP = {
-  cohort: 1,                          // 第幾梯
-  dates: {
-    saleOpen:  '2026-10-10',          // 開賣（早鳥開始）＝直播講座前一週
-    demoLive:  '2026-10-17',          // 免費示範直播講座
-    earlyEnd:  '2026-10-18',          // 早鳥最後一天（當天 times.earlyEnd 截止）＝示範講座隔天
-    regClose:  '2026-10-23',          // 報名截止
-    day0:      '2026-10-25',          // 第 0 天：健檢＋節拍檢測＋一段演奏
-    start:     '2026-10-26',          // 開營＝第 1 天
-    kickoff:   '2026-10-25',          // 開營前一晚：帳號開通＋VooV 線上聊天＋第 0 天三件事
-    retest:    '2026-11-22',          // 重測開放（第 28 天）
-    day30:     '2026-11-24',          // 第 30 天：重測最後一天
-    replyBy:   '2026-11-27',          // 個人對照回覆送到
-    closeLive: '2026-11-29'           // 結營影片上架（錄影，不直播）
-  },
-  times: {
-    saleOpen:   '00:00',
-    regClose:   '23:59',
-    demoLive:   '15:00',
-    earlyEnd:   '23:59',
-    weeklyLive: '21:00',               // 每週講解影片上架時間（錄好的，不是直播）
-    kickoff:    '20:00',
-    dailyUpload:'23:59'                // （目前頁面沒用到：每天上傳已改成選填）
-  },
-  weeklyLiveDay: 1,                   // 每週直播星期幾（0=日 1=一 … 4=四）
-  weeklyLiveName: '週一',
-  kickoffMinutes: 60,                 // 開營 VooV 聊天（VooV 免費版上限 60 分鐘）
-  feedbackDays: '週五',                // Jacob 固定回饋的日子（每週一次，看這一週傳上來的影片）
-  beatCheckPerWeek: 2,                // 節拍檢測每週最多幾次
-  demoMinutes: 90,
-  liveUrl: 'https://www.jacobdrumemory.com/live',   // 示範講座：先到這裡登入留問題
-  replayMonths: 3,                    // 結營後講解影片與紀錄還能看幾個月
+  name: '7 天運棒特訓班',
+  firstStart: '2026-11-02',           // 第一梯開始日（週一）。這天以前的梯次不顯示
+  closeTime: '23:59',                 // 開始前的週六幾點截止報名
+  batchesShown: 4,                    // 梯次區最多列幾梯
+  cap: 5,                             // 每梯人數上限
+  dailyMin: '15–20',                  // 每天大約練幾分鐘
+  replayDays: 90,                     // 做完後影片與回覆還能看幾天
+  upgradeDays: 14,                    // 做完後幾天內升級教練課可全額折抵
   price: {
-    twRegular: 2490, twEarly: 1990,   // 台幣
-    cnRegular: 599,  cnEarly: 469,    // 人民幣（微信收款）
-    upTw: 8250,      upCn: 2250       // 升級線上教練課（三個月）
+    tw: 690,                          // 台幣（單一價格，沒有早鳥）
+    cn: 169,                          // 人民幣（微信收款）
+    upTw: 8250                        // 升級線上教練課（三個月）
   },
-  cap: { max: 30, min: 15 },          // 每梯上限／開營門檻
-  upgradeDays: 14,                    // 結營後幾天內升級可全額折抵
-  paused: true,                       // 改版中暫停開賣（2026-10-09 Jacob：要改成 7～15 天、更便宜、更聚焦）。新版定案再改回 false
-  checkoutUrl:   'https://jdac-admin.vercel.app/camp',   // 台灣／海外結帳頁（綠界，只收信用卡）
+  paused: true,                       // 暫停開賣中（Jacob 另外點頭才改 false）
+  statusUrl:     'https://jdac-admin.vercel.app/api/camp-status',   // 即時梯次／名額
+  checkoutUrl:   'https://jdac-admin.vercel.app/camp',               // 台灣／海外結帳頁（一律開新分頁）
   checkoutUrlCn: ''                   // 大陸：不開結帳頁（大陸打不開），按鈕捲到下面的客服微信說明
 };
 </script>
@@ -62,13 +41,13 @@ html{scroll-behavior:smooth}
 .paused-note b{color:#fa5a1e}
 .paused-note a{color:#fff;text-decoration:underline}
 .pg[data-phase="paused"] .paused-note{display:block}
-.pg[data-phase="paused"] [data-cta="camp-demo-live"]{display:none!important}
-[data-buy].is-closed{background:#d9d6cc!important;border-color:#d9d6cc!important;color:#6f6d64!important;pointer-events:none;cursor:default}
+.pg[data-phase="paused"] .ft-cta [data-buy]{display:none}   /* 暫停中：收尾帶已經有 LINE 鈕，不重複 */
+[data-buy].is-closed{background:#d9d6cc!important;border-color:#d9d6cc!important;color:#6f6d64!important;pointer-events:none;cursor:default;box-shadow:none!important}
 html,body{margin:0;background:#f4f3ee}
 .pg{background:#f4f3ee;color:#0c0c0c;font-family:"Noto Sans TC",sans-serif;width:100%;overflow-x:clip;line-height:1.6;-webkit-font-smoothing:antialiased}
 .pg *{box-sizing:border-box}
-.jd-in{max-width:1180px;margin:0 auto;padding-left:clamp(18px,5vw,64px);padding-right:clamp(18px,5vw,64px)}
-.pg p,.pn-card .tx,.li span,.track .td,.svc-card .sd{text-wrap:pretty}
+.jd-in{max-width:1180px;margin:0 auto;padding-left:clamp(16px,5vw,64px);padding-right:clamp(16px,5vw,64px)}
+.pg p,.pn-card .tx,.track .td,.svc-card .sd,.dy-step .sd,.fq .ans{text-wrap:pretty}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 [hidden]{display:none!important}
 .eb{display:block;font-family:"Archivo",sans-serif;font-weight:500;letter-spacing:.28em;text-transform:uppercase;font-size:12px;color:#2563ff}
@@ -79,7 +58,7 @@ html,body{margin:0;background:#f4f3ee}
 .mono{font-family:"JetBrains Mono","Noto Sans TC",monospace}
 
 /* ── 按鈕：實心藍、不加任何反光／掃光疊層（會讓整顆按鈕空白） ── */
-.btn{font-family:"Noto Sans TC",sans-serif;font-weight:700;font-size:16px;line-height:1.35;padding:15px 28px;border:1.5px solid #0c0c0c;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;transition:transform .14s,background .14s}
+.btn{font-family:"Noto Sans TC",sans-serif;font-weight:700;font-size:16px;line-height:1.35;padding:15px 28px;border:1.5px solid #0c0c0c;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;transition:transform .14s,background .14s;max-width:100%}
 .btn:hover{transform:translate(-2px,-2px)}
 .btn.p{background:#2563ff;color:#fff;border-color:#2563ff}
 .btn.p:hover{background:#1f56e0}
@@ -96,16 +75,14 @@ html,body{margin:0;background:#f4f3ee}
 .jh-top{display:flex;justify-content:space-between;align-items:center;gap:8px 14px;flex-wrap:wrap;border-bottom:1.5px solid #0c0c0c;padding-bottom:14px}
 .jh-tag{display:inline-flex;align-items:center;gap:10px;font-family:"Archivo",sans-serif;font-weight:500;letter-spacing:.3em;text-transform:uppercase;font-size:12px;color:#2563ff}
 .jh-tag .dot{width:9px;height:9px;background:#fa5a1e;border-radius:50%;flex:none}
-.jh-idx{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;color:#55524a}
+.jh-idx{font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:11px;letter-spacing:.12em;color:#55524a}
 .jh-idx b{color:#2563ff;font-weight:700}
-.jh-grid{display:grid;grid-template-columns:minmax(min-content,1fr) minmax(300px,380px);gap:clamp(28px,4vw,64px);align-items:center;margin-top:clamp(26px,4vw,48px)}
-.jh-name{display:inline-flex;align-items:center;gap:10px;font-weight:900;font-size:clamp(15px,1.5vw,18px);letter-spacing:.06em;color:#0c0c0c;margin:0}
+.jh-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,380px);gap:clamp(28px,4vw,64px);align-items:center;margin-top:clamp(26px,4vw,48px)}
+.jh-name{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-weight:900;font-size:clamp(15px,1.5vw,18px);letter-spacing:.06em;color:#0c0c0c;margin:0}
 .jh-name .no{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11px;letter-spacing:.1em;color:#fff;background:#0c0c0c;padding:3px 8px;border-radius:4px}
-.jh-head{font-family:"Archivo",sans-serif;font-style:italic;font-weight:900;font-size:clamp(46px,7vw,88px);line-height:.9;letter-spacing:-.022em;margin:14px 0 0;color:#0c0c0c}
 .jh-name .sb{font-weight:500;font-size:.86em;letter-spacing:.04em;color:#55524a}
-.jh-head .l2{display:block;color:#2563ff}
-.jh-head .l2.fit{font-size:.8em}
-.jh-head .l3{display:block;font-size:.46em;margin-top:10px;letter-spacing:-.01em}
+.jh-head{font-family:"Archivo",sans-serif;font-style:italic;font-weight:900;font-size:clamp(46px,7vw,88px);line-height:.9;letter-spacing:-.022em;margin:14px 0 0;color:#0c0c0c}
+.jh-head .l2{display:block;color:#2563ff;font-size:.8em;word-spacing:.14em}
 .jh-hook{font-weight:900;font-size:clamp(24px,3vw,38px);line-height:1.34;letter-spacing:-.01em;margin:24px 0 0;max-width:620px;color:#0c0c0c}
 .jh-hook em{font-style:normal;color:#2563ff;display:inline-block}
 .jh-tagline{font-size:clamp(15px,1.4vw,17.5px);line-height:1.9;color:#3a3a36;margin:16px 0 0;max-width:560px}
@@ -113,21 +90,20 @@ html,body{margin:0;background:#f4f3ee}
 .jh-cta{display:flex;gap:12px;margin-top:28px;align-items:center;flex-wrap:wrap}
 .jh-price{margin:14px 0 0;font-size:13.5px;line-height:1.7;color:#55524a}
 .jh-price b{color:#0c0c0c}
-.jh-price s{color:#8a8579}
 
-/* 右欄：梯次票卡 */
+/* 右欄：下一梯票卡 */
 .tk{background:#fff;border:1.5px solid #0c0c0c;border-radius:16px;box-shadow:8px 9px 0 #2563ff;padding:18px 20px 16px;transform:rotate(1.2deg)}
 .tk-hd{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1.5px solid #0c0c0c;padding-bottom:12px;margin-bottom:4px}
-.tk-hd .t{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.14em;color:#0c0c0c}
+.tk-hd .t{font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:11px;font-weight:700;letter-spacing:.14em;color:#0c0c0c}
 .tk-hd .pill{background:#fa5a1e;color:#fff;font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;padding:4px 9px;border-radius:4px;white-space:nowrap}
 .tk-row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;padding:9px 0;border-bottom:1px dashed #d8d5cc;align-items:baseline}
 .tk-row:last-of-type{border-bottom:0}
 .tk-row .d{font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:12.5px;font-weight:700;color:#0c0c0c;white-space:nowrap}
 .tk-row .e{font-size:14px;line-height:1.5;color:#3a3a36}
-.tk-row .e small{display:block;font-size:12px;color:#8a8579}
+.tk-row .e small{display:block;font-size:12px;font-weight:400;color:#8a8579}
 .tk-row.hl .d{color:#2563ff}
 .tk-row.hl .e{font-weight:900;color:#0c0c0c}
-.tk-ft{margin-top:10px;padding-top:12px;border-top:1.5px solid #0c0c0c;font-size:12.5px;line-height:1.7;color:#55524a}
+.tk-ft{margin:10px 0 0;padding-top:12px;border-top:1.5px solid #0c0c0c;font-size:12.5px;line-height:1.7;color:#55524a}
 .tk-ft b{color:#0c0c0c}
 
 .jh-stat{display:grid;grid-template-columns:repeat(4,1fr);border-top:1.5px solid #0c0c0c;margin-top:clamp(34px,4vw,54px)}
@@ -139,13 +115,13 @@ html,body{margin:0;background:#f4f3ee}
 .jh-stat .v.o{color:#fa5a1e}
 .jh-stat .k{font-size:13px;color:#3a3a36;margin-top:8px;letter-spacing:.03em;line-height:1.5}
 
-/* ═══ PAIN 你是不是這樣 ═══ */
+/* ═══ PAIN 你是不是也這樣 ═══ */
 .pain{padding:clamp(44px,5vw,72px) 0}
 .pn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:14px;margin-top:28px}
-.pn-card{display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;background:#fff;border:1.5px solid #0c0c0c;border-radius:14px;box-shadow:4px 5px 0 #0c0c0c;padding:18px 18px;font-family:inherit;font-size:15.5px;line-height:1.65;color:#0c0c0c;cursor:pointer;transition:box-shadow .14s,border-color .14s,transform .12s}
+.pn-card{display:flex;align-items:flex-start;gap:14px;width:100%;min-width:0;text-align:left;background:#fff;border:1.5px solid #0c0c0c;border-radius:14px;box-shadow:4px 5px 0 #0c0c0c;padding:18px 18px;font-family:inherit;font-size:15.5px;line-height:1.65;color:#0c0c0c;cursor:pointer;transition:box-shadow .14s,border-color .14s,transform .12s}
 .pn-card:hover{transform:translate(-1px,-1px)}
 .pn-card .n{flex:none;font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;color:#8a8579;padding-top:3px}
-.pn-card .tx{flex:1;font-weight:700}
+.pn-card .tx{flex:1;min-width:0;font-weight:700}
 .pn-card .bx{flex:none;width:24px;height:24px;border:1.5px solid #0c0c0c;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px}
 .pn-card .bx svg{opacity:0}
 .pn-card[aria-pressed="true"]{border-color:#2563ff;box-shadow:4px 5px 0 #2563ff}
@@ -162,17 +138,14 @@ html,body{margin:0;background:#f4f3ee}
 .wy-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,330px);gap:clamp(28px,4vw,60px);align-items:start}
 .wy-body p{font-size:clamp(15px,1.4vw,17px);line-height:1.95;color:#3a3a36;margin:18px 0 0;max-width:640px}
 .wy-body p b{color:#0c0c0c;font-weight:900;border-bottom:2px solid #fa5a1e}
-.wy-quote{margin:26px 0 0;padding:4px 0 4px 18px;border-left:4px solid #2563ff;max-width:600px}
-.wy-quote q{display:block;font-weight:900;font-size:clamp(20px,2.2vw,27px);line-height:1.5;color:#0c0c0c;quotes:"「" "」"}
-.wy-quote q em{font-style:normal;color:#2563ff;display:inline-block}
-.wy-quote cite{display:block;font-style:normal;font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:12px;letter-spacing:.06em;color:#8a8579;margin-top:10px}
 .wy-body .last{font-weight:700;color:#0c0c0c}
-.wy-photo{background:#fff;border:1.5px solid #0c0c0c;box-shadow:9px 10px 0 #2563ff;padding:10px 10px 12px;transform:rotate(-1.5deg);margin-top:8px}
+.wy-body .me{margin-top:24px;padding:4px 0 4px 18px;border-left:4px solid #2563ff;font-size:clamp(15px,1.4vw,16.5px);color:#0c0c0c}
+.wy-photo{background:#fff;border:1.5px solid #0c0c0c;box-shadow:9px 10px 0 #2563ff;padding:10px 10px 12px;transform:rotate(-1.5deg);margin:8px 0 0}
 .wy-photo .im{display:block;width:100%;height:clamp(300px,32vw,420px);background:#d9d6cc center top/cover no-repeat}
-.wy-photo .cap{display:block;font-family:"Archivo",sans-serif;font-size:10.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#0c0c0c;margin-top:9px}
+.wy-photo .cap{display:block;font-family:"Archivo","Noto Sans TC",sans-serif;font-size:10.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#0c0c0c;margin-top:9px}
 .wy-photo .cap b{color:#2563ff;font-weight:800;margin-right:6px}
 .bd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:18px;margin-top:clamp(30px,4vw,44px)}
-.bd-card{background:#fff;border:1.5px solid #0c0c0c;border-radius:16px;padding:18px 20px 20px}
+.bd-card{background:#fff;border:1.5px solid #0c0c0c;border-radius:16px;padding:18px 20px 20px;min-width:0}
 .bd-card.brake{box-shadow:6px 7px 0 #0c0c0c}
 .bd-card.drop{box-shadow:6px 7px 0 #2563ff}
 .bd-card .tg{font-family:"Archivo",sans-serif;font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:#8a8579}
@@ -182,47 +155,19 @@ html,body{margin:0;background:#f4f3ee}
 .bd-card .ds{font-size:14px;line-height:1.75;color:#55524a;margin:12px 0 0}
 .bd-note{font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:11.5px;letter-spacing:.04em;color:#8a8579;margin:14px 0 0}
 
-/* ═══ DEMO 免費示範直播 ═══ */
-.dm{padding:clamp(20px,3vw,36px) 0 clamp(44px,5vw,72px)}
-.dm-panel{background:#fff;border:1.5px solid #0c0c0c;border-radius:20px;box-shadow:8px 9px 0 #fa5a1e;padding:clamp(24px,3.5vw,44px);display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,360px);gap:clamp(24px,4vw,52px);align-items:center}
-.otag{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:700;letter-spacing:2px;padding:7px 13px;border-radius:5px;color:#fff;background:#fa5a1e}
-.otag.b{background:#2563ff}
-.otag.k{background:#0c0c0c}
-.dm h2{font-weight:900;font-size:clamp(25px,3vw,38px);line-height:1.3;margin:16px 0 0;letter-spacing:-.01em}
-.dm p{font-size:clamp(15px,1.4vw,16.5px);line-height:1.9;color:#3a3a36;margin:14px 0 0}
-.dm p b{color:#0c0c0c}
-.dm .btn{margin-top:22px}
-.dm .fine{font-size:13px;color:#8a8579;margin:12px 0 0}
-.dm-facts{margin:0;padding:0;list-style:none;border-top:1.5px solid #0c0c0c}
-.dm-facts li{display:grid;grid-template-columns:62px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px dashed #d8d5cc;align-items:baseline}
-.dm-facts .k{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#2563ff}
-.dm-facts .v{font-size:15px;font-weight:700;line-height:1.55}
-.dm-facts .v small{display:block;font-weight:400;font-size:12.5px;color:#8a8579}
-
-/* ═══ DAILY 每天 40–60 分鐘 ═══ */
+/* ═══ FOCUS 只練運棒 ═══ */
 .dy{padding:clamp(44px,5vw,72px) 0}
 .dy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:22px;margin-top:32px}
-.dy-step{border-top:2px solid #0c0c0c;padding-top:16px}
+.dy-step{border-top:2px solid #0c0c0c;padding-top:16px;min-width:0}
 .dy-step .top{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
 .dy-step .sn{font-family:"Archivo",sans-serif;font-style:italic;font-weight:900;font-size:clamp(38px,3.4vw,48px);color:#2563ff;line-height:.85}
 .dy-step .tm{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.08em;color:#0c0c0c;border:1.5px solid #0c0c0c;border-radius:999px;padding:3px 10px;white-space:nowrap}
 .dy-step .sh{font-weight:900;font-size:18px;color:#0c0c0c;margin-top:14px}
 .dy-step .sd{font-size:14.5px;color:#55524a;margin-top:8px;line-height:1.8}
 .dy-note{font-size:clamp(15px,1.4vw,17px);line-height:1.85;color:#3a3a36;margin:32px 0 0;padding-top:18px;border-top:1.5px solid #0c0c0c;max-width:760px}
-.dy-note b{color:#2563ff}
-/* 節拍檢測 */
-.bt{margin-top:30px;background:#fff;border:1.5px solid #0c0c0c;border-radius:16px;box-shadow:6px 7px 0 #2563ff;padding:clamp(20px,3vw,32px);display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,360px);gap:clamp(18px,3vw,44px);align-items:start}
-.bt h3{font-weight:900;font-size:clamp(19px,2vw,24px);margin:14px 0 0;line-height:1.4;color:#0c0c0c}
-.bt p{font-size:clamp(15px,1.4vw,16px);line-height:1.85;color:#3a3a36;margin:10px 0 0}
-.bt p b{color:#0c0c0c}
-.bt p.fine{font-size:13.5px;color:#8a8579}
-.bt ol{list-style:none;margin:0;padding:0;border-top:1.5px solid #0c0c0c;counter-reset:bt}
-.bt li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;padding:11px 0;border-bottom:1px dashed #d8d5cc;font-size:14.5px;line-height:1.6;color:#3a3a36;counter-increment:bt}
-.bt li:before{content:counter(bt,decimal-leading-zero);font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;color:#2563ff;padding-top:2px}
-.bt li:last-child{border-bottom:0}
-.bt li b{color:#0c0c0c}
+.dy-note b{color:#0c0c0c;border-bottom:2px solid #fa5a1e}
 
-/* ═══ DRUM-LAB 黑色監聽：四週課表 ═══ */
+/* ═══ DRUM-LAB 黑色監聽：7 天怎麼跑 ═══ */
 .band-dark{background:#0a0a0a;color:#e8eaf0;font-family:"JetBrains Mono","Noto Sans TC",monospace}
 .tick{display:flex;height:16px;align-items:flex-end;padding:0 18px;background:#0c0c0c;border-top:1px solid #1c1f29;border-bottom:1px solid #1c1f29;overflow:hidden}
 .tick i{flex:1;min-width:0;height:5px;border-left:1px solid #2a2f3c}
@@ -240,12 +185,13 @@ html,body{margin:0;background:#f4f3ee}
 .lc .sechead .note{font-size:11px;color:#586073;letter-spacing:.1em}
 .lc .lead{font-family:"Noto Sans TC",sans-serif;font-size:14.5px;line-height:1.85;color:#8a93a8;max-width:680px;margin:14px 0 8px}
 .lc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:0 44px}
-.track{display:grid;grid-template-columns:66px minmax(0,1fr);gap:0 6px;border-bottom:1px solid #161a22;padding:20px 0;align-items:start}
+.track{display:grid;grid-template-columns:72px minmax(0,1fr);gap:0 6px;border-bottom:1px solid #161a22;padding:20px 0;align-items:start}
 .track .ch{font-size:10.5px;color:#2563ff;letter-spacing:.06em;padding-top:2px}
-.track .ch b{display:block;font-family:"Archivo",sans-serif;font-style:italic;font-weight:900;font-size:28px;color:#2a3142;line-height:1;margin-top:4px}
+.track .ch b{display:block;font-family:"Archivo",sans-serif;font-style:italic;font-weight:900;font-size:28px;color:#2a3142;line-height:1;margin-top:4px;white-space:nowrap}
+.track .ch b.sm{font-size:22px}
 .track.key .ch b{color:#fa5a1e}
 .track .tt{font-family:"Noto Sans TC",sans-serif;font-weight:900;font-size:18px;color:#fff;margin-bottom:2px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
-.track .tt span{font-family:"Archivo",sans-serif;font-style:italic;font-weight:800;font-size:12px;letter-spacing:.08em;color:#2563ff;text-transform:uppercase}
+.track .tt span{font-family:"Archivo","Noto Sans TC",sans-serif;font-style:italic;font-weight:800;font-size:12px;letter-spacing:.08em;color:#2563ff;text-transform:uppercase}
 .track .td{font-family:"Noto Sans TC",sans-serif;font-size:14px;line-height:1.75;color:#a3abbd;margin:6px 0 12px}
 .track .td b{color:#fff;font-weight:700}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
@@ -267,24 +213,21 @@ html,body{margin:0;background:#f4f3ee}
 .live .dates span.end{color:#fa5a1e;border-color:#5a2e18}
 .live .rp{font-family:"Noto Sans TC",sans-serif;font-size:13px;color:#8a93a8;flex-basis:100%}
 
-/* ═══ WHAT YOU GET ═══ */
+/* ═══ FEEDBACK 兩次回覆＋前後對照 ═══ */
 .gt{padding:clamp(44px,5vw,72px) 0}
 .svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:18px;margin-top:32px}
-.svc-card{border:1.5px solid #0c0c0c;border-radius:14px;background:#fff;box-shadow:5px 6px 0 #0c0c0c;padding:1.5rem 1.5rem}
+.svc-card{border:1.5px solid #0c0c0c;border-radius:14px;background:#fff;box-shadow:5px 6px 0 #0c0c0c;padding:1.5rem 1.5rem;min-width:0}
 .svc-card.hl{box-shadow:5px 6px 0 #2563ff}
 .svc-card .ic{width:40px;height:40px;border:1.5px solid #0c0c0c;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:15px;color:#0c0c0c}
 .svc-card.hl .ic{color:#2563ff;border-color:#2563ff}
+.svc-card .wn{font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:11px;font-weight:700;letter-spacing:.1em;color:#8a8579;margin-bottom:6px}
+.svc-card.hl .wn{color:#2563ff}
 .svc-card .st{font-weight:900;font-size:17px;color:#0c0c0c;margin-bottom:8px;line-height:1.45}
 .svc-card .sd{font-size:14px;line-height:1.8;color:#55524a}
 .svc-card .sd b{color:#0c0c0c}
-.svc-card ul{margin:4px 0 0;padding:0;list-style:none}
-.svc-card li{font-size:14px;line-height:1.6;color:#3a3a36;padding:6px 0 6px 16px;position:relative;border-bottom:1px dashed #e0ddd3}
-.svc-card li:last-child{border-bottom:0}
-.svc-card li:before{content:"";position:absolute;left:0;top:14px;width:6px;height:6px;background:#2563ff;border-radius:1px}
-.svc-card li small{color:#8a8579;font-size:12.5px}
-.gt-not{font-size:13.5px;line-height:1.8;color:#8a8579;margin:18px 0 0;max-width:760px}
-.gt-not b{color:#3a3a36}
-/* 前後對照卡 */
+.gt-not{font-size:14.5px;line-height:1.85;color:#55524a;margin:22px 0 0;max-width:760px}
+.gt-not b{color:#0c0c0c}
+/* 前後對照卡（格式示意，不放假資料） */
 .ba{margin-top:26px;background:#fff;border:1.5px solid #0c0c0c;border-radius:18px;box-shadow:7px 8px 0 #0c0c0c;padding:clamp(20px,3vw,34px)}
 .ba-hd{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
 .ba-hd h3{font-weight:900;font-size:clamp(19px,2vw,24px);margin:0;line-height:1.4}
@@ -292,67 +235,101 @@ html,body{margin:0;background:#f4f3ee}
 .ba-row{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr);gap:14px;padding:14px 0;border-bottom:1px dashed #d8d5cc;align-items:center}
 .ba-row.h{padding:10px 0;border-bottom:1.5px solid #0c0c0c}
 .ba-row.h span{font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:11px;font-weight:700;letter-spacing:.1em;color:#8a8579}
-.ba-row.h span.d30{color:#2563ff}
+.ba-row.h span.d7{color:#2563ff}
 .ba-row .it{font-weight:700;font-size:15px;line-height:1.5}
 .ba-row .it small{display:block;font-weight:400;font-size:12.5px;color:#8a8579;line-height:1.6;margin-top:2px}
 .ba-row .cell{font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:12px;color:#b3b0a6;border-bottom:1.5px dashed #c9c7be;padding:6px 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ba-row .cell.d30{color:#2563ff;border-bottom-color:#2563ff}
+.ba-row .cell.d7{color:#2563ff;border-bottom-color:#2563ff}
 .ba-row .cell .m{display:none}
 .ba-cap{margin:16px 0 0;font-size:14.5px;line-height:1.8;color:#3a3a36}
 .ba-cap b{color:#0c0c0c;border-bottom:2px solid #fa5a1e}
 
-/* ═══ WHO ═══ */
-.wh{padding:clamp(44px,5vw,72px) 0}
-.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:18px;margin-top:30px}
-.col{border:1.5px solid #0c0c0c;border-radius:14px;padding:1.5rem 1.5rem;background:#fff}
-.col.good{box-shadow:5px 5px 0 #2563ff}
-.col.no{box-shadow:5px 5px 0 #0c0c0c}
-.col .ct{font-size:14.5px;font-weight:900;letter-spacing:.03em;margin:0 0 1rem}
-.col.good .ct{color:#2563ff}
-.col.no .ct{color:#8a8579}
-.li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.65;margin-bottom:.8rem;color:#3a3f49}
-.li:last-child{margin-bottom:0}
-.li svg{flex:none;margin-top:4px}
-.col.no .li{color:#6f6a60}
-.li b{color:#0c0c0c}
+/* 節拍檢測 */
+.bt-sec{padding:0 0 clamp(44px,5vw,72px)}
+.bt{background:#fff;border:1.5px solid #0c0c0c;border-radius:16px;box-shadow:6px 7px 0 #2563ff;padding:clamp(20px,3vw,32px);display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,380px);gap:clamp(18px,3vw,44px);align-items:start}
+.bt h3{font-weight:900;font-size:clamp(21px,2.3vw,28px);margin:14px 0 0;line-height:1.35;color:#0c0c0c}
+.bt p{font-size:clamp(15px,1.4vw,16px);line-height:1.85;color:#3a3a36;margin:10px 0 0}
+.bt p b{color:#0c0c0c}
+.bt p.fine{font-size:13.5px;color:#8a8579}
+.bt ol{list-style:none;margin:0;padding:0;border-top:1.5px solid #0c0c0c;counter-reset:bt}
+.bt li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;padding:11px 0;border-bottom:1px dashed #d8d5cc;font-size:14.5px;line-height:1.6;color:#3a3a36;counter-increment:bt}
+.bt li:before{content:counter(bt,decimal-leading-zero);font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;color:#2563ff;padding-top:2px}
+.bt li:last-child{border-bottom:0}
+.bt li b{color:#0c0c0c}
+.lights{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.lights span{display:inline-flex;align-items:center;gap:7px;font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:12px;font-weight:700;color:#3a3a36;border:1px solid #e0ddd3;background:#f7f5ec;border-radius:999px;padding:4px 11px}
+.lights i{width:10px;height:10px;border-radius:50%;flex:none}
+.lights .g{background:#1f9d55}.lights .y{background:#f0b400}.lights .r{background:#e5484d}
+
+/* ═══ PREP 需要準備什麼 ═══ */
+.pp{padding:clamp(44px,5vw,72px) 0 clamp(20px,3vw,36px)}
+.pp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:16px;margin-top:30px}
+.pp-grid .svc-card{padding:1.25rem 1.25rem}
+
+/* ═══ BATCHES 梯次與名額 ═══ */
+.bc-sec{padding:clamp(44px,5vw,72px) 0 clamp(20px,3vw,36px)}
+.bc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:16px;margin-top:28px}
+.bc{background:#fff;border:1.5px solid #0c0c0c;border-radius:14px;box-shadow:5px 6px 0 #0c0c0c;padding:16px 18px 12px;min-width:0}
+.bc.is-feat{box-shadow:6px 7px 0 #2563ff}
+.bc.is-full{background:#f7f5ec;box-shadow:none;border-color:#c9c7be}
+.bc-hd{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1.5px solid #0c0c0c;padding-bottom:10px}
+.bc.is-full .bc-hd{border-bottom-color:#c9c7be}
+.bc-hd .t{font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:11px;font-weight:700;letter-spacing:.12em;color:#8a8579}
+.bc.is-feat .bc-hd .t{color:#2563ff}
+.bc-hd .s{font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:11px;font-weight:700;letter-spacing:.04em;color:#fff;background:#0c0c0c;border-radius:4px;padding:3px 9px;white-space:nowrap}
+.bc.is-feat .bc-hd .s{background:#fa5a1e}
+.bc.is-full .bc-hd .s{background:#d9d6cc;color:#6f6d64}
+.bc-date{font-family:"Archivo",sans-serif;font-style:italic;font-weight:900;font-size:40px;line-height:1;letter-spacing:-.01em;color:#0c0c0c;margin:14px 0 4px}
+.bc-date small{font-family:"Noto Sans TC",sans-serif;font-style:normal;font-weight:700;font-size:15px;letter-spacing:0;margin-left:6px}
+.bc.is-full .bc-date{color:#8a8579}
+.bc ul{list-style:none;margin:8px 0 0;padding:0}
+.bc li{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:7px 0;border-bottom:1px dashed #d8d5cc;font-size:13.5px;line-height:1.5}
+.bc li:last-child{border-bottom:0}
+.bc li span{color:#8a8579}
+.bc li b{font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:12.5px;color:#0c0c0c;white-space:nowrap}
+.bc-note{margin:18px 0 0;font-size:14px;line-height:1.8;color:#55524a;max-width:760px}
+.bc-note b{color:#0c0c0c}
+.bc-note a{color:#2563ff}
 
 /* ═══ PRICE ═══ */
-.pr{padding:clamp(44px,5vw,72px) 0}
-.panel{background:#fff;border:1.5px solid #0c0c0c;border-radius:22px;box-shadow:8px 9px 0 #0c0c0c;padding:clamp(24px,4vw,50px);max-width:960px;margin:0 auto}
+.pr{padding:clamp(36px,4vw,60px) 0 clamp(44px,5vw,72px)}
+.panel{background:#fff;border:1.5px solid #0c0c0c;border-radius:22px;box-shadow:8px 9px 0 #0c0c0c;padding:clamp(22px,4vw,50px);max-width:960px;margin:0 auto}
 .panel h2{font-weight:900;font-size:clamp(26px,3vw,38px);color:#0c0c0c;margin:16px 0 0;line-height:1.3}
 .panel .lead{font-size:clamp(15px,1.3vw,16.5px);line-height:1.9;color:#55524a;margin:12px 0 0;max-width:680px}
+.otag{display:inline-block;font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:12.5px;font-weight:700;letter-spacing:2px;padding:7px 13px;border-radius:5px;color:#fff;background:#fa5a1e;max-width:100%}
+.otag.b{background:#2563ff}
+.otag.k{background:#0c0c0c}
 .pbox{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:18px;margin-top:26px}
-.pcard{border:1.5px solid #0c0c0c;border-radius:14px;padding:20px 20px 18px}
+.pcard{border:1.5px solid #0c0c0c;border-radius:14px;padding:20px 20px 18px;min-width:0}
 .pcard.tw{box-shadow:5px 6px 0 #2563ff}
-.pcard .pk{font-family:"Archivo",sans-serif;font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#2563ff}
+.pcard .pk{font-family:"Archivo","Noto Sans TC",sans-serif;font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#2563ff}
 .pcard.cn .pk{color:#8a8579}
 .pcard .amt{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-top:8px}
-.pcard .amt .lbl{font-size:13px;font-weight:700;color:#fff;background:#fa5a1e;border-radius:4px;padding:2px 8px;align-self:center}
 .pcard .amt .pn{font-family:"Archivo",sans-serif;font-style:italic;font-weight:900;font-size:clamp(38px,4.6vw,52px);line-height:1;letter-spacing:-.01em;color:#0c0c0c}
 .pcard .amt .pn small{font-size:.42em;letter-spacing:.02em;margin-right:4px}
-.pcard .amt s{font-size:15px;color:#8a8579}
 .pcard .due{font-size:13.5px;color:#55524a;margin:10px 0 0;line-height:1.7}
 .pcard .due b{color:#0c0c0c}
 .pcard.cn .amt .pn{font-size:clamp(28px,3.2vw,36px)}
 .pcard .pd{font-size:13.5px;line-height:1.8;color:#55524a;margin:10px 0 0}
+.pcard .pd b{color:#0c0c0c}
 .incl{font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:12.5px;line-height:1.9;color:#55524a;background:#f4f3ee;border:1px solid #e0ddd3;border-radius:10px;padding:13px 16px;margin:18px 0 0}
 .incl b{color:#2563ff}
 .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid #0c0c0c;border-radius:12px;margin-top:18px;overflow:hidden}
-.facts>div{padding:13px 14px;border-right:1px solid #d8d5cc}
+.facts>div{padding:13px 14px;border-right:1px solid #d8d5cc;min-width:0}
 .facts>div:last-child{border-right:0}
 .facts .k{font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:10.5px;letter-spacing:.1em;color:#8a8579}
 .facts .v{font-weight:900;font-size:16px;margin-top:2px;line-height:1.4}
 .facts .v small{display:block;font-weight:400;font-size:12px;color:#8a8579}
 .pr-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
-.cta{font-family:"Noto Sans TC",sans-serif;background:#2563ff;color:#fff;font-size:17px;font-weight:700;line-height:1.35;padding:17px 30px;border:1.5px solid #2563ff;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 6px 18px rgba(37,99,255,.35);transition:background .14s,transform .14s}
+.cta{font-family:"Noto Sans TC",sans-serif;background:#2563ff;color:#fff;font-size:17px;font-weight:700;line-height:1.35;padding:17px 30px;border:1.5px solid #2563ff;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 6px 18px rgba(37,99,255,.35);transition:background .14s,transform .14s;text-align:center}
 .cta:hover{background:#1f56e0;transform:translateY(-1px)}
-.cta.main{flex:1 1 300px}
-.cta.alt{flex:1 1 240px;background:#fff;color:#0c0c0c;border-color:#0c0c0c;box-shadow:4px 5px 0 #0c0c0c}
+.cta.main{flex:1 1 300px;min-width:min(300px,100%)}
+.cta.alt{flex:1 1 240px;min-width:min(240px,100%);background:#fff;color:#0c0c0c;border-color:#0c0c0c;box-shadow:4px 5px 0 #0c0c0c}
 .cta.alt:hover{background:#faf8f2}
 .micro{color:#8a8579;font-size:13px;line-height:1.75;margin:16px 0 0}
 .micro b{color:#3a3a36}
 
-/* ═══ AFTER 結營之後 ═══ */
+/* ═══ AFTER 做完之後 ═══ */
 .af{padding:clamp(44px,5vw,72px) 0}
 .af-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,4vw,56px);align-items:start}
 .af-body p{font-size:clamp(15px,1.4vw,17px);line-height:1.9;color:#3a3a36;margin:16px 0 0}
@@ -361,7 +338,7 @@ html,body{margin:0;background:#f4f3ee}
 .af-body .credit b{color:#0c0c0c}
 .cmp-wrap{background:#fff;border:1.5px solid #0c0c0c;border-radius:16px;box-shadow:6px 7px 0 #0c0c0c;overflow:hidden}
 .cmp-wrap table{width:100%;border-collapse:collapse;table-layout:fixed}
-.cmp-wrap th,.cmp-wrap td{text-align:left;vertical-align:top;padding:12px 14px;font-size:14px;line-height:1.6;border-bottom:1px dashed #d8d5cc}
+.cmp-wrap th,.cmp-wrap td{text-align:left;vertical-align:top;padding:12px 14px;font-size:14px;line-height:1.6;border-bottom:1px dashed #d8d5cc;overflow-wrap:anywhere}
 .cmp-wrap tr:last-child td,.cmp-wrap tr:last-child th{border-bottom:0}
 .cmp-wrap thead th{font-weight:900;font-size:14.5px;border-bottom:1.5px solid #0c0c0c;background:#f7f5ec}
 .cmp-wrap thead th.c2{color:#2563ff}
@@ -389,7 +366,7 @@ html,body{margin:0;background:#f4f3ee}
 .fq .ans p:last-child{margin-bottom:0}
 .fq .ans b{color:#0c0c0c}
 
-/* ═══ FINAL CTA（藍色收單帶）＋頁尾 ═══ */
+/* ═══ FINAL CTA（藍色收尾帶）＋頁尾 ═══ */
 .ft-cta{background:#2563ff;color:#fff}
 .ft-cta .jd-in{padding-top:clamp(36px,4.5vw,60px);padding-bottom:clamp(36px,4.5vw,60px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(20px,4vw,56px);align-items:center}
 .ft-cta .lab{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.75);margin:0}
@@ -403,18 +380,17 @@ html,body{margin:0;background:#f4f3ee}
 .ft-bar nav{display:flex;gap:16px;flex-wrap:wrap}
 .ft-bar a{color:#c3cad9;text-decoration:none;font-size:13.5px}
 .ft-bar a:hover{color:#fff}
-.ft-bar .cr{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;color:#5d6678}
+.ft-bar .cr{margin-left:auto;font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:11px;letter-spacing:.08em;color:#5d6678}
 
 /* ═══ RWD ═══ */
 @media(max-width:900px){
-  .jh-grid{grid-template-columns:1fr}
+  .jh-grid{grid-template-columns:minmax(0,1fr)}
   .tk{transform:none;max-width:460px}
-  .wy-grid{grid-template-columns:1fr}
+  .wy-grid{grid-template-columns:minmax(0,1fr)}
   .wy-photo{max-width:320px;transform:none}
-  .dm-panel{grid-template-columns:1fr}
-  .bt{grid-template-columns:1fr}
-  .af-grid{grid-template-columns:1fr}
-  .ft-cta .jd-in{grid-template-columns:1fr}
+  .bt{grid-template-columns:minmax(0,1fr)}
+  .af-grid{grid-template-columns:minmax(0,1fr)}
+  .ft-cta .jd-in{grid-template-columns:minmax(0,1fr)}
   .ft-bar .cr{margin-left:0;width:100%}
 }
 @media(max-width:720px){
@@ -423,20 +399,25 @@ html,body{margin:0;background:#f4f3ee}
   .jh-stat .st:nth-child(2){border-right:0;padding-left:14px}
   .jh-stat .st:nth-child(4){padding-left:14px}
   .jh-stat .st:nth-child(n+3){border-top:1px solid #c9c7be;margin-top:14px}
-  .pbox{grid-template-columns:1fr}
-  .facts{grid-template-columns:1fr}
+  .pbox{grid-template-columns:minmax(0,1fr)}
+  .facts{grid-template-columns:minmax(0,1fr)}
   .facts>div{border-right:0;border-bottom:1px solid #d8d5cc}
   .facts>div:last-child{border-bottom:0}
 }
 @media(max-width:560px){
-  .jh-cta .btn,.dm .btn,.ft-cta .btns .btn{width:100%}
+  .jd-in{padding-left:16px;padding-right:16px}
+  .jh-cta .btn,.ft-cta .btns .btn{width:100%}
   .ft-cta .btns{width:100%}
   .cta{width:100%;flex-basis:100%}
+  .track{grid-template-columns:60px minmax(0,1fr)}
+  .track .ch b{font-size:24px}
+  .track .ch b.sm{font-size:18px}
   .ba-row{grid-template-columns:1fr 1fr;gap:8px 12px}
   .ba-row .it{grid-column:1/-1}
   .ba-row.h{display:none}
   .ba-row .cell .m{display:inline;color:#8a8579;margin-right:6px}
-  .ba-row .cell.d30 .m{color:#2563ff}
+  .ba-row .cell.d7 .m{color:#2563ff}
+  .tk{padding:16px 16px 14px}
   .tk-row{grid-template-columns:88px minmax(0,1fr)}
   .cmp-wrap th,.cmp-wrap td{padding:10px 10px;font-size:13px}
   .cmp-wrap tbody th,.cmp-wrap thead th:first-child{width:56px}
@@ -449,64 +430,58 @@ html,body{margin:0;background:#f4f3ee}
 }
 </style></head><body>
 <div class="pg">
-<div class="paused-note"><b>改版中</b>　這一梯營隊正在調整天數和內容，新的梯次、日期和價格很快公布。想第一個知道：<a href="https://line.me/R/ti/p/@jdactw" target="_blank" rel="noopener">LINE @jdactw</a> 留言，大陸請加微信 jdac_drums。</div>
+<div class="paused-note"><b>改版中</b>　7 天運棒特訓班還沒開放報名。想第一個知道開放時間：<a href="https://line.me/R/ti/p/@jdactw" target="_blank" rel="noopener">LINE @jdactw</a> 留言，大陸請加微信 jdac_drums。</div>
 
   <!-- ═══ HERO ═══ -->
   <section class="hero"><div class="jd-in">
     <div class="jh-top">
-      <span class="jh-tag"><span class="dot"></span>30-Day Stick &amp; Coordination Camp</span>
-      <span class="jh-idx">COHORT <b>01</b> · <span data-d="start">10/19（一）</span>開營</span>
+      <span class="jh-tag"><span class="dot"></span>7-Day Stick Class</span>
+      <span class="jh-idx">NEXT · <b data-b="start">11/2（一）</b> 開始</span>
     </div>
     <div class="jh-grid">
       <div>
-        <p class="jh-name"><span class="no">NO.01</span>運棒協調營<span class="sb">調整運棒・協調演奏</span></p>
-        <h1 class="jh-head"><span class="sr">運棒協調營・30 天：調整運棒、協調演奏。</span>STICK &amp;<span class="l2 fit">COORDINATION</span><span class="l3">30-DAY CAMP.</span></h1>
-        <p class="jh-hook">你以為打不快是手不夠快，<br>其實是<em>每一下都在煞車。</em></p>
-        <p class="jh-tagline">每天 40–60 分鐘，跟著我先把運棒調好，再把手跟腳接起來。開營前測一次、第 30 天再測一次，<b>差多少，你自己看得到</b>。</p>
+        <p class="jh-name"><span class="no">NEW</span>7 天運棒特訓班<span class="sb">小班・每梯 <span data-v="cap">5</span> 人</span></p>
+        <h1 class="jh-head"><span class="sr">7 天運棒特訓班</span><span aria-hidden="true">7-DAY<span class="l2">STICK CLASS.</span></span></h1>
+        <p class="jh-hook">你以為要更用力練，<br>其實要先<em>學會少出力。</em></p>
+        <p class="jh-tagline">7 天，每天 <span data-v="dailyMin">15–20</span> 分鐘，只練運棒。開始前一天錄一段，第 7 天再錄同一段，<b>我親自把兩段放在一起看，回覆給你</b>。</p>
         <div class="jh-cta">
-          <a class="btn p" href="#checkout" data-buy="tw" data-cta="camp-earlybird" data-cta-after="camp-regular"><span data-until="earlyEnd">早鳥報名</span><span data-after="earlyEnd" hidden>立即報名</span> <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
-          <a class="btn s" href="#demo" data-until="demoLive"><span data-d="demoLive" data-f="md">10/17</span> 免費直播講座</a>
+          <a class="btn p" href="#checkout" data-buy="tw" data-cta="stick7-hero">我要報名・NT$<span data-v="price.tw">690</span> <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+          <a class="btn s" href="#how">看 7 天怎麼跑</a>
         </div>
-        <p class="jh-price" data-until="earlyEnd">早鳥 <b>NT$<span data-v="price.twEarly">1,990</span></b>（原價 <s>NT$<span data-v="price.twRegular">2,490</span></s>），到 <span data-d="earlyEnd">10/8（四）</span><span data-v="times.earlyEnd">23:59</span> 截止 · 每梯 <span data-v="cap.max">30</span> 人</p>
-        <p class="jh-price" data-after="earlyEnd" hidden><b>NT$<span data-v="price.twRegular">2,490</span></b> · 報名到 <span data-d="regClose">10/16（五）</span> · 每梯 <span data-v="cap.max">30</span> 人</p>
+        <p class="jh-price"><b>NT$<span data-v="price.tw">690</span></b>・下一梯 <span data-b="start">11/2（一）</span>開始・報名到 <span data-b="close">10/31（六）23:59</span>・<span data-seats>每梯 5 人</span></p>
       </div>
 
-      <aside class="tk" aria-label="第 1 梯日程">
-        <div class="tk-hd"><span class="t">COHORT 01 / 第 1 梯日程</span><span class="pill" data-until="earlyEnd">早鳥中</span></div>
-        <div class="tk-row"><span class="d" data-d="saleOpen">10/5（一）</span><span class="e"><span data-v="times.saleOpen">00:00</span> 開賣，早鳥開始</span></div>
-        <div class="tk-row"><span class="d" data-d="demoLive">10/8（四）</span><span class="e">免費直播講座 <span data-v="times.demoLive">15:00</span><small>回答大家的問題，先到 /live 留問題</small></span></div>
-        <div class="tk-row"><span class="d" data-d="earlyEnd">10/18（日）</span><span class="e">早鳥截止 <span data-v="times.earlyEnd">23:59</span></span></div>
-        <div class="tk-row"><span class="d" data-d="regClose">10/16（五）</span><span class="e">報名截止<small>額滿會提前關閉</small></span></div>
-        <div class="tk-row"><span class="d" data-d="kickoff">10/25（日）</span><span class="e">開通＋線上開營 <span data-v="times.kickoff">20:00</span><small>VooV 跟大家聊聊，接著做第 0 天的三件事</small></span></div>
-        <div class="tk-row hl"><span class="d" data-d="start">10/19（一）</span><span class="e">開營・第 1 天</span></div>
-        <div class="tk-row"><span class="d">每<span data-v="feedbackDays">週五</span></span><span class="e">Jacob 看這週的影片、給回饋<small>下週一 <span data-v="times.weeklyLive">21:00</span> 講解影片上架</small></span></div>
-        <div class="tk-row"><span class="d" data-d="day30">11/24（二）</span><span class="e">第 30 天：重測截止<small>第 28～30 天重做節拍檢測、重錄那段演奏</small></span></div>
-        <div class="tk-row"><span class="d" data-d="replyBy">11/27（五）</span><span class="e">個人對照回覆送到</span></div>
-        <div class="tk-row"><span class="d" data-d="closeLive">11/29（日）</span><span class="e">結營影片上架</span></div>
-        <p class="tk-ft">每梯上限 <b><span data-v="cap.max">30</span> 人</b>，滿 <b><span data-v="cap.min">15</span> 人</b>開營。</p>
+      <aside class="tk" aria-label="下一梯日程">
+        <div class="tk-hd"><span class="t">NEXT / 下一梯日程</span><span class="pill" data-pill>每梯 5 人</span></div>
+        <div class="tk-row"><span class="d" data-b="day0">11/1（日）</span><span class="e">第 0 天：錄起點影片<small>單擊八分 80 BPM・8 小節，傳到節拍檢測</small></span></div>
+        <div class="tk-row hl"><span class="d" data-b="start">11/2（一）</span><span class="e">開始・Jacob 回你第一次<small>告訴你這週先顧什麼</small></span></div>
+        <div class="tk-row"><span class="d" data-b="days">11/2–11/7</span><span class="e">每天 <span data-v="dailyMin">15–20</span> 分鐘<small>6 天練到 5 天就算完成</small></span></div>
+        <div class="tk-row"><span class="d" data-b="day7">11/8（日）</span><span class="e">第 7 天：錄同一段</span></div>
+        <div class="tk-row hl"><span class="d" data-b="reply2">11/9（一）</span><span class="e">Jacob 的前後對照回覆</span></div>
+        <p class="tk-ft">報名到 <b data-b="close">10/31（六）23:59</b>・<span data-seats>每梯 5 人</span></p>
       </aside>
     </div>
 
     <div class="jh-stat">
-      <div class="st"><div class="v">30<small>DAYS</small></div><div class="k">全梯同一天開營</div></div>
-      <div class="st"><div class="v">40–60<small>MIN</small></div><div class="k">每天大約練這麼久</div></div>
-      <div class="st"><div class="v o">1×<small>/WEEK</small></div><div class="k">每<span data-v="feedbackDays">週五</span> Jacob 親自看影片、給回饋</div></div>
-      <div class="st"><div class="v"><span data-v="cap.max">30</span><small>MAX</small></div><div class="k">每梯人數上限</div></div>
+      <div class="st"><div class="v">7<small>DAYS</small></div><div class="k">另加開始前的第 0 天</div></div>
+      <div class="st"><div class="v"><span data-v="dailyMin">15–20</span><small>MIN</small></div><div class="k">每天大約練這麼久</div></div>
+      <div class="st"><div class="v o">2×<small>REPLY</small></div><div class="k">Jacob 親自回你兩次</div></div>
+      <div class="st"><div class="v"><span data-v="cap">5</span><small>MAX</small></div><div class="k">每梯人數上限</div></div>
     </div>
   </div></section>
 
   <!-- ═══ PAIN ═══ -->
   <section class="pain" aria-labelledby="pn-h"><div class="jd-in">
-    <span class="eb">Sound familiar? / 你是不是這樣</span>
-    <h2 class="sec-h" id="pn-h">打了好幾年，卻越打越累？</h2>
+    <span class="eb">Sound familiar? / 你是不是也這樣</span>
+    <h2 class="sec-h" id="pn-h">練了很久，<br>手還是卡在同一個地方？</h2>
     <p class="sub">下面這幾個，你中了幾個？點一下，我幫你算。</p>
     <div class="pn-grid" id="pnGrid">
-      <button type="button" class="pn-card" aria-pressed="false"><span class="n">01</span><span class="tx">打很久了，速度一直卡在同一個地方。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
-      <button type="button" class="pn-card" aria-pressed="false"><span class="n">02</span><span class="tx">一首歌打下來，手臂比腳還累。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
-      <button type="button" class="pn-card" aria-pressed="false"><span class="n">03</span><span class="tx">越想打快，手就越緊。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
-      <button type="button" class="pn-card" aria-pressed="false"><span class="n">04</span><span class="tx">自己打覺得還好，一開節拍器就飄。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
-      <button type="button" class="pn-card" aria-pressed="false"><span class="n">05</span><span class="tx">運棒影片看了很多，一坐上鼓又回到老樣子。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
-      <button type="button" class="pn-card" aria-pressed="false"><span class="n">06</span><span class="tx">一加上大鼓，手就亂掉，手腳對不起來。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
+      <button type="button" class="pn-card" aria-pressed="false"><span class="n">01</span><span class="tx">一首歌打下來，手臂比腳還累。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
+      <button type="button" class="pn-card" aria-pressed="false"><span class="n">02</span><span class="tx">慢慢打還好，速度一上來，手就亂掉。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
+      <button type="button" class="pn-card" aria-pressed="false"><span class="n">03</span><span class="tx">左手就是比右手弱，兩邊打起來一大一小。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
+      <button type="button" class="pn-card" aria-pressed="false"><span class="n">04</span><span class="tx">自己打覺得還可以，一開節拍器、速度一快就飄。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
+      <button type="button" class="pn-card" aria-pressed="false"><span class="n">05</span><span class="tx">手一直很緊，越想放鬆越緊。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
+      <button type="button" class="pn-card" aria-pressed="false"><span class="n">06</span><span class="tx">下班都有在練，練了好幾個月，好像沒什麼差。</span><span class="bx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>
     </div>
     <p class="pn-count" id="pnCount" aria-live="polite">這幾個看起來不一樣，很多時候是同一個原因。往下看。</p>
   </div></section>
@@ -518,11 +493,12 @@ html,body{margin:0;background:#f4f3ee}
         <span class="eb">Why you're stuck / 卡住的地方</span>
         <h2 class="sec-h" id="wy-h">你一直在踩煞車，<br>只是自己沒發現。</h2>
         <p>很多人打鼓，是把棒子「壓」進鼓皮。打到的那一下手還在用力，棒子被按住、彈不回來，下一下只好再出力把它抬起來。</p>
-        <p>一下兩下沒感覺。一首歌打下來，手就緊了、累了，速度也卡在那裡。</p>
-        <p>所以我上課一直講：<b>丟下去</b>。棒子丟下去，讓它自己彈回來，手跟著走就好。</p>
-        <p class="last">這 30 天，第一週就是把運棒調好、把煞車放掉。手順了，再加大鼓、練輕重音，最後讓手跟腳一起動。</p>
+        <p>一下兩下沒感覺。一首歌打下來，手就緊了、累了，速度一上來就亂。</p>
+        <p>所以這 7 天只練運棒：<b>慢慢抬起來，到最高點直接放掉</b>，手指不張開，讓棒子自己掉下去、自己彈回來。</p>
+        <p class="last">先把地基打穩，炫技才有意義。運棒順了，再來談左右手一樣、跟節拍器打穩。</p>
+        <p class="me">我是 Jacob，JDAC 爵士鼓學校的老師。這 7 天你傳上來的影片，都是我自己看、自己回。</p>
       </div>
-      <figure class="wy-photo" aria-hidden="true" style="margin:8px 0 0">
+      <figure class="wy-photo" aria-hidden="true">
         <span class="im" style="background-image:url('https://static.wixstatic.com/media/1a91b2_1e92d8180af344d9964f182bc39876ef~mv2.jpg/v1/fill/w_680,h_820,al_c,q_85,enc_auto/jacob.jpg')"></span>
         <span class="cap"><b>JACOB</b>JDAC · DRUM COACH</span>
       </figure>
@@ -547,7 +523,7 @@ html,body{margin:0;background:#f4f3ee}
         <p class="ds">打到鼓皮，手還在出力。棒子被按住，下一下要再用力抬起來。每一下都這樣，手當然越打越緊。</p>
       </div>
       <div class="bd-card drop">
-        <div class="tg">Drop · 丟下去</div>
+        <div class="tg">Free Stroke · 丟下去</div>
         <div class="nm">丟下去，讓它彈回來</div>
         <svg viewBox="0 0 320 124" role="img" aria-label="丟下去：棒子打到鼓皮後自己彈回來，手跟著走">
           <line x1="8" y1="100" x2="312" y2="100" stroke="#c9c7be" stroke-width="1.2" stroke-dasharray="4 4"/>
@@ -562,228 +538,201 @@ html,body{margin:0;background:#f4f3ee}
     <p class="bd-note">// 線條＝棒頭高度，從左到右是時間。</p>
   </div></section>
 
-  <!-- ═══ FREE DEMO LIVE ═══ -->
-  <section class="dm" id="demo" data-until="demoLive"><div class="jd-in">
-    <div class="dm-panel">
-      <div>
-        <span class="otag">FREE LIVE Q&amp;A / 免費直播講座</span>
-        <h2>還不確定？<br><span data-d="demoLive" data-f="md">10/8</span> 下午，先來看一次。</h2>
-        <p><span data-v="demoMinutes">90</span> 分鐘，免費。這場主要是<b>回答大家的問題</b>：手很緊、打不快、練了沒進步、練習怎麼排，都可以問。</p>
-        <p>先到 <b>jacobdrumemory.com/live</b> 登入，把你想問的留下來，我照收到的問題安排當天內容。事前提問名額有限，先留先排；直播當下也可以現場問。</p>
-        <p>看完覺得適合，再報名營隊。</p>
-        <a class="btn p" href="https://www.jacobdrumemory.com/live" target="_blank" rel="noopener" data-cta="camp-demo-live">去 /live 留問題 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
-        <p class="fine">早鳥價到隔天 <span data-d="earlyEnd">10/18（日）</span><span data-v="times.earlyEnd">23:59</span> 截止，看完講座回去想一想再報也來得及。</p>
-      </div>
-      <ul class="dm-facts">
-        <li><span class="k">DATE</span><span class="v" data-d="demoLive">10/8（四）</span></li>
-        <li><span class="k">TIME</span><span class="v"><span data-v="times.demoLive">21:00</span><small>台灣／北京時間</small></span></li>
-        <li><span class="k">LENGTH</span><span class="v"><span data-v="demoMinutes">90</span> 分鐘</span></li>
-        <li><span class="k">COST</span><span class="v">免費</span></li>
-        <li><span class="k">內容</span><span class="v">回答大家的問題<small>先到 /live 留問題，現場也能問</small></span></li>
-      </ul>
-    </div>
-  </div></section>
-
-  <!-- ═══ DAILY ═══ -->
-  <section class="dy" aria-labelledby="dy-h"><div class="jd-in">
-    <span class="eb">How it runs / 30 天怎麼跑</span>
-    <h2 class="sec-h" id="dy-h">每天 40–60 分鐘，<em>四件事</em>。</h2>
-    <p class="sub">全部在學員專區的營隊區完成。暖身影片、每天的課、上傳、每週講解，都放在同一個地方，不用另外去找。</p>
+  <!-- ═══ FOCUS 只練運棒 ═══ -->
+  <section class="dy" id="focus" aria-labelledby="dy-h"><div class="jd-in">
+    <span class="eb">What you practice / 練什麼</span>
+    <h2 class="sec-h" id="dy-h">這 7 天，<em>只練運棒</em>。</h2>
+    <p class="sub">不練節奏、不練過門，也用不到大鼓。每天 <span data-v="dailyMin">15–20</span> 分鐘，專心顧手。</p>
     <div class="dy-grid">
-      <div class="dy-step"><div class="top"><span class="sn">01</span><span class="tm">WARM-UP</span></div><div class="sh">暖身</div><div class="sd">跟著「運棒優化」A 或 B 練習打一支，手先熱開。</div></div>
-      <div class="dy-step"><div class="top"><span class="sn">02</span><span class="tm">WATCH</span></div><div class="sh">看當天的課</div><div class="sd">營隊區每天都有當天的課。看完，就知道今天要練什麼。</div></div>
-      <div class="dy-step"><div class="top"><span class="sn">03</span><span class="tm">PRACTICE</span></div><div class="sh">照指示練</div><div class="sd">照課裡講的練。速度多少、練幾遍、要不要開節拍器，課裡都會講。</div></div>
-      <div class="dy-step"><div class="top"><span class="sn">04</span><span class="tm">OPTIONAL</span></div><div class="sh">想給我看，就拍一段傳上來</div><div class="sd">選填，不傳也可以。手機放側面、拍到手肘，用手機相機拍好，再從相簿選影片上傳。有幾天我會請大家錄一整張譜。</div></div>
+      <div class="dy-step"><div class="top"><span class="sn">01</span><span class="tm">RELAX</span></div><div class="sh">放鬆</div><div class="sd">用最少的力氣打。手不用一直撐著，能省的力氣都省下來。</div></div>
+      <div class="dy-step"><div class="top"><span class="sn">02</span><span class="tm">SLOW</span></div><div class="sh">慢速運棒</div><div class="sd">慢慢抬起來，到最高點直接放掉，手指不張開。先慢，才看得清楚自己的手在做什麼。</div></div>
+      <div class="dy-step"><div class="top"><span class="sn">03</span><span class="tm">FREE STROKE</span></div><div class="sh">Free Stroke</div><div class="sd">棒子丟下去，讓它自己彈回來，手跟著走。</div></div>
+      <div class="dy-step"><div class="top"><span class="sn">04</span><span class="tm">EVEN</span></div><div class="sh">左右手一樣</div><div class="sd">右手怎麼打，左手就怎麼打。兩隻手的動作、聲音都對齊。</div></div>
     </div>
-    <p class="dy-note">影片哪一天都可以傳。我<b>每<span data-v="feedbackDays">週五</span>看一次、回一次</b>，看的是你這一週傳上來的影片。大家同一天開營、同一天結營，週五我看到大家常卡的地方，會整理進<span data-v="weeklyLiveName">週一</span>的講解影片。你會發現，別人卡住的地方很多時候跟你一樣。</p>
-
-    <div class="bt" id="beatcheck">
-      <div>
-        <span class="otag b">BEAT CHECK / 節拍檢測</span>
-        <h3>拍子穩不穩，<br>錄下來看看。</h3>
-        <p>營隊期間，節拍檢測<b>每週最多用 <span data-v="beatCheckPerWeek">2</span> 次</b>，什麼時候測你自己挑。</p>
-        <p>選好要測的練習，輸入 BPM 和你怎麼打的，把錄好的檔案傳上去。結果會告訴你哪裡搶拍、哪裡拖拍，手跟大鼓在哪裡對不齊。</p>
-        <p class="fine">這是給你練習參考用的。每<span data-v="feedbackDays">週五</span>我回饋的時候，也會一起看你的檢測結果。</p>
-      </div>
-      <ol>
-        <li><span><b>選練習</b>：這次要測哪一個。</span></li>
-        <li><span><b>輸入 BPM 和打法</b>：幾速、用什麼方式打。</span></li>
-        <li><span><b>錄好，傳上去</b>：照你剛剛填的速度和打法錄。</span></li>
-        <li><span><b>看結果</b>：搶拍、拖拍，還有手腳哪裡分開了。</span></li>
-      </ol>
-    </div>
+    <p class="dy-note">最後全部收在一件事：<b>單擊八分，跟著節拍器打穩</b>。這也是第 0 天和第 7 天要錄的那一段。</p>
   </div></section>
 
-  <!-- ═══ 四週課表（DRUM-LAB 黑色監聽） ═══ -->
-  <div class="band-dark" id="curriculum">
+  <!-- ═══ 7 天怎麼跑（DRUM-LAB 黑色監聽） ═══ -->
+  <div class="band-dark" id="how">
     <div class="tick" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <section class="lc" aria-labelledby="lc-h"><div class="jd-in">
-      <div class="scope" aria-hidden="true"><span class="l1">● CAMP MONITOR — DAY 00 → DAY 30</span><span class="l2">4 WEEKS</span><svg viewBox="0 0 1180 46" preserveAspectRatio="none"><polyline class="wave" fill="none" stroke="#2563ff" stroke-width="1.4" points="0,23 60,23 90,8 120,40 150,15 180,30 220,23 290,23 320,6 350,42 380,18 410,28 450,23 520,23 550,12 580,38 610,9 640,40 670,20 700,28 740,23 820,23 850,7 880,41 910,16 940,32 980,23 1060,23 1090,11 1120,38 1150,14 1180,23"/></svg></div>
-      <div class="sechead"><h2 id="lc-h">FOUR WEEKS / <span>四週課表</span></h2><span class="note">運棒優化 → 大鼓 → 輕重音 → 應用</span></div>
-      <p class="lead">一週一個主題，一層一層疊上去。第 0 天跟第 30 天做一樣的檢測，中間四週照順序走。</p>
+      <div class="scope" aria-hidden="true"><span class="l1">● STICK MONITOR — DAY 00 → DAY 07</span><span class="l2">7 + 1 DAYS</span><svg viewBox="0 0 1180 46" preserveAspectRatio="none"><polyline class="wave" fill="none" stroke="#2563ff" stroke-width="1.4" points="0,23 60,23 90,8 120,40 150,15 180,30 220,23 290,23 320,6 350,42 380,18 410,28 450,23 520,23 550,12 580,38 610,9 640,40 670,20 700,28 740,23 820,23 850,7 880,41 910,16 940,32 980,23 1060,23 1090,11 1120,38 1150,14 1180,23"/></svg></div>
+      <div class="sechead"><h2 id="lc-h">DAY 0 → DAY 7 / <span>7 天怎麼跑</span></h2><span class="note">錄起點 → 每天跟練 → 錄對照 → 回覆</span></div>
+      <p class="lead">全部在學員專區完成：看影片、每天打勾、從手機相簿上傳、節拍檢測、看我的回覆，都在同一個地方。沒有直播，一天之中什麼時候練都可以。</p>
       <div class="lc-grid">
         <div class="track key"><div class="ch">DAY<b>00</b></div><div>
-          <div class="tt">第 0 天 <span>Baseline · <i data-d="day0" data-f="md" style="font-style:normal">10/25</i></span></div>
-          <div class="td">開營前一天，做三件事：① <b>27 題鼓手能力健檢</b>。② <b>單擊八分 80</b>，節拍器外放，打 8 小節，傳到「節拍檢測」，這段也是你的起點影片。③ <b>演奏一首歌或一段節奏</b>，1 分鐘內，我看你全身打起來自不自然。</div>
-          <div class="chips"><span>能力健檢 27 題</span><span>單擊八分 80・8 小節</span><span>一首歌或一段節奏</span></div>
-          <div class="meter"><span class="pk"></span><span></span><span></span><span></span><span></span><em>BASELINE</em></div>
+          <div class="tt">第 0 天・週日 <span>Baseline · <i data-b="day0" data-f="md" style="font-style:normal">11/1</i></span></div>
+          <div class="td">開始前一天，錄你的起點。<b>單擊八分 80 BPM，節拍器外放，打 8 小節</b>，用手機拍下來，傳到學員專區的「節拍檢測」。連拍帶傳，大概 10 分鐘。</div>
+          <div class="chips"><span>單擊八分・80 BPM</span><span>節拍器外放</span><span>8 小節</span><span>約 10 分鐘</span></div>
+          <div class="meter"><span class="pk"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><em>BASELINE</em></div>
         </div></div>
-        <div class="track"><div class="ch">WEEK<b>01</b></div><div>
-          <div class="tt">運棒優化 <span>Stick tune-up</span></div>
-          <div class="td">先把德式、Power Grip、Free Stroke 整理好，再接 Stick Control。每天跟練「運棒優化」A／B 練習。</div>
-          <div class="chips"><span>德式</span><span>Power Grip</span><span>Free Stroke</span><span>Stick Control</span><span>運棒優化 A／B</span></div>
-          <div class="meter"><span class="on"></span><span></span><span></span><span></span><span></span><em>LV 1 / 4</em></div>
+        <div class="track"><div class="ch">REPLY<b>01</b></div><div>
+          <div class="tt">第 1 天・週一 <span>Reply 1 · <i data-b="start" data-f="md" style="font-style:normal">11/2</i></span></div>
+          <div class="td">我看完你的起點影片，回你一段短短的：<b>這週練的時候，先顧什麼</b>。</div>
+          <div class="chips"><span>Jacob 回覆 ①</span><span>這週的重點</span></div>
+          <div class="meter"><span class="on"></span><span class="on"></span><span></span><span></span><span></span><span></span><span></span><span></span><em>REPLY 1/2</em></div>
         </div></div>
-        <div class="track"><div class="ch">WEEK<b>02</b></div><div>
-          <div class="tt">法式／美式＋大鼓 <span>Grips &amp; Kick</span></div>
-          <div class="td">手換成法式、美式運棒。腳開始練大鼓：Heel Up、Closed Tone。接著大鼓加進 Basic Grid 和 New Breed。</div>
-          <div class="chips"><span>法式</span><span>美式</span><span>Heel Up</span><span>Closed Tone</span><span>大鼓＋Basic Grid</span><span>大鼓＋New Breed</span></div>
-          <div class="meter"><span class="on"></span><span class="on"></span><span></span><span></span><span></span><em>LV 2 / 4</em></div>
+        <div class="track"><div class="ch">DAY<b class="sm">01–06</b></div><div>
+          <div class="tt">週一到週六 <span>Daily · <i data-b="days" style="font-style:normal">11/2–11/7</i></span></div>
+          <div class="td">每天 <span data-v="dailyMin">15–20</span> 分鐘，跟著我的「運棒優化」跟練影片（A 練習／B 練習，Stick Control）練，再搭配幾支短講解。做完在學員專區打勾。<b>6 天練到 5 天就算完成</b>，留一天給加班或臨時有事。</div>
+          <div class="chips"><span>運棒優化 A 練習</span><span>運棒優化 B 練習</span><span>Stick Control</span><span>慢速運棒講解</span><span>德式握棒</span><span>Free Stroke</span><span>常見問題</span></div>
+          <div class="meter"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><em>6 DAYS</em></div>
         </div></div>
-        <div class="track"><div class="ch">WEEK<b>03</b></div><div>
-          <div class="tt">輕重音入門 <span>Accents</span></div>
-          <div class="td">四種運棒 Full、Down、Tap、Up，用 Basic Grid 和 New Breed 練輕重音。同一週開始 <b>14 天協調衝刺，第 1–7 天</b>。</div>
-          <div class="chips"><span>Full</span><span>Down</span><span>Tap</span><span>Up</span><span>Basic Grid</span><span>New Breed</span><span>協調衝刺 1–7</span></div>
-          <div class="meter"><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span><em>LV 3 / 4</em></div>
+        <div class="track key"><div class="ch">DAY<b>07</b></div><div>
+          <div class="tt">第 7 天・週日 <span>Replay · <i data-b="day7" data-f="md" style="font-style:normal">11/8</i></span></div>
+          <div class="td">同樣的速度、同樣外放節拍器、同樣 8 小節，<b>再錄一次</b>，傳到節拍檢測。</div>
+          <div class="chips"><span>單擊八分・80 BPM</span><span>同一段再錄</span><span>節拍檢測</span></div>
+          <div class="meter"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="pk"></span><em>REPLAY</em></div>
         </div></div>
-        <div class="track"><div class="ch">WEEK<b>04</b></div><div>
-          <div class="tt">進階輕重音＋應用 <span>Put it to music</span></div>
-          <div class="td">輕重音加上前臂，再練移位，最後用到節奏和過門裡。<b>14 天協調衝刺，第 8–14 天</b>。第 28–30 天，重做第 0 天那兩段。</div>
-          <div class="chips"><span>加前臂</span><span>移位</span><span>節奏</span><span>過門</span><span>協調衝刺 8–14</span></div>
-          <div class="meter"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><em>LV 4 / 4</em></div>
+        <div class="track key"><div class="ch">REPLY<b>02</b></div><div>
+          <div class="tt">下一個週一 <span>Reply 2 · <i data-b="reply2" data-f="md" style="font-style:normal">11/9</i></span></div>
+          <div class="td">我把你第 0 天和第 7 天的影片、兩次節拍檢測的結果放在一起看，<b>回一段只給你的前後對照</b>。</div>
+          <div class="chips"><span>Jacob 回覆 ②</span><span>影片並排</span><span>檢測結果並排</span></div>
+          <div class="meter"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><em>REPLY 2/2</em></div>
         </div></div>
-        <div class="track key"><div class="ch">DAY<b>30</b></div><div>
-          <div class="tt">重測＋對照回覆 <span>Replay · <i data-d="day30" data-f="md" style="font-style:normal">11/24</i></span></div>
-          <div class="td">單擊八分 80 再傳一次節拍檢測，那首歌或那段節奏再錄一次，健檢也再做一次。我把你第 0 天和第 30 天的影片並排看，<b>錄一段只給你的回覆</b>，<span data-d="replyBy" data-f="md">11/27</span> 前送到。</div>
-          <div class="chips"><span>節拍檢測重測</span><span>演奏重錄</span><span>健檢重做</span><span>影片並排</span></div>
-          <div class="meter"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="pk"></span><em>PEAK</em></div>
+        <div class="track"><div class="ch">AFTER<b>+<span data-v="replayDays">90</span></b></div><div>
+          <div class="tt">做完之後 <span>Keep practicing</span></div>
+          <div class="td">影片和我給你的回覆，<b><span data-v="replayDays">90</span> 天內都還看得到</b>，可以照著繼續練。</div>
+          <div class="chips"><span>影片回看</span><span>回覆回看</span><span>可以再測</span></div>
+          <div class="meter"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><em><i data-v="replayDays" style="font-style:normal">90</i> DAYS</em></div>
         </div></div>
       </div>
       <div class="live">
-        <span class="lb"><i></i>WEEKLY</span>
-        <span class="when">每<span data-v="weeklyLiveName">週一</span> <span data-v="times.weeklyLive">21:00</span> 講解影片上架</span>
-        <span class="dates" id="liveDates"><span>11/2</span><span>11/9</span><span>11/16</span><span>11/23</span><span class="end">結營影片 11/29</span></span>
-        <span class="rp">週五我看完大家這一週的影片，把常見的問題整理起來，一拍一拍拆給全梯看。錄好的影片，什麼時候看都可以，留在營隊區，只有這一梯看得到。</span>
+        <span class="lb"><i></i>NEXT BATCH</span>
+        <span class="when">下一梯 <span data-b="start">11/2（一）</span>開始</span>
+        <span class="dates"><span><i data-b="day0" data-f="md" style="font-style:normal">11/1</i> 第 0 天</span><span><i data-b="days" style="font-style:normal">11/2–11/7</i> 每天練</span><span><i data-b="day7" data-f="md" style="font-style:normal">11/8</i> 第 7 天</span><span class="end"><i data-b="reply2" data-f="md" style="font-style:normal">11/9</i> 對照回覆</span></span>
+        <span class="rp">沒有直播、不用準時上線。影片都是錄好的，下班回家再練就可以。</span>
       </div>
     </div></section>
   </div>
 
-  <!-- ═══ WHAT YOU GET ═══ -->
-  <section class="gt" aria-labelledby="gt-h"><div class="jd-in">
-    <span class="eb">What you get / 你會拿到什麼</span>
-    <h2 class="sec-h" id="gt-h">你練，我看。</h2>
+  <!-- ═══ FEEDBACK Jacob 會怎麼回你 ═══ -->
+  <section class="gt" id="reply" aria-labelledby="gt-h"><div class="jd-in">
+    <span class="eb">Feedback / Jacob 會怎麼回你</span>
+    <h2 class="sec-h" id="gt-h">你練，我看。<br>我會回你<em>兩次</em>。</h2>
+    <p class="sub">回覆以文字為主，有時候會加一小段影片，都放在學員專區你的帳號裡。</p>
     <div class="svc-grid">
-      <div class="svc-card hl"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="st">每<span data-v="feedbackDays">週五</span>回饋一次，我親自看</div><div class="sd">影片哪一天都可以傳。每<b><span data-v="feedbackDays">週五</span></b>我把你這一週傳上來的影片和節拍檢測結果看過，告訴你哪裡還在出力、下一步調什麼。</div></div>
-      <div class="svc-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3"/></svg></div><div class="st">每<span data-v="weeklyLiveName">週一</span> <span data-v="times.weeklyLive">21:00</span> 講解影片</div><div class="sd">週五看到大家常卡的地方，我整理起來，一拍一拍拆給大家看，也回答大家留的問題。錄好的，什麼時候看都可以。</div></div>
-      <div class="svc-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="9" height="14" rx="1.5"/><rect x="13" y="5" width="9" height="14" rx="1.5"/></svg></div><div class="st">第 30 天，一段只給你的回覆</div><div class="sd">你第 0 天和第 30 天的影片並排放，我看完錄一段回覆給你本人：改了什麼、還差什麼、下一步練什麼。<span data-d="replyBy">11/27（五）</span>前送到。</div></div>
-      <div class="svc-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="st">30 天內開放的練習工具</div>
-        <ul>
-          <li>學員專區裡的營隊區 <small>：每天的課、暖身影片都在這裡</small></li>
-          <li>「運棒優化」A／B 跟練影片</li>
-          <li>節拍檢測 <small>（每週最多 <span data-v="beatCheckPerWeek">2</span> 次）</small></li>
-          <li>14 天協調衝刺 <small>（第 3、4 週跟著跑完）</small></li>
-          <li>練功房節奏遊戲</li>
-          <li>AI 課程助理 <small>：平台怎麼用、練習卡在哪，都可以問</small></li>
-        </ul>
-      </div>
+      <div class="svc-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="wn">第一次・<span data-b="start">11/2（一）</span></div><div class="st">看完起點影片，告訴你這週先顧什麼</div><div class="sd">看你第 0 天那 8 小節，回你一段短短的：<b>這週練的時候，先注意什麼</b>。</div></div>
+      <div class="svc-card hl"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="9" height="14" rx="1.5"/><rect x="13" y="5" width="9" height="14" rx="1.5"/></svg></div><div class="wn">第二次・<span data-b="reply2">11/9（一）</span></div><div class="st">前後對照，一段只給你的回覆</div><div class="sd">把你第 0 天和第 7 天的影片、兩次節拍檢測的結果放在一起看，告訴你<b>哪裡變了、哪裡還沒，接下來先練什麼</b>。</div></div>
     </div>
 
     <div class="ba">
-      <div class="ba-hd"><span class="otag k">BEFORE / AFTER</span><h3>第 0 天和第 30 天，做一樣的三件事</h3></div>
-      <div class="ba-tb" role="table" aria-label="前後測項目">
-        <div class="ba-row h" role="row"><span role="columnheader">項目</span><span role="columnheader">DAY 0 · <i data-d="day0" data-f="md" style="font-style:normal">10/25</i></span><span class="d30" role="columnheader">DAY 30 · <i data-d="day30" data-f="md" style="font-style:normal">11/24</i></span></div>
-        <div class="ba-row" role="row"><span class="it" role="cell">鼓手能力健檢<small>27 題</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>你的結果</span><span class="cell d30" role="cell"><span class="m">DAY 30</span>你的結果</span></div>
-        <div class="ba-row" role="row"><span class="it" role="cell">節拍檢測<small>單擊八分 80，節拍器外放，8 小節</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>▶ 起點影片</span><span class="cell d30" role="cell"><span class="m">DAY 30</span>▶ 同樣再測</span></div>
-        <div class="ba-row" role="row"><span class="it" role="cell">一首歌或一段節奏<small>1 分鐘內，看全身打起來自不自然</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>▶ 第一次錄</span><span class="cell d30" role="cell"><span class="m">DAY 30</span>▶ 影片並排</span></div>
+      <div class="ba-hd"><span class="otag k">BEFORE / AFTER</span><h3>前後對照，大概長這樣</h3></div>
+      <div class="ba-tb" role="table" aria-label="前後對照的項目">
+        <div class="ba-row h" role="row"><span role="columnheader">項目</span><span role="columnheader">DAY 0 · <i data-b="day0" data-f="md" style="font-style:normal">11/1</i></span><span class="d7" role="columnheader">DAY 7 · <i data-b="day7" data-f="md" style="font-style:normal">11/8</i></span></div>
+        <div class="ba-row" role="row"><span class="it" role="cell">影片<small>單擊八分 80 BPM，節拍器外放，8 小節</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>▶ 起點影片</span><span class="cell d7" role="cell"><span class="m">DAY 7</span>▶ 同一段再錄</span></div>
+        <div class="ba-row" role="row"><span class="it" role="cell">搶拍還是拖拍<small>節拍檢測</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>你的結果</span><span class="cell d7" role="cell"><span class="m">DAY 7</span>你的結果</span></div>
+        <div class="ba-row" role="row"><span class="it" role="cell">每一下平不平均<small>節拍檢測</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>你的結果</span><span class="cell d7" role="cell"><span class="m">DAY 7</span>你的結果</span></div>
+        <div class="ba-row" role="row"><span class="it" role="cell">左右手音量<small>節拍檢測</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>你的結果</span><span class="cell d7" role="cell"><span class="m">DAY 7</span>你的結果</span></div>
       </div>
-      <p class="ba-cap">兩次用同樣的題目、同樣的錄法。<b>差多少，你自己看得到</b>。影片我會並排看，再錄一段回覆給你。</p>
+      <p class="ba-cap">這是格式示意，格子裡會放你自己的影片和檢測結果。兩次同樣的速度、同樣的錄法，<b>差多少，你自己看得到</b>。我看完再回你。</p>
     </div>
 
-    <p class="gt-not"><b>營隊裡沒有的：</b>教練課的其他課程、講座、動態鼓譜。這些要升級線上教練課才會打開。</p>
+    <p class="gt-not"><b>先講清楚：</b>7 天不會讓你變成另一個鼓手。這 7 天先把方向調對，讓你看清楚自己的手在做什麼、接下來該練什麼。速度之後再說。</p>
   </div></section>
 
-  <!-- ═══ WHO ═══ -->
-  <section class="wh" aria-labelledby="wh-h"><div class="jd-in">
-    <span class="eb">Is this for you / 誰適合</span>
-    <h2 class="sec-h" id="wh-h">報名前，先看這兩欄。</h2>
-    <div class="cols">
-      <div class="col good">
-        <p class="ct">適合你，如果——</p>
-        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span>已經打鼓一段時間，自學或上過課都算</span></div>
-        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span>手很緊、越打越累</span></div>
-        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span>速度上不去，一快就亂</span></div>
-        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span>跟節拍器，拍子會飄</span></div>
-        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span>加上大鼓，手腳就對不起來</span></div>
-        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span>每天擠得出 40–60 分鐘，<b>願意拍影片給我看</b></span></div>
+  <!-- ═══ BEAT CHECK 節拍檢測 ═══ -->
+  <section class="bt-sec" id="beatcheck" aria-labelledby="bt-h"><div class="jd-in">
+    <div class="bt">
+      <div>
+        <span class="otag b">BEAT CHECK / 節拍檢測</span>
+        <h3 id="bt-h">拍子穩不穩，<br>傳上去幾秒就知道。</h3>
+        <p>節拍器外放，打一段錄下來，傳到學員專區的節拍檢測。<b>幾秒內</b>就會告訴你右邊這幾件事。</p>
+        <p>第 0 天、第 7 天各測一次。中間想再測，也可以。</p>
+        <div class="lights" aria-label="結果用綠、黃、紅燈號標示"><span><i class="g"></i>綠</span><span><i class="y"></i>黃</span><span><i class="r"></i>紅</span><span>＋一句白話說明</span></div>
+        <p class="fine">節拍器要外放，錄得到節拍器的聲音，才知道你跟它對不對得上。檢測結果是系統算的，回覆是我自己寫的。</p>
       </div>
-      <div class="col no">
-        <p class="ct">先別報，如果——</p>
-        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b3b0a6" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg><span>完全沒打過鼓。建議先從線上教練課的 Pre-school 開始</span></div>
-        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b3b0a6" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg><span>想學新歌、學很多新節奏。這 30 天主要練運棒和手腳協調</span></div>
-        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b3b0a6" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg><span>想三天變快，不打算每天練</span></div>
-        <div class="li"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b3b0a6" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg><span>手邊沒有鼓，也沒有打點板</span></div>
-      </div>
+      <ol>
+        <li><span><b>搶拍還是拖拍</b>：你比節拍器快，還是慢。</span></li>
+        <li><span><b>每一下平不平均</b>：有沒有忽大忽小。</span></li>
+        <li><span><b>左右手音量</b>：兩隻手打出來差多少。</span></li>
+        <li><span><b>燈號＋白話</b>：綠、黃、紅燈標出來，旁邊一句話講給你聽。</span></li>
+      </ol>
     </div>
   </div></section>
 
-  <!-- ═══ PRICE ═══ -->
+  <!-- ═══ PREP 需要準備什麼 ═══ -->
+  <section class="pp" id="prep" aria-labelledby="pp-h"><div class="jd-in">
+    <span class="eb">What you need / 需要準備什麼</span>
+    <h2 class="sec-h" id="pp-h">四樣東西，<br>你可能都有了。</h2>
+    <div class="pp-grid">
+      <div class="svc-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L16 6"/><path d="M8 20L20 6"/><circle cx="16.5" cy="5.5" r="1.5"/><circle cx="20.5" cy="5.5" r="1.5"/></svg></div><div class="st">鼓棒＋打點板或小鼓</div><div class="sd">有大鼓不用準備，這 7 天只練手。</div></div>
+      <div class="svc-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg></div><div class="st">一支手機</div><div class="sd">拍第 0 天和第 7 天的影片，拍好從相簿選起來上傳。</div></div>
+      <div class="svc-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l4 18H5z"/><path d="M12 16l4-9"/></svg></div><div class="st">節拍器</div><div class="sd">手機 app 就可以。<b>要外放</b>，不要戴耳機。</div></div>
+      <div class="svc-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div class="st">每天 <span data-v="dailyMin">15–20</span> 分鐘</div><div class="sd">週一到週六，練到 5 天就算完成。</div></div>
+    </div>
+    <p class="gt-not"><b>這 7 天可能不適合你，如果：</b>你想學新節奏、新歌或過門（這 7 天只練運棒）；或是不方便拍影片（回覆要看到影片才給得出來）。</p>
+  </div></section>
+
+  <!-- ═══ BATCHES 梯次與名額 ═══ -->
+  <section class="bc-sec" id="batches" aria-labelledby="bc-h"><div class="jd-in">
+    <span class="eb">Batches / 梯次與名額</span>
+    <h2 class="sec-h" id="bc-h">每月第 1、第 3 個週一開始，<br>一梯 <em><span data-v="cap">5</span> 個人</em>。</h2>
+    <p class="sub">報名到開始前的週六 <span data-v="closeTime">23:59</span>。週日錄第 0 天的影片，週一開始。</p>
+    <div class="bc-grid" id="batchList" aria-live="polite">
+      <div class="bc is-feat"><div class="bc-hd"><span class="t">下一梯</span><span class="s">每梯 5 人</span></div><div class="bc-date">11/2<small>（一）開始</small></div><ul><li><span>第 0 天</span><b>11/1（日）</b></li><li><span>第 7 天</span><b>11/8（日）</b></li><li><span>對照回覆</span><b>11/9（一）</b></li><li><span>報名截止</span><b>10/31（六）23:59</b></li></ul></div>
+      <div class="bc"><div class="bc-hd"><span class="t">BATCH</span><span class="s">每梯 5 人</span></div><div class="bc-date">11/16<small>（一）開始</small></div><ul><li><span>第 0 天</span><b>11/15（日）</b></li><li><span>第 7 天</span><b>11/22（日）</b></li><li><span>對照回覆</span><b>11/23（一）</b></li><li><span>報名截止</span><b>11/14（六）23:59</b></li></ul></div>
+      <div class="bc"><div class="bc-hd"><span class="t">BATCH</span><span class="s">每梯 5 人</span></div><div class="bc-date">12/7<small>（一）開始</small></div><ul><li><span>第 0 天</span><b>12/6（日）</b></li><li><span>第 7 天</span><b>12/13（日）</b></li><li><span>對照回覆</span><b>12/14（一）</b></li><li><span>報名截止</span><b>12/5（六）23:59</b></li></ul></div>
+      <div class="bc"><div class="bc-hd"><span class="t">BATCH</span><span class="s">每梯 5 人</span></div><div class="bc-date">12/21<small>（一）開始</small></div><ul><li><span>第 0 天</span><b>12/20（日）</b></li><li><span>第 7 天</span><b>12/27（日）</b></li><li><span>對照回覆</span><b>12/28（一）</b></li><li><span>報名截止</span><b>12/19（六）23:59</b></li></ul></div>
+    </div>
+    <p class="bc-note" id="batchNote">每梯 <b>5 人</b>，額滿就關。</p>
+  </div></section>
+
+  <!-- ═══ PRICE 價格與報名 ═══ -->
   <section class="pr" id="checkout" aria-labelledby="pr-h"><div class="jd-in">
     <div class="panel">
-      <span class="otag b">COHORT 01 / 運棒協調營・第 1 梯報名</span>
-      <h2 id="pr-h">第 1 梯，<span data-v="cap.max">30</span> 個位置。</h2>
-      <p class="lead">影片我要一支一支看，每週講解也只講得到這麼多人，所以一梯最多 <span data-v="cap.max">30</span> 人。滿 <span data-v="cap.min">15</span> 人開營。</p>
+      <span class="otag b">7-DAY STICK CLASS / 報名</span>
+      <h2 id="pr-h">一梯 <span data-v="cap">5</span> 個人，NT$<span data-v="price.tw">690</span>。</h2>
+      <p class="lead">每個人的影片我都要自己看、自己回，所以一梯只收 <span data-v="cap">5</span> 個人。價格就一種，不用搶早鳥。</p>
 
       <div class="pbox">
         <div class="pcard tw">
           <div class="pk">台灣・海外</div>
-          <div class="amt" data-until="earlyEnd"><span class="lbl">早鳥</span><span class="pn"><small>NT$</small><span data-v="price.twEarly">1,990</span></span><s>原價 NT$<span data-v="price.twRegular">2,490</span></s></div>
-          <div class="amt" data-after="earlyEnd" hidden><span class="pn"><small>NT$</small><span data-v="price.twRegular">2,490</span></span></div>
-          <p class="due" data-until="earlyEnd">早鳥到 <b><span data-d="earlyEnd">10/8（四）</span><span data-v="times.earlyEnd">23:59</span></b>，之後恢復原價。</p>
-          <p class="due" data-after="earlyEnd" hidden>報名到 <b><span data-d="regClose">10/16（五）</span></b>，額滿提前關閉。</p>
+          <div class="amt"><span class="pn"><small>NT$</small><span data-v="price.tw">690</span></span></div>
+          <p class="due">報名到開始前的週六 <b><span data-v="closeTime">23:59</span></b>，額滿提前關閉。<br>下一梯：<b data-b="start">11/2（一）</b>開始，報名到 <b data-b="close">10/31（六）23:59</b>。</p>
         </div>
         <div class="pcard cn" id="cn-pay">
           <div class="pk">大陸學員・微信付款</div>
-          <div class="amt" data-until="earlyEnd"><span class="pn"><small>¥</small><span data-v="price.cnEarly">469</span></span><s>原價 ¥<span data-v="price.cnRegular">599</span></s></div>
-          <div class="amt" data-after="earlyEnd" hidden><span class="pn"><small>¥</small><span data-v="price.cnRegular">599</span></span></div>
-          <p class="pd">加客服微信 <b style="font-family:'JetBrains Mono',monospace;user-select:all">jdac_drums</b>，說你要報名營隊，客服會給你付款方式；確認收款後幫你登記名額，營隊區跟台灣學員同一天開通。</p>
+          <div class="amt"><span class="pn"><small>¥</small><span data-v="price.cn">169</span></span></div>
+          <p class="pd">加客服微信 <b style="font-family:'JetBrains Mono',monospace;user-select:all">jdac_drums</b>，說你要報名 7 天運棒特訓班、想上哪一梯，客服會給你付款方式。確認收款後幫你登記名額，也請把你登入學員專區用的 email 給客服。</p>
         </div>
       </div>
 
-      <p class="incl">含：<b>30 天營隊區</b>｜每天的課＋運棒優化跟練影片｜<b>Jacob 每週五回饋</b>｜每週講解影片｜節拍檢測｜線上開營｜<b>第 30 天對照回覆</b>｜前後測｜練功房｜AI 課程助理</p>
+      <p class="incl">含：<b>7 天跟練影片</b>（運棒優化 A／B 練習）＋短講解｜每日打勾清單｜<b>節拍檢測</b>｜<b>Jacob 親自回覆 2 次</b>（含前後對照）｜做完後 <span data-v="replayDays">90</span> 天內可回看</p>
 
       <div class="facts">
-        <div><div class="k">每梯上限</div><div class="v"><span data-v="cap.max">30</span> 人</div></div>
-        <div><div class="k">開營門檻</div><div class="v"><span data-v="cap.min">15</span> 人<small>沒到就不開，全額退費</small></div></div>
-        <div><div class="k">報名截止</div><div class="v"><span data-d="regClose">10/16（五）</span><small>額滿提前關閉</small></div></div>
+        <div><div class="k">每梯上限</div><div class="v"><span data-v="cap">5</span> 人<small>額滿就關</small></div></div>
+        <div><div class="k">開始日</div><div class="v">每月第 1、第 3 個週一<small>前一天（週日）是第 0 天</small></div></div>
+        <div><div class="k">退費</div><div class="v">開始前全額退<small>週六 <span data-v="closeTime">23:59</span> 前；開始後不退</small></div></div>
       </div>
 
       <div class="pr-cta">
-        <a class="cta main" href="#checkout" data-buy="tw" data-cta="camp-earlybird" data-cta-after="camp-regular"><span data-until="earlyEnd">早鳥報名・NT$<span data-v="price.twEarly">1,990</span></span><span data-after="earlyEnd" hidden>立即報名・NT$<span data-v="price.twRegular">2,490</span></span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
-        <a class="cta alt" href="#cn-pay" data-buy="cn" data-cta="camp-earlybird-cn" data-cta-after="camp-regular-cn">大陸學員・加客服微信報名</a>
+        <a class="cta main" href="#checkout" data-buy="tw" data-cta="stick7-price">我要報名・NT$<span data-v="price.tw">690</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+        <a class="cta alt" href="#cn-pay" data-buy="cn" data-cta="stick7-cn">大陸學員・加客服微信報名</a>
       </div>
-      <p class="micro"><b><span data-d="day0">10/18（日）</span></b>做第 0 天的三件事，<b><span data-d="start">10/26（一）</span></b>正式開始。</p>
+      <p class="micro">結帳頁會開在新分頁。<b>報名用的 email，要跟你登入 www.jacobdrumemory.com 學員專區的 email 一樣</b>，影片和回覆才會出現在你的帳號裡。</p>
     </div>
   </div></section>
 
-  <!-- ═══ AFTER ═══ -->
-  <section class="af" aria-labelledby="af-h"><div class="jd-in">
+  <!-- ═══ AFTER 做完之後 ═══ -->
+  <section class="af" id="after" aria-labelledby="af-h"><div class="jd-in">
     <div class="af-grid">
       <div class="af-body">
-        <span class="eb">After day 30 / 結營之後</span>
-        <h2 class="sec-h" id="af-h">手順了，<br>接下來練什麼？</h2>
-        <p>30 天練的是運棒和手腳協調。手腳順了，接下來就是更多節奏、過門、歌。</p>
-        <p>線上教練課是每週交作業，我每週親自批改、回覆。到現在我已經<b>批改超過 3,000 份作業</b>，整套課程庫也會一起打開。</p>
-        <p class="credit">結營後 <b><span data-v="upgradeDays">14</span> 天內</b>升級線上教練課（三個月 NT$<span data-v="price.upTw">8,250</span>／大陸 ¥<span data-v="price.upCn">2,250</span>），<b>你付的營隊費全額折抵</b>。</p>
-        <p>不升級也完全沒關係。30 天練下來的東西是你的，照著練就好。</p>
+        <span class="eb">After day 7 / 做完之後</span>
+        <h2 class="sec-h" id="af-h">7 天做完，<br>接下來呢？</h2>
+        <p>7 天練的是運棒。做完之後，影片和我給你的回覆，<b><span data-v="replayDays">90</span> 天內都還看得到</b>，可以照著繼續練。</p>
+        <p>如果你想要有人每週盯著你練，線上教練課是一期 3 個月、12 次作業批改，節奏、過門、歌都在裡面。</p>
+        <p class="credit">做完後 <b><span data-v="upgradeDays">14</span> 天內</b>升級線上教練課（3 個月 NT$<span data-v="price.upTw">8,250</span>），<b>特訓班付的 NT$<span data-v="price.tw">690</span> 全額折抵</b>。用 LINE @jdactw 跟我們說一聲就好。</p>
+        <p>不升級也完全沒關係。7 天練下來的東西是你的，照著練就好。</p>
       </div>
       <div class="cmp-wrap">
         <table>
-          <thead><tr><th></th><th>運棒協調營</th><th class="c2">線上教練課</th></tr></thead>
+          <thead><tr><th></th><th>7 天運棒特訓班</th><th class="c2">線上教練課</th></tr></thead>
           <tbody>
-            <tr><th>期間</th><td>30 天，全梯同一天開始</td><td class="c2">一期 3 個月</td></tr>
-            <tr><th>練什麼</th><td>運棒、大鼓、輕重音、手腳協調</td><td class="c2">完整課程庫：節奏、過門、歌、技巧</td></tr>
-            <tr><th>回饋</th><td>影片哪天都能傳，Jacob 每週五回一次</td><td class="c2">每週交作業，Jacob 親自批改回覆</td></tr>
-            <tr><th>價格</th><td>NT$<span data-v="price.twEarly">1,990</span> 起</td><td class="c2">NT$<span data-v="price.upTw">8,250</span>／期<br>營隊費全額折抵</td></tr>
+            <tr><th>期間</th><td>第 0 天＋7 天</td><td class="c2">一期 3 個月</td></tr>
+            <tr><th>練什麼</th><td>只練運棒</td><td class="c2">完整課程：節奏、過門、歌、技巧</td></tr>
+            <tr><th>回饋</th><td>Jacob 回 2 次，含前後對照</td><td class="c2">12 次作業批改</td></tr>
+            <tr><th>價格</th><td>NT$<span data-v="price.tw">690</span></td><td class="c2">NT$<span data-v="price.upTw">8,250</span>／期<br><span data-v="upgradeDays">14</span> 天內升級折抵 NT$<span data-v="price.tw">690</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -795,46 +744,54 @@ html,body{margin:0;background:#f4f3ee}
     <span class="otag b">FAQ / 常見問題</span>
     <h2 id="fq-h">報名前，你可能會問</h2>
 
-    <details><summary><span class="num">01</span><span class="qq">每天要花多久？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p>大約 40–60 分鐘。先用「運棒優化」A 或 B 練習暖身，再看當天的課、照課裡的指示練。想讓我看，就拍一段傳上來，這步是選填。</p><p>影片全部在營隊區裡，不用另外去找。</p></div></details>
+    <details><summary><span class="num">01</span><span class="qq">沒有鼓可以嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans"><p>可以。鼓棒加一個打點板就夠了，有小鼓也可以。這 7 天只練手，有沒有大鼓都沒差。</p></div></details>
 
-    <details><summary><span class="num">02</span><span class="qq">講解影片一定要準時看嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p>不用。每<span data-v="weeklyLiveName">週一</span>晚上 <span data-v="times.weeklyLive">21:00</span> 上架，之後什麼時候看都可以，留在營隊區，只有同一梯的人看得到。</p><p>整個營隊只有開營那晚（<span data-d="kickoff">10/25（日）</span><span data-v="times.kickoff">20:00</span>）是線上聊天，沒空也沒關係，會錄下來放進營隊區。</p><p>結營之後，你的帳號會變成唯讀，不能再上傳，但<b>講解影片和你自己的紀錄還可以看 <span data-v="replayMonths">3</span> 個月</b>。</p></div></details>
+    <details><summary><span class="num">02</span><span class="qq">我才剛開始學，可以報嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans"><p>可以，有鼓棒和打點板就能開始。第 0 天那段打得很卡也沒關係，那本來就是拿來當起點的。</p></div></details>
 
-    <details><summary><span class="num">03</span><span class="qq">需要什麼設備？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p><b>一組鼓或一個打點板</b>，加一支手機。手機用來看影片、玩練功房、拍影片。第 2 週開始會練大鼓，有鼓會比較好練。</p><p>影片用手機平常的相機拍就好，拍完從相簿選起來上傳，不用在網站裡錄。</p><p>錄影時手機要放在側面、拍得到手肘，找個東西把它立起來就行，手機架或一疊書都可以。</p></div></details>
+    <details><summary><span class="num">03</span><span class="qq">沒辦法每天練怎麼辦？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans"><p>週一到週六共 6 天，<b>練到 5 天就算完成</b>，留一天給加班或臨時有事。</p><p>一天 <span data-v="dailyMin">15–20</span> 分鐘，下班回家就練得完。</p></div></details>
 
-    <details><summary><span class="num">04</span><span class="qq">影片每天都會被回嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p>不會。影片哪一天都可以傳，不傳也可以。我固定<b>每<span data-v="feedbackDays">週五</span></b>，把你這一週傳上來的影片和節拍檢測結果一起看，給你回饋。</p><p>週五看到大家常卡的地方，我會整理進下週一的講解影片。多錄幾天，你自己也留得下紀錄，我回的時候也看得出這一週的變化。</p></div></details>
+    <details><summary><span class="num">04</span><span class="qq">有幾天沒跟上，做不完怎麼辦？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans"><p>影片做完之後 <span data-v="replayDays">90</span> 天內都還看得到，晚幾天跟上，也可以繼續練。</p><p>只有第 7 天那段，請在週日錄好傳上來，週一我才能把兩段放在一起看。真的卡住了，先 LINE @jdactw 說一聲。</p></div></details>
 
-    <details><summary><span class="num">05</span><span class="qq">大陸學員怎麼付款？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p>用微信付款。人民幣早鳥 ¥<span data-v="price.cnEarly">469</span>，原價 ¥<span data-v="price.cnRegular">599</span>。</p><p>加客服微信 <b>jdac_drums</b>，說你要報名營隊，客服會給你付款方式。確認收款後幫你登記名額，營隊區跟台灣學員同一天開通。</p><p>大陸打不開刷卡結帳頁，所以大陸學員一律走客服微信。</p></div></details>
+    <details><summary><span class="num">05</span><span class="qq">有直播嗎？要準時上線嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans"><p>沒有直播，不用準時上線。影片都是錄好的，一天之中什麼時候練都可以。</p><p>看影片、打勾、上傳、節拍檢測、看我的回覆，全部在 www.jacobdrumemory.com 的學員專區。</p></div></details>
 
-    <details><summary><span class="num">06</span><span class="qq">報名人數不夠怎麼辦？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p>每梯滿 <span data-v="cap.min">15</span> 人才開營。到報名截止（<span data-d="regClose">10/16（五）</span>）還不到 <span data-v="cap.min">15</span> 人，這一梯就不開，已經付的<b>全額退費</b>。</p></div></details>
+    <details><summary><span class="num">06</span><span class="qq">回覆是怎麼回的？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans"><p>以文字為主，有時候會加一小段影片。兩次都是我自己看你的影片、自己回。</p><p>節拍檢測的燈號和說明是系統算的；看完影片要跟你講什麼，是我寫的。</p></div></details>
 
-    <details><summary><span class="num">07</span><span class="qq">可以只看影片、不交影片嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p>可以。每天的課、暖身影片、每週講解、練功房都照樣能用。</p><p>只是回饋要看影片才給得出來。這一週沒傳影片，週五我就沒東西可以回你；第 30 天的對照回覆，也需要你第 0 天和第 30 天的影片。</p></div></details>
+    <details><summary><span class="num">07</span><span class="qq">7 天真的會有差嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans"><p>我不會跟你說 7 天就變快。這 7 天練的是方向：怎麼放鬆、怎麼用最少的力氣、左右手怎麼打得一樣。</p><p>差多少，第 7 天的影片和檢測結果會告訴你，我也會在對照回覆裡講清楚，接下來先練什麼。</p></div></details>
 
-    <details><summary><span class="num">08</span><span class="qq">完全沒打過鼓，可以參加嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p>不建議。這個營隊是給已經在打、但卡住的人，第一天就會用到基本的握棒和節拍器。完全沒碰過鼓，建議先從線上教練課的 Pre-school 開始。</p></div></details>
+    <details><summary><span class="num">08</span><span class="qq">可以退費嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans"><p>開始之前（開始前的週六 <span data-v="closeTime">23:59</span> 以前）可以<b>全額退費</b>。開始之後就不退了。</p></div></details>
 
-    <details><summary><span class="num">09</span><span class="qq">我不在台灣，可以參加嗎？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-      <div class="ans"><p>可以，全程線上。營隊裡的講解都是錄好的影片，什麼時間看都可以。只有開營那晚的線上聊天有固定時間（台灣／北京時間 <span data-v="times.kickoff">20:00</span>），沒空就看錄影。</p></div></details>
+    <details><summary><span class="num">09</span><span class="qq">做完之後呢？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans"><p>影片和我的回覆，做完後 <span data-v="replayDays">90</span> 天內都看得到。</p><p>想繼續有人盯你練，做完 <span data-v="upgradeDays">14</span> 天內升級線上教練課（3 個月 NT$<span data-v="price.upTw">8,250</span>，12 次作業批改），<b>NT$<span data-v="price.tw">690</span> 全額折抵</b>，LINE @jdactw 跟我們說就好。</p></div></details>
+
+    <details><summary><span class="num">10</span><span class="qq">要用哪個帳號登入？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans"><p>報名用的 email，就是你登入 www.jacobdrumemory.com 學員專區的 email。<b>兩個要一樣</b>，影片和回覆才會出現在你的帳號裡。</p></div></details>
+
+    <details><summary><span class="num">11</span><span class="qq">大陸學員怎麼付款？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans"><p>用微信付款，¥<span data-v="price.cn">169</span>。加客服微信 <b>jdac_drums</b>，說你要報名 7 天運棒特訓班、想上哪一梯，客服會給你付款方式。</p><p>大陸打不開刷卡結帳頁，所以大陸學員一律走客服微信。</p></div></details>
+
+    <details><summary><span class="num">12</span><span class="qq">為什麼一梯只收 5 個人？</span><span class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0c0c0c" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans"><p>因為每個人的影片我都要自己看、自己回。人一多，回覆就會變短、變慢。</p></div></details>
   </div></div></section>
 
-  <!-- ═══ FINAL CTA ═══ -->
+  <!-- ═══ FINAL：邀請來問 ═══ -->
   <footer>
     <section class="ft-cta"><div class="jd-in">
       <div>
-        <p class="lab">Last call / 最後一件事</p>
-        <h2>想好了，就報名。<span data-until="demoLive"><br>還沒想好，先來看示範。</span></h2>
-        <p class="say" data-until="demoLive"><span data-d="demoLive">10/8（四）</span><span data-v="times.demoLive">15:00</span> 免費直播講座，<span data-v="demoMinutes">90</span> 分鐘，先到 /live 留問題。聽完覺得適合，再決定。</p>
-        <p class="say" data-after="demoLive" hidden>運棒協調營第 <span data-v="cohort">1</span> 梯 <span data-d="start">10/26（一）</span>開營，一梯最多 <span data-v="cap.max">30</span> 人。</p>
+        <p class="lab">Still thinking / 還在想</p>
+        <h2>不確定適不適合？<br>先來 LINE 聊聊。</h2>
+        <p class="say">跟我們說說你現在卡在哪、手邊有什麼器材，一起看看這 7 天適不適合你。大陸請加微信 jdac_drums。</p>
       </div>
       <div class="btns">
-        <a class="btn w" href="#checkout" data-buy="tw" data-cta="camp-earlybird" data-cta-after="camp-regular"><span data-until="earlyEnd">早鳥報名</span><span data-after="earlyEnd" hidden>立即報名</span></a>
-        <a class="btn ow" href="https://www.jacobdrumemory.com/live" target="_blank" rel="noopener" data-cta="camp-demo-live" data-until="demoLive">去 /live 留問題</a>
+        <a class="btn w" href="https://line.me/R/ti/p/@jdactw" target="_blank" rel="noopener" data-cta="stick7-line">LINE @jdactw 問問題</a>
+        <a class="btn ow" href="#checkout" data-buy="tw" data-cta="stick7-footer">我要報名</a>
       </div>
     </div></section>
     <div class="ft-bar"><div class="jd-in">
@@ -857,61 +814,167 @@ html,body{margin:0;background:#f4f3ee}
   var pg = document.querySelector('.pg');
   if (!C || !pg) return;
   var WD = '日一二三四五六';
+  var RX_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
   function get(path){ return path.split('.').reduce(function(o,k){ return o == null ? undefined : o[k]; }, C); }
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
   function ymd(s){ var a = String(s||'').split('-'); return { y:+a[0], m:+a[1], d:+a[2] }; }
+  function iso(y, m, d){ var t = new Date(Date.UTC(y, m-1, d)); return t.getUTCFullYear() + '-' + pad(t.getUTCMonth()+1) + '-' + pad(t.getUTCDate()); }
+  function addDays(s, n){ var p = ymd(s); return iso(p.y, p.m, p.d + n); }
   function wday(p){ return new Date(Date.UTC(p.y, p.m-1, p.d)).getUTCDay(); }   // 用 UTC 算，避免時區把日期推前一天
   function fmtMD(s){ var p = ymd(s); return p.m + '/' + p.d; }
   function fmtMDW(s){ var p = ymd(s); return p.m + '/' + p.d + '（' + WD[wday(p)] + '）'; }
   function money(v){ return (typeof v === 'number' && v >= 1000) ? v.toLocaleString('en-US') : String(v); }
   // 台灣時間某天 HH:MM 的毫秒（UTC+8）
   function twMs(s, hm){ var p = ymd(s), t = String(hm||'23:59').split(':'); return Date.UTC(p.y, p.m-1, p.d, +t[0], +t[1], 59) - 8*3600e3; }
+  // 毫秒 → 台灣時間的日期＋時:分
+  function twParts(ms){ var d = new Date(ms + 8*3600e3); return { s: iso(d.getUTCFullYear(), d.getUTCMonth()+1, d.getUTCDate()), hm: pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()) }; }
+  function fmtClose(ms, md){ var p = twParts(ms); return (md ? fmtMD(p.s) : fmtMDW(p.s)) + ' ' + p.hm; }
 
-  // 1) 日期
-  pg.querySelectorAll('[data-d]').forEach(function(el){
-    var s = C.dates[el.getAttribute('data-d')]; if (!s) return;
-    el.textContent = el.getAttribute('data-f') === 'md' ? fmtMD(s) : fmtMDW(s);
-  });
-  // 2) 價格／名額／時間等數值
-  pg.querySelectorAll('[data-v]').forEach(function(el){
-    var v = get(el.getAttribute('data-v')); if (v === undefined || v === '') return;
-    el.textContent = money(v);
-  });
-  // 3) 每週直播日期：開營～第 30 天之間的每個直播日，最後接結營直播
-  var ld = document.getElementById('liveDates');
-  if (ld) {
-    var s = ymd(C.dates.start), e = ymd(C.dates.day30);
-    var t = Date.UTC(s.y, s.m-1, s.d), end = Date.UTC(e.y, e.m-1, e.d), out = [];
-    for (t += 864e5; t <= end; t += 864e5) {   // 從開營隔天起算：開營當天的週一不排講解
-       var d = new Date(t); if (d.getUTCDay() === C.weeklyLiveDay) out.push((d.getUTCMonth()+1) + '/' + d.getUTCDate()); }
-    ld.innerHTML = out.map(function(x){ return '<span>' + x + '</span>'; }).join('') + '<span class="end">結營影片 ' + fmtMD(C.dates.closeLive) + '</span>';
-  }
-  // 4) 時間狀態：早鳥過了自動切原價、示範直播過了自動收起邀請。?now=2026-10-09 可預覽
+  // ?now=2026-10-30 或 ?now=2026-10-30T22:00 可以預覽某個時間點的樣子
   var now = Date.now(), q = /[?&]now=(\d{4}-\d{2}-\d{2})(?:T(\d{2}:\d{2}))?/.exec(location.search);
   if (q) now = twMs(q[1], q[2] || '12:00');
-  var endAt = { earlyEnd: twMs(C.dates.earlyEnd, C.times.earlyEnd), demoLive: twMs(C.dates.demoLive, C.times.demoLive) + (C.demoMinutes || 45) * 60e3 };   // 示範直播一結束就收起邀請（早鳥照舊到當天 earlyEnd）
-  pg.querySelectorAll('[data-until]').forEach(function(el){ var k = endAt[el.getAttribute('data-until')]; if (k) el.hidden = now > k; });
-  pg.querySelectorAll('[data-after]').forEach(function(el){ var k = endAt[el.getAttribute('data-after')]; if (k) el.hidden = now <= k; });
-  if (now > endAt.earlyEnd) pg.querySelectorAll('[data-cta-after]').forEach(function(el){ el.setAttribute('data-cta', el.getAttribute('data-cta-after')); });
 
-  // 4b) 開賣前／報名截止後：買的按鈕換字。結帳網址有填才真的連過去，沒填就捲到價格區
-  var openAt = twMs(C.dates.saleOpen, C.times.saleOpen || '00:00') - 59e3;
-  var closeAt = twMs(C.dates.regClose, C.times.regClose || '23:59');
-  var phase = C.paused ? 'paused' : (now < openAt ? 'soon' : (now > closeAt ? 'closed' : 'open'));
-  pg.setAttribute('data-phase', phase);
-  pg.querySelectorAll('[data-buy]').forEach(function(el){
-    var cn = el.getAttribute('data-buy') === 'cn';
-    if (phase === 'paused') { el.textContent = cn ? '改版中・加微信 jdac_drums 等通知' : '改版中・LINE 留言等通知'; if (cn) el.setAttribute('href', '#cn-pay'); else { el.setAttribute('href', 'https://line.me/R/ti/p/@jdactw'); el.setAttribute('target', '_blank'); el.setAttribute('rel', 'noopener'); } el.classList.add('is-soon'); }
-    else if (phase === 'soon') { el.textContent = fmtMDW(C.dates.saleOpen) + ' ' + (C.times.saleOpen || '00:00') + ' 開賣' + (cn ? '・大陸加微信報名' : ''); el.setAttribute('href', '#checkout'); el.classList.add('is-soon'); }
-    else if (phase === 'closed') { el.textContent = '第 ' + C.cohort + ' 梯報名已截止'; el.removeAttribute('href'); el.classList.add('is-closed'); el.setAttribute('aria-disabled', 'true'); }
-    else { var u = cn ? C.checkoutUrlCn : C.checkoutUrl; if (u) { el.setAttribute('href', u); el.setAttribute('target', '_blank'); el.setAttribute('rel', 'noopener'); } }
-  });
-  var pill = pg.querySelector('.tk-hd .pill');
-  if (pill && phase === 'paused') pill.textContent = '改版中';
-  if (pill && phase === 'soon') pill.textContent = fmtMD(C.dates.saleOpen) + ' 開賣';
-  if (pill && phase === 'closed') pill.textContent = '已截止';
+  // ── 梯次：預設用規則自己算（每月第 1、第 3 個週一；firstStart 以前不算）──
+  function mondays13(y, m){ var dow = new Date(Date.UTC(y, m-1, 1)).getUTCDay(); var d1 = 1 + (8 - dow) % 7; return [iso(y, m, d1), iso(y, m, d1 + 14)]; }
+  function closeOf(start){ return twMs(addDays(start, -2), C.closeTime || '23:59'); }
+  function computeBatches(){
+    var out = [], f = ymd(C.firstStart || '2026-11-02'), y = f.y, m = f.m, n = C.batchesShown || 4;
+    for (var i = 0; i < 36 && out.length < n; i++) {
+      mondays13(y, m).forEach(function(s){
+        if (out.length >= n || (C.firstStart && s < C.firstStart)) return;
+        var close = closeOf(s); if (close <= now) return;
+        out.push({ startDate: s, day0Date: addDays(s, -1), closeAtMs: close, seatsLeft: null, soldOut: false });
+      });
+      m++; if (m > 12) { m = 1; y++; }
+    }
+    return out;
+  }
 
-  // 4c) 頁內錨點：被外層 iframe 撐成全高時，網址 #hash 不會捲動外層網頁，改用 scrollIntoView（會連外層一起捲）
+  // ── 後端 /api/camp-status：格式對才用，不對就當沒抓到 ──
+  function normalize(j){
+    if (!j || typeof j !== 'object' || !Array.isArray(j.batches)) return null;
+    var list = [];
+    for (var i = 0; i < j.batches.length; i++) {
+      var b = j.batches[i];
+      if (!b || !RX_DATE.test(String(b.startDate))) return null;
+      if (C.firstStart && b.startDate < C.firstStart) continue;
+      var close = b.closeAt ? Date.parse(b.closeAt) : NaN;
+      if (isNaN(close)) close = closeOf(b.startDate);
+      if (close <= now) continue;
+      var seats = (typeof b.seatsLeft === 'number' && b.seatsLeft >= 0) ? Math.floor(b.seatsLeft) : null;
+      list.push({ startDate: b.startDate, day0Date: RX_DATE.test(String(b.day0Date)) ? b.day0Date : addDays(b.startDate, -1), closeAtMs: close, seatsLeft: seats, soldOut: !!b.soldOut || seats === 0 });
+    }
+    if (!list.length) return null;
+    list.sort(function(a, b){ return a.startDate < b.startDate ? -1 : 1; });
+    var price = j.price || {};
+    return {
+      phase: j.phase,
+      cap: (typeof j.cap === 'number' && j.cap > 0) ? j.cap : null,
+      tw: (typeof price.TWD === 'number' && price.TWD > 0) ? price.TWD : null,
+      cn: (typeof price.CNY === 'number' && price.CNY > 0) ? price.CNY : null,
+      batches: list.slice(0, C.batchesShown || 4)
+    };
+  }
+
+  var S = { batches: computeBatches(), live: false, phase: C.paused ? 'paused' : 'open' };
+
+  function renderValues(){
+    pg.querySelectorAll('[data-v]').forEach(function(el){
+      var v = get(el.getAttribute('data-v')); if (v === undefined || v === '') return;
+      el.textContent = money(v);
+    });
+  }
+
+  // 剩幾位只在「開放中＋抓到即時資料」時顯示；其他情況只寫每梯幾人
+  function seatText(b){
+    if (!b || S.phase !== 'open' || !S.live) return '每梯 ' + C.cap + ' 人';
+    if (b.soldOut) return '額滿';
+    if (b.seatsLeft == null) return '每梯 ' + C.cap + ' 人';
+    return '剩 ' + b.seatsLeft + ' 位';
+  }
+
+  function renderBatches(){
+    var list = S.batches, f = null;
+    for (var i = 0; i < list.length; i++) if (!list[i].soldOut) { f = list[i]; break; }
+    if (!f) f = list[0];
+    if (!f) return;
+    var s = f.startDate;
+    var map = { start: s, day0: f.day0Date, day7: addDays(s, 6), reply2: addDays(s, 7) };
+    pg.querySelectorAll('[data-b]').forEach(function(el){
+      var k = el.getAttribute('data-b'), md = el.getAttribute('data-f') === 'md';
+      if (k === 'close') el.textContent = fmtClose(f.closeAtMs, md);
+      else if (k === 'days') el.textContent = fmtMD(s) + '–' + fmtMD(addDays(s, 5));
+      else if (map[k]) el.textContent = md ? fmtMD(map[k]) : fmtMDW(map[k]);
+    });
+    pg.querySelectorAll('[data-seats]').forEach(function(el){ el.textContent = seatText(f); });
+    var pill = pg.querySelector('[data-pill]');
+    if (pill) pill.textContent = S.phase === 'paused' ? '改版中' : S.phase === 'closed' ? '暫停報名' : seatText(f);
+
+    var box = document.getElementById('batchList');
+    if (box) {
+      box.innerHTML = list.map(function(b){
+        var feat = b === f, full = b.soldOut && S.live && S.phase === 'open';
+        var st = S.phase === 'paused' ? '尚未開放' : S.phase === 'closed' ? '暫停報名' : seatText(b);
+        return '<div class="bc' + (feat ? ' is-feat' : '') + (full ? ' is-full' : '') + '">'
+          + '<div class="bc-hd"><span class="t">' + (feat ? '下一梯' : 'BATCH') + '</span><span class="s">' + st + '</span></div>'
+          + '<div class="bc-date">' + fmtMD(b.startDate) + '<small>（' + WD[wday(ymd(b.startDate))] + '）開始</small></div>'
+          + '<ul><li><span>第 0 天</span><b>' + fmtMDW(b.day0Date) + '</b></li>'
+          + '<li><span>第 7 天</span><b>' + fmtMDW(addDays(b.startDate, 6)) + '</b></li>'
+          + '<li><span>對照回覆</span><b>' + fmtMDW(addDays(b.startDate, 7)) + '</b></li>'
+          + '<li><span>報名截止</span><b>' + fmtClose(b.closeAtMs) + '</b></li></ul></div>';
+      }).join('');
+    }
+    var note = document.getElementById('batchNote');
+    if (note) {
+      note.innerHTML = S.phase === 'paused'
+        ? '報名還沒開放，日期先給你參考。想第一個知道：<a href="https://line.me/R/ti/p/@jdactw" target="_blank" rel="noopener">LINE @jdactw</a> 留言，大陸請加微信 jdac_drums。'
+        : S.phase === 'closed'
+        ? '目前暫停報名。想知道下一次開放：<a href="https://line.me/R/ti/p/@jdactw" target="_blank" rel="noopener">LINE @jdactw</a> 留言。'
+        : S.live
+        ? '剩餘名額是即時的。每梯 <b>' + C.cap + ' 人</b>，額滿就關。'
+        : '每梯 <b>' + C.cap + ' 人</b>，額滿就關。';
+    }
+    pg.setAttribute('data-batches', S.live ? 'live' : 'fallback');
+  }
+
+  // ── 報名鈕：暫停中／暫停報名／開放 ──
+  function applyBuy(){
+    var phase = S.phase;
+    pg.setAttribute('data-phase', phase);
+    pg.querySelectorAll('[data-buy]').forEach(function(el){
+      var cn = el.getAttribute('data-buy') === 'cn';
+      if (phase === 'paused') { el.textContent = cn ? '改版中・加微信 jdac_drums 等通知' : '改版中・LINE 留言等通知'; if (cn) el.setAttribute('href', '#cn-pay'); else { el.setAttribute('href', 'https://line.me/R/ti/p/@jdactw'); el.setAttribute('target', '_blank'); el.setAttribute('rel', 'noopener'); } el.classList.add('is-soon'); }
+      else if (phase === 'closed') { el.textContent = '目前暫停報名'; el.removeAttribute('href'); el.removeAttribute('target'); el.classList.add('is-closed'); el.setAttribute('aria-disabled', 'true'); }
+      else { var u = cn ? C.checkoutUrlCn : C.checkoutUrl; if (u) { el.setAttribute('href', u); el.setAttribute('target', '_blank'); el.setAttribute('rel', 'noopener'); } }
+    });
+  }
+
+  renderValues();
+  renderBatches();
+  applyBuy();
+
+  // ── 抓即時梯次＋名額（抓不到就維持上面算出來的日期）──
+  if (C.statusUrl && window.fetch) {
+    var ctl = window.AbortController ? new AbortController() : null;
+    var to = setTimeout(function(){ if (ctl) ctl.abort(); }, 8000);
+    fetch(C.statusUrl, { cache: 'no-store', credentials: 'omit', signal: ctl ? ctl.signal : undefined })
+      .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function(j){
+        clearTimeout(to);
+        var n = normalize(j); if (!n) return;
+        S.live = true; S.batches = n.batches;
+        if (n.cap) C.cap = n.cap;
+        if (n.tw) C.price.tw = n.tw;
+        if (n.cn) C.price.cn = n.cn;
+        if (!C.paused) S.phase = n.phase === 'closed' ? 'closed' : n.phase === 'paused' ? 'paused' : 'open';
+        renderValues(); renderBatches();
+        if (!C.paused && S.phase !== 'open') applyBuy();
+      })
+      .catch(function(){ clearTimeout(to); });
+  }
+
+  // 頁內錨點：被外層 iframe 撐成全高時，網址 #hash 不會捲動外層網頁，改用 scrollIntoView（會連外層一起捲）
   pg.addEventListener('click', function(e){
     var a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a) return;
     var id = a.getAttribute('href').slice(1); var t = id && document.getElementById(id); if (!t) return;
@@ -919,7 +982,7 @@ html,body{margin:0;background:#f4f3ee}
   });
   function reduceMotion(){ return !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); }
 
-  // 5) 「你中了幾個」
+  // 「你中了幾個」
   var cards = pg.querySelectorAll('.pn-card'), cnt = document.getElementById('pnCount');
   function upd(){
     var n = 0; cards.forEach(function(c){ if (c.getAttribute('aria-pressed') === 'true') n++; });
@@ -930,9 +993,8 @@ html,body{margin:0;background:#f4f3ee}
   }
   cards.forEach(function(c){ c.addEventListener('click', function(){ c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); upd(); }); });
 
-  // 6) 監聽段電平條進場點亮（純裝飾；不支援或偏好減少動態就維持全亮）
-  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if ('IntersectionObserver' in window && !reduce) {
+  // 監聽段電平條進場點亮（純裝飾；不支援或偏好減少動態就維持全亮）
+  if ('IntersectionObserver' in window && !reduceMotion()) {
     pg.classList.add('anim');
     var io = new IntersectionObserver(function(es){ es.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('lit'); io.unobserve(en.target); } }); }, { threshold: 0.3 });
     pg.querySelectorAll('.track').forEach(function(el){ io.observe(el); });
