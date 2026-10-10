@@ -28,7 +28,7 @@ const CAMP = {
   },
   paused: false,                      // 2026-10-10 Jacob：推上去開賣（要再暫停改回 true）
   statusUrl:     'https://jdac-admin.vercel.app/api/camp-status',   // 即時梯次／名額
-  checkoutUrl:   'https://jdac-admin.vercel.app/camp',               // 台灣／海外結帳頁（一律開新分頁）
+  checkoutUrl:   'https://www.jacobdrumemory.com/%E7%87%9F%E9%9A%8Acheckout',   // 台灣／海外結帳頁＝官網「/營隊checkout」頁（裡面嵌 jdac-admin.vercel.app/camp；2026-10-10）
   checkoutUrlCn: ''                   // 大陸：不開結帳頁（大陸打不開），按鈕捲到下面的客服微信說明
 };
 </script>
@@ -287,6 +287,8 @@ html,body{margin:0;background:#f4f3ee}
 .bc li:last-child{border-bottom:0}
 .bc li span{color:#8a8579}
 .bc li b{font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:12.5px;color:#0c0c0c;white-space:nowrap}
+.bc-go{display:block;margin:12px 0 4px;text-align:center;font-weight:900;font-size:14px;color:#fff;background:#0c0c0c;border-radius:8px;padding:10px 0;text-decoration:none}
+.bc.is-feat .bc-go{background:#2563ff}
 .bc-note{margin:18px 0 0;font-size:14px;line-height:1.8;color:#55524a;max-width:760px}
 .bc-note b{color:#0c0c0c}
 .bc-note a{color:#2563ff}
@@ -889,6 +891,9 @@ html,body{margin:0;background:#f4f3ee}
   }
 
   // 剩幾位只在「開放中＋抓到即時資料」時顯示；其他情況只寫每梯幾人
+  function linkTarget(u){ return /^https:\/\/www\.jacobdrumemory\.com\//.test(String(u || '')) ? '_top' : '_blank'; }
+  function withCohort(u, startDate){ return u + (u.indexOf('?') === -1 ? '?' : '&') + 'c=' + String(startDate).replace(/-/g, ''); }
+
   function seatText(b){
     if (!b || S.phase !== 'open' || !S.live) return '每梯 ' + C.cap + ' 人';
     if (b.soldOut) return '額滿';
@@ -924,7 +929,9 @@ html,body{margin:0;background:#f4f3ee}
           + '<ul><li><span>第 0 天</span><b>' + fmtMDW(b.day0Date) + '</b></li>'
           + '<li><span>第 7 天</span><b>' + fmtMDW(addDays(b.startDate, 6)) + '</b></li>'
           + '<li><span>對照回覆</span><b>' + fmtMDW(addDays(b.startDate, 7)) + '</b></li>'
-          + '<li><span>報名截止</span><b>' + fmtClose(b.closeAtMs) + '</b></li></ul></div>';
+          + '<li><span>報名截止</span><b>' + fmtClose(b.closeAtMs) + '</b></li></ul>'
+          + (S.phase === 'open' && !b.soldOut && C.checkoutUrl ? '<a class="bc-go" href="' + withCohort(C.checkoutUrl, b.startDate) + '" target="' + linkTarget(C.checkoutUrl) + '" data-cta="stick7-batch">報這一梯 →</a>' : '')
+          + '</div>';
       }).join('');
     }
     var note = document.getElementById('batchNote');
@@ -948,7 +955,7 @@ html,body{margin:0;background:#f4f3ee}
       var cn = el.getAttribute('data-buy') === 'cn';
       if (phase === 'paused') { el.textContent = cn ? '改版中・加微信 jdac_drums 等通知' : '改版中・LINE 留言等通知'; if (cn) el.setAttribute('href', '#cn-pay'); else { el.setAttribute('href', 'https://line.me/R/ti/p/@jdactw'); el.setAttribute('target', '_blank'); el.setAttribute('rel', 'noopener'); } el.classList.add('is-soon'); }
       else if (phase === 'closed') { el.textContent = '目前暫停報名'; el.removeAttribute('href'); el.removeAttribute('target'); el.classList.add('is-closed'); el.setAttribute('aria-disabled', 'true'); }
-      else { var u = cn ? C.checkoutUrlCn : C.checkoutUrl; if (u) { el.setAttribute('href', u); el.setAttribute('target', '_blank'); el.setAttribute('rel', 'noopener'); } }
+      else { var u = cn ? C.checkoutUrlCn : C.checkoutUrl; if (u) { var tg = linkTarget(u); el.setAttribute('href', u); el.setAttribute('target', tg); if (tg === '_blank') el.setAttribute('rel', 'noopener'); else el.removeAttribute('rel'); } }
     });
   }
 
