@@ -1010,7 +1010,5 @@ html,body{margin:0;background:#f4f3ee}
   }
 })();
 </script>
-<script>/* 把內容高度回報給外層 Wix（masterPage.js wireEmbedAutoHeight 收）。⚠️ jdacFrom 一定要帶，沒署名的訊息會被丟掉。 */
-(function(){function h(){try{var d=document.documentElement,b=document.body;var H=Math.max(d.scrollHeight,b.scrollHeight,d.offsetHeight,b.offsetHeight);parent.postMessage({jdacFrom:'camppage',jdacHeight:H},'*');}catch(e){}}
-window.addEventListener('load',h);window.addEventListener('resize',h);document.addEventListener('toggle',h,true);setInterval(h,1200);})();</script>
+<script src="./embed-child.js" data-from="camppage"></script><!-- 回報內容高度給外層 Wix（Wix 自訂程式碼 embed-fit.js 收），見 embed-child.js -->
 </body></html>
