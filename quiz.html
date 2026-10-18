@@ -131,11 +131,18 @@ footer a{color:#2563ff;text-decoration:none;font-weight:700}
 .qb-cal{font-size:12px;line-height:1.8;color:#55524a;background:#eef3ff;border-radius:10px;padding:11px 14px;margin:12px 0 0}
 .qb-note{font-size:12.5px;line-height:1.85;color:#55524a;background:#f7f5ec;border-radius:10px;padding:12px 15px;margin:10px 0 0}
 .qb-again{background:none;border:none;color:#8a8579;font-size:13px;font-weight:600;cursor:pointer;font-family:"Noto Sans TC",sans-serif;text-decoration:underline;padding:6px 0;margin-top:10px}
+.qb-endrow{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:10px}
+.qb-endrow .qb-again{margin-top:0}
+.qb-cont{font-family:"Noto Sans TC",sans-serif;font-weight:800;font-size:15px;padding:12px 24px;border:1.5px solid #0c0c0c;background:#2563ff;color:#fff;border-radius:12px;cursor:pointer;box-shadow:3px 3px 0 #0c0c0c;transition:transform .1s,box-shadow .1s;margin-left:auto}
+.qb-cont:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #0c0c0c}
+.qb-cont:active{transform:translate(3px,3px);box-shadow:0 0 0 #0c0c0c}
 
 @media(max-width:620px){
   .qb-openbtn,.qb-tapbtn{width:100%}
   .qb-gtitle span{display:block;margin:4px 0 0}
   .qb-taprow{gap:12px}
+  .qb-endrow{flex-direction:column-reverse;align-items:stretch}
+  .qb-cont{width:100%;margin-left:0}
 }
 </style>
 </head>
@@ -239,8 +246,8 @@ function result(){
  var T=TYPES[win];var dirs='';for(var d=0;d<T.dir.length;d++){dirs+='<li data-n="'+(d+1)+'">'+qzEsc(T.dir[d])+'</li>';}
  var em='<div class="qz-em"><p class="lb">把「'+qzEsc(T.name)+'」的 3 天客製練習菜單寄給你</p><p class="sb">留個 email，我把照你型別排好的 3 天菜單寄過去——每天一步，附我 YouTube 上對應的教學影片。看完覺得對味，再談加入。</p><form class="qz-emform" novalidate><div class="qz-emrow"><input class="qz-emin" type="email" name="email" required maxlength="120" placeholder="你的 Email" autocomplete="email" inputmode="email"><button type="submit" class="qz-embtn">寄給我 3 天菜單</button></div><p class="qz-emmsg" hidden></p></form></div>';
  var hc='<div class="qz-hc">'+'<p class="lb">知道型別，還不知道差在哪一塊</p>'+'<p class="sb">27 題、5 分鐘，測出你在時間感、協調獨立、讀譜視奏、耳朵與扒歌、風格廣度、練習系統六個面向各在哪一級——對照 Rockschool 官方分級，告訴你最該補的是哪兩塊。</p>'+'<a class="jh-btn hc" href="https://www.jacobdrumemory.com/drummerquiz?src=type" target="_blank" rel="noopener">開始能力健檢 →</a>'+'</div>';
-  panel.innerHTML='<span class="qz-rtag">'+qzEsc(T.tag)+' · 你的鼓手型別</span>'+'<p class="qz-rname">'+qzEsc(T.name)+'</p>'+'<div class="qz-diag">'+qzEsc(T.diag)+'</div>'+'<p class="qz-dh">你現在該練的三件事</p>'+'<ul class="qz-dir">'+dirs+'</ul>'+'<div class="qz-bridge">🥁 '+qzEsc(T.bridge)+'</div>'+em+hc+
-  '<div class="qz-cta"><a class="jh-btn p" href="https://www.jacobdrumemory.com/onlinecoaching" target="_blank" rel="noopener">看線上教練課 →</a><a class="jh-btn line" href="https://line.me/R/ti/p/@jdactw" target="_blank" rel="noopener">加 LINE 諮詢</a><button type="button" class="jh-btn" id="qzWechat">複製微信號</button><button type="button" class="qz-retry">↺ 重測一次</button></div><p class="qz-wxhint" id="qzWxHint" hidden></p>';
+ panel.innerHTML='<span class="qz-rtag">'+qzEsc(T.tag)+' · 你的鼓手型別</span>'+'<p class="qz-rname">'+qzEsc(T.name)+'</p>'+'<div class="qz-diag">'+qzEsc(T.diag)+'</div>'+'<p class="qz-dh">你現在該練的三件事</p>'+'<ul class="qz-dir">'+dirs+'</ul>'+jdacS7Quiz(win,'main')+'<div class="qz-bridge">🥁 '+qzEsc(T.bridge)+'</div>'+em+hc+
+  '<div class="qz-cta"><a class="jh-btn p" href="https://www.jacobdrumemory.com/onlinecoaching" target="_blank" rel="noopener">看線上教練課 →</a><a class="jh-btn line" href="https://line.me/R/ti/p/@jdactw" target="_blank" rel="noopener">加 LINE 諮詢</a><button type="button" class="jh-btn" id="qzWechat">複製微信號</button><button type="button" class="qz-retry">↺ 重測一次</button></div><p class="qz-wxhint" id="qzWxHint" hidden></p>'+jdacS7Quiz(win,'after');
  panel.querySelector('.qz-retry').addEventListener('click',reset);
  var wb=panel.querySelector('#qzWechat');
  wb.addEventListener('click',function(){
@@ -256,6 +263,7 @@ function result(){
   fetch('https://www.jacobdrumemory.com/_functions/quizLead',{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({email:em2,type:win,answers:'picks:'+picks.join(','),source:SRC})}).then(function(r){return r.json();}).then(function(j){if(j&&j.ok){f.reset();btn.style.display='none';msg.hidden=false;msg.className='qz-emmsg ok';msg.innerHTML=j.sent?'✓ 菜單第一天已經寄出！請收信（沒看到就找一下垃圾郵件夾）。接下來 3 天，每天會收到一步。':'✓ 已經幫你登記好了！菜單會盡快寄到你信箱（記得看一下垃圾郵件夾），接下來幾天每天一步。';}else{btn.disabled=false;btn.textContent=old;msg.hidden=false;msg.className='qz-emmsg err';msg.textContent='寄送失敗，請稍後再試一次～';}}).catch(function(){btn.disabled=false;btn.textContent=old;msg.hidden=false;msg.className='qz-emmsg err';msg.textContent='寄送失敗，請檢查網路後再試一次。';});
  });
  jdacQuizBonus(panel,DATA);
+ jdacS7Fill(panel);
 }
 reset();
 }
@@ -282,11 +290,17 @@ reset();
  */
 var jdacRlAudio = null, jdacRlSilent = null, jdacRlVexPromise = null;
 
-function jdacQuizBonus(panel, DATA) {
+/* opts（第三個參數，可省略——測驗頁與兩支銷售頁都不傳，行為完全不變）：
+ *   anchor   插入點選擇器，預設 '.qz-cta'
+ *   autoStart 跳過 teaser 直接進第一關（健檢把它當「題目」用，不是加碼關）
+ *   onDone   五關跑完、使用者按「繼續」時呼叫，帶 {passN, topI, ceiling, scores}
+ * 回傳 {stop}——呼叫端換頁前要 stop()，否則空白鍵監聽會殘留一次。 */
+function jdacQuizBonus(panel, DATA, opts) {
+  opts = opts || {};
   var B = DATA && DATA.bonus;
-  if (!B || !B.qs || !B.qs.length) return;
-  var anchor = panel.querySelector('.qz-cta');
-  if (!anchor) return;
+  if (!B || !B.qs || !B.qs.length) return null;
+  var anchor = panel.querySelector(opts.anchor || '.qz-cta');
+  if (!anchor) return null;
 
   var BPM = 90, BEAT = 60000 / BPM, LEAD = 4, PASS = 95, DEBOUNCE = 60;
   var INK = '#0c0c0c';
@@ -681,7 +695,16 @@ function jdacQuizBonus(panel, DATA) {
       }
       run();
     });
-    wrap.querySelector('#qbTap').addEventListener('click', function () { unlock(); tap(); });
+    // 打點吃 pointerdown 不吃 click：click 在觸控要等 touchend，而且抖動大。
+    // 綠點門檻只有 150ms，預備 4 拍的中位數只吸收得掉「固定」延遲，吸收不掉抖動。
+    // pointerdown 在滑鼠上也比較對——鼓手是「打下去」的那一刻算數，不是放開。
+    var padEl = wrap.querySelector('#qbTap');
+    if (window.PointerEvent) {
+      padEl.style.touchAction = 'manipulation';
+      padEl.addEventListener('pointerdown', function (e) { e.preventDefault(); unlock(); tap(); });
+    } else {
+      padEl.addEventListener('click', function () { unlock(); tap(); });
+    }
     keyHandler = function (ev) {
       if (!wrap.isConnected) { stopAll(); return; }
       if (ev.code === 'Space') { ev.preventDefault(); unlock(); tap(); }
@@ -736,9 +759,17 @@ function jdacQuizBonus(panel, DATA) {
       '</div>' +
       '<p class="qb-cal">🎯 每題的「預備 4 拍」都拿去量了你的裝置延遲並自動補償（藍牙耳機通常 100ms 以上）——所以綠黃紅是你自己的，不是你耳機的。</p>' +
       (B.note ? '<p class="qb-note">' + esc(B.note) + '</p>' : '') +
-      '<button type="button" class="qb-again">↺ 再玩一次</button>';
+      '<div class="qb-endrow">' +
+      '<button type="button" class="qb-again">' + (opts.onDone ? '↺ 重打一次' : '↺ 再玩一次') + '</button>' +
+      (opts.onDone ? '<button type="button" class="qb-cont">繼續健檢 →</button>' : '') +
+      '</div>';
     wrap.querySelector('.qb-again').addEventListener('click', function () {
       qi = 0; scores = []; board();
+    });
+    var contBtn = wrap.querySelector('.qb-cont');
+    if (contBtn) contBtn.addEventListener('click', function () {
+      stopAll();
+      opts.onDone({ passN: passN, topI: topI, ceiling: ceiling, scores: scores.slice() });
     });
   }
 
@@ -752,7 +783,81 @@ function jdacQuizBonus(panel, DATA) {
     wrap.querySelector('.qb-openbtn').addEventListener('click', function () { qi = 0; scores = []; board(); });
   }
 
-  teaser();
+  if (opts.autoStart) { qi = 0; scores = []; board(); } else { teaser(); }
+  return { stop: stopAll };
+}
+/* 7 天運棒特訓班：首頁、教練課頁、測驗／健檢結果的推薦卡（Jacob 2026-10-18）
+ * 首頁 B 版主打橫幅、教練課頁「想先試試」卡、型別測驗 C/D 主推＋A/B 次推、健檢「時間感」最低主推＋全部次推。
+ * 日期／名額／價格：HTML 先放不會錯的預設字（每月第 1、3 個週一開跑・NT$690，名額先藏），
+ * 抓到 jdac-admin 即時梯次才換成真的開跑日和剩幾位；抓不到就維持預設，不會顯示錯的名額。
+ * 樣式全用行內 style——這支會被首頁、教練課頁、/drummertype、/drummerquiz 四個地方共用，不碰各頁的 CSS。 */
+var JDAC_S7_URL = 'https://www.jacobdrumemory.com/7-day';
+var JDAC_S7_STATUS = 'https://jdac-admin.vercel.app/api/camp-status';
+
+function jdacS7Esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+// 三顆小膠囊：開跑日（有綠點）、剩幾位（抓到才出現）、價格
+// ⚠️ 這裡是 style="..." 屬性，字型名稱只能用單引號（雙引號會把屬性截斷，膠囊外框整個消失）
+function jdacS7Chips(color){
+  var c = 'display:inline-flex;align-items:center;gap:6px;font-family:\'JetBrains Mono\',\'Noto Sans TC\',monospace;font-size:11.5px;font-weight:700;padding:4px 9px;border:1.5px solid '+color+';color:'+color+';border-radius:99px;white-space:nowrap';
+  return '<span style="'+c+'"><i style="width:7px;height:7px;border-radius:50%;background:#16c784;box-shadow:0 0 0 3px rgba(22,199,132,.25)"></i><span data-s7="date">每月第 1、3 個週一開跑</span></span>'+
+    '<span data-s7="seats" style="'+c+';display:none"></span>'+
+    '<span data-s7="price" style="'+c+'">NT$690</span>';
+}
+
+// 抓即時梯次，把 root 裡的 [data-s7] 換成真的
+function jdacS7Fill(root){
+  if(!root || !root.querySelector || !root.querySelector('[data-s7]') || !window.fetch) return;
+  var W = ['日','一','二','三','四','五','六'];
+  fetch(JDAC_S7_STATUS, {cache:'no-store', credentials:'omit'}).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(function(j){
+    var bs = (j && j.batches) || [], b = null;
+    for (var i = 0; i < bs.length; i++) { if (!bs[i].soldOut) { b = bs[i]; break; } }
+    var open = !!(j && j.phase === 'open' && b);
+    if (open) {
+      var p = String(b.startDate).split('-').map(Number), t = new Date(Date.UTC(p[0], p[1]-1, p[2]));
+      root.querySelectorAll('[data-s7="date"]').forEach(function(el){ el.textContent = p[1]+'/'+p[2]+'（'+W[t.getUTCDay()]+'）開跑'; });
+      if (b.seatsLeft != null) root.querySelectorAll('[data-s7="seats"]').forEach(function(el){ el.textContent = '剩 '+b.seatsLeft+' 位'; el.hidden = false; el.style.display = 'inline-flex'; });
+    }
+    if (j && j.price && j.price.TWD) root.querySelectorAll('[data-s7="price"]').forEach(function(el){ el.textContent = 'NT$'+Number(j.price.TWD).toLocaleString('en-US'); });
+  }).catch(function(){});
+}
+
+// 主推卡（白底黑框、藍硬陰影）
+function jdacS7Card(kicker, title, why){
+  return '<div class="s7-card" style="background:#fff;border:1.5px solid #0c0c0c;box-shadow:6px 7px 0 #2563ff;padding:20px 20px 18px;margin:0 0 22px;position:relative;text-align:left">'+
+    '<span style="position:absolute;top:-12px;right:14px;background:#fa5a1e;color:#fff;font-family:Archivo,sans-serif;font-weight:900;font-style:italic;font-size:12.5px;letter-spacing:.06em;padding:3px 10px;transform:rotate(3deg);box-shadow:2px 3px 0 #0c0c0c">NEW</span>'+
+    '<div style="font-family:\'JetBrains Mono\',monospace;font-size:11px;font-weight:700;letter-spacing:.16em;color:#2563ff">'+jdacS7Esc(kicker)+'</div>'+
+    '<p style="font-size:20px;font-weight:900;margin:8px 0 0;line-height:1.4;color:#0c0c0c">'+jdacS7Esc(title)+'</p>'+
+    '<p style="font-size:14.5px;line-height:1.85;color:#3a3a36;margin:10px 0 0">'+why+'</p>'+
+    '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px">'+jdacS7Chips('#0c0c0c')+'</div>'+
+    '<a href="'+JDAC_S7_URL+'" target="_top" style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:#2563ff;color:#fff;font-weight:700;font-size:15px;padding:12px 22px;border:1.5px solid #2563ff;text-decoration:none">看 7 天運棒特訓班 →</a>'+
+    '<p style="font-size:12px;color:#8a8579;margin:10px 0 0;line-height:1.6">做完 14 天內升級線上教練課，這 690 全額折抵。</p></div>';
+}
+
+// 次推：一行小字（lead 換開頭那句：旁邊沒推教練課的地方不要講「一次 3 個月」）
+function jdacS7Line(lead){
+  return '<p class="s7-line" style="font-size:13.5px;line-height:1.8;color:#55524a;margin:14px 0 0;text-align:left">'+jdacS7Esc(lead||'還不確定要不要一次 3 個月？')+
+    '<a href="'+JDAC_S7_URL+'" target="_top" style="color:#2563ff;font-weight:700">先用 7 天運棒特訓班試試我怎麼帶你 →</a>'+
+    '（NT$690，做完 14 天內升級，這 690 全額折抵）</p>';
+}
+
+// 5 題型別測驗：C 時間感浮動、D 回鍋＝主推卡（slot 'main'，放「該練的三件事」下面）；
+// A 空白、B 自學卡關＝次推一行（slot 'after'，放「直接加入教練課」按鈕下面）；E 目標衝刺不出現
+function jdacS7Quiz(type, slot){
+  if (slot === 'after') return (type === 'A' || type === 'B') ? jdacS7Line() : '';
+  if (type === 'C') return jdacS7Card('先從這裡開始 · 7 DAYS', '你這一型，最適合先做 7 天運棒特訓班',
+    '拍子會飄，很多時候是<b style="color:#0c0c0c">手太緊、每一下都在出力</b>，越打越快、越打越累。這 7 天只練運棒，第 0 天和第 7 天各做一次節拍檢測，<b style="color:#0c0c0c">有沒有越打越快，前後比一比就看得到</b>。');
+  if (type === 'D') return jdacS7Card('先從這裡開始 · 7 DAYS', '回鍋的第一步：先用 7 天把手找回來',
+    '隔一段時間沒打，手通常是最先生疏的。這 7 天<b style="color:#0c0c0c">每天 20–30 分鐘、只練運棒</b>，開始前一天和第 7 天各錄一段，我把前後放在一起看、回覆你。');
+  return '';
+}
+
+// 健檢：最弱是「時間感」（而且真的偏低）＝主推卡，放報告裡「該練的三件事」下面；
+// 報告沒留 email 前是模糊的，所以按鈕下面另外對所有人放一行 jdacS7Line
+function jdacS7Health(weakKey, allStrong){
+  if (allStrong || weakKey !== 'TIME') return '';
+  return jdacS7Card('你的時間感最需要先顧 · 7 DAYS', '先用 7 天，把拍子打穩',
+    '時間感不穩，常常是手太緊、每一下都在出力。7 天運棒特訓班<b style="color:#0c0c0c">每天 20–30 分鐘、只練運棒</b>，開始前一天和第 7 天各錄一段，我把前後放在一起看、回覆你。');
 }
 jdacQuizInit(document);
 </script>
