@@ -865,7 +865,7 @@ html,body{margin:0;background:#f4f3ee}
       if (isNaN(close)) close = closeOf(b.startDate);
       if (close <= now) continue;
       var seats = (typeof b.seatsLeft === 'number' && b.seatsLeft >= 0) ? Math.floor(b.seatsLeft) : null;
-      list.push({ startDate: b.startDate, day0Date: RX_DATE.test(String(b.day0Date)) ? b.day0Date : addDays(b.startDate, -1), closeAtMs: close, seatsLeft: seats, soldOut: !!b.soldOut || seats === 0 });
+      list.push({ startDate: b.startDate, day0Date: RX_DATE.test(String(b.day0Date)) ? b.day0Date : addDays(b.startDate, -1), closeAtMs: close, seatsLeft: seats, soldOut: !!b.soldOut || seats === 0, seatsHidden: b.seatsHidden === true });
     }
     if (!list.length) return null;
     list.sort(function(a, b){ return a.startDate < b.startDate ? -1 : 1; });
@@ -895,6 +895,7 @@ html,body{margin:0;background:#f4f3ee}
   function seatText(b){
     if (!b || S.phase !== 'open' || !S.live) return '每梯 ' + C.cap + ' 人';
     if (b.soldOut) return '額滿';
+    if (b.seatsHidden) return '報名中';   // 後端放寬上限的梯次（2026-10-25 起 11/16 梯）不顯示剩幾位
     if (b.seatsLeft == null) return '每梯 ' + C.cap + ' 人';
     return '剩 ' + b.seatsLeft + ' 位';
   }
