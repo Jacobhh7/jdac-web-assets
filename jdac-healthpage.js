@@ -876,6 +876,11 @@ function jdacQuizBonus(panel, DATA, opts) {
  * 樣式全用行內 style——這支會被首頁、教練課頁、/drummertype、/drummerquiz 四個地方共用，不碰各頁的 CSS。 */
 var JDAC_S7_URL = 'https://www.jacobdrumemory.com/7-day';
 var JDAC_S7_STATUS = 'https://jdac-admin.vercel.app/api/camp-status';
+// 額滿公告的備用字（Jacob 2026-11-10：「11 月兩梯都額滿了，12 月的先不要開，之後會開」）。
+// 有字＝開跑日那顆膠囊先顯示這句（綠點換橘點）；抓到即時狀態再照它：有開放的梯次就換成真的開跑日，
+// 有 notice 就用它的 short。空字串＝沒有公告（照舊顯示「每月第 1、3 個週一開跑」）。
+// 要跟 jdac-admin api/_camp.js 的 CAMP.notice.short 一樣；要開 12 月時那邊改完，這裡清成 '' 再重新 build 四頁。
+var JDAC_S7_FULL = '11 月額滿・12 月梯次之後開放';
 
 function jdacS7Esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
@@ -888,9 +893,22 @@ function jdacS7Chips(color){
     '<span data-s7="price" style="'+c+'">NT$690</span>';
 }
 
+// 開跑日那顆膠囊：換字＋換燈（full＝額滿公告，橘點；否則綠點）
+function jdacS7Date(root, text, full){
+  root.querySelectorAll('[data-s7="date"]').forEach(function(el){
+    el.textContent = text;
+    var dot = el.parentNode && el.parentNode.querySelector ? el.parentNode.querySelector('i') : null;
+    if (dot) { dot.style.background = full ? '#fa5a1e' : '#16c784'; dot.style.boxShadow = full ? '0 0 0 3px rgba(250,90,30,.25)' : '0 0 0 3px rgba(22,199,132,.25)'; }
+  });
+  // 沒有膠囊的一行字／小條（[data-s7="note"]）：額滿公告時在後面補一句，平常是空的
+  root.querySelectorAll('[data-s7="note"]').forEach(function(el){ el.textContent = full ? text + '。' : ''; el.hidden = !full; });
+}
+
 // 抓即時梯次，把 root 裡的 [data-s7] 換成真的
 function jdacS7Fill(root){
-  if(!root || !root.querySelector || !root.querySelector('[data-s7]') || !window.fetch) return;
+  if(!root || !root.querySelector || !root.querySelector('[data-s7]')) return;
+  if (JDAC_S7_FULL) jdacS7Date(root, JDAC_S7_FULL, true);
+  if(!window.fetch) return;
   var W = ['日','一','二','三','四','五','六'];
   fetch(JDAC_S7_STATUS, {cache:'no-store', credentials:'omit'}).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(function(j){
     var bs = (j && j.batches) || [], b = null;
@@ -898,8 +916,10 @@ function jdacS7Fill(root){
     var open = !!(j && j.phase === 'open' && b);
     if (open) {
       var p = String(b.startDate).split('-').map(Number), t = new Date(Date.UTC(p[0], p[1]-1, p[2]));
-      root.querySelectorAll('[data-s7="date"]').forEach(function(el){ el.textContent = p[1]+'/'+p[2]+'（'+W[t.getUTCDay()]+'）開跑'; });
+      jdacS7Date(root, p[1]+'/'+p[2]+'（'+W[t.getUTCDay()]+'）開跑', false);
       if (b.seatsLeft != null) root.querySelectorAll('[data-s7="seats"]').forEach(function(el){ el.textContent = '剩 '+b.seatsLeft+' 位'; el.hidden = false; el.style.display = 'inline-flex'; });
+    } else if (j && j.notice && j.notice.text) {
+      jdacS7Date(root, String(j.notice.short || j.notice.title || JDAC_S7_FULL || '額滿'), true);
     }
     if (j && j.price && j.price.TWD) root.querySelectorAll('[data-s7="price"]').forEach(function(el){ el.textContent = 'NT$'+Number(j.price.TWD).toLocaleString('en-US'); });
   }).catch(function(){});
@@ -921,7 +941,7 @@ function jdacS7Card(kicker, title, why){
 function jdacS7Line(lead){
   return '<p class="s7-line" style="font-size:13.5px;line-height:1.8;color:#55524a;margin:14px 0 0;text-align:left">'+jdacS7Esc(lead||'還不確定要不要一次 3 個月？')+
     '<a href="'+JDAC_S7_URL+'" target="_top" style="color:#2563ff;font-weight:700">先用 7 天運棒特訓班試試我怎麼帶你 →</a>'+
-    '（NT$690，做完 14 天內升級，這 690 全額折抵）</p>';
+    '（NT$690，做完 14 天內升級，這 690 全額折抵）<b data-s7="note" hidden style="color:#fa5a1e;font-weight:700"></b></p>';
 }
 
 // 5 題型別測驗：C 時間感浮動、D 回鍋＝主推卡（slot 'main'，放「該練的三件事」下面）；

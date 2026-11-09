@@ -120,7 +120,19 @@ def build(sheets):
   }} else {{ document.querySelectorAll('.reveal').forEach(function (n) {{ n.classList.add('in-view'); }}); }}
   // 7 天運棒特訓班橫幅：抓到 jdac-admin 即時梯次才換成真的開跑日／剩幾位（放寬上限的梯次不回剩幾位 → 不顯示）
   (function () {{
-    if (!window.fetch || !document.querySelector('[data-s7]')) return;
+    if (!document.querySelector('[data-s7]')) return;
+    // 額滿公告的備用字（2026-11-10 Jacob：11 月兩梯額滿、12 月梯次之後開放）。抓到即時狀態再照它；
+    // 要跟 jdac-admin api/_camp.js 的 CAMP.notice.short 一樣。要開 12 月時清成 '' 再重跑這支。
+    var S7_FULL = '11 月額滿・12 月梯次之後開放';
+    function s7Date(text, full) {{
+      document.querySelectorAll('[data-s7="date"]').forEach(function (el) {{
+        el.textContent = text;
+        var dot = el.parentNode.querySelector('i');
+        if (dot) {{ dot.style.background = full ? '#fa5a1e' : ''; dot.style.boxShadow = full ? '0 0 0 3px rgba(250,90,30,.25)' : ''; }}
+      }});
+    }}
+    if (S7_FULL) s7Date(S7_FULL, true);
+    if (!window.fetch) return;
     var W = ['日', '一', '二', '三', '四', '五', '六'];
     fetch('https://jdac-admin.vercel.app/api/camp-status', {{ cache: 'no-store', credentials: 'omit' }})
       .then(function (r) {{ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }})
@@ -129,8 +141,10 @@ def build(sheets):
         for (var i = 0; i < bs.length; i++) {{ if (!bs[i].soldOut) {{ b = bs[i]; break; }} }}
         if (j && j.phase === 'open' && b) {{
           var p = String(b.startDate).split('-').map(Number), t = new Date(Date.UTC(p[0], p[1] - 1, p[2]));
-          document.querySelectorAll('[data-s7="date"]').forEach(function (el) {{ el.textContent = p[1] + '/' + p[2] + '（' + W[t.getUTCDay()] + '）開跑'; }});
+          s7Date(p[1] + '/' + p[2] + '（' + W[t.getUTCDay()] + '）開跑', false);
           if (b.seatsLeft != null) document.querySelectorAll('[data-s7="seats"]').forEach(function (el) {{ el.textContent = '剩 ' + b.seatsLeft + ' 位'; el.hidden = false; }});
+        }} else if (j && j.notice && j.notice.text) {{
+          s7Date(String(j.notice.short || j.notice.title || S7_FULL || '額滿'), true);
         }}
         if (j && j.price && j.price.TWD) document.querySelectorAll('[data-s7="price"]').forEach(function (el) {{ el.textContent = 'NT$' + Number(j.price.TWD).toLocaleString('en-US'); }});
       }}).catch(function () {{}});

@@ -27,6 +27,20 @@ const CAMP = {
     upTw: 8250                        // 升級線上教練課（三個月）
   },
   paused: false,                      // 2026-10-10 Jacob：推上去開賣（要再暫停改回 true）
+  // 額滿公告（2026-11-10 Jacob：「11 月兩梯都額滿了，12 月的先不要開，之後會開、請大家再注意」）。
+  // 有設＝整頁顯示額滿：頂部公告、日期換成星期、梯次卡換成 cards、報名鈕不能按。
+  // 即時狀態抓得到就以它為準（jdac-admin api/_camp.js 的 fullCohorts／holdFrom／notice；它說開放就照常開放）；
+  // 這裡是抓不到時（大陸連不到 vercel）的備用字，title／text／short 要跟那邊的 notice 一樣。
+  // 要開 12 月：先改 jdac-admin 那邊，再把這裡改成 full: null。
+  full: {
+    title: '11 月梯次額滿',
+    text:  '11/2、11/16 兩梯都額滿了。12 月梯次之後會開放，請再留意。',
+    short: '11 月額滿・12 月梯次之後開放',
+    cards: [                          // 梯次區的卡片：tag 左上小字、st 右上狀態、big 大字、sm 大字後面的小字、note 說明、off＝灰掉
+      { tag: 'NOV', st: '額滿',     big: '11 月', sm: '11/2、11/16 兩梯', note: '兩梯都額滿了。', off: true },
+      { tag: 'DEC', st: '之後開放', big: '12 月', sm: '梯次',             note: '之後會開放，開放時間會公布在這一頁，請再留意。' }
+    ]
+  },
   statusUrl:     'https://jdac-admin.vercel.app/api/camp-status',   // 即時梯次／名額
   checkoutUrl:   'https://www.jacobdrumemory.com/7-day-checkout',    // 台灣／海外結帳頁＝官網 /7-day-checkout 頁（2026-10-12 從 /campcheckout 改名，舊網址 301 過來；裡面嵌 jdac-admin.vercel.app/camp；2026-10-10）
   checkoutUrlCn: ''                   // 大陸：不開結帳頁（大陸打不開），按鈕捲到下面的客服微信說明
@@ -42,6 +56,14 @@ html{scroll-behavior:smooth}
 .paused-note a{color:#fff;text-decoration:underline}
 .pg[data-phase="paused"] .paused-note{display:block}
 .pg[data-phase="paused"] .ft-cta [data-buy]{display:none}   /* 暫停中：收尾帶已經有 LINE 鈕，不重複 */
+/* 額滿公告（CAMP.full／camp-status 的 notice）：頂部黑條、帶日期的小字藏起來、收尾帶不重複放報名鈕 */
+.full-note{display:none;background:#0c0c0c;color:#fff;font-family:"Noto Sans TC",sans-serif;font-size:15px;line-height:1.7;padding:14px clamp(16px,4vw,36px);text-align:center}
+.full-note b{color:#fa5a1e;margin-right:.6em}
+.pg[data-phase="full"] .full-note{display:block}
+.pg[data-phase="full"] [data-dated]{display:none}
+.pg[data-phase="full"] .ft-cta [data-buy]{display:none}
+.bc .bc-say{margin:10px 0 6px;font-size:14px;line-height:1.75;color:#3a3a36}
+.bc.is-full .bc-say{color:#6f6d64}
 [data-buy].is-closed{background:#d9d6cc!important;border-color:#d9d6cc!important;color:#6f6d64!important;pointer-events:none;cursor:default;box-shadow:none!important}
 html,body{margin:0;background:#f4f3ee}
 .pg{background:#f4f3ee;color:#0c0c0c;font-family:"Noto Sans TC",sans-serif;width:100%;overflow-x:clip;line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -432,13 +454,14 @@ html,body{margin:0;background:#f4f3ee}
 }
 </style></head><body>
 <div class="pg">
+<div class="full-note" id="fullNote" role="status"><b>11 月梯次額滿</b>11/2、11/16 兩梯都額滿了。12 月梯次之後會開放，請再留意。</div>
 <div class="paused-note"><b>改版中</b>　7 天運棒特訓班還沒開放報名。想第一個知道開放時間：<a href="https://line.me/R/ti/p/@jdactw" target="_blank" rel="noopener">LINE @jdactw</a> 留言，大陸請加微信 jdac_drums。</div>
 
   <!-- ═══ HERO ═══ -->
   <section class="hero"><div class="jd-in">
     <div class="jh-top">
       <span class="jh-tag"><span class="dot"></span>7-Day Stick Class</span>
-      <span class="jh-idx">NEXT · <b data-b="start">11/2（一）</b> 開始</span>
+      <span class="jh-idx" data-full="&lt;b&gt;{title}&lt;/b&gt;">NEXT · <b data-b="start">11/2（一）</b> 開始</span>
     </div>
     <div class="jh-grid">
       <div>
@@ -447,20 +470,20 @@ html,body{margin:0;background:#f4f3ee}
         <p class="jh-hook">你以為要更用力練，<br>但其實要先<em>學會怎麼發力。</em></p>
         <p class="jh-tagline">7 天，每天 <span data-v="dailyMin">20–30</span> 分鐘，只練運棒。開始前一天錄兩段，第 7 天再錄同樣兩段，<b>我親自把前後放在一起看，回覆給你</b>。</p>
         <div class="jh-cta">
-          <a class="btn p" href="#checkout" data-buy="tw" data-cta="stick7-hero">我要報名・NT$<span data-v="price.tw">690</span> <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+          <a class="btn p" href="#checkout" data-buy="tw" data-cta="stick7-hero" data-full="{short}">我要報名・NT$<span data-v="price.tw">690</span> <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
           <a class="btn s" href="#how">看 7 天怎麼跑</a>
         </div>
-        <p class="jh-price"><b>NT$<span data-v="price.tw">690</span></b>・下一梯 <span data-b="start">11/2（一）</span>開始・報名到 <span data-b="close">10/31（六）23:59</span>・<span data-seats>每梯 5 人</span></p>
+        <p class="jh-price" data-full="&lt;b&gt;NT$&lt;span data-v=&quot;price.tw&quot;&gt;690&lt;/span&gt;&lt;/b&gt;・{text}"><b>NT$<span data-v="price.tw">690</span></b>・下一梯 <span data-b="start">11/2（一）</span>開始・報名到 <span data-b="close">10/31（六）23:59</span>・<span data-seats>每梯 5 人</span></p>
       </div>
 
       <aside class="tk" aria-label="下一梯日程">
-        <div class="tk-hd"><span class="t">NEXT / 下一梯日程</span><span class="pill" data-pill>每梯 5 人</span></div>
+        <div class="tk-hd"><span class="t" data-full="7 DAYS / 這 7 天怎麼排">NEXT / 下一梯日程</span><span class="pill" data-pill>每梯 5 人</span></div>
         <div class="tk-row"><span class="d" data-b="day0">11/1（日）</span><span class="e">第 0 天：錄起點、寫下你的問題<small>單手八分 80、雙手交替八分 150，傳到節拍檢測</small></span></div>
         <div class="tk-row"><span class="d" data-b="days">11/2–11/7</span><span class="e">每天 <span data-v="dailyMin">20–30</span> 分鐘<small>6 天練到 5 天就算完成</small></span></div>
         <div class="tk-row hl"><span class="d" data-b="mid" data-f="md">11/5–11/6</span><span class="e">週四或週五・Jacob 回你第一次<small>後半段要調整什麼</small></span></div>
         <div class="tk-row"><span class="d" data-b="day7">11/8（日）</span><span class="e">第 7 天：錄同樣兩段</span></div>
         <div class="tk-row hl"><span class="d" data-b="reply2">11/9（一）</span><span class="e">Jacob 的前後對照回覆</span></div>
-        <p class="tk-ft">報名到 <b data-b="close">10/31（六）23:59</b>・<span data-seats>每梯 5 人</span></p>
+        <p class="tk-ft" data-full="&lt;b&gt;{title}&lt;/b&gt;・12 月梯次之後開放">報名到 <b data-b="close">10/31（六）23:59</b>・<span data-seats>每梯 5 人</span></p>
       </aside>
     </div>
 
@@ -563,31 +586,31 @@ html,body{margin:0;background:#f4f3ee}
       <p class="lead">全部在學員專區完成：看影片、每天打勾、從手機相簿上傳、節拍檢測、看我的回覆，都在同一個地方。</p>
       <div class="lc-grid">
         <div class="track key"><div class="ch">DAY<b>00</b></div><div>
-          <div class="tt">第 0 天・週日 <span>Baseline · <i data-b="day0" data-f="md" style="font-style:normal">11/1</i></span></div>
+          <div class="tt">第 0 天・週日 <span>Baseline<span data-dated> · <i data-b="day0" data-f="md" style="font-style:normal">11/1</i></span></span></div>
           <div class="td">開始前一天，錄你的起點。節拍器外放，錄兩段：<b>① 單手八分 80：右手 8 小節，接著左手 8 小節　② 雙手交替八分 150：8 小節</b>。用手機拍下來，傳到學員專區的「節拍檢測」。再看一次自己的影片，<b>寫下你現在的問題、覺得自己缺什麼</b>，這就是你的起點。大概 15 分鐘。</div>
           <div class="chips"><span>單手八分・80 BPM</span><span>雙手交替八分・150 BPM</span><span>節拍器外放</span><span>寫下你的問題</span></div>
           <div class="meter"><span class="pk"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><em>BASELINE</em></div>
         </div></div>
         <div class="track"><div class="ch">DAY<b class="sm">01–06</b></div><div>
-          <div class="tt">週一到週六 <span>Daily · <i data-b="days" style="font-style:normal">11/2–11/7</i></span></div>
+          <div class="tt">週一到週六 <span>Daily<span data-dated> · <i data-b="days" style="font-style:normal">11/2–11/7</i></span></span></div>
           <div class="td">每天 <span data-v="dailyMin">20–30</span> 分鐘：先看當天的課（每天 00:00 開放當天的），每一支都會寫它的用意；再跟著我的「運棒優化」跟練影片（A 練習／B 練習，Stick Control）練。做完在學員專區打勾。<b>6 天練到 5 天就算完成</b>，留一天給加班或臨時有事。</div>
           <div class="chips"><span>慢速運棒講解</span><span>德式握棒</span><span>Free Stroke</span><span>Power Grip</span><span>法式、美式握棒</span><span>三種運棒</span><span>運棒優化 A／B 練習</span></div>
           <div class="meter"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><em>6 DAYS</em></div>
         </div></div>
         <div class="track"><div class="ch">REPLY<b>01</b></div><div>
-          <div class="tt">週四或週五 <span>Reply 1 · <i data-b="mid" data-f="md" style="font-style:normal">11/5–11/6</i></span></div>
+          <div class="tt">週四或週五 <span>Reply 1<span data-dated> · <i data-b="mid" data-f="md" style="font-style:normal">11/5–11/6</i></span></span></div>
           <div class="td">我看你的起點影片、你寫下的問題，和前三天傳的練習，回你一段：<b>後半段練的時候，要調整什麼</b>。</div>
           <div class="chips"><span>Jacob 回覆 ①</span><span>後半段的調整方向</span></div>
           <div class="meter"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span><span></span><em>REPLY 1/2</em></div>
         </div></div>
         <div class="track key"><div class="ch">DAY<b>07</b></div><div>
-          <div class="tt">第 7 天・週日 <span>Replay · <i data-b="day7" data-f="md" style="font-style:normal">11/8</i></span></div>
+          <div class="tt">第 7 天・週日 <span>Replay<span data-dated> · <i data-b="day7" data-f="md" style="font-style:normal">11/8</i></span></span></div>
           <div class="td">同樣兩段、同樣的速度、同樣外放節拍器，<b>再錄一次</b>，傳到節拍檢測。</div>
           <div class="chips"><span>單手八分・80 BPM</span><span>雙手交替八分・150 BPM</span><span>同樣兩段再錄</span></div>
           <div class="meter"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="pk"></span><em>REPLAY</em></div>
         </div></div>
         <div class="track key"><div class="ch">REPLY<b>02</b></div><div>
-          <div class="tt">下一個週一 <span>Reply 2 · <i data-b="reply2" data-f="md" style="font-style:normal">11/9</i></span></div>
+          <div class="tt">下一個週一 <span>Reply 2<span data-dated> · <i data-b="reply2" data-f="md" style="font-style:normal">11/9</i></span></span></div>
           <div class="td">我把你第 0 天和第 7 天的影片、兩次節拍檢測的結果放在一起看，<b>回一段只給你的前後對照</b>。</div>
           <div class="chips"><span>Jacob 回覆 ②</span><span>影片並排</span><span>檢測結果並排</span></div>
           <div class="meter"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><em>REPLY 2/2</em></div>
@@ -600,8 +623,8 @@ html,body{margin:0;background:#f4f3ee}
         </div></div>
       </div>
       <div class="live">
-        <span class="lb"><i></i>NEXT BATCH</span>
-        <span class="when">下一梯 <span data-b="start">11/2（一）</span>開始</span>
+        <span class="lb" data-full="&lt;i&gt;&lt;/i&gt;7-DAY CLASS"><i></i>NEXT BATCH</span>
+        <span class="when" data-full="{short}">下一梯 <span data-b="start">11/2（一）</span>開始</span>
         <span class="dates"><span><i data-b="day0" data-f="md" style="font-style:normal">11/1</i> 第 0 天</span><span><i data-b="days" style="font-style:normal">11/2–11/7</i> 每天練</span><span><i data-b="mid" data-f="md" style="font-style:normal">11/5–11/6</i> 中間回覆</span><span><i data-b="day7" data-f="md" style="font-style:normal">11/8</i> 第 7 天</span><span class="end"><i data-b="reply2" data-f="md" style="font-style:normal">11/9</i> 對照回覆</span></span>
       </div>
     </div></section>
@@ -620,7 +643,7 @@ html,body{margin:0;background:#f4f3ee}
     <div class="ba">
       <div class="ba-hd"><span class="otag k">BEFORE / AFTER</span><h3>前後對照，大概長這樣</h3></div>
       <div class="ba-tb" role="table" aria-label="前後對照的項目">
-        <div class="ba-row h" role="row"><span role="columnheader">項目</span><span role="columnheader">DAY 0 · <i data-b="day0" data-f="md" style="font-style:normal">11/1</i></span><span class="d7" role="columnheader">DAY 7 · <i data-b="day7" data-f="md" style="font-style:normal">11/8</i></span></div>
+        <div class="ba-row h" role="row"><span role="columnheader">項目</span><span role="columnheader">DAY 0<span data-dated> · <i data-b="day0" data-f="md" style="font-style:normal">11/1</i></span></span><span class="d7" role="columnheader">DAY 7<span data-dated> · <i data-b="day7" data-f="md" style="font-style:normal">11/8</i></span></span></div>
         <div class="ba-row" role="row"><span class="it" role="cell">影片<small>單手八分 80（右左各 8 小節）、雙手交替八分 150，節拍器外放</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>▶ 起點影片</span><span class="cell d7" role="cell"><span class="m">DAY 7</span>▶ 同樣兩段再錄</span></div>
         <div class="ba-row" role="row"><span class="it" role="cell">搶拍還是拖拍<small>節拍檢測</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>你的結果</span><span class="cell d7" role="cell"><span class="m">DAY 7</span>你的結果</span></div>
         <div class="ba-row" role="row"><span class="it" role="cell">每一下平不平均<small>節拍檢測</small></span><span class="cell" role="cell"><span class="m">DAY 0</span>你的結果</span><span class="cell d7" role="cell"><span class="m">DAY 7</span>你的結果</span></div>
@@ -691,12 +714,12 @@ html,body{margin:0;background:#f4f3ee}
           <div class="pk">台灣・海外</div>
           <div class="amt"><span class="pn"><small>NT$</small><span data-v="price.tw">690</span></span></div>
           <p class="pd">刷卡或 <b>PayPal</b> 都可以，一樣是台幣 NT$<span data-v="price.tw">690</span>。</p>
-          <p class="due">報名到開始前的週六 <b><span data-v="closeTime">23:59</span></b>，額滿提前關閉。<br>下一梯：<b data-b="start">11/2（一）</b>開始，報名到 <b data-b="close">10/31（六）23:59</b>。</p>
+          <p class="due" data-full="&lt;b&gt;{title}。&lt;/b&gt;{text}">報名到開始前的週六 <b><span data-v="closeTime">23:59</span></b>，額滿提前關閉。<br>下一梯：<b data-b="start">11/2（一）</b>開始，報名到 <b data-b="close">10/31（六）23:59</b>。</p>
         </div>
         <div class="pcard cn" id="cn-pay">
           <div class="pk">大陸學員・微信付款</div>
           <div class="amt"><span class="pn"><small>¥</small><span data-v="price.cn">169</span></span></div>
-          <p class="pd">加客服微信 <b style="font-family:'JetBrains Mono',monospace;user-select:all">jdac_drums</b>，說你要報名 7 天運棒特訓班、想上哪一梯，客服會給你付款方式。確認收款後幫你登記名額，也請把你登入學員專區用的 email 給客服。</p>
+          <p class="pd" data-full="{text}開放後再加客服微信 &lt;b style=&quot;font-family:'JetBrains Mono',monospace;user-select:all&quot;&gt;jdac_drums&lt;/b&gt; 報名，也可以先加起來問問題。">加客服微信 <b style="font-family:'JetBrains Mono',monospace;user-select:all">jdac_drums</b>，說你要報名 7 天運棒特訓班、想上哪一梯，客服會給你付款方式。確認收款後幫你登記名額，也請把你登入學員專區用的 email 給客服。</p>
         </div>
       </div>
 
@@ -709,10 +732,10 @@ html,body{margin:0;background:#f4f3ee}
       </div>
 
       <div class="pr-cta">
-        <a class="cta main" href="#checkout" data-buy="tw" data-cta="stick7-price">我要報名・NT$<span data-v="price.tw">690</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
-        <a class="cta alt" href="#cn-pay" data-buy="cn" data-cta="stick7-cn">大陸學員・加客服微信報名</a>
+        <a class="cta main" href="#checkout" data-buy="tw" data-cta="stick7-price" data-full="{short}">我要報名・NT$<span data-v="price.tw">690</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+        <a class="cta alt" href="#cn-pay" data-buy="cn" data-cta="stick7-cn" data-full="大陸學員・12 月梯次開放後再加微信報名">大陸學員・加客服微信報名</a>
       </div>
-      <p class="micro">結帳頁會開在新分頁。<b>報名用的 email，要跟你登入 www.jacobdrumemory.com 學員專區的 email 一樣</b>，影片和回覆才會出現在你的帳號裡。</p>
+      <p class="micro" data-dated>結帳頁會開在新分頁。<b>報名用的 email，要跟你登入 www.jacobdrumemory.com 學員專區的 email 一樣</b>，影片和回覆才會出現在你的帳號裡。</p>
     </div>
   </div></section>
 
@@ -867,11 +890,14 @@ html,body{margin:0;background:#f4f3ee}
       var seats = (typeof b.seatsLeft === 'number' && b.seatsLeft >= 0) ? Math.floor(b.seatsLeft) : null;
       list.push({ startDate: b.startDate, day0Date: RX_DATE.test(String(b.day0Date)) ? b.day0Date : addDays(b.startDate, -1), closeAtMs: close, seatsLeft: seats, soldOut: !!b.soldOut || seats === 0, seatsHidden: b.seatsHidden === true });
     }
-    if (!list.length) return null;
+    // 額滿公告：後端在一梯都不能報、而且有手動標額滿／還沒開放時回 notice（這時梯次可以是空的）
+    var nt = (j.notice && typeof j.notice === 'object' && typeof j.notice.text === 'string' && j.notice.text) ? { title: String(j.notice.title || ''), text: j.notice.text, short: String(j.notice.short || j.notice.title || '') } : null;
+    if (!list.length && !nt) return null;
     list.sort(function(a, b){ return a.startDate < b.startDate ? -1 : 1; });
     var price = j.price || {};
     return {
       phase: j.phase,
+      notice: nt,
       cap: (typeof j.cap === 'number' && j.cap > 0) ? j.cap : null,
       tw: (typeof price.TWD === 'number' && price.TWD > 0) ? price.TWD : null,
       cn: (typeof price.CNY === 'number' && price.CNY > 0) ? price.CNY : null,
@@ -879,7 +905,23 @@ html,body{margin:0;background:#f4f3ee}
     };
   }
 
-  var S = { batches: computeBatches(), live: false, phase: C.paused ? 'paused' : 'open' };
+  var S = { batches: computeBatches(), live: false, phase: C.paused ? 'paused' : C.full ? 'full' : 'open', notice: C.full || null };
+
+  // ── 額滿公告：有 data-full 的元素整段換字（{title}／{text}／{short}），回到開放時換回原本的 ──
+  function esc(t){ return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function isFull(){ return S.phase === 'full' && !!S.notice; }
+  function fillNotice(tpl){ var n = S.notice || {}; return String(tpl).replace(/\{title\}/g, esc(n.title)).replace(/\{text\}/g, esc(n.text)).replace(/\{short\}/g, esc(n.short)); }
+  function swapFull(){
+    var on = isFull();
+    pg.querySelectorAll('[data-full]').forEach(function(el){
+      if (el._orig == null) el._orig = el.innerHTML;
+      el.innerHTML = on ? fillNotice(el.getAttribute('data-full')) : el._orig;
+    });
+    var bar = document.getElementById('fullNote');
+    if (bar && on) bar.innerHTML = '<b>' + esc(S.notice.title) + '</b>' + esc(S.notice.text);
+  }
+  // 額滿時不寫哪一天，只寫星期幾（下一梯的日期還沒公布）
+  var GENERIC = { day0: '週日', days: '週一–週六', mid: '週四／週五', day7: '週日', reply2: '週一' };
 
   function renderValues(){
     pg.querySelectorAll('[data-v]').forEach(function(el){
@@ -900,7 +942,27 @@ html,body{margin:0;background:#f4f3ee}
     return '剩 ' + b.seatsLeft + ' 位';
   }
 
+  function renderFull(){
+    pg.querySelectorAll('[data-b]').forEach(function(el){ var g = GENERIC[el.getAttribute('data-b')]; if (g) el.textContent = g; });
+    pg.querySelectorAll('[data-seats]').forEach(function(el){ el.textContent = '每梯 ' + C.cap + ' 人'; });
+    var pill = pg.querySelector('[data-pill]'); if (pill) pill.textContent = '額滿';
+    var box = document.getElementById('batchList');
+    if (box) {
+      var cards = (C.full && C.full.cards && C.full.cards.length) ? C.full.cards : [{ tag: 'FULL', st: '額滿', big: '', sm: S.notice.title, note: S.notice.text, off: true }];
+      box.innerHTML = cards.map(function(c){
+        return '<div class="bc' + (c.off ? ' is-full' : ' is-feat') + '">'
+          + '<div class="bc-hd"><span class="t">' + esc(c.tag) + '</span><span class="s">' + esc(c.st) + '</span></div>'
+          + '<div class="bc-date">' + esc(c.big) + '<small>' + esc(c.sm) + '</small></div>'
+          + '<p class="bc-say">' + esc(c.note) + '</p></div>';
+      }).join('');
+    }
+    var note = document.getElementById('batchNote');
+    if (note) note.innerHTML = '';   // 兩張卡已經講完了，下面不再重複一次
+    pg.setAttribute('data-batches', S.live ? 'live' : 'fallback');
+  }
+
   function renderBatches(){
+    if (isFull()) return renderFull();
     var list = S.batches, f = null;
     for (var i = 0; i < list.length; i++) if (!list[i].soldOut) { f = list[i]; break; }
     if (!f) f = list[0];
@@ -955,15 +1017,15 @@ html,body{margin:0;background:#f4f3ee}
     pg.setAttribute('data-phase', phase);
     pg.querySelectorAll('[data-buy]').forEach(function(el){
       var cn = el.getAttribute('data-buy') === 'cn';
+      if (phase === 'full') { el.removeAttribute('href'); el.removeAttribute('target'); el.classList.add('is-closed'); el.setAttribute('aria-disabled', 'true'); return; }   // 字由 swapFull 換
       if (phase === 'paused') { el.textContent = cn ? '改版中・加微信 jdac_drums 等通知' : '改版中・LINE 留言等通知'; if (cn) el.setAttribute('href', '#cn-pay'); else { el.setAttribute('href', 'https://line.me/R/ti/p/@jdactw'); el.setAttribute('target', '_blank'); el.setAttribute('rel', 'noopener'); } el.classList.add('is-soon'); }
       else if (phase === 'closed') { el.textContent = '目前暫停報名'; el.removeAttribute('href'); el.removeAttribute('target'); el.classList.add('is-closed'); el.setAttribute('aria-disabled', 'true'); }
-      else { var u = cn ? C.checkoutUrlCn : C.checkoutUrl; if (u) { var tg = linkTarget(u); el.setAttribute('href', u); el.setAttribute('target', tg); if (tg === '_blank') el.setAttribute('rel', 'noopener'); else el.removeAttribute('rel'); } }
+      else { el.classList.remove('is-closed'); el.removeAttribute('aria-disabled'); if (!el.getAttribute('href')) el.setAttribute('href', cn ? '#cn-pay' : '#checkout'); var u = cn ? C.checkoutUrlCn : C.checkoutUrl; if (u) { var tg = linkTarget(u); el.setAttribute('href', u); el.setAttribute('target', tg); if (tg === '_blank') el.setAttribute('rel', 'noopener'); else el.removeAttribute('rel'); } }
     });
   }
 
-  renderValues();
-  renderBatches();
-  applyBuy();
+  function renderAll(){ swapFull(); renderValues(); renderBatches(); applyBuy(); }
+  renderAll();
 
   // ── 抓即時梯次＋名額（抓不到就維持上面算出來的日期）──
   if (C.statusUrl && window.fetch) {
@@ -978,9 +1040,12 @@ html,body{margin:0;background:#f4f3ee}
         if (n.cap) C.cap = n.cap;
         if (n.tw) C.price.tw = n.tw;
         if (n.cn) C.price.cn = n.cn;
-        if (!C.paused) S.phase = n.phase === 'closed' ? 'closed' : n.phase === 'paused' ? 'paused' : 'open';
-        renderValues(); renderBatches();
-        if (!C.paused && S.phase !== 'open') applyBuy();
+        if (!C.paused) {
+          // 後端有額滿公告＝額滿；沒有＝照它的狀態（它說開放就開放，就算這一頁的 CAMP.full 還沒拿掉）
+          if (n.notice) { S.phase = 'full'; S.notice = n.notice; }
+          else { S.phase = n.phase === 'closed' ? 'closed' : n.phase === 'paused' ? 'paused' : 'open'; S.notice = null; }
+        }
+        renderAll();
       })
       .catch(function(){ clearTimeout(to); });
   }
