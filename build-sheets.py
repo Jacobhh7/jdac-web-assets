@@ -149,6 +149,7 @@ def build(sheets):
 if __name__ == '__main__':
     files = sorted(f for f in glob.glob('sheets/_data/*.json')
                    if not os.path.basename(f).startswith('_'))
-    sheets = sorted((json.load(open(f, encoding='utf-8')) for f in files), key=lambda s: s['no'])
+    # 最新的排最前面（Jacob 2026-11-09：「讓最新更新的放在最前面」）——編號大的在前，SHEET 編號本身不變
+    sheets = sorted((json.load(open(f, encoding='utf-8')) for f in files), key=lambda s: int(s['no']), reverse=True)
     build(sheets)
     print(f'✓ sheets.html（{len(sheets)} 份講義，一頁）')

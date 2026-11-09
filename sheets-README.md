@@ -9,6 +9,8 @@
 2. 複製 `sheets/_data/_範本.json` → `sheets/_data/<slug>.json`，填 10 個欄位
 3. `python3 build-sheets.py` → push
 
+卡片順序＝**編號大的（最新）排最前面**（2026-11-09 起），所以新講義的 `no` 要比現有的都大。
+
 JSON 就這些：`slug / no / title / card_line / pdf / thumb / pages / video_len /
 youtube_url / bilibili_url`。後兩個可留空（留空就不出那顆按鈕）。
 `youtu.be/ID` 會自動轉成 `watch?v=ID`。
