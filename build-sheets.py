@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """產生 sheets.html —— **只有一頁**。每份講義一張卡：下載譜 / YouTube / B站。
+（2026-11-09 Jacob：「把七日班的資訊也做到 /sheets」→ 見證下面加 7 天運棒特訓班橫幅 `.s7`，
+ 文案照首頁 B 版橫幅那一條；開跑日／名額／價格抓 jdac-admin camp-status。）
 
 加一份新講義＝寫一個 sheets/_data/<slug>.json，然後 `python3 build-sheets.py`。
 （2026-09-02 Jacob：「我只要那一頁就好，不用按進去還有那麼多資料大綱」——
@@ -77,6 +79,20 @@ def build(sheets):
   <div class="who">昕宇 <span>／ 爵士鼓老師</span></div>
 </div>
 
+<a class="s7 reveal" href="https://www.jacobdrumemory.com/7-day?src=sheets" target="_blank" rel="noopener">
+  <span class="s7-new">NEW</span>
+  <div class="s7-t">
+    <div class="s7-eb">7-DAY STICK CLASS · 7 天運棒特訓班</div>
+    <h2>先用 7 天，<br>把<span>手練鬆</span>。</h2>
+    <p class="s7-hook">你以為要更用力練，<br>但其實要先<em>學會怎麼發力</em>。</p>
+    <p class="s7-meta">每天 20–30 分鐘、只練運棒。開始前一天錄兩段，第 7 天再錄一次，我親自把前後放在一起看、回覆你。</p>
+    <div class="s7-chips"><span class="s7-chip"><i class="live"></i><span data-s7="date">每月第 1、3 個週一開跑</span></span><span class="s7-chip" data-s7="seats" hidden></span><span class="s7-chip" data-s7="price">NT$690</span></div>
+    <span class="s7-btn">看 7 天怎麼跑 →</span>
+    <p class="s7-fine">做完 14 天內升級線上教練課，這 690 全額折抵。</p>
+  </div>
+  <div class="s7-ph" role="img" aria-label="Jacob"></div>
+</a>
+
 <div class="dp">
   <div class="dp-c reveal">
     <span class="dp-tag">先量一下</span>
@@ -102,6 +118,23 @@ def build(sheets):
       if (x.isIntersecting) {{ x.target.classList.add('in-view'); io.unobserve(x.target); }} }}); }}, {{ threshold: .12 }});
     document.querySelectorAll('.reveal').forEach(function (n) {{ io.observe(n); }});
   }} else {{ document.querySelectorAll('.reveal').forEach(function (n) {{ n.classList.add('in-view'); }}); }}
+  // 7 天運棒特訓班橫幅：抓到 jdac-admin 即時梯次才換成真的開跑日／剩幾位（放寬上限的梯次不回剩幾位 → 不顯示）
+  (function () {{
+    if (!window.fetch || !document.querySelector('[data-s7]')) return;
+    var W = ['日', '一', '二', '三', '四', '五', '六'];
+    fetch('https://jdac-admin.vercel.app/api/camp-status', {{ cache: 'no-store', credentials: 'omit' }})
+      .then(function (r) {{ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }})
+      .then(function (j) {{
+        var bs = (j && j.batches) || [], b = null;
+        for (var i = 0; i < bs.length; i++) {{ if (!bs[i].soldOut) {{ b = bs[i]; break; }} }}
+        if (j && j.phase === 'open' && b) {{
+          var p = String(b.startDate).split('-').map(Number), t = new Date(Date.UTC(p[0], p[1] - 1, p[2]));
+          document.querySelectorAll('[data-s7="date"]').forEach(function (el) {{ el.textContent = p[1] + '/' + p[2] + '（' + W[t.getUTCDay()] + '）開跑'; }});
+          if (b.seatsLeft != null) document.querySelectorAll('[data-s7="seats"]').forEach(function (el) {{ el.textContent = '剩 ' + b.seatsLeft + ' 位'; el.hidden = false; }});
+        }}
+        if (j && j.price && j.price.TWD) document.querySelectorAll('[data-s7="price"]').forEach(function (el) {{ el.textContent = 'NT$' + Number(j.price.TWD).toLocaleString('en-US'); }});
+      }}).catch(function () {{}});
+  }})();
   function rh() {{ if (window.parent === window) return;
     try {{ window.parent.postMessage({{ jdacHeight: Math.ceil(document.documentElement.scrollHeight), jdacFrom: 'sheets' }}, '*'); }} catch (e) {{}} }}
   window.addEventListener('load', rh); window.addEventListener('resize', rh);
