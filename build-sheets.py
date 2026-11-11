@@ -149,12 +149,9 @@ def build(sheets):
         if (j && j.price && j.price.TWD) document.querySelectorAll('[data-s7="price"]').forEach(function (el) {{ el.textContent = 'NT$' + Number(j.price.TWD).toLocaleString('en-US'); }});
       }}).catch(function () {{}});
   }})();
-  function rh() {{ if (window.parent === window) return;
-    try {{ window.parent.postMessage({{ jdacHeight: Math.ceil(document.documentElement.scrollHeight), jdacFrom: 'sheets' }}, '*'); }} catch (e) {{}} }}
-  window.addEventListener('load', rh); window.addEventListener('resize', rh);
-  [0, 300, 800, 1500, 2500].forEach(function (ms) {{ setTimeout(rh, ms); }});
 }})();
 </script>
+<script src="./embed-child.js" data-from="sheets"></script><!-- 回報內容高度給外層 Wix（自訂程式碼 embed-fit.js 收）；量 body 才縮得回來（11/11 起換掉舊的 scrollHeight 回報） -->
 </body>
 </html>
 '''
