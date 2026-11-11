@@ -31,8 +31,10 @@ const CAMP = {
   // 有設＝整頁顯示額滿：頂部公告、日期換成星期、梯次卡換成 cards、報名鈕不能按。
   // 即時狀態抓得到就以它為準（jdac-admin api/_camp.js 的 fullCohorts／holdFrom／notice；它說開放就照常開放）；
   // 這裡是抓不到時（大陸連不到 vercel）的備用字，title／text／short 要跟那邊的 notice 一樣。
-  // 要開 12 月：先改 jdac-admin 那邊，再把這裡改成 full: null。
+  // 2026-11-12 起 12 月梯次是自動開放的（jdac-admin openAfter：11/16 梯收滿或報名截止就列出 12/7、12/21）。
+  // until＝這段備用字的期限：過了 11/16 梯的報名截止，備用字就不再用（抓不到即時狀態的人改看照規則算出來的梯次）。
   full: {
+    until: '2026-11-14T23:59:59+08:00',
     title: '11 月梯次額滿',
     text:  '11/2、11/16 兩梯都額滿了。12 月梯次之後會開放，請再留意。',
     short: '11 月額滿・12 月梯次之後開放',
@@ -483,7 +485,7 @@ html,body{margin:0;background:#f4f3ee}
         <div class="tk-row hl"><span class="d" data-b="mid" data-f="md">11/5–11/6</span><span class="e">週四或週五・Jacob 回你第一次<small>後半段要調整什麼</small></span></div>
         <div class="tk-row"><span class="d" data-b="day7">11/8（日）</span><span class="e">第 7 天：錄同樣兩段</span></div>
         <div class="tk-row hl"><span class="d" data-b="reply2">11/9（一）</span><span class="e">Jacob 的前後對照回覆</span></div>
-        <p class="tk-ft" data-full="&lt;b&gt;{title}&lt;/b&gt;・12 月梯次之後開放">報名到 <b data-b="close">10/31（六）23:59</b>・<span data-seats>每梯 5 人</span></p>
+        <p class="tk-ft" data-full="&lt;b&gt;{short}&lt;/b&gt;">報名到 <b data-b="close">10/31（六）23:59</b>・<span data-seats>每梯 5 人</span></p>
       </aside>
     </div>
 
@@ -733,7 +735,7 @@ html,body{margin:0;background:#f4f3ee}
 
       <div class="pr-cta">
         <a class="cta main" href="#checkout" data-buy="tw" data-cta="stick7-price" data-full="{short}">我要報名・NT$<span data-v="price.tw">690</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
-        <a class="cta alt" href="#cn-pay" data-buy="cn" data-cta="stick7-cn" data-full="大陸學員・12 月梯次開放後再加微信報名">大陸學員・加客服微信報名</a>
+        <a class="cta alt" href="#cn-pay" data-buy="cn" data-cta="stick7-cn" data-full="大陸學員・梯次開放後再加微信報名">大陸學員・加客服微信報名</a>
       </div>
       <p class="micro" data-dated>結帳頁會開在新分頁。<b>報名用的 email，要跟你登入 www.jacobdrumemory.com 學員專區的 email 一樣</b>，影片和回覆才會出現在你的帳號裡。</p>
     </div>
@@ -905,6 +907,7 @@ html,body{margin:0;background:#f4f3ee}
     };
   }
 
+  if (C.full && C.full.until && Date.now() > Date.parse(C.full.until)) C.full = null;   // 備用的額滿公告過期了
   var S = { batches: computeBatches(), live: false, phase: C.paused ? 'paused' : C.full ? 'full' : 'open', notice: C.full || null };
 
   // ── 額滿公告：有 data-full 的元素整段換字（{title}／{text}／{short}），回到開放時換回原本的 ──
@@ -948,7 +951,8 @@ html,body{margin:0;background:#f4f3ee}
     var pill = pg.querySelector('[data-pill]'); if (pill) pill.textContent = '額滿';
     var box = document.getElementById('batchList');
     if (box) {
-      var cards = (C.full && C.full.cards && C.full.cards.length) ? C.full.cards : [{ tag: 'FULL', st: '額滿', big: '', sm: S.notice.title, note: S.notice.text, off: true }];
+      var cards = (C.full && C.full.cards && C.full.cards.length && S.notice.title === C.full.title) ? C.full.cards :   // 寫死的卡片只配這一句公告；後端換了公告（例：12 月額滿・1 月之後開放）就用通用卡
+         [{ tag: 'FULL', st: '額滿', big: '', sm: S.notice.title, note: S.notice.text, off: true }];
       box.innerHTML = cards.map(function(c){
         return '<div class="bc' + (c.off ? ' is-full' : ' is-feat') + '">'
           + '<div class="bc-hd"><span class="t">' + esc(c.tag) + '</span><span class="s">' + esc(c.st) + '</span></div>'

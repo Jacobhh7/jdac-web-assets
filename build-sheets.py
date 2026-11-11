@@ -124,6 +124,9 @@ def build(sheets):
     // 額滿公告的備用字（2026-11-10 Jacob：11 月兩梯額滿、12 月梯次之後開放）。抓到即時狀態再照它；
     // 要跟 jdac-admin api/_camp.js 的 CAMP.notice.short 一樣。要開 12 月時清成 '' 再重跑這支。
     var S7_FULL = '11 月額滿・12 月梯次之後開放';
+    // 備用字的期限（2026-11-12：12 月梯次改成自動開放——11/16 梯收滿或 11/14 23:59 報名截止）。過了就不顯示，回到「每月第 1、3 個週一開跑」。
+    var S7_FULL_UNTIL = '2026-11-14T23:59:59+08:00';
+    if (S7_FULL_UNTIL && Date.now() > Date.parse(S7_FULL_UNTIL)) S7_FULL = '';
     function s7Date(text, full) {{
       document.querySelectorAll('[data-s7="date"]').forEach(function (el) {{
         el.textContent = text;
