@@ -17,6 +17,7 @@ const CAMP = {
   firstStart: '2026-11-02',           // 第一梯開始日（週一）。這天以前的梯次不顯示
   closeTime: '23:59',                 // 開始前的週六幾點截止報名
   batchesShown: 4,                    // 梯次區最多列幾梯
+  fallbackFrom: '2026-12-07',         // 抓不到即時名額時，照規則算的梯次從這天起列（2026-11-12：11/16 梯已額滿，備用畫面直接列 12/7、12/21；即時資料不受影響）
   cap: 5,                             // 每梯人數上限
   dailyMin: '20–30',                  // 每天大約練幾分鐘（2026-10-10 Jacob 從 15–20 改）
   replayDays: 14,                     // 做完後影片與回覆還能看幾天（2026-10-10 Jacob 從 90 改 14）
@@ -34,7 +35,7 @@ const CAMP = {
   // 2026-11-12 起 12 月梯次是自動開放的（jdac-admin openAfter：11/16 梯收滿或報名截止就列出 12/7、12/21）。
   // until＝這段備用字的期限：過了 11/16 梯的報名截止，備用字就不再用（抓不到即時狀態的人改看照規則算出來的梯次）。
   full: {
-    until: '2026-11-14T23:59:59+08:00',
+    until: '2026-11-12T13:00:00+08:00',   // 2026-11-12 中午 11/16 梯付滿、12 月梯次已經自動開放 → 這段備用字提前到期（原本設 11/14 23:59）
     title: '11 月梯次額滿',
     text:  '11/2、11/16 兩梯都額滿了。12 月梯次之後會開放，請再留意。',
     short: '11 月額滿・12 月梯次之後開放',
@@ -869,7 +870,7 @@ html,body{margin:0;background:#f4f3ee}
     var out = [], f = ymd(C.firstStart || '2026-11-02'), y = f.y, m = f.m, n = C.batchesShown || 4;
     for (var i = 0; i < 36 && out.length < n; i++) {
       mondays13(y, m).forEach(function(s){
-        if (out.length >= n || (C.firstStart && s < C.firstStart)) return;
+        if (out.length >= n || (C.firstStart && s < C.firstStart) || (C.fallbackFrom && s < C.fallbackFrom)) return;
         var close = closeOf(s); if (close <= now) return;
         out.push({ startDate: s, day0Date: addDays(s, -1), closeAtMs: close, seatsLeft: null, soldOut: false });
       });
