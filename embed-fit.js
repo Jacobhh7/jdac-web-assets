@@ -9,7 +9,7 @@
  * 自訂元素又會撞學員專區佔走的 wix-default-custom-element 標籤（2026-07-01 全站卡住過），
  * 所以改由「自訂程式碼」這支跑在頁面本體的腳本來撐高。
  *
- * 只理 jacobhh7.github.io 送來、帶 jdacFrom 的訊息：
+ * 只理 jacobhh7.github.io 送來、帶 jdacFrom 的訊息（另外 jdac-admin.vercel.app 只認 jdacFrom:'lesson'＝回台約課頁）：
  *   {jdacFrom, jdacHeight}            → 把那個 iframe 和它外面幾層 Wix 包裝改成內容高度
  *   {jdacFrom, jdacScrollTo, block}    → 嵌入頁裡的錨點／scrollIntoView，改捲外層頁面
  * 撐高之後回 {jdacFit:1} 給嵌入頁，嵌入頁才會把 scrollIntoView 改走外層（見 embed-child.js）。
@@ -18,6 +18,9 @@
   if (window.__jdacEmbedFit) return;
   window.__jdacEmbedFit = 1;
   var ORIGIN = /^https:\/\/jacobhh7\.github\.io$/;
+  // jdac-admin（Vercel）只認回台約課頁 /lesson（2026-11-20）。特訓班結帳頁（jdacFrom:'campcheckout'）照舊不理，
+  // 維持編輯器設的高度——它的高度回報是舊寫法（只會長不會縮），沒驗過之前不要一起撐。
+  var ADMIN = /^https:\/\/jdac-admin\.vercel\.app$/, ADMIN_FROM = { lesson: 1 };
   var MAX = 60000;
 
   function frameOf(win) {
@@ -90,9 +93,10 @@
   }
 
   window.addEventListener('message', function (e) {
-    if (!ORIGIN.test(e.origin || '')) return;
     var d = e.data;
     if (!d || typeof d !== 'object' || !d.jdacFrom) return;
+    var o = e.origin || '';
+    if (!ORIGIN.test(o) && !(ADMIN.test(o) && ADMIN_FROM[d.jdacFrom] === 1)) return;
     var f = frameOf(e.source);
     if (!f) return;
     if (d.jdacHeight != null) {
