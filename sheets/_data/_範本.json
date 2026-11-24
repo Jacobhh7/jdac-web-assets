@@ -8,6 +8,7 @@
  "thumb": "sheets/your-slug-p1.png",
  "pages": 2,
  "video_len": "10:31",
+ "audio": "（選填）伴奏音檔：sheets/your-slug-backing.mp3，有填才會出現「下載伴奏」鈕；沒有就整行刪掉",
  "youtube_url": "https://youtu.be/XXXXXXXXXXX   ← 貼 YouTube 網址，章節就會自動變成可點的 ?t= 深連結",
  "bilibili_url": "https://www.bilibili.com/video/BVxxxxxxxxxx/   ← 貼 B站網址；兩個都可以留空"
 }

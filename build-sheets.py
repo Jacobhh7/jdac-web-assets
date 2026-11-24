@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""產生 sheets.html —— **只有一頁**。每份講義一張卡：下載譜 / YouTube / B站。
+"""產生 sheets.html —— **只有一頁**。每份講義一張卡：下載譜 /（選填）下載伴奏 / YouTube / B站。
 （2026-11-09 Jacob：「把七日班的資訊也做到 /sheets」→ 見證下面加 7 天運棒特訓班橫幅 `.s7`，
  文案照首頁 B 版橫幅那一條；開跑日／名額／價格抓 jdac-admin camp-status。）
 
@@ -19,6 +19,8 @@ def yt(u):   # youtu.be/ID → watch?v=ID
 
 def card(s):
     btns = f'<a class="b p" href="{E(s["pdf"])}" download>下載譜（{E(s["pages"])} 頁）</a>'
+    if s.get('audio'):      # 2026-11-24：伴奏音檔（選填）。白底黑框鈕，藍色實心鈕仍然只給「下載譜」
+        btns += f'<a class="b" href="{E(s["audio"])}" download><span class="m">♪</span>下載伴奏</a>'
     if s.get('youtube_url'):
         btns += f'<a class="b" href="{yt(s["youtube_url"])}" target="_blank" rel="noopener"><span class="m">▶</span>YouTube</a>'
     if s.get('bilibili_url'):
